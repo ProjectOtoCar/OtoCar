@@ -20,4 +20,62 @@ public class Seller {
     @OneToMany(mappedBy = "seller")
     private Set<Advertisement> advertisement;
 
+    public Seller() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public TypeAccount getType() {
+        return type;
+    }
+
+    public void setType(TypeAccount type) {
+        this.type = type;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public LocalDate getCreateAccount() {
+        return createAccount;
+    }
+
+    public void setCreateAccount(LocalDate createAccount) {
+        this.createAccount = createAccount;
+    }
+
+    public Set<Advertisement> getAdvertisement() {
+        return advertisement;
+    }
+
+    public void setAdvertisement(Set<Advertisement> advertisement) {
+        this.advertisement = advertisement;
+    }
 }
