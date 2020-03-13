@@ -21,6 +21,16 @@ public class Advertisement {
     private Seller seller;
 
 
+    public Advertisement(BigDecimal price, LocalDate dateAdd, String title, String content,String city,Car car,Seller seller ) {
+        this.price = price;
+        this.dateAdd = dateAdd;
+        this.title = title;
+        this.content = content;
+        this.city = city;
+        this.car = car;
+        this.seller = seller;
+    }
+
     public Advertisement() {
     }
 

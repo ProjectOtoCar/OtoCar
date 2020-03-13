@@ -24,6 +24,15 @@ public class Seller {
     public Seller() {
     }
 
+    public Seller(String firstName,String lastName,TypeAccount type,int phoneNumber,LocalDate createAccount,Set<Advertisement> advertisement) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.type = type;
+        this.phoneNumber = phoneNumber;
+        this.createAccount = createAccount;
+        this.advertisement = advertisement;
+    }
+
     public Long getId() {
         return id;
     }
