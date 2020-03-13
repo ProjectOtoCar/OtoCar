@@ -96,4 +96,5 @@ public class Car {
     public void setColor(Color color) {
         this.color = color;
     }
+
 }

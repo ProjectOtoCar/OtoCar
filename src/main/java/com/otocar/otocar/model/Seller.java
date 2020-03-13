@@ -78,4 +78,5 @@ public class Seller {
     public void setAdvertisement(Set<Advertisement> advertisement) {
         this.advertisement = advertisement;
     }
+
 }

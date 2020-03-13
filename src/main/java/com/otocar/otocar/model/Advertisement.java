@@ -20,6 +20,7 @@ public class Advertisement {
     @ManyToOne
     private Seller seller;
 
+
     public Advertisement() {
     }
 
@@ -86,4 +87,5 @@ public class Advertisement {
     public void setSeller(Seller seller) {
         this.seller = seller;
     }
+
 }
