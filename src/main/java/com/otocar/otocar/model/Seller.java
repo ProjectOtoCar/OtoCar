@@ -20,6 +20,7 @@ public class Seller {
     @OneToMany(mappedBy = "seller")
     private Set<Advertisement> advertisement;
 
+
     public Seller() {
     }
 
