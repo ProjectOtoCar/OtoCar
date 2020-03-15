@@ -22,7 +22,14 @@ public class Car {
     private TypeCar typeCar;
     private Color color;
 
-    public Car(String brand,int engine,int enginePower,TypeFuel fuel,LocalDate firstRegistartion,int mileage,TypeCar typeCar,Color color){
+    public Car(String brand,
+               int engine,
+               int enginePower,
+               TypeFuel fuel,
+               LocalDate firstRegistartion,
+               int mileage,
+               TypeCar typeCar,
+               Color color){
                 this.brand = brand;
                 this.engine = engine;
                 this.enginePower = enginePower;
