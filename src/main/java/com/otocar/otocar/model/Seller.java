@@ -19,7 +19,7 @@ public class Seller {
     private LocalDate createAccount;
     private LocalDate premiumAccount;
     private LocalDate lastAddvertisement;
-    @OneToMany(mappedBy = "seller")
+    @OneToMany(cascade = CascadeType.ALL ,mappedBy = "seller")
     private Set<Advertisement> advertisement;
 
 
