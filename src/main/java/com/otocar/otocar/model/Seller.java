@@ -17,6 +17,8 @@ public class Seller {
     private TypeAccount type;
     private int phoneNumber;
     private LocalDate createAccount;
+    private LocalDate premiumAccount;
+    private LocalDate lastAddvertisement;
     @OneToMany(mappedBy = "seller")
     private Set<Advertisement> advertisement;
 
@@ -24,13 +26,22 @@ public class Seller {
     public Seller() {
     }
 
-    public Seller(String firstName,String lastName,TypeAccount type,int phoneNumber,LocalDate createAccount,Set<Advertisement> advertisement) {
+    public Seller(String firstName,
+                  String lastName,
+                  TypeAccount type,
+                  int phoneNumber,
+                  LocalDate createAccount,
+                  LocalDate premiumAccount,
+                  Set<Advertisement> advertisement,
+                  LocalDate lastAddvertisement) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.type = type;
         this.phoneNumber = phoneNumber;
         this.createAccount = createAccount;
+        this.premiumAccount = premiumAccount;
         this.advertisement = advertisement;
+        this.lastAddvertisement = lastAddvertisement;
     }
 
     public Long getId() {
@@ -89,4 +100,19 @@ public class Seller {
         this.advertisement = advertisement;
     }
 
+    public LocalDate getPremiumAccount() {
+        return premiumAccount;
+    }
+
+    public void setPremiumAccount(LocalDate premiumAccount) {
+        this.premiumAccount = premiumAccount;
+    }
+
+    public LocalDate getLastAddvertisement() {
+        return lastAddvertisement;
+    }
+
+    public void setLastAddvertisement(LocalDate lastAddvertisement) {
+        this.lastAddvertisement = lastAddvertisement;
+    }
 }
