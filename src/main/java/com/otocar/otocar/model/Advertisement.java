@@ -3,6 +3,7 @@ package com.otocar.otocar.model;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "Advertisements")
@@ -12,6 +13,7 @@ public class Advertisement {
     private Long id;
     private BigDecimal price;
     private LocalDate dateAdd;
+    private Boolean isActive;
     private String title;
     private String content;
     private String city;
@@ -19,16 +21,27 @@ public class Advertisement {
     private Car car;
     @ManyToOne
     private Seller seller;
+    @OneToMany(mappedBy = "advertisement")
+    private Set<Image> images;
 
-
-    public Advertisement(BigDecimal price, LocalDate dateAdd, String title, String content,String city,Car car,Seller seller ) {
+    public Advertisement(BigDecimal price,
+                         LocalDate dateAdd,
+                         Boolean isActive,
+                         String title,
+                         String content,
+                         String city,
+                         Car car,
+                         Seller seller,
+                         Set<Image> images) {
         this.price = price;
         this.dateAdd = dateAdd;
+        this.isActive = isActive;
         this.title = title;
         this.content = content;
         this.city = city;
         this.car = car;
         this.seller = seller;
+        this.images = images;
     }
 
     public Advertisement() {
@@ -98,4 +111,19 @@ public class Advertisement {
         this.seller = seller;
     }
 
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
+    }
 }
