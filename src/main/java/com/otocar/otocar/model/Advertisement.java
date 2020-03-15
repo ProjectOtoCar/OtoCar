@@ -17,11 +17,11 @@ public class Advertisement {
     private String title;
     private String content;
     private String city;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Car car;
     @ManyToOne
     private Seller seller;
-    @OneToMany(mappedBy = "advertisement")
+    @OneToMany(mappedBy = "advertisement", cascade = CascadeType.ALL)
     private Set<Image> images;
 
     public Advertisement(BigDecimal price,
