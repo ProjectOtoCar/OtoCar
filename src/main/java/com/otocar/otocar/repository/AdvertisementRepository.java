@@ -25,13 +25,12 @@ public interface AdvertisementRepository extends PagingAndSortingRepository<Adve
     //Cena(Ograniczenie)
 
     //Sortowania
-    Page<Advertisement> findAllByActiveAndOrderByPriceAsc(boolean active, BigDecimal price, Pageable pageable);
+    Page<Advertisement> findAllByActiveOrderByPriceAsc(boolean active, Pageable pageable);
+    Page<Advertisement> findAllByActiveOrderByPriceDesc(boolean active, Pageable pageable);
 
-    Page<Advertisement> findAllByActiveAndOrderByPriceDesc(boolean active, BigDecimal price, Pageable pageable);
+    Page<Advertisement> findAllByActiveOrderByDateAddAsc(boolean active, Pageable pageable);
 
-    Page<Advertisement> findAllByActiveAndOrderByDateAddAsc(boolean active, LocalDate dataAdd, Pageable pageable);
-
-    Page<Advertisement> findAllByActiveAndOrderByDateAddDesc(boolean active, LocalDate dataAdd, Pageable pageable);
+    Page<Advertisement> findAllByActiveOrderByDateAddDesc(boolean active, Pageable pageable);
 //----------------------------------------------------------------------------------------------------------------------------
     Page<Advertisement> findAllByActiveAndCar_Brand(boolean active, Pageable pageable, String brand);
 
