@@ -51,15 +51,24 @@ public class ImageService implements CrudServce<Long, Image> {
 
     @Override
     public Optional<Void> patch(Long aLong, Map<String, String> fields) {
+        boolean isEdit = false;
         Optional<Image> optionalImage = imageRepository.findById(aLong);
         if(optionalImage.isEmpty()) {
             return Optional.empty();
         }
+        if(fields.size() == 0){
+            return Optional.empty();
+        }
         if(fields.get("isMainImage") != null) {
             optionalImage.get().setMainImage(Boolean.getBoolean(fields.get("isMainImage")));
+            isEdit = true;
         }
         if(fields.get("photo") != null) {
             optionalImage.get().setPhoto(fields.get("photo").getBytes());
+            isEdit = true;
+        }
+        if(isEdit){
+            imageRepository.save(optionalImage.get());
         }
         return Optional.empty();
     }
