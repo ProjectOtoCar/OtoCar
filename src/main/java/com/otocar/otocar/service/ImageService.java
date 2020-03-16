@@ -1,16 +1,66 @@
 package com.otocar.otocar.service;
 
+import com.otocar.otocar.model.Image;
 import com.otocar.otocar.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+import java.util.Optional;
+
 @Service
-public class ImageService {
+public class ImageService implements CrudServce<Long, Image> {
 
     private ImageRepository imageRepository;
 
     @Autowired
     public ImageService(ImageRepository imageRepository) {
         this.imageRepository = imageRepository;
+    }
+
+    @Override
+    public Iterable<Image> findAll() {
+        return imageRepository.findAll();
+    }
+
+    @Override
+    public Image findById(Long aLong) {
+        return imageRepository.findById(aLong).orElse(null);
+    }
+
+    @Override
+    public Optional<Void> deleteById(Long aLong) {
+        imageRepository.deleteById(aLong);
+        return Optional.empty();
+    }
+
+    @Override
+    public Image save(Image obj) {
+        Optional<Image> optionalImage = Optional.of(imageRepository.save(obj));
+        return optionalImage.orElse(null);
+    }
+
+    @Override
+    public Image change(Long aLong, Image obj) {
+        if(imageRepository.findById(aLong).isEmpty()){
+            return imageRepository.save(obj);
+        }
+        obj.setId(aLong);
+        return imageRepository.save(obj);
+    }
+
+    @Override
+    public Optional<Void> patch(Long aLong, Map<String, String> fields) {
+        Optional<Image> optionalImage = imageRepository.findById(aLong);
+        if(optionalImage.isEmpty()) {
+            return Optional.empty();
+        }
+        if(fields.get("isMainImage") != null) {
+            optionalImage.get().setMainImage(Boolean.getBoolean(fields.get("isMainImage")));
+        }
+        if(fields.get("photo") != null) {
+            optionalImage.get().setPhoto(fields.get("photo").getBytes());
+        }
+        return Optional.empty();
     }
 }

@@ -28,7 +28,7 @@ public class CarService implements CrudServce<Long, Car> {
     }
 
     @Override
-    public Car findBy(Long aLong) {
+    public Car findById(Long aLong) {
         return carRepository.findById(aLong).orElse(null);
     }
 

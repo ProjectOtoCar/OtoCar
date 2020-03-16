@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface CrudServce<ID, T> {
     Iterable<T> findAll();
-    T findBy(ID id);
+    T findById(ID id);
     Optional<Void> deleteById(ID id);
     T save(T obj);
     T change(ID id, T obj);
