@@ -1,5 +1,8 @@
 package com.otocar.otocar.service;
 
+import com.otocar.otocar.enums.Color;
+import com.otocar.otocar.enums.TypeCar;
+import com.otocar.otocar.enums.TypeFuel;
 import com.otocar.otocar.model.Car;
 import com.otocar.otocar.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +58,53 @@ public class CarService implements CrudServce<Long, Car> {
 
     @Override
     public Optional<Void> patch(Long aLong, Map<String, String> fields) {
+        boolean isEdit = false;
+        Optional<Car> optionalCar = carRepository.findById(aLong);
+        if(optionalCar.isEmpty()) {
+            return Optional.empty();
+        }
+        if(fields.size() == 0){
+            return Optional.empty();
+        }
+        if(fields.get("brand") != null){
+            optionalCar.get().setBrand(fields.get("brand"));
+            isEdit = true;
+        }
+        if(fields.get("engine") != null){
+            optionalCar.get().setEngine(Integer.parseInt(fields.get("engine")));
+            isEdit = true;
+        }
+        if(fields.get("enginePower") != null){
+            optionalCar.get().setEnginePower(Integer.parseInt(fields.get("enginePower")));
+            isEdit = true;
+        }
+        if(fields.get("model") != null){
+            optionalCar.get().setModel(fields.get("model"));
+            isEdit = true;
+        }
+        if(fields.get("fuel") != null){
+            optionalCar.get().setFuel(TypeFuel.valueOf(fields.get("fuel")));
+            isEdit = true;
+        }
+        if(fields.get("firstRegistartion") != null){
+            optionalCar.get().setFirstRegistartion(Integer.parseInt(fields.get("firstRegistartion")));
+            isEdit = true;
+        }
+        if(fields.get("mileage") != null){
+            optionalCar.get().setMileage(Integer.parseInt(fields.get("mileage")));
+            isEdit = true;
+        }
+        if(fields.get("typeCar") != null){
+            optionalCar.get().setTypeCar(TypeCar.valueOf(fields.get("typeCar")));
+            isEdit = true;
+        }
+        if(fields.get("color") != null){
+            optionalCar.get().setColor(Color.valueOf(fields.get("color")));
+            isEdit = true;
+        }
+        if(isEdit) {
+            carRepository.save(optionalCar.get());
+        }
         return Optional.empty();
     }
 }
