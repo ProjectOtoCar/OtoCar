@@ -16,6 +16,7 @@ public class Car {
     private String brand;
     private int engine;
     private int enginePower;
+    private String model;
     @Enumerated(EnumType.STRING)
     private TypeFuel fuel;
     private LocalDate firstRegistartion;
@@ -32,7 +33,8 @@ public class Car {
                LocalDate firstRegistartion,
                int mileage,
                TypeCar typeCar,
-               Color color){
+               Color color,
+               String model){
                 this.brand = brand;
                 this.engine = engine;
                 this.enginePower = enginePower;
@@ -41,6 +43,7 @@ public class Car {
                 this.mileage = mileage;
                 this.typeCar = typeCar;
                 this.color = color;
+                this.model = model;
     }
 
     public Car() {
@@ -119,4 +122,11 @@ public class Car {
     }
 
 
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
 }
