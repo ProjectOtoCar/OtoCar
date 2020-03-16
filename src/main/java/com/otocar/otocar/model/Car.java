@@ -16,10 +16,13 @@ public class Car {
     private String brand;
     private int engine;
     private int enginePower;
+    @Enumerated(EnumType.STRING)
     private TypeFuel fuel;
     private LocalDate firstRegistartion;
     private int mileage;
+    @Enumerated(EnumType.STRING)
     private TypeCar typeCar;
+    @Enumerated(EnumType.STRING)
     private Color color;
 
     public Car(String brand,

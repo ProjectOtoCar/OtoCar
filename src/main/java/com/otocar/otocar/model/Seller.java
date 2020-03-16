@@ -14,6 +14,7 @@ public class Seller {
     private Long id;
     private String firstName;
     private String lastName;
+    @Enumerated(EnumType.STRING)
     private TypeAccount type;
     private int phoneNumber;
     private LocalDate createAccount;
