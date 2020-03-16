@@ -19,7 +19,7 @@ public class Car {
     private String model;
     @Enumerated(EnumType.STRING)
     private TypeFuel fuel;
-    private LocalDate firstRegistartion;
+    private int firstRegistartion;
     private int mileage;
     @Enumerated(EnumType.STRING)
     private TypeCar typeCar;
@@ -30,7 +30,7 @@ public class Car {
                int engine,
                int enginePower,
                TypeFuel fuel,
-               LocalDate firstRegistartion,
+               int firstRegistartion,
                int mileage,
                TypeCar typeCar,
                Color color,
@@ -89,11 +89,11 @@ public class Car {
         this.fuel = fuel;
     }
 
-    public LocalDate getFirstRegistartion() {
+    public int getFirstRegistartion() {
         return firstRegistartion;
     }
 
-    public void setFirstRegistartion(LocalDate firstRegistartion) {
+    public void setFirstRegistartion(int firstRegistartion) {
         this.firstRegistartion = firstRegistartion;
     }
 
