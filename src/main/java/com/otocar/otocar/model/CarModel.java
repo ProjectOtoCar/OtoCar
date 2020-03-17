@@ -12,7 +12,7 @@ public class CarModel {
     private String name;
     @ManyToOne
     private Brand brand;
-    @OneToMany(mappedBy = "model", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "model", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Car> car;
 
     public CarModel() {

@@ -27,12 +27,12 @@ public class BrandLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if(((Collection<Brand>)brandService.findAll()).size() == 0) {
-            addedBrand();
+            addBrand();
         }
 
     }
 
-    private void addedBrand() throws IOException {
+    private void addBrand() throws IOException {
 
         InputStream inputStream = ClassLoader.getSystemResourceAsStream("brands_and_models.csv");
         InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);

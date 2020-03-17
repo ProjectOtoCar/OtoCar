@@ -16,7 +16,7 @@ public class Seller {
     private String lastName;
     @Enumerated(EnumType.STRING)
     private TypeAccount type;
-    private int phoneNumber;
+    private String phoneNumber;
     private LocalDate createAccount;
     private LocalDate premiumAccount;
     private LocalDate lastAddvertisement;
@@ -30,7 +30,7 @@ public class Seller {
     public Seller(String firstName,
                   String lastName,
                   TypeAccount type,
-                  int phoneNumber,
+                  String phoneNumber,
                   LocalDate createAccount,
                   LocalDate premiumAccount,
                   Set<Advertisement> advertisement,
@@ -77,11 +77,11 @@ public class Seller {
         this.type = type;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
