@@ -12,6 +12,9 @@ public class CarModel {
     @ManyToOne
     private Brand brand;
 
+    public CarModel() {
+    }
+
     public CarModel(Long id, String name, Brand brand) {
         this.id = id;
         this.name = name;
