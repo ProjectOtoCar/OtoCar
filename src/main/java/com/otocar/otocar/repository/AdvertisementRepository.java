@@ -13,16 +13,11 @@ import java.time.LocalDate;
 
 @Repository
 public interface AdvertisementRepository extends PagingAndSortingRepository<Advertisement, Long> {
-    Page<Advertisement> findAllByActive(boolean active, Pageable pageable);
+    Page<Advertisement> findAllByActiveOrderByDateAddDesc(boolean active, Pageable pageable);
 
-    Page<Advertisement> findAllByActiveAndDateAddGreaterThan(boolean active, LocalDate dateAdd, Pageable pageable);
+    Page<Advertisement> findAllByActiveAndCityOrderByDateAddDesc(boolean active, String city, Pageable pageable);
 
-    Page<Advertisement> findAllByActiveAndCity(boolean active, String city, Pageable pageable);
-
-    Page<Advertisement> findAllByActiveAndDateAddGreaterThanAndCity(boolean active, LocalDate dateAdd, String city, Pageable pageable);
-
-    Page<Advertisement> findAllBySellerAndActive(Seller seller, boolean active, Pageable pageable);
-    //Cena(Ograniczenie)
+    Page<Advertisement> findAllByActiveAndSellerOrderByDateAddDesc(boolean active, Seller seller, Pageable pageable);
 
     //Sortowania
     Page<Advertisement> findAllByActiveOrderByPriceAsc(boolean active, Pageable pageable);
@@ -30,7 +25,7 @@ public interface AdvertisementRepository extends PagingAndSortingRepository<Adve
 
     Page<Advertisement> findAllByActiveOrderByDateAddAsc(boolean active, Pageable pageable);
 
-    Page<Advertisement> findAllByActiveOrderByDateAddDesc(boolean active, Pageable pageable);
+
 //----------------------------------------------------------------------------------------------------------------------------
     Page<Advertisement> findAllByActiveAndCar_Brand(boolean active, Pageable pageable, String brand);
 
