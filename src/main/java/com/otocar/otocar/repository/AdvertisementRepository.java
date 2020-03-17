@@ -26,7 +26,7 @@ public interface AdvertisementRepository extends PagingAndSortingRepository<Adve
     Page<Advertisement> findAllByActiveOrderByDateAddAsc(boolean active, Pageable pageable);
 
 
-//----------------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------
     Page<Advertisement> findAllByActiveAndCar_Brand_Name(boolean active, Pageable pageable, String brandName);
 
     Page<Advertisement> findAllByActiveAndCar_FirstRegistrationLessThan(boolean active, Pageable pageable, int first);
@@ -35,11 +35,11 @@ public interface AdvertisementRepository extends PagingAndSortingRepository<Adve
 
     Page<Advertisement> findAllByActiveAndCar_FirstRegistrationBetween(boolean active, Pageable pageable, int low, int high);
 
-    Page<Advertisement> findAllByActiveAndPriceLessThan(boolean active, Pageable pageable,BigDecimal price);
+    Page<Advertisement> findAllByActiveAndPriceLessThan(boolean active, Pageable pageable, BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndPriceBetween(boolean active,Pageable pageable, BigDecimal low, BigDecimal high);
+    Page<Advertisement> findAllByActiveAndPriceBetween(boolean active, Pageable pageable, BigDecimal low, BigDecimal high);
 
-    Page<Advertisement> findAllByActiveAndPriceGreaterThan(boolean active, Pageable pageable,BigDecimal price);
+    Page<Advertisement> findAllByActiveAndPriceGreaterThan(boolean active, Pageable pageable, BigDecimal price);
 
     Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_Model_Name(boolean active, Pageable pageable, String brand, String model);
 
@@ -49,60 +49,60 @@ public interface AdvertisementRepository extends PagingAndSortingRepository<Adve
 
     Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_FirstRegistrationBetween(boolean active, Pageable pageable, String brand, int low, int high);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndPriceLessThan(boolean active, Pageable pageable ,String brand, BigDecimal price);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndPriceLessThan(boolean active, Pageable pageable, String brand, BigDecimal price);
 
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndPriceGreaterThan(boolean active, Pageable pageable ,String brand, BigDecimal price);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndPriceGreaterThan(boolean active, Pageable pageable, String brand, BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndPriceBetween(boolean active, Pageable pageable ,String brand,BigDecimal low, BigDecimal high);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndPriceBetween(boolean active, Pageable pageable, String brand, BigDecimal low, BigDecimal high);
 
-    Page<Advertisement> findAllByActiveAndCar_FirstRegistartionLessThanAndPriceLessThan(boolean active, Pageable pageable, int first, BigDecimal price);
+    Page<Advertisement> findAllByActiveAndCar_FirstRegistrationLessThanAndPriceLessThan(boolean active, Pageable pageable, int first, BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndCar_FirstRegistartionLessThanAndPriceGreaterThan(boolean active, Pageable pageable, int first, BigDecimal price);
+    Page<Advertisement> findAllByActiveAndCar_FirstRegistrationLessThanAndPriceGreaterThan(boolean active, Pageable pageable, int first, BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndCar_FirstRegistartionLessThanAndPriceBetween(boolean active, Pageable pageable, int first, BigDecimal low, BigDecimal high);
+    Page<Advertisement> findAllByActiveAndCar_FirstRegistrationLessThanAndPriceBetween(boolean active, Pageable pageable, int first, BigDecimal low, BigDecimal high);
 
-    Page<Advertisement> findAllByActiveAndCar_FirstRegistartionGreaterThanAndPriceLessThan(boolean active, Pageable pageable, int first, BigDecimal price);
+    Page<Advertisement> findAllByActiveAndCar_FirstRegistrationGreaterThanAndPriceLessThan(boolean active, Pageable pageable, int first, BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndCar_FirstRegistartionGreaterThanAndPriceGreaterThan(boolean active, Pageable pageable, int first, BigDecimal price);
+    Page<Advertisement> findAllByActiveAndCar_FirstRegistrationGreaterThanAndPriceGreaterThan(boolean active, Pageable pageable, int first, BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndCar_FirstRegistartionGreaterThanAndPriceBetween(boolean active, Pageable pageable, int first, BigDecimal low, BigDecimal high);
+    Page<Advertisement> findAllByActiveAndCar_FirstRegistrationGreaterThanAndPriceBetween(boolean active, Pageable pageable, int first, BigDecimal low, BigDecimal high);
 
-    Page<Advertisement> findAllByActiveAndCar_FirstRegistartionBetweenAndPriceLessThan(boolean active, Pageable pageable, int low, int high, BigDecimal price);
+    Page<Advertisement> findAllByActiveAndCar_FirstRegistrationBetweenAndPriceLessThan(boolean active, Pageable pageable, int low, int high, BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndCar_FirstRegistartionBetweenAndPriceGreaterThan(boolean active, Pageable pageable,int low, int high, BigDecimal price);
+    Page<Advertisement> findAllByActiveAndCar_FirstRegistrationBetweenAndPriceGreaterThan(boolean active, Pageable pageable, int low, int high, BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndCar_FirstRegistartionBetweenAndPriceBetween(boolean active, Pageable pageable, int low, int high, BigDecimal lowPrice, BigDecimal highPrice);
+    Page<Advertisement> findAllByActiveAndCar_FirstRegistrationBetweenAndPriceBetween(boolean active, Pageable pageable, int low, int high, BigDecimal lowPrice, BigDecimal highPrice);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_ModelAndCar_FirstRegistartionLessThan(boolean active, Pageable pageable, String brand, String model, int first);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_Model_NameAndCar_FirstRegistrationLessThan(boolean active, Pageable pageable, String brand, String model, int first);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_ModelAndCar_FirstRegistartionGreaterThan(boolean active, Pageable pageable, String brand, String model, int first);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_Model_NameAndCar_FirstRegistrationGreaterThan(boolean active, Pageable pageable, String brand, String model, int first);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_ModelAndCar_FirstRegistartionBetween(boolean active, Pageable pageable, String brand, String model, int low, int high);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_Model_NameAndCar_FirstRegistrationBetween(boolean active, Pageable pageable, String brand, String model, int low, int high);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_ModelAndPriceLessThan(boolean active, Pageable pageable, String brand, String model, BigDecimal price);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_Model_NameAndPriceLessThan(boolean active, Pageable pageable, String brand, String model, BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_ModelAndPriceGreaterThan(boolean active, Pageable pageable, String brand, String model, BigDecimal price);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_Model_NameAndPriceGreaterThan(boolean active, Pageable pageable, String brand, String model, BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_ModelAndPriceBetween(boolean active, Pageable pageable, String brand, String model, BigDecimal lowPrice, BigDecimal highPrice);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_Model_NameAndPriceBetween(boolean active, Pageable pageable, String brand, String model, BigDecimal lowPrice, BigDecimal highPrice);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_ModelAndCar_FirstRegistartionLessThanAndPriceLessThan(boolean active, Pageable pageable, String brand, String model, int first, BigDecimal price);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_FirstRegistrationLessThanAndPriceLessThan(boolean active, Pageable pageable, String brand, int first, BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_ModelAndCar_FirstRegistartionLessThanAndPriceGreaterThan(boolean active, Pageable pageable, String brand, String model, int first, BigDecimal price);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_FirstRegistrationLessThanAndPriceGreaterThan(boolean active, Pageable pageable, String brand, int first, BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_ModelAndCar_FirstRegistartionLessThanAndPriceBetween(boolean active, Pageable pageable, String brand, String model, int first, BigDecimal low, BigDecimal high);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_FirstRegistrationLessThanAndPriceBetween(boolean active, Pageable pageable, String brand, int first, BigDecimal lowPrice, BigDecimal highPrice);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_ModelAndCar_FirstRegistartionGreaterThanAndPriceLessThan(boolean active, Pageable pageable, String brand, String model, int first, BigDecimal price);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_Model_NameAndCar_FirstRegistrationLessThanAndPriceLessThan(boolean active, Pageable pageable, String brand, String model, int first, BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_ModelAndCar_FirstRegistartionGreaterThanAndPriceGreaterThan(boolean active, Pageable pageable, String brand, String model, int first, BigDecimal price);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_Model_NameAndCar_FirstRegistrationLessThanAndPriceGreaterThan(boolean active, Pageable pageable, String brand, String model, int first, BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_ModelAndCar_FirstRegistartionGreaterThanAndPriceBetween(boolean active, Pageable pageable, String brand, String model, int first, BigDecimal low, BigDecimal high);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_Model_NameAndCar_FirstRegistrationLessThanAndPriceBetween(boolean active, Pageable pageable, String brand, String model, int first, BigDecimal low, BigDecimal high);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_FirstRegistartionLessThanAndPriceLessThan(boolean active, Pageable pageable, String brand, int first, BigDecimal price);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_Model_NameAndCar_FirstRegistrationGreaterThanAndPriceLessThan(boolean active, Pageable pageable, String brand, String model, int first, BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_FirstRegistartionLessThanAndPriceGreaterThan(boolean active, Pageable pageable, String brand, int first, BigDecimal price);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_Model_NameAndCar_FirstRegistrationGreaterThanAndPriceGreaterThan(boolean active, Pageable pageable, String brand, String model, int first, BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_FirstRegistartionLessThanAndPriceBetween(boolean active, Pageable pageable, String brand, int first, BigDecimal lowPrice, BigDecimal highPrice);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_Model_NameAndCar_FirstRegistrationGreaterThanAndPriceBetween(boolean active, Pageable pageable, String brand, String model, int first, BigDecimal low, BigDecimal high);
 
 
 }

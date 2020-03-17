@@ -98,7 +98,7 @@ public Page<Advertisement> findByCarRegistrationLessThan(int page, int year){
         return optionalAdvertisements.orElse(null);
     }
 
-    Page<Advertisement> findByBrandAndModel(int page, String brandName, String modelName){
+   public Page<Advertisement> findByBrandAndModel(int page, String brandName, String modelName){
         Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
         Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_Brand_NameAndCar_Model_Name(true,pag,brandName,modelName));
         return optionalAdvertisements.orElse(null);
@@ -120,6 +120,77 @@ public Page<Advertisement> findByCarRegistrationLessThan(int page, int year){
         return optionalAdvertisements.orElse(null);
     }
 
+    public Page<Advertisement> findByBrandAndPriceLessThan(int page, String brandName, BigDecimal price){
+        Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
+        Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_Brand_NameAndPriceLessThan(true, pag, brandName, price));
+        return optionalAdvertisements.orElse(null);
+    }
+
+    public  Page<Advertisement> findByBrandandPriceGreaterThan(int page, String brandName, BigDecimal price){
+        Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
+        Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_Brand_NameAndPriceGreaterThan(true, pag,brandName, price));
+        return optionalAdvertisements.orElse(null);
+    }
+    public Page<Advertisement> findByBrandAndPriceBetween(int page, String brandName, BigDecimal lowPrice, BigDecimal highPrice){
+        Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
+        Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_Brand_NameAndPriceBetween(true,pag,brandName,lowPrice,highPrice));
+        return optionalAdvertisements.orElse(null);
+    }
+
+    public Page<Advertisement> findByRegistrationLessAndPriceLess(int page, int firstRegistartion, BigDecimal price){
+        Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
+        Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_FirstRegistrationLessThanAndPriceLessThan(true,pag,firstRegistartion,price));
+        return optionalAdvertisements.orElse(null);
+    }
+
+    public Page<Advertisement> findByRegistrationlessThanAndPriceGreaterThan(int page, int firstRegistration, BigDecimal price){
+        Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
+        Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_FirstRegistrationLessThanAndPriceGreaterThan(true,pag,firstRegistration,price));
+        return optionalAdvertisements.orElse(null);
+    }
+
+    public Page<Advertisement> findByRegistrationLessThanAndPriceBetween(int page, int firstRegistration, BigDecimal lowPrice, BigDecimal highPrice){
+        Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
+        Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_FirstRegistrationLessThanAndPriceBetween(true,pag,firstRegistration,lowPrice,highPrice));
+        return optionalAdvertisements.orElse(null);
+    }
+
+    public Page<Advertisement> findByRegistrationGreaterThanAndPriceLessThan(int page, int firstRegistration, BigDecimal price) {
+        Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
+        Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_FirstRegistrationGreaterThanAndPriceLessThan(true, pag, firstRegistration, price));
+        return optionalAdvertisements.orElse(null);
+    }
+
+    public Page<Advertisement> findByRegistrationGreaterThanAndPriceGreaterThan(int page, int firstRegistration, BigDecimal price) {
+        Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
+        Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_FirstRegistrationGreaterThanAndPriceGreaterThan(true,pag,firstRegistration,price));
+        return optionalAdvertisements.orElse(null);
+    }
+
+    public Page<Advertisement> findByRegistrationGreaterThanAndPriceBetween(int page, int firstRegistration, BigDecimal lowPrice, BigDecimal highPrice){
+        Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
+        Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_FirstRegistrationGreaterThanAndPriceBetween(true,pag,firstRegistration,lowPrice,highPrice));
+        return optionalAdvertisements.orElse(null);
+    }
+
+    public  Page<Advertisement> findByRegistrationBetweenAndPriceLessThan(int page, int lowFirstRegistration, int highRegistration, BigDecimal price){
+        Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
+        Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_FirstRegistrationBetweenAndPriceLessThan(true,pag,lowFirstRegistration,highRegistration,price));
+        return optionalAdvertisements.orElse(null);
+    }
+
+    public Page<Advertisement> findByRegistrationBetweenAndPriceGreaterThan(int page, int lowFirstRegistration, int highRegistration, BigDecimal price){
+        Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
+        Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_FirstRegistrationBetweenAndPriceGreaterThan(true,pag,lowFirstRegistration,highRegistration,price));
+        return optionalAdvertisements.orElse(null);
+    }
+
+    public Page<Advertisement> findByRegistrationBetweenAndPriceBetween(int page, int lowFirstRegistration, int highRegistration, BigDecimal lowPrice, BigDecimal highPrice){
+        Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
+        Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_FirstRegistrationBetweenAndPriceBetween(true,pag,lowFirstRegistration,highRegistration,lowPrice,highPrice));
+        return optionalAdvertisements.orElse(null);
+
+    }
 
 
 
