@@ -1,6 +1,7 @@
 package com.otocar.otocar.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Models")
@@ -11,14 +12,16 @@ public class CarModel {
     private String name;
     @ManyToOne
     private Brand brand;
+    @OneToMany(mappedBy = "model", cascade = CascadeType.ALL)
+    private Set<Car> car;
 
     public CarModel() {
     }
 
-    public CarModel(Long id, String name, Brand brand) {
-        this.id = id;
+    public CarModel(String name, Brand brand, Set<Car> car) {
         this.name = name;
         this.brand = brand;
+        this.car = car;
     }
 
     public Long getId() {
@@ -43,5 +46,13 @@ public class CarModel {
 
     public void setBrand(Brand brand) {
         this.brand = brand;
+    }
+
+    public Set<Car> getCar() {
+        return car;
+    }
+
+    public void setCar(Set<Car> car) {
+        this.car = car;
     }
 }

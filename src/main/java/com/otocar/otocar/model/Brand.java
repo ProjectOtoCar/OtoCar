@@ -9,15 +9,17 @@ public class Brand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
+    @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL)
+private Set<Car> car;
     @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL)
     private Set<CarModel> carModels;
 
     public Brand() {
     }
 
-    public Brand(String name, Set<CarModel> carModels) {
+    public Brand(String name, Set<Car> car, Set<CarModel> carModels) {
         this.name = name;
+        this.car = car;
         this.carModels = carModels;
     }
 
@@ -35,6 +37,14 @@ public class Brand {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Car> getCar() {
+        return car;
+    }
+
+    public void setCar(Set<Car> car) {
+        this.car = car;
     }
 
     public Set<CarModel> getCarModels() {

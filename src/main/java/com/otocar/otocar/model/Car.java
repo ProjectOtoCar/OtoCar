@@ -6,6 +6,7 @@ import com.otocar.otocar.enums.TypeFuel;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "Cars")
@@ -13,10 +14,13 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String brand;
+
+    @ManyToOne
+    private Brand brand;
     private int engine;
     private int enginePower;
-    private String model;
+    @ManyToOne
+    private CarModel model;
     @Enumerated(EnumType.STRING)
     private TypeFuel fuel;
     private int firstRegistartion;
@@ -26,27 +30,21 @@ public class Car {
     @Enumerated(EnumType.STRING)
     private Color color;
 
-    public Car(String brand,
-               int engine,
-               int enginePower,
-               TypeFuel fuel,
-               int firstRegistartion,
-               int mileage,
-               TypeCar typeCar,
-               Color color,
-               String model){
-                this.brand = brand;
-                this.engine = engine;
-                this.enginePower = enginePower;
-                this.fuel = fuel;
-                this.firstRegistartion = firstRegistartion;
-                this.mileage = mileage;
-                this.typeCar = typeCar;
-                this.color = color;
-                this.model = model;
-    }
+
 
     public Car() {
+    }
+
+    public Car(Brand brand, int engine, int enginePower, CarModel model, TypeFuel fuel, int firstRegistartion, int mileage, TypeCar typeCar, Color color) {
+        this.brand = brand;
+        this.engine = engine;
+        this.enginePower = enginePower;
+        this.model = model;
+        this.fuel = fuel;
+        this.firstRegistartion = firstRegistartion;
+        this.mileage = mileage;
+        this.typeCar = typeCar;
+        this.color = color;
     }
 
     public Long getId() {
@@ -57,11 +55,11 @@ public class Car {
         this.id = id;
     }
 
-    public String getBrand() {
+    public Brand getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void setBrand(Brand brand) {
         this.brand = brand;
     }
 
@@ -79,6 +77,14 @@ public class Car {
 
     public void setEnginePower(int enginePower) {
         this.enginePower = enginePower;
+    }
+
+    public CarModel getModel() {
+        return model;
+    }
+
+    public void setModel(CarModel model) {
+        this.model = model;
     }
 
     public TypeFuel getFuel() {
@@ -119,14 +125,5 @@ public class Car {
 
     public void setColor(Color color) {
         this.color = color;
-    }
-
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
     }
 }
