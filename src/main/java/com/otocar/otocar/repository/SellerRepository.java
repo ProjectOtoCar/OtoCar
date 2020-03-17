@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public interface SellerRepository  extends PagingAndSortingRepository<Seller, Long> {
     Page<Seller> findAllByLastName(String lastName, Pageable pageable);
     Page<Seller> findAllByFirstName(String firstName, Pageable pageable);
-    Page<Seller> findAllByFirstNameAndLastName(String firstName, String LastName);
+    Page<Seller> findAllByFirstNameAndLastName(String firstName, String LastName, Pageable pageable);
     Page<Seller> findAllByType(TypeAccount typeAccount, Pageable pageable);
     Page<Seller> findAllByFirstNameAndType(String firstName, TypeAccount typeAccount ,Pageable pageable);
     Page<Seller> findAllByLastNameAndType(String firstName, TypeAccount typeAccount ,Pageable pageable);
@@ -21,5 +21,5 @@ public interface SellerRepository  extends PagingAndSortingRepository<Seller, Lo
     Page<Seller> findAllByPremiumAccountGreaterThan(LocalDate today, Pageable pageable);
     Page<Seller> findAllByPremiumAccountGreaterThanAndFirstName(LocalDate today, String firstName,Pageable pageable);
     Page<Seller> findAllByPremiumAccountGreaterThanAndLastName(LocalDate today, String lastName,Pageable pageable);
-    Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAAndLastName(LocalDate today, String firstName,String lastName, Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndLastName(LocalDate today, String firstName,String lastName, Pageable pageable);
 }

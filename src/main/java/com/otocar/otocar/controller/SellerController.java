@@ -15,4 +15,7 @@ public class SellerController {
     public SellerController(SellerService sellerService) {
         this.sellerService = sellerService;
     }
+
+    public SellerController() {
+    }
 }
