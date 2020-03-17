@@ -66,7 +66,7 @@ public class AdvertisementService {
     }
 public Page<Advertisement> findByCarRegistrationLessThan(int page, int year){
     Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
-    Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_FirstRegistrationLessThan(true,pag,year);
+    Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_FirstRegistrationLessThan(true,pag,year));
     return optionalAdvertisements.orElse(null);
 }
 
@@ -97,6 +97,76 @@ public Page<Advertisement> findByCarRegistrationLessThan(int page, int year){
         Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndPriceBetween(true,pag,lowPrice,highPrice));
         return optionalAdvertisements.orElse(null);
     }
+
+    Page<Advertisement> findByBrandAndModel(int page, String brandName, String modelName){
+        Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
+        Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_Brand_NameAndCar_Model_Name(true,pag,brandName,modelName));
+        return optionalAdvertisements.orElse(null);
+    }
+
+    public Page<Advertisement> findByBrandAndRegistrationLessThan(int page, String brandName, int year){
+        Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
+        Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_Brand_NameAndCar_FirstRegistrationLessThan(true,pag,brandName,year));
+        return optionalAdvertisements.orElse(null);
+    }
+    public Page<Advertisement> findByBrandAndRegistrationGreaterThan(int page, String brandName, int year){
+        Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
+        Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_Brand_NameAndCar_FirstRegistrationGreaterThan(true, pag,brandName,year));
+        return optionalAdvertisements.orElse(null);
+    }
+    public Page<Advertisement> findByBrandAndRegistrationBetween(int page, String brandName, int lowYear, int highYear){
+        Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
+        Optional<Page<Advertisement>> optionalAdvertisements = Optional.of(advertisementRepository.findAllByActiveAndCar_Brand_NameAndCar_FirstRegistrationBetween(true,pag,brandName,lowYear,highYear));
+        return optionalAdvertisements.orElse(null);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public Advertisement save (Advertisement adv){
         return advertisementRepository.save(adv);

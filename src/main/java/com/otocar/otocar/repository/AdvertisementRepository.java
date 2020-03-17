@@ -41,15 +41,16 @@ public interface AdvertisementRepository extends PagingAndSortingRepository<Adve
 
     Page<Advertisement> findAllByActiveAndPriceGreaterThan(boolean active, Pageable pageable,BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_Model(boolean active, Pageable pageable, String brand, String model);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_Model_Name(boolean active, Pageable pageable, String brand, String model);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_FirstRegistartionLessThan(boolean active, Pageable pageable, String brand, int first);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_FirstRegistrationLessThan(boolean active, Pageable pageable, String brand, int first);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_FirstRegistartionGreaterThan(boolean active, Pageable pageable, String brand, int first);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_FirstRegistrationGreaterThan(boolean active, Pageable pageable, String brand, int first);
 
-    Page<Advertisement> findAllByActiveAndCar_BrandAndCar_FirstRegistartionBetween(boolean active, Pageable pageable, String brand, int low, int high);
+    Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_FirstRegistrationBetween(boolean active, Pageable pageable, String brand, int low, int high);
 
     Page<Advertisement> findAllByActiveAndCar_BrandAndPriceLessThan(boolean active, Pageable pageable ,String brand, BigDecimal price);
+
 
     Page<Advertisement> findAllByActiveAndCar_BrandAndPriceGreaterThan(boolean active, Pageable pageable ,String brand, BigDecimal price);
 

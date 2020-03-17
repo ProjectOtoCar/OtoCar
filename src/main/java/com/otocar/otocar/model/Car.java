@@ -23,7 +23,7 @@ public class Car {
     private CarModel model;
     @Enumerated(EnumType.STRING)
     private TypeFuel fuel;
-    private int firstRegistartion;
+    private int firstRegistration;
     private int mileage;
     @Enumerated(EnumType.STRING)
     private TypeCar typeCar;
@@ -35,13 +35,13 @@ public class Car {
     public Car() {
     }
 
-    public Car(Brand brand, int engine, int enginePower, CarModel model, TypeFuel fuel, int firstRegistartion, int mileage, TypeCar typeCar, Color color) {
+    public Car(Brand brand, int engine, int enginePower, CarModel model, TypeFuel fuel, int firstRegistration, int mileage, TypeCar typeCar, Color color) {
         this.brand = brand;
         this.engine = engine;
         this.enginePower = enginePower;
         this.model = model;
         this.fuel = fuel;
-        this.firstRegistartion = firstRegistartion;
+        this.firstRegistration = firstRegistration;
         this.mileage = mileage;
         this.typeCar = typeCar;
         this.color = color;
@@ -96,11 +96,11 @@ public class Car {
     }
 
     public int getFirstRegistartion() {
-        return firstRegistartion;
+        return firstRegistration;
     }
 
     public void setFirstRegistartion(int firstRegistartion) {
-        this.firstRegistartion = firstRegistartion;
+        this.firstRegistration = firstRegistartion;
     }
 
     public int getMileage() {
