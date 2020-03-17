@@ -2,11 +2,12 @@ package com.otocar.otocar.service;
 
 import com.otocar.otocar.model.Brand;
 import com.otocar.otocar.repository.BrandRepository;
+import org.springframework.stereotype.Service;
 
-import javax.crypto.spec.OAEPParameterSpec;
 import java.util.Map;
 import java.util.Optional;
 
+@Service
 public class BrandService implements CrudServce<Long, Brand> {
 
     private  final BrandRepository brandRepository;
