@@ -11,7 +11,7 @@ public class Brand {
     private String name;
     @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL)
 private Set<Car> car;
-    @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<CarModel> carModels;
 
     public Brand() {
