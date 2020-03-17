@@ -37,11 +37,11 @@ public class Brand {
         this.name = name;
     }
 
-    public Set<CarModels> getCarModels() {
+    public Set<CarModel> getCarModels() {
         return carModels;
     }
 
-    public void setCarModels(Set<CarModels> carModels) {
+    public void setCarModels(Set<CarModel> carModels) {
         this.carModels = carModels;
     }
 }
