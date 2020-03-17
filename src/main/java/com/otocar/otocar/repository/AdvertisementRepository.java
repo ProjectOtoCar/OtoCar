@@ -19,27 +19,27 @@ public interface AdvertisementRepository extends PagingAndSortingRepository<Adve
 
     Page<Advertisement> findAllByActiveAndSellerOrderByDateAddDesc(boolean active, Seller seller, Pageable pageable);
 
-    //Sortowania
     Page<Advertisement> findAllByActiveOrderByPriceAsc(boolean active, Pageable pageable);
+
     Page<Advertisement> findAllByActiveOrderByPriceDesc(boolean active, Pageable pageable);
 
     Page<Advertisement> findAllByActiveOrderByDateAddAsc(boolean active, Pageable pageable);
 
 
 //----------------------------------------------------------------------------------------------------------------------------
-    Page<Advertisement> findAllByActiveAndCar_Brand(boolean active, Pageable pageable, String brand);
+    Page<Advertisement> findAllByActiveAndCar_Brand_Name(boolean active, Pageable pageable, String brandName);
 
-    Page<Advertisement> findAllByActiveAndCar_FirstRegistartionLessThan(boolean active, Pageable pageable, int first);
+    Page<Advertisement> findAllByActiveAndCar_FirstRegistrationLessThan(boolean active, Pageable pageable, int first);
 
-    Page<Advertisement> findAllByActiveAndCar_FirstRegistartionGreaterThan(boolean active, Pageable pageable, int first);
+    Page<Advertisement> findAllByActiveAndCar_FirstRegistrationGreaterThan(boolean active, Pageable pageable, int first);
 
-    Page<Advertisement> findAllByActiveAndCar_FirstRegistartionBetween(boolean active, Pageable pageable, int low, int high);
+    Page<Advertisement> findAllByActiveAndCar_FirstRegistrationBetween(boolean active, Pageable pageable, int low, int high);
 
-    Page<Advertisement> findAllByActiveAndPriceLessThan(boolean active, BigDecimal price, Pageable pageable);
+    Page<Advertisement> findAllByActiveAndPriceLessThan(boolean active, Pageable pageable,BigDecimal price);
 
-    Page<Advertisement> findAllByActiveAndPriceBetween(boolean active, BigDecimal low, BigDecimal high, Pageable pageable);
+    Page<Advertisement> findAllByActiveAndPriceBetween(boolean active,Pageable pageable, BigDecimal low, BigDecimal high);
 
-    Page<Advertisement> findAllByActiveAndPriceGreaterThan(boolean active, BigDecimal price, Pageable pageable);
+    Page<Advertisement> findAllByActiveAndPriceGreaterThan(boolean active, Pageable pageable,BigDecimal price);
 
     Page<Advertisement> findAllByActiveAndCar_BrandAndCar_Model(boolean active, Pageable pageable, String brand, String model);
 
