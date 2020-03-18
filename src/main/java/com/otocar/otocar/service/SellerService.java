@@ -10,10 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class SellerService extends AddPagable implements com.otocar.otocar.interfaces.Seller<Integer> {
+public class SellerService extends AddPagable implements com.otocar.otocar.interfaces.Seller<Integer>, CrudServce<Long, Seller> {
 
     private SellerRepository sellerRepository;
 
@@ -22,7 +23,7 @@ public class SellerService extends AddPagable implements com.otocar.otocar.inter
         this.sellerRepository = sellerRepository;
     }
 
-
+    @Override
     public Seller findById(Long aLong) {
         return sellerRepository.findById(aLong).orElse(null);
     }
@@ -33,28 +34,72 @@ public class SellerService extends AddPagable implements com.otocar.otocar.inter
     }
 
 
-
+    @Override
     public Iterable<Seller> findAll() {
         return sellerRepository.findAll();
     }
-
+    @Override
     public Seller save(Seller seller) {
         Optional<Seller> sellerOptional = Optional.of(sellerRepository.save(seller));
         return sellerOptional.orElse(null);
     }
 
-
+    @Override
     public Optional<Void> deleteById(Long along) {
         sellerRepository.deleteById(along);
         return Optional.empty();
     }
-
+    @Override
     public Seller change(Long aLong, Seller seller) {
         if(sellerRepository.findById(aLong).isEmpty()) {
             return sellerRepository.save(seller);
         }
         seller.setId(aLong);
         return sellerRepository.save(seller);
+    }
+
+    @Override
+    public Optional<Void> patch(Long aLong, Map<String, String> fields) {
+        boolean isEdit = false;
+        Optional<Seller> optionalSeller = sellerRepository.findById(aLong);
+        if(optionalSeller.isEmpty()) {
+            return Optional.empty();
+        }
+        if(fields.size() == 0) {
+            return Optional.empty();
+        }
+        if(fields.get("firstName") != null) {
+            optionalSeller.get().setFirstName(fields.get("firstName"));
+            isEdit = true;
+        }
+        if(fields.get("lastName") != null) {
+            optionalSeller.get().setLastName(fields.get("lastName"));
+            isEdit = true;
+        }
+        if(fields.get("type") != null) {
+            optionalSeller.get().setType(TypeAccount.valueOf(fields.get("type")));
+            isEdit = true;
+        }
+        if(fields.get("phoneNumber") != null) {
+            optionalSeller.get().setPhoneNumber(fields.get("phoneNumber"));
+            isEdit = true;
+        }
+        if(fields.get("createAccount") != null) {
+            optionalSeller.get().setCreateAccount(LocalDate.parse(fields.get("createAccount")));
+            isEdit = true;
+        }
+        if(fields.get("premiumAccount") != null) {
+            optionalSeller.get().setPremiumAccount(LocalDate.parse(fields.get("premiumAccount")));
+            isEdit = true;
+        }
+        if(fields.get("lastAddvertisement") != null) {
+            optionalSeller.get().setLastAddvertisement(LocalDate.parse(fields.get("lastAddvertisement")));
+            isEdit = true;
+        }
+        if(isEdit) {
+            sellerRepository.save(optionalSeller.get());
+        }
+        return Optional.empty();
     }
 
     @Override

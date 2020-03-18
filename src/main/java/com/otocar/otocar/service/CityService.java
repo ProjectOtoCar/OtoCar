@@ -56,6 +56,21 @@ public class CityService extends AddPagable implements CrudServce<Long, City> {
 
     @Override
     public Optional<Void> patch(Long aLong, Map<String, String> fields) {
+        boolean isEdit = false;
+        Optional<City> optionalCity = cityRepository.findById(aLong);
+        if(optionalCity.isEmpty()) {
+            return Optional.empty();
+        }
+        if(fields.size() == 0){
+            return Optional.empty();
+        }
+        if(fields.get("name") != null) {
+            optionalCity.get().setName(fields.get("name") );
+            isEdit = true;
+        }
+        if(isEdit) {
+            cityRepository.save(optionalCity.get());
+        }
         return Optional.empty();
     }
 }
