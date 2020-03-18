@@ -1,5 +1,7 @@
 package com.otocar.otocar.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.otocar.otocar.enums.Color;
 import com.otocar.otocar.enums.TypeCar;
 import com.otocar.otocar.enums.TypeFuel;
@@ -10,6 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Cars")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

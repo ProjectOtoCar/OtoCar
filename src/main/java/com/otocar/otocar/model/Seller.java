@@ -1,5 +1,7 @@
 package com.otocar.otocar.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.otocar.otocar.enums.TypeAccount;
 
 import javax.persistence.*;
@@ -8,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Accounts")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
