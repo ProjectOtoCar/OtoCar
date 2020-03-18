@@ -25,7 +25,7 @@ public class AdvertisementService {
 
     public Page<Advertisement> findAll(int page) {
         Pageable pag = PageRequest.of((page - 1) * 10, page * 10);
-        return advertisementRepository.findAllByActiveOrderByDateAddDesc(true, pag);
+        return advertisementRepository.findAll(pag);
     }
 
     public Page<Advertisement> findByCity(int page, String city) {

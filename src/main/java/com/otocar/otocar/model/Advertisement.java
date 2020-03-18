@@ -17,7 +17,7 @@ public class Advertisement {
     private Long id;
     private BigDecimal price;
     private LocalDate dateAdd;
-    private Boolean isActive;
+    private Boolean active;
     private String title;
     private String content;
     @OneToOne(cascade = CascadeType.ALL)
@@ -40,7 +40,7 @@ public class Advertisement {
                          Set<Image> images) {
         this.price = price;
         this.dateAdd = dateAdd;
-        this.isActive = isActive;
+        this.active = isActive;
         this.title = title;
         this.content = content;
         this.city = city;
@@ -117,11 +117,11 @@ public class Advertisement {
     }
 
     public Boolean getActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(Boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
     public Set<Image> getImages() {
