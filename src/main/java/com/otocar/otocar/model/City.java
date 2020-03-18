@@ -1,0 +1,47 @@
+package com.otocar.otocar.model;
+
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
+@Table(name = "Cities")
+public class City {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    @OneToMany(mappedBy = "city", cascade =  CascadeType.ALL)
+    private Set<Advertisement> advertisements;
+
+    public City(String name, Set<Advertisement> advertisements) {
+        this.name = name;
+        this.advertisements = advertisements;
+    }
+
+    public City() {
+    }
+
+   public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Advertisement> getAdvertisements() {
+        return advertisements;
+    }
+
+    public void setAdvertisements(Set<Advertisement> advertisements) {
+        this.advertisements = advertisements;
+    }
+}

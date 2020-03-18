@@ -16,20 +16,21 @@ public class Advertisement {
     private Boolean isActive;
     private String title;
     private String content;
-    private String city;
     @OneToOne(cascade = CascadeType.ALL)
     private Car car;
     @ManyToOne
     private Seller seller;
     @OneToMany(mappedBy = "advertisement", cascade = CascadeType.ALL)
     private Set<Image> images;
+    @ManyToOne
+    private City city;
 
     public Advertisement(BigDecimal price,
                          LocalDate dateAdd,
                          Boolean isActive,
                          String title,
                          String content,
-                         String city,
+                         City city,
                          Car car,
                          Seller seller,
                          Set<Image> images) {
@@ -87,11 +88,11 @@ public class Advertisement {
         this.content = content;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
 
