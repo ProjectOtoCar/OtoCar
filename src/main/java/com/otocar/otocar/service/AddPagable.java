@@ -8,6 +8,6 @@ public class AddPagable {
         if(page <= 0){
             page = 1;
         }
-        return PageRequest.of((page - 1) * 10, page * 10);
+        return PageRequest.of((page - 1) * 10, 10);
     }
 }

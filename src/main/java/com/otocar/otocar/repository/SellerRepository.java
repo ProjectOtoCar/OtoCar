@@ -10,16 +10,37 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 
 @Repository
-public interface SellerRepository  extends PagingAndSortingRepository<Seller, Long> {
-    Page<Seller> findAllByLastName(String lastName, Pageable pageable);
-    Page<Seller> findAllByFirstName(String firstName, Pageable pageable);
-    Page<Seller> findAllByFirstNameAndLastName(String firstName, String LastName, Pageable pageable);
-    Page<Seller> findAllByType(TypeAccount typeAccount, Pageable pageable);
-    Page<Seller> findAllByFirstNameAndType(String firstName, TypeAccount typeAccount ,Pageable pageable);
-    Page<Seller> findAllByLastNameAndType(String firstName, TypeAccount typeAccount ,Pageable pageable);
-    Page<Seller> findAllByFirstNameAndLastNameAndType(String firstName, String  lastName, TypeAccount typeAccount ,Pageable pageable);
-    Page<Seller> findAllByPremiumAccountGreaterThan(LocalDate today, Pageable pageable);
-    Page<Seller> findAllByPremiumAccountGreaterThanAndFirstName(LocalDate today, String firstName,Pageable pageable);
-    Page<Seller> findAllByPremiumAccountGreaterThanAndLastName(LocalDate today, String lastName,Pageable pageable);
-    Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndLastName(LocalDate today, String firstName,String lastName, Pageable pageable);
+public interface SellerRepository  extends PagingAndSortingRepository<Seller, Long>, com.otocar.otocar.interfaces.Seller<Pageable> {
+    Page<Seller> findAllByOrderByCreateAccountAsc(Pageable pageable);
+    Page<Seller> findAllByOrderByCreateAccountDesc(Pageable pageable);
+    Page<Seller> findAllByFirstNameOrderByCreateAccountAsc(String firstName, Pageable pageable);
+    Page<Seller> findAllByFirstNameOrderByCreateAccountDesc(String firstName, Pageable pageable);
+    Page<Seller> findAllByLastNameOrderByCreateAccountAsc(String LastName, Pageable pageable);
+    Page<Seller> findAllByLastNameOrderByCreateAccountDesc(String LastName, Pageable pageable);
+    Page<Seller> findAllByFirstNameAndLastNameOrderByCreateAccountAsc(String firstName, String LastName, Pageable pageable);
+    Page<Seller> findAllByFirstNameAndLastNameOrderByCreateAccountDesc(String firstName, String LastName, Pageable pageable);
+    Page<Seller> findAllByTypeOrderByCreateAccountAsc(TypeAccount typeAccount, Pageable pageable);
+    Page<Seller> findAllByTypeOrderByCreateAccountDesc(TypeAccount typeAccount, Pageable pageable);
+    Page<Seller> findAllByFirstNameAndTypeOrderByCreateAccountAsc(String firstName, TypeAccount typeAccount, Pageable pageable);
+    Page<Seller> findAllByFirstNameAndTypeOrderByCreateAccountDesc(String firstName, TypeAccount typeAccount, Pageable pageable);
+    Page<Seller> findAllByLastNameAndTypeOrderByCreateAccountAsc(String LastName, TypeAccount typeAccount, Pageable pageable);
+    Page<Seller> findAllByLastNameAndTypeOrderByCreateAccountDesc(String LastName, TypeAccount typeAccount, Pageable pageable);
+    Page<Seller> findAllByFirstNameAndLastNameAndTypeOrderByCreateAccountAsc(String firstName, String LastName, TypeAccount typeAccount, Pageable pageable);
+    Page<Seller> findAllByFirstNameAndLastNameAndTypeOrderByCreateAccountDesc(String firstName, String LastName, TypeAccount typeAccount, Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanOrderByCreateAccountAsc(LocalDate today, Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanOrderByCreateAccountDesc(LocalDate today, Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameOrderByCreateAccountDesc(LocalDate today, String firstName,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameOrderByCreateAccountAsc(LocalDate today, String firstName,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanAndTypeOrderByCreateAccountAsc(LocalDate today, TypeAccount typeAccount,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanAndTypeOrderByCreateAccountDesc(LocalDate today,TypeAccount typeAccount,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanAndLastNameOrderByCreateAccountAsc(LocalDate today, String lastName,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanAndLastNameOrderByCreateAccountDesc(LocalDate today, String lastName,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate today,String lastName, TypeAccount typeAccount,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate today,String lastName, TypeAccount typeAccount,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndTypeOrderByCreateAccountAsc(LocalDate today,String firstName, TypeAccount typeAccount,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndTypeOrderByCreateAccountDesc(LocalDate today,String firstName, TypeAccount typeAccount,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameOrderByCreateAccountAsc(LocalDate today, String firstName,String lastName, Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameOrderByCreateAccountDesc(LocalDate today, String firstName,String lastName, Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate today, String firstName,String lastName,TypeAccount typeAccount, Pageable pageable);
+    Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate today, String firstName,String lastName,TypeAccount typeAccount, Pageable pageable);
 }
