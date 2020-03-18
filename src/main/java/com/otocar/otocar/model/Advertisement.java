@@ -1,6 +1,7 @@
 package com.otocar.otocar.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -31,7 +32,7 @@ public class Advertisement {
 
     public Advertisement(BigDecimal price,
                          LocalDate dateAdd,
-                         Boolean isActive,
+                         Boolean active,
                          String title,
                          String content,
                          City city,
@@ -40,7 +41,7 @@ public class Advertisement {
                          Set<Image> images) {
         this.price = price;
         this.dateAdd = dateAdd;
-        this.active = isActive;
+        this.active = active;
         this.title = title;
         this.content = content;
         this.city = city;
