@@ -1,6 +1,7 @@
 package com.otocar.otocar.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -14,8 +15,10 @@ public class Brand {
     private Long id;
     private String name;
     @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL)
-private Set<Car> car;
+    @JsonIgnore
+    private Set<Car> car;
     @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<CarModel> carModels;
 
     public Brand() {
