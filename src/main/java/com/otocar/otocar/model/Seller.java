@@ -1,6 +1,7 @@
 package com.otocar.otocar.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.otocar.otocar.enums.TypeAccount;
 
@@ -24,6 +25,7 @@ public class Seller {
     private LocalDate premiumAccount;
     private LocalDate lastAddvertisement;
     @OneToMany(cascade = CascadeType.ALL ,mappedBy = "seller")
+    @JsonIgnore
     private Set<Advertisement> advertisement;
 
 
