@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @RestController
@@ -39,6 +40,7 @@ public class AdvertisementController {
 
     @PostMapping("")
     public Advertisement postSeller(@RequestBody Advertisement advertisement) {
+        advertisement.setDateAdd(LocalDate.now());
         return advertisementService.addAdv(advertisement);
     }
 

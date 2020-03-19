@@ -19,7 +19,7 @@ public class Advertisement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Size(min = 1, max = 100000000)
+    //@Size(min = 1, max = 100000000)
     private BigDecimal price;
     @NotNull
     private LocalDate dateAdd;
