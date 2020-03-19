@@ -23,6 +23,7 @@ public class SellerController {
     }
 
     @GetMapping("")
+    @ResponseStatus(value = HttpStatus.OK)
     public Page<Seller> findAll(@RequestParam(defaultValue = "1") int page,
                                 @RequestParam(required = false) String firstName,
                                 @RequestParam(required = false) String lastName,
