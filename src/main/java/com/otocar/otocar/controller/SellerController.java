@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Map;
 
 @RestController
@@ -53,6 +54,11 @@ public class SellerController {
     @PostMapping("")
     @ResponseStatus(value = HttpStatus.CREATED)
     public Seller postSeller(@RequestBody Seller seller) {
+        seller.setType(TypeAccount.NORMAL);
+        seller.setPremiumAccount(LocalDate.now());
+        seller.setLastAddvertisement(null);
+        seller.setCreateAccount(LocalDate.now());
+        seller.setAdvertisement(new HashSet<>());
         return sellerService.save(seller);
     }
 

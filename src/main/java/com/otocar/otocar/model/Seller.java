@@ -19,8 +19,9 @@ public class Seller {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Size(min = 10)
+    @Size(min = 4, max = 40)
     private String firstName;
+    @Size(min = 4, max = 40)
     private String lastName;
     @Enumerated(EnumType.STRING)
     private TypeAccount type;
@@ -41,18 +42,15 @@ public class Seller {
                   String lastName,
                   TypeAccount type,
                   String phoneNumber,
-                  LocalDate createAccount,
-                  LocalDate premiumAccount,
-                  Set<Advertisement> advertisement,
-                  LocalDate lastAddvertisement) {
+                  Set<Advertisement> advertisement) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.type = type;
         this.phoneNumber = phoneNumber;
-        this.createAccount = createAccount;
-        this.premiumAccount = premiumAccount;
+        this.createAccount = LocalDate.now();
+        this.premiumAccount = LocalDate.now();
         this.advertisement = advertisement;
-        this.lastAddvertisement = lastAddvertisement;
+        this.lastAddvertisement = null;
     }
 
     public Long getId() {
