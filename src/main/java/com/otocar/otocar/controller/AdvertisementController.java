@@ -38,6 +38,13 @@ public class AdvertisementController {
 
     }
 
+    @GetMapping("/{id}")
+    public Page<Advertisement> findAllAdvertisementBySeller(@PathVariable(value = "id") Long id, @RequestParam(defaultValue = "1")int page) {
+        Page<Advertisement> advertisementPage = advertisementService.findAllAdvertisementBySeller(id,page);
+        advertisementPage.forEach(advertisement -> advertisement.getCity().setAdvertisements(null));
+        return advertisementPage;
+    }
+
     @PostMapping("")
     public Advertisement postSeller(@RequestBody Advertisement advertisement) {
         advertisement.setDateAdd(LocalDate.now());

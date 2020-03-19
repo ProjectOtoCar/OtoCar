@@ -50,4 +50,7 @@ public class AdvertisementService extends AddPagable {
         advertisement.setId(aLong);
         return advertisementRepository.save(advertisement);
     }
+    public Page<Advertisement> findAllAdvertisementBySeller(Long id, Integer page) {
+        return advertisementRepository.findAllAdvertisementBySeller(id,pagable(page));
+    }
 }

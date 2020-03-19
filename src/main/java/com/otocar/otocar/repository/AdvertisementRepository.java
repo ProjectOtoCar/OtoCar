@@ -5,7 +5,9 @@ import com.otocar.otocar.model.Image;
 import com.otocar.otocar.model.Seller;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -20,7 +22,8 @@ public interface AdvertisementRepository extends PagingAndSortingRepository<Adve
     Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_Model_NameAndCar_FirstRegistrationBetweenAndPriceBetweenOrderByPriceDesc(boolean active, Pageable pageable, String brandName,String modelName,int lowFirst,int hightfirst, BigDecimal lowPrice, BigDecimal highPrice);
     Page<Advertisement> findAllByActiveAndCar_Brand_NameAndCar_Model_NameAndCar_FirstRegistrationBetweenAndPriceBetweenOrderByPriceAsc(boolean active, Pageable pageable, String brandName,String modelName,int lowFirst,int hightfirst, BigDecimal lowPrice, BigDecimal highPrice);
 
-
+    @Query(value = "Select a From Advertisement a where a.seller.id = :id")
+    Page<Advertisement> findAllAdvertisementBySeller(@Param("id") Long id, Pageable page);
 
 
 
