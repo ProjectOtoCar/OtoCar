@@ -8,6 +8,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Models")
+@NamedQuery(name="CarModel.findCarModel",
+query="SELECT c FROM CarModel c WHERE c.brand.name =:brandName")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class CarModel {
     @Id
