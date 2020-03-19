@@ -1,25 +1,37 @@
 package com.otocar.otocar.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.otocar.otocar.enums.TypeAccount;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
 @Table(name = "Accounts")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @Size(min = 4, max = 40)
     private String firstName;
+    @Size(min = 4, max = 40)
     private String lastName;
+    @Enumerated(EnumType.STRING)
     private TypeAccount type;
-    private int phoneNumber;
+    private String phoneNumber;
+    @NotNull
     private LocalDate createAccount;
     private LocalDate premiumAccount;
     private LocalDate lastAddvertisement;
     @OneToMany(cascade = CascadeType.ALL ,mappedBy = "seller")
+    @JsonIgnore
     private Set<Advertisement> advertisement;
 
 
@@ -29,19 +41,16 @@ public class Seller {
     public Seller(String firstName,
                   String lastName,
                   TypeAccount type,
-                  int phoneNumber,
-                  LocalDate createAccount,
-                  LocalDate premiumAccount,
-                  Set<Advertisement> advertisement,
-                  LocalDate lastAddvertisement) {
+                  String phoneNumber,
+                  Set<Advertisement> advertisement) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.type = type;
         this.phoneNumber = phoneNumber;
-        this.createAccount = createAccount;
-        this.premiumAccount = premiumAccount;
+        this.createAccount = LocalDate.now();
+        this.premiumAccount = LocalDate.now();
         this.advertisement = advertisement;
-        this.lastAddvertisement = lastAddvertisement;
+        this.lastAddvertisement = null;
     }
 
     public Long getId() {
@@ -76,11 +85,11 @@ public class Seller {
         this.type = type;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

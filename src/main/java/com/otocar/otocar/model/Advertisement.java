@@ -1,41 +1,58 @@
 package com.otocar.otocar.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
 @Table(name = "Advertisements")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Advertisement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    //@Size(min = 1, max = 100000000)
     private BigDecimal price;
+    @NotNull
     private LocalDate dateAdd;
-    private Boolean isActive;
+    @NotNull
+    private Boolean active;
+    @NotNull
+    @Size(max = 100,min = 10)
     private String title;
     private String content;
-    private String city;
     @OneToOne(cascade = CascadeType.ALL)
+    @NotNull
     private Car car;
     @ManyToOne
+    @NotNull
     private Seller seller;
     @OneToMany(mappedBy = "advertisement", cascade = CascadeType.ALL)
     private Set<Image> images;
+    @ManyToOne
+    @NotNull
+    private City city;
 
     public Advertisement(BigDecimal price,
                          LocalDate dateAdd,
-                         Boolean isActive,
+                         Boolean active,
                          String title,
                          String content,
-                         String city,
+                         City city,
                          Car car,
                          Seller seller,
                          Set<Image> images) {
         this.price = price;
         this.dateAdd = dateAdd;
-        this.isActive = isActive;
+        this.active = active;
         this.title = title;
         this.content = content;
         this.city = city;
@@ -87,11 +104,11 @@ public class Advertisement {
         this.content = content;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
 
@@ -112,11 +129,11 @@ public class Advertisement {
     }
 
     public Boolean getActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(Boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
     public Set<Image> getImages() {
