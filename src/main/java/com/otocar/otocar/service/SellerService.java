@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class SellerService extends AddPagable implements com.otocar.otocar.interfaces.Seller<Integer>, CrudServce<Long, Seller> {
+public class SellerService extends AddPagable implements CrudServce<Long, Seller> {
 
     private SellerRepository sellerRepository;
 
@@ -101,244 +101,198 @@ public class SellerService extends AddPagable implements com.otocar.otocar.inter
         }
         return Optional.empty();
     }
+    private Page<Seller> findALlByNameAsc(String firstName, String lastName, int page) {
+        Page<Seller> sellerPage = null;
 
-    @Override
-    public Page<Seller> findAllByOrderByCreateAccountAsc(Integer pageable) {
-        return sellerRepository.findAllByOrderByCreateAccountAsc(pagable(pageable));
+        if(firstName != null && lastName != null) {
+            sellerPage = sellerRepository.findAllByFirstNameAndLastNameOrderByCreateAccountAsc(firstName, lastName, pagable(page));
+        } else if (firstName != null) {
+            sellerPage = sellerRepository.findAllByFirstNameOrderByCreateAccountAsc(firstName, pagable(page));
+        } else if(lastName !=null) {
+            sellerPage = sellerRepository.findAllByLastNameOrderByCreateAccountAsc(lastName, pagable(page));
+        } else {
+            sellerPage = sellerRepository.findAllByOrderByCreateAccountAsc(pagable(page));
+        }
+        return sellerPage;
+    }
+    private Page<Seller> findALlByNameDesc(String firstName, String lastName, int page) {
+        Page<Seller> sellerPage = null;
+        if(firstName != null && lastName != null) {
+            sellerPage = sellerRepository.findAllByFirstNameAndLastNameOrderByCreateAccountDesc(firstName, lastName, pagable(page));
+        } else if (firstName != null) {
+            sellerPage = sellerRepository.findAllByFirstNameOrderByCreateAccountDesc(firstName, pagable(page));
+        } else if(lastName !=null) {
+            sellerPage = sellerRepository.findAllByLastNameOrderByCreateAccountDesc(lastName, pagable(page));
+        } else {
+            sellerPage = sellerRepository.findAllByOrderByCreateAccountDesc(pagable(page));
+        }
+        return sellerPage;
+    }
+    public Page<Seller> findAllByName(String firstName, String lastName, boolean sort, int page) {
+        Page<Seller> sellerPage = null;
+        if(sort) {
+            sellerPage = findALlByNameDesc(firstName, lastName, page);
+        } else {
+            sellerPage = findALlByNameAsc(firstName, lastName, page);
+        }
+        return sellerPage;
     }
 
-    @Override
-    public Page<Seller> findAllByOrderByCreateAccountDesc(Integer pageable) {
-        return sellerRepository.findAllByOrderByCreateAccountDesc(pagable(pageable));
+    public Page<Seller> findAllByNameAndType(String firstName, String lastName, TypeAccount typeAccount, boolean sort, int page) {
+        Page<Seller> sellerPage = null;
+        if(typeAccount == null) {
+            sellerPage = findAllByName(firstName, lastName, sort, page);
+        } else {
+            if(sort) {
+                sellerPage = findAllByNameAndTypeDesc(firstName, lastName, typeAccount, page);
+            } else {
+                sellerPage = findAllByNameAndTypeAsc(firstName,lastName,typeAccount,page);
+            }
+        }
+        return sellerPage;
     }
 
-    @Override
-    public Page<Seller> findAllByFirstNameOrderByCreateAccountAsc(String firstName, Integer pageable) {
-        return sellerRepository.findAllByFirstNameOrderByCreateAccountAsc(firstName, pagable(pageable));
+    private Page<Seller> findAllByNameAndTypeDesc(String firstName, String lastName, TypeAccount typeAccount, int page) {
+        Page<Seller> sellerPage = null;
+        if(firstName != null && lastName != null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByFirstNameAndLastNameAndTypeOrderByCreateAccountDesc(firstName, lastName,typeAccount, pagable(page));
+        } else if (firstName != null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByFirstNameAndTypeOrderByCreateAccountDesc(firstName, typeAccount, pagable(page));
+        } else if(lastName !=null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByLastNameAndTypeOrderByCreateAccountDesc(lastName, typeAccount, pagable(page));
+        } else if(typeAccount !=null) {
+            sellerPage = sellerRepository.findAllByTypeOrderByCreateAccountDesc(typeAccount, pagable(page));
+        } else {
+            sellerPage = sellerRepository.findAllByOrderByCreateAccountDesc(pagable(page));
+        }
+        return sellerPage;
     }
 
-    @Override
-    public Page<Seller> findAllByFirstNameOrderByCreateAccountDesc(String firstName, Integer pageable) {
-        return sellerRepository.findAllByFirstNameOrderByCreateAccountDesc(firstName, pagable(pageable));
+    private Page<Seller> findAllByNameAndTypeAsc(String firstName, String lastName, TypeAccount typeAccount, int page) {
+        Page<Seller> sellerPage = null;
+
+        if(firstName != null && lastName != null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByFirstNameAndLastNameAndTypeOrderByCreateAccountAsc(firstName, lastName,typeAccount, pagable(page));
+        } else if (firstName != null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByFirstNameAndTypeOrderByCreateAccountAsc(firstName, typeAccount, pagable(page));
+        } else if(lastName !=null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByLastNameAndTypeOrderByCreateAccountAsc(lastName, typeAccount, pagable(page));
+        } else if(typeAccount !=null) {
+            sellerPage = sellerRepository.findAllByTypeOrderByCreateAccountAsc(typeAccount, pagable(page));
+        } else {
+            sellerPage = sellerRepository.findAllByOrderByCreateAccountAsc(pagable(page));
+        }
+        return sellerPage;
+    }
+    private Page<Seller> findAllByNameAndTypeIsPremiumAsc(String firstName, String lastName, TypeAccount typeAccount,int page) {
+        Page<Seller> sellerPage = null;
+        if(firstName != null && lastName != null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate.now(),firstName, lastName, typeAccount, pagable(page));
+        } else if (firstName != null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountGreaterThanAndFirstNameAndTypeOrderByCreateAccountAsc(LocalDate.now(),firstName, typeAccount, pagable(page));
+        } else if(lastName !=null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountGreaterThanAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate.now(), lastName, typeAccount, pagable(page));
+        } else if(firstName != null && lastName != null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameOrderByCreateAccountAsc(LocalDate.now(), firstName, lastName, pagable(page));
+        } else if(firstName != null ) {
+            sellerPage = sellerRepository.findAllByPremiumAccountGreaterThanAndFirstNameOrderByCreateAccountAsc(LocalDate.now(), firstName, pagable(page));
+        } else if(lastName != null ) {
+            sellerPage = sellerRepository.findAllByPremiumAccountGreaterThanAndLastNameOrderByCreateAccountAsc(LocalDate.now(), lastName, pagable(page));
+        } else if(typeAccount !=null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountGreaterThanAndTypeOrderByCreateAccountAsc(LocalDate.now(),typeAccount, pagable(page));
+        } else {
+            sellerPage = sellerRepository.findAllByPremiumAccountGreaterThanOrderByCreateAccountAsc(LocalDate.now(), pagable(page));
+        }
+        return sellerPage;
+    }
+    private Page<Seller> findAllByNameAndTypeIsPremiumDesc(String firstName, String lastName, TypeAccount typeAccount,int page) {
+        Page<Seller> sellerPage = null;
+        if(firstName != null && lastName != null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate.now(),firstName, lastName, typeAccount, pagable(page));
+        } else if (firstName != null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountGreaterThanAndFirstNameAndTypeOrderByCreateAccountDesc(LocalDate.now(),firstName, typeAccount, pagable(page));
+        } else if(lastName !=null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountGreaterThanAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate.now(), lastName, typeAccount, pagable(page));
+        } else if(firstName != null && lastName != null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameOrderByCreateAccountDesc(LocalDate.now(), firstName, lastName, pagable(page));
+        } else if(firstName != null ) {
+            sellerPage = sellerRepository.findAllByPremiumAccountGreaterThanAndFirstNameOrderByCreateAccountDesc(LocalDate.now(), firstName, pagable(page));
+        } else if(lastName != null ) {
+            sellerPage = sellerRepository.findAllByPremiumAccountGreaterThanAndLastNameOrderByCreateAccountDesc(LocalDate.now(), lastName, pagable(page));
+        }else if(typeAccount !=null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountGreaterThanAndTypeOrderByCreateAccountDesc(LocalDate.now(),typeAccount, pagable(page));
+        } else {
+            sellerPage = sellerRepository.findAllByPremiumAccountGreaterThanOrderByCreateAccountDesc(LocalDate.now(), pagable(page));
+        }
+        return sellerPage;
+    }
+    private Page<Seller> findAllByNameAndTypeIsNotPremiumDesc(String firstName, String lastName, TypeAccount typeAccount,int page) {
+        Page<Seller> sellerPage = null;
+        if(firstName != null && lastName != null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountLessThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate.now(),firstName, lastName, typeAccount, pagable(page));
+        } else if (firstName != null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountLessThanAndFirstNameAndTypeOrderByCreateAccountDesc(LocalDate.now(),firstName, typeAccount, pagable(page));
+        } else if(lastName !=null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountLessThanAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate.now(), lastName, typeAccount, pagable(page));
+        } else if(firstName != null && lastName != null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountLessThanAndFirstNameAndLastNameOrderByCreateAccountDesc(LocalDate.now(), firstName, lastName, pagable(page));
+        } else if(firstName != null ) {
+            sellerPage = sellerRepository.findAllByPremiumAccountLessThanAndFirstNameOrderByCreateAccountDesc(LocalDate.now(), firstName, pagable(page));
+        } else if(lastName != null ) {
+            sellerPage = sellerRepository.findAllByPremiumAccountLessThanAndLastNameOrderByCreateAccountDesc(LocalDate.now(), lastName, pagable(page));
+        }else if(typeAccount !=null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountLessThanAndTypeOrderByCreateAccountDesc(LocalDate.now(),typeAccount, pagable(page));
+        } else {
+            sellerPage = sellerRepository.findAllByPremiumAccountLessThanOrderByCreateAccountDesc(LocalDate.now(), pagable(page));
+        }
+        return sellerPage;
+    }
+    private Page<Seller> findAllByNameAndTypeIsNotPremiumAsc(String firstName, String lastName, TypeAccount typeAccount,int page) {
+        Page<Seller> sellerPage = null;
+        if(firstName != null && lastName != null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountLessThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate.now(),firstName, lastName, typeAccount, pagable(page));
+        } else if (firstName != null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountLessThanAndFirstNameAndTypeOrderByCreateAccountAsc(LocalDate.now(),firstName, typeAccount, pagable(page));
+        } else if(lastName !=null && typeAccount != null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountLessThanAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate.now(), lastName, typeAccount, pagable(page));
+        } else if(firstName != null && lastName != null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountLessThanAndFirstNameAndLastNameOrderByCreateAccountAsc(LocalDate.now(), firstName, lastName, pagable(page));
+        } else if(firstName != null ) {
+            sellerPage = sellerRepository.findAllByPremiumAccountLessThanAndFirstNameOrderByCreateAccountAsc(LocalDate.now(), firstName, pagable(page));
+        } else if(lastName != null ) {
+            sellerPage = sellerRepository.findAllByPremiumAccountLessThanAndLastNameOrderByCreateAccountAsc(LocalDate.now(), lastName, pagable(page));
+        } else if(typeAccount !=null) {
+            sellerPage = sellerRepository.findAllByPremiumAccountLessThanAndTypeOrderByCreateAccountAsc(LocalDate.now(),typeAccount, pagable(page));
+        } else {
+            sellerPage = sellerRepository.findAllByPremiumAccountLessThanOrderByCreateAccountAsc(LocalDate.now(), pagable(page));
+        }
+        return sellerPage;
     }
 
-    @Override
-    public Page<Seller> findAllByLastNameOrderByCreateAccountAsc(String lastName, Integer pageable) {
-        return sellerRepository.findAllByLastNameOrderByCreateAccountAsc(lastName, pagable(pageable));
+
+    public Page<Seller> findAllByNameAndTypeAndPremium(String firstName, String lastName, TypeAccount typeAccount, boolean sort, String premium, int page) {
+        Page<Seller> sellerPage = null;
+        if(premium == null) {
+            System.out.println("premium null");
+            sellerPage = findAllByNameAndType(firstName, lastName, typeAccount, sort, page);
+        }
+        else if(premium.toLowerCase().equals("true")) {
+            System.out.println("premium");
+            if(sort) {
+                sellerPage = findAllByNameAndTypeIsPremiumDesc(firstName, lastName, typeAccount, page);
+            } else {
+                sellerPage = findAllByNameAndTypeIsPremiumAsc(firstName,lastName,typeAccount,page);
+            }
+        } else {
+            System.out.println("!premium");
+            if(sort) {
+                sellerPage = findAllByNameAndTypeIsNotPremiumDesc(firstName, lastName, typeAccount, page);
+            } else {
+                sellerPage = findAllByNameAndTypeIsNotPremiumAsc(firstName, lastName, typeAccount, page);
+            }
+        }
+
+        return sellerPage;
     }
 
-    @Override
-    public Page<Seller> findAllByLastNameOrderByCreateAccountDesc(String lastname, Integer pageable) {
-        return sellerRepository.findAllByLastNameOrderByCreateAccountDesc(lastname, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByFirstNameAndLastNameOrderByCreateAccountAsc(String firstName, String lastName, Integer pageable) {
-        return sellerRepository.findAllByFirstNameAndLastNameOrderByCreateAccountAsc(firstName,lastName,pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByFirstNameAndLastNameOrderByCreateAccountDesc(String firstName, String lastName, Integer pageable) {
-        return sellerRepository.findAllByFirstNameAndLastNameOrderByCreateAccountDesc(firstName,lastName,pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByTypeOrderByCreateAccountAsc(TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByTypeOrderByCreateAccountAsc(typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByTypeOrderByCreateAccountDesc(TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByTypeOrderByCreateAccountDesc(typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByFirstNameAndTypeOrderByCreateAccountAsc(String firstName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByFirstNameAndTypeOrderByCreateAccountAsc(firstName,typeAccount,pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByFirstNameAndTypeOrderByCreateAccountDesc(String firstName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByFirstNameAndTypeOrderByCreateAccountDesc(firstName,typeAccount,pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByLastNameAndTypeOrderByCreateAccountAsc(String lastName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByLastNameAndTypeOrderByCreateAccountAsc(lastName, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByLastNameAndTypeOrderByCreateAccountDesc(String lastName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByLastNameAndTypeOrderByCreateAccountDesc(lastName, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByFirstNameAndLastNameAndTypeOrderByCreateAccountAsc(String firstName, String lastName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByFirstNameAndLastNameAndTypeOrderByCreateAccountAsc(firstName, lastName, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByFirstNameAndLastNameAndTypeOrderByCreateAccountDesc(String firstName, String lastName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByFirstNameAndLastNameAndTypeOrderByCreateAccountDesc(firstName, lastName, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountGreaterThanOrderByCreateAccountAsc(LocalDate today, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountGreaterThanOrderByCreateAccountAsc(today, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountGreaterThanOrderByCreateAccountDesc(LocalDate today, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountGreaterThanOrderByCreateAccountDesc(today, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameOrderByCreateAccountAsc(LocalDate today, String firstName, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountGreaterThanAndFirstNameOrderByCreateAccountAsc(today, firstName, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountGreaterThanAndTypeOrderByCreateAccountAsc(LocalDate today, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountGreaterThanAndTypeOrderByCreateAccountAsc(today, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountGreaterThanAndTypeOrderByCreateAccountDesc(LocalDate today, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountGreaterThanAndTypeOrderByCreateAccountDesc(today, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameOrderByCreateAccountDesc(LocalDate today, String firstName, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountGreaterThanAndFirstNameOrderByCreateAccountDesc(today, firstName, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountGreaterThanAndLastNameOrderByCreateAccountAsc(LocalDate today, String lastName, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountGreaterThanAndLastNameOrderByCreateAccountAsc(today, lastName, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountGreaterThanAndLastNameOrderByCreateAccountDesc(LocalDate today, String lastName, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountGreaterThanAndLastNameOrderByCreateAccountDesc(today, lastName, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountGreaterThanAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate today, String lastName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountGreaterThanAndLastNameAndTypeOrderByCreateAccountAsc(today, lastName, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountGreaterThanAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate today, String lastName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountGreaterThanAndLastNameAndTypeOrderByCreateAccountDesc(today, lastName, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndTypeOrderByCreateAccountAsc(LocalDate today, String firstName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountGreaterThanAndFirstNameAndTypeOrderByCreateAccountAsc(today, firstName, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndTypeOrderByCreateAccountDesc(LocalDate today, String firstName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountGreaterThanAndFirstNameAndTypeOrderByCreateAccountDesc(today, firstName, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameOrderByCreateAccountAsc(LocalDate today, String firstName, String lastName, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameOrderByCreateAccountAsc(today, firstName, lastName, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameOrderByCreateAccountDesc(LocalDate today, String firstName, String lastName, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameOrderByCreateAccountDesc(today, firstName, lastName, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate today, String firstName, String lastName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountAsc(today, firstName, lastName, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate today, String firstName, String lastName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountDesc(today, firstName, lastName, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountLessThanOrderByCreateAccountAsc(LocalDate today, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountLessThanOrderByCreateAccountAsc(today, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountLessThanOrderByCreateAccountDesc(LocalDate today, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountLessThanOrderByCreateAccountDesc(today, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountLessThanAndFirstNameOrderByCreateAccountDesc(LocalDate today, String firstName, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountLessThanAndFirstNameOrderByCreateAccountDesc(today, firstName, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountLessThanAndFirstNameOrderByCreateAccountAsc(LocalDate today, String firstName, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountLessThanAndFirstNameOrderByCreateAccountAsc(today, firstName, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountLessThanAndTypeOrderByCreateAccountAsc(LocalDate today, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountLessThanAndTypeOrderByCreateAccountAsc(today, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountLessThanAndTypeOrderByCreateAccountDesc(LocalDate today, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountLessThanAndTypeOrderByCreateAccountDesc(today, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountLessThanAndLastNameOrderByCreateAccountAsc(LocalDate today, String lastName, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountLessThanAndLastNameOrderByCreateAccountAsc(today, lastName, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountLessThanAndLastNameOrderByCreateAccountDesc(LocalDate today, String lastName, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountLessThanAndLastNameOrderByCreateAccountDesc(today,lastName,pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountLessThanAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate today, String lastName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountLessThanAndLastNameAndTypeOrderByCreateAccountAsc(today,lastName, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountLessThanAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate today, String lastName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountLessThanAndLastNameAndTypeOrderByCreateAccountDesc(today, lastName, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountLessThanAndFirstNameAndTypeOrderByCreateAccountAsc(LocalDate today, String firstName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountLessThanAndFirstNameAndTypeOrderByCreateAccountAsc(today, firstName, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountLessThanAndFirstNameAndTypeOrderByCreateAccountDesc(LocalDate today, String firstName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountLessThanAndFirstNameAndTypeOrderByCreateAccountDesc(today, firstName, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountLessThanAndFirstNameAndLastNameOrderByCreateAccountAsc(LocalDate today, String firstName, String lastName, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountLessThanAndFirstNameAndLastNameOrderByCreateAccountAsc(today, firstName, lastName, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountLessThanAndFirstNameAndLastNameOrderByCreateAccountDesc(LocalDate today, String firstName, String lastName, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountLessThanAndFirstNameAndLastNameOrderByCreateAccountDesc(today, firstName, lastName, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountLessThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate today, String firstName, String lastName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountLessThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountAsc(today, firstName, lastName, typeAccount, pagable(pageable));
-    }
-
-    @Override
-    public Page<Seller> findAllByPremiumAccountLessThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate today, String firstName, String lastName, TypeAccount typeAccount, Integer pageable) {
-        return sellerRepository.findAllByPremiumAccountLessThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountDesc(today, firstName, lastName, typeAccount, pagable(pageable));
-    }
 }
