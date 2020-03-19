@@ -39,4 +39,20 @@ public interface Seller<PAGE> {
     Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameOrderByCreateAccountDesc(LocalDate today, String firstName, String lastName, PAGE pageable);
     Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate today, String firstName, String lastName, TypeAccount typeAccount, PAGE pageable);
     Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate today, String firstName, String lastName, TypeAccount typeAccount, PAGE pageable);
+    Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountLessThanOrderByCreateAccountAsc(LocalDate today, PAGE pageable);
+    Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountLessThanOrderByCreateAccountDesc(LocalDate today, PAGE pageable);
+    Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountLessThanAndFirstNameOrderByCreateAccountDesc(LocalDate today, String firstName, PAGE pageable);
+    Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountLessThanAndFirstNameOrderByCreateAccountAsc(LocalDate today, String firstName, PAGE pageable);
+    Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountLessThanAndTypeOrderByCreateAccountAsc(LocalDate today, TypeAccount typeAccount, PAGE pageable);
+    Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountLessThanAndTypeOrderByCreateAccountDesc(LocalDate today, TypeAccount typeAccount, PAGE pageable);
+    Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountLessThanAndLastNameOrderByCreateAccountAsc(LocalDate today, String lastName, PAGE pageable);
+    Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountLessThanAndLastNameOrderByCreateAccountDesc(LocalDate today, String lastName, PAGE pageable);
+    Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountLessThanAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate today, String lastName, TypeAccount typeAccount, PAGE pageable);
+    Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountLessThanAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate today, String lastName, TypeAccount typeAccount, PAGE pageable);
+    Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountLessThanAndFirstNameAndTypeOrderByCreateAccountAsc(LocalDate today, String firstName, TypeAccount typeAccount, PAGE pageable);
+    Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountLessThanAndFirstNameAndTypeOrderByCreateAccountDesc(LocalDate today, String firstName, TypeAccount typeAccount, PAGE pageable);
+    Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountLessThanAndFirstNameAndLastNameOrderByCreateAccountAsc(LocalDate today, String firstName, String lastName, PAGE pageable);
+    Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountLessThanAndFirstNameAndLastNameOrderByCreateAccountDesc(LocalDate today, String firstName, String lastName, PAGE pageable);
+    Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountLessThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate today, String firstName, String lastName, TypeAccount typeAccount, PAGE pageable);
+    Page<com.otocar.otocar.model.Seller> findAllByPremiumAccountLessThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate today, String firstName, String lastName, TypeAccount typeAccount, PAGE pageable);
 }

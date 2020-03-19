@@ -43,4 +43,20 @@ public interface SellerRepository  extends PagingAndSortingRepository<Seller, Lo
     Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameOrderByCreateAccountDesc(LocalDate today, String firstName,String lastName, Pageable pageable);
     Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate today, String firstName,String lastName,TypeAccount typeAccount, Pageable pageable);
     Page<Seller> findAllByPremiumAccountGreaterThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate today, String firstName,String lastName,TypeAccount typeAccount, Pageable pageable);
+    Page<Seller> findAllByPremiumAccountLessThanOrderByCreateAccountAsc(LocalDate today, Pageable pageable);
+    Page<Seller> findAllByPremiumAccountLessThanOrderByCreateAccountDesc(LocalDate today, Pageable pageable);
+    Page<Seller> findAllByPremiumAccountLessThanAndFirstNameOrderByCreateAccountDesc(LocalDate today, String firstName,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountLessThanAndFirstNameOrderByCreateAccountAsc(LocalDate today, String firstName,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountLessThanAndTypeOrderByCreateAccountAsc(LocalDate today, TypeAccount typeAccount,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountLessThanAndTypeOrderByCreateAccountDesc(LocalDate today,TypeAccount typeAccount,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountLessThanAndLastNameOrderByCreateAccountAsc(LocalDate today, String lastName,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountLessThanAndLastNameOrderByCreateAccountDesc(LocalDate today, String lastName,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountLessThanAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate today,String lastName, TypeAccount typeAccount,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountLessThanAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate today,String lastName, TypeAccount typeAccount,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountLessThanAndFirstNameAndTypeOrderByCreateAccountAsc(LocalDate today,String firstName, TypeAccount typeAccount,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountLessThanAndFirstNameAndTypeOrderByCreateAccountDesc(LocalDate today,String firstName, TypeAccount typeAccount,Pageable pageable);
+    Page<Seller> findAllByPremiumAccountLessThanAndFirstNameAndLastNameOrderByCreateAccountAsc(LocalDate today, String firstName,String lastName, Pageable pageable);
+    Page<Seller> findAllByPremiumAccountLessThanAndFirstNameAndLastNameOrderByCreateAccountDesc(LocalDate today, String firstName,String lastName, Pageable pageable);
+    Page<Seller> findAllByPremiumAccountLessThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate today, String firstName,String lastName,TypeAccount typeAccount, Pageable pageable);
+    Page<Seller> findAllByPremiumAccountLessThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate today, String firstName,String lastName,TypeAccount typeAccount, Pageable pageable);
 }
