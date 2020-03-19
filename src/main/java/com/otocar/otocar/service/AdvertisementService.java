@@ -37,7 +37,17 @@ public class AdvertisementService extends AddPagable {
         }
         return optionalAdvertisements.orElse(null);
     }
-    public Advertisement save(Advertisement adv) {
+    public Advertisement addAdv(Advertisement adv) {
         return advertisementRepository.save(adv);
+    }
+    public void deleteById(Long id){
+        advertisementRepository.deleteById(id);
+    }
+    public Advertisement change(Long aLong, Advertisement advertisement) {
+        if(advertisementRepository.findById(aLong).isEmpty()) {
+            return advertisementRepository.save(advertisement);
+        }
+        advertisement.setId(aLong);
+        return advertisementRepository.save(advertisement);
     }
 }

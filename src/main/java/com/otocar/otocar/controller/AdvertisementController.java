@@ -5,11 +5,9 @@ import com.otocar.otocar.model.Seller;
 import com.otocar.otocar.service.AdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -25,11 +23,6 @@ public class AdvertisementController {
         this.advertisementService = advertisementService;
     }
 
-//    @GetMapping("")
-//    public Page<Advertisement> findAll(@RequestParam(defaultValue = "1") int page) {
-//        return advertisementService.findAll(page);
-//    }
-
     @GetMapping("/sort")
     public Page<Advertisement> findAllOrderByPrice(@RequestParam(defaultValue = "1") int page,
                                                    @RequestParam(required = false) String brandName,
@@ -44,4 +37,18 @@ public class AdvertisementController {
 
     }
 
+    @PostMapping("")
+    public Advertisement postSeller(@RequestBody Advertisement advertisement) {
+        return advertisementService.addAdv(advertisement);
+    }
+
+    @PutMapping("/{id}")
+    public Advertisement putSeller(@PathVariable(value = "id") Long id, @RequestBody Advertisement advertisement) {
+        return advertisementService.change(id, advertisement);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable(value = "id") Long id) {
+        advertisementService.deleteById(id);
+    }
 }
