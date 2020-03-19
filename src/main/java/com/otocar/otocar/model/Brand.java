@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 @Entity
 @Table(name = "Brands")
@@ -13,12 +15,15 @@ public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @Size(min = 5)
     private String name;
     @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Car> car;
     @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
+    @NotNull
     private Set<CarModel> carModels;
 
     public Brand() {

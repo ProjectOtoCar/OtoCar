@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.otocar.otocar.enums.TypeAccount;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -16,11 +18,14 @@ public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @Size(min = 10)
     private String firstName;
     private String lastName;
     @Enumerated(EnumType.STRING)
     private TypeAccount type;
     private String phoneNumber;
+    @NotNull
     private LocalDate createAccount;
     private LocalDate premiumAccount;
     private LocalDate lastAddvertisement;

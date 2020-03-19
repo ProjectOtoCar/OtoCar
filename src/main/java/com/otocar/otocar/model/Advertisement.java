@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
@@ -16,18 +18,27 @@ public class Advertisement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @Size(min = 1, max = 100000000)
     private BigDecimal price;
+    @NotNull
     private LocalDate dateAdd;
+    @NotNull
     private Boolean active;
+    @NotNull
+    @Size(max = 100,min = 10)
     private String title;
     private String content;
     @OneToOne(cascade = CascadeType.ALL)
+    @NotNull
     private Car car;
     @ManyToOne
+    @NotNull
     private Seller seller;
     @OneToMany(mappedBy = "advertisement", cascade = CascadeType.ALL)
     private Set<Image> images;
     @ManyToOne
+    @NotNull
     private City city;
 
     public Advertisement(BigDecimal price,
