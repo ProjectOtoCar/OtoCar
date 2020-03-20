@@ -35,7 +35,7 @@ public class AdvertisementController {
                                                    @RequestParam(defaultValue = "desc") String orderBy
                                                    ) {
 
-        Page<Advertisement> advertisements = advertisementService.find(page, brandName, modelName, lowRegistration, highRegistration, lowPrice, highPirce, orderBy);
+        Page<Advertisement> advertisements = advertisementService.find(page, brandName, modelName, lowRegistration, hiqghRegistration, lowPrice, highPirce, orderBy);
 
         advertisements.forEach(advertisement -> {
             advertisement.setContent(null);
