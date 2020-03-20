@@ -2,6 +2,7 @@ package com.otocar.otocar.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.util.Set;
 @Entity
 @Table(name = "Advertisements")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Advertisement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

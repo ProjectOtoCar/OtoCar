@@ -1,6 +1,7 @@
 package com.otocar.otocar.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.Set;
 @NamedQuery(name="CarModel.findCarModel",
 query="SELECT c FROM CarModel c WHERE c.brand.name =:brandName")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CarModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

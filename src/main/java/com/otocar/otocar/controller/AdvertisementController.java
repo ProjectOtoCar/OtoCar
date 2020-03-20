@@ -34,7 +34,20 @@ public class AdvertisementController {
                                                    @RequestParam(defaultValue = "2020") int highRegistration,
                                                    @RequestParam(defaultValue = "desc") String orderBy
                                                    ) {
-        return advertisementService.find(page,brandName,modelName,lowRegistration,highRegistration,lowPrice,highPirce,orderBy);
+
+        Page<Advertisement> advertisements = advertisementService.find(page, brandName, modelName, lowRegistration, highRegistration, lowPrice, highPirce, orderBy);
+
+        advertisements.forEach(advertisement -> {
+            advertisement.setContent(null);
+            advertisement.getCar().setColor(null);
+            advertisement.getCar().setTypeCar(null);
+            advertisement.getCar().setBrand(null);
+            advertisement.getCar().setModel(null);
+            advertisement.setSeller(null);
+            advertisement.getCity().setAdvertisements(null);
+
+        });
+        return advertisements;
 
     }
 
