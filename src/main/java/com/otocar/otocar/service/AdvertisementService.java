@@ -1,7 +1,6 @@
 package com.otocar.otocar.service;
 
 import com.otocar.otocar.model.Advertisement;
-import com.otocar.otocar.model.Seller;
 import com.otocar.otocar.repository.AdvertisementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -52,5 +51,8 @@ public class AdvertisementService extends AddPagable {
     }
     public Page<Advertisement> findAllAdvertisementBySeller(Long id, Integer page) {
         return advertisementRepository.findAllAdvertisementBySeller(id,pagable(page));
+    }
+    public Advertisement findAllById(Long id){
+        return advertisementRepository.findById(id).orElse(null);
     }
 }
