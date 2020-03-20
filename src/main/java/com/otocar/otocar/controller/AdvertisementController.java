@@ -38,12 +38,18 @@ public class AdvertisementController {
 
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("seller/{id}")
     public Page<Advertisement> findAllAdvertisementBySeller(@PathVariable(value = "id") Long id, @RequestParam(defaultValue = "1")int page) {
         Page<Advertisement> advertisementPage = advertisementService.findAllAdvertisementBySeller(id,page);
         advertisementPage.forEach(advertisement -> advertisement.getCity().setAdvertisements(null));
         return advertisementPage;
     }
+
+    @GetMapping("{id}")
+    public Advertisement findAdvertismentById(@PathVariable(value = "id") Long id){
+        return advertisementService.findAllById(id);
+    }
+
 
     @PostMapping("")
     public Advertisement postSeller(@RequestBody Advertisement advertisement) {
