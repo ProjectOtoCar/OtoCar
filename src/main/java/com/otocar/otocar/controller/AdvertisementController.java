@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -69,6 +70,12 @@ public class AdvertisementController {
     public Advertisement postSeller(@RequestBody Advertisement advertisement) {
         advertisement.setDateAdd(LocalDate.now());
         return advertisementService.addAdv(advertisement);
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(value =  HttpStatus.OK)
+    public void patch(@PathVariable(value = "id") Long id, @RequestBody Map<String, Object> fields ) {
+        advertisementService.patch(id, fields);
     }
 
     @PutMapping("/{id}")
