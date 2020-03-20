@@ -18,7 +18,7 @@ public class Brand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Size(min = 5)
+    @Size(min = 5, max = 50)
     private String name;
     @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL)
     @JsonIgnore

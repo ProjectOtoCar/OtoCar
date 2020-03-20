@@ -20,7 +20,7 @@ public class CarModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Size(min = 1)
+    @Size(min = 1, max = 100)
     private String name;
     @ManyToOne
     @NotNull

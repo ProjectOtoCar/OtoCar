@@ -48,7 +48,6 @@ public class AdvertisementController {
 
         });
         return advertisements;
-
     }
 
     @GetMapping("seller/{id}")
