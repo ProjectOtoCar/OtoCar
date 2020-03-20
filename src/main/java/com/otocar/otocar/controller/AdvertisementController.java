@@ -24,7 +24,7 @@ public class AdvertisementController {
         this.advertisementService = advertisementService;
     }
 
-    @GetMapping("/sort")
+    @GetMapping("")
     public Page<Advertisement> findAllOrderByPrice(@RequestParam(defaultValue = "1") int page,
                                                    @RequestParam(required = false) String brandName,
                                                    @RequestParam(required = false) String modelName,
@@ -35,7 +35,6 @@ public class AdvertisementController {
                                                    @RequestParam(defaultValue = "desc") String orderBy
                                                    ) {
         return advertisementService.find(page,brandName,modelName,lowRegistration,highRegistration,lowPrice,highPirce,orderBy);
-
     }
 
     @GetMapping("/{id}")

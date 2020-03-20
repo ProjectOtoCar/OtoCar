@@ -7,6 +7,8 @@ import com.otocar.otocar.enums.TypeAccount;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Set;
@@ -24,10 +26,13 @@ public class Seller {
     @Size(min = 4, max = 40)
     private String lastName;
     @Enumerated(EnumType.STRING)
+    @NotNull
     private TypeAccount type;
+    @Pattern(regexp = "[0-9]{9}")
     private String phoneNumber;
     @NotNull
     private LocalDate createAccount;
+    @NotNull
     private LocalDate premiumAccount;
     private LocalDate lastAddvertisement;
     @OneToMany(cascade = CascadeType.ALL ,mappedBy = "seller")

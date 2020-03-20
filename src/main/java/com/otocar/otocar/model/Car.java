@@ -7,6 +7,8 @@ import com.otocar.otocar.enums.TypeCar;
 import com.otocar.otocar.enums.TypeFuel;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -24,8 +26,12 @@ public class Car {
     @NotNull
     private Brand brand;
     //@Size(min = 1000)
+    @Min(1)
+    @Max(50_000)
     private int engine;
     //@Size(min = 50)
+    @Min(1)
+    @Max(20_000)
     private int enginePower;
     @ManyToOne
     @NotNull
@@ -35,13 +41,15 @@ public class Car {
     private int firstRegistration;
     @NotNull
     //@Size(min = 1, max=2000000)
+    @Min(0)
+    @Max(10_000_000)
     private int mileage;
     @Enumerated(EnumType.STRING)
+    @NotNull
     private TypeCar typeCar;
     @Enumerated(EnumType.STRING)
+    @NotNull
     private Color color;
-
-
 
     public Car() {
     }

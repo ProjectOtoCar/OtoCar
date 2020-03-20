@@ -1,10 +1,11 @@
 package com.otocar.otocar.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
@@ -19,7 +20,8 @@ public class Advertisement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    //@Size(min = 1, max = 100000000)
+    @Min(1)
+    @Max(10_000_000)
     private BigDecimal price;
     @NotNull
     private LocalDate dateAdd;
@@ -28,6 +30,7 @@ public class Advertisement {
     @NotNull
     @Size(max = 100,min = 10)
     private String title;
+    @Size(max = 400)
     private String content;
     @OneToOne(cascade = CascadeType.ALL)
     @NotNull

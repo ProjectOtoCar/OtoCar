@@ -18,7 +18,7 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Size(min=10)
+    @Size(min=10, max =  100)
     private String name;
     @OneToMany(mappedBy = "city", cascade =  CascadeType.ALL)
     private Set<Advertisement> advertisements;
