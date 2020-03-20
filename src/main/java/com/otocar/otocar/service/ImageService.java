@@ -50,7 +50,7 @@ public class ImageService implements CrudServce<Long, Image> {
     }
 
     @Override
-    public Optional<Void> patch(Long aLong, Map<String, String> fields) {
+    public Optional<Void> patch(Long aLong, Map<String, Object> fields) {
         boolean isEdit = false;
         Optional<Image> optionalImage = imageRepository.findById(aLong);
         if(optionalImage.isEmpty()) {
@@ -60,11 +60,11 @@ public class ImageService implements CrudServce<Long, Image> {
             return Optional.empty();
         }
         if(fields.get("isMainImage") != null) {
-            optionalImage.get().setMainImage(Boolean.getBoolean(fields.get("isMainImage")));
+            optionalImage.get().setMainImage(Boolean.getBoolean((String) fields.get("isMainImage")));
             isEdit = true;
         }
         if(fields.get("photo") != null) {
-            optionalImage.get().setPhoto(fields.get("photo").getBytes());
+            optionalImage.get().setPhoto(((String)fields.get("photo")).getBytes());
             isEdit = true;
         }
         if(isEdit){

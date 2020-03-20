@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class SellerService extends AddPagable implements CrudServce<Long, Seller> {
+public class SellerService extends AddPagable implements CrudServce<Long,Seller> {
 
     private SellerRepository sellerRepository;
 
@@ -23,7 +23,7 @@ public class SellerService extends AddPagable implements CrudServce<Long, Seller
         this.sellerRepository = sellerRepository;
     }
 
-    @Override
+
     public Seller findById(Long aLong) {
         return sellerRepository.findById(aLong).orElse(null);
     }
@@ -34,22 +34,22 @@ public class SellerService extends AddPagable implements CrudServce<Long, Seller
     }
 
 
-    @Override
+
     public Iterable<Seller> findAll() {
         return sellerRepository.findAll();
     }
-    @Override
+
     public Seller save(Seller seller) {
         Optional<Seller> sellerOptional = Optional.of(sellerRepository.save(seller));
         return sellerOptional.orElse(null);
     }
 
-    @Override
+
     public Optional<Void> deleteById(Long along) {
         sellerRepository.deleteById(along);
         return Optional.empty();
     }
-    @Override
+
     public Seller change(Long aLong, Seller seller) {
         if(sellerRepository.findById(aLong).isEmpty()) {
             return sellerRepository.save(seller);
@@ -58,8 +58,8 @@ public class SellerService extends AddPagable implements CrudServce<Long, Seller
         return sellerRepository.save(seller);
     }
 
-    @Override
-    public Optional<Void> patch(Long aLong, Map<String, String> fields) {
+
+    public Optional<Void> patch(Long aLong, Map<String, Object> fields) {
         boolean isEdit = false;
         Optional<Seller> optionalSeller = sellerRepository.findById(aLong);
         if(optionalSeller.isEmpty()) {
@@ -69,31 +69,27 @@ public class SellerService extends AddPagable implements CrudServce<Long, Seller
             return Optional.empty();
         }
         if(fields.get("firstName") != null) {
-            optionalSeller.get().setFirstName(fields.get("firstName"));
+            optionalSeller.get().setFirstName(((String)fields.get("firstName")));
             isEdit = true;
         }
         if(fields.get("lastName") != null) {
-            optionalSeller.get().setLastName(fields.get("lastName"));
+            optionalSeller.get().setLastName((String)fields.get("lastName"));
             isEdit = true;
         }
         if(fields.get("type") != null) {
-            optionalSeller.get().setType(TypeAccount.valueOf(fields.get("type")));
+            optionalSeller.get().setType(TypeAccount.valueOf((String)fields.get("type")));
             isEdit = true;
         }
         if(fields.get("phoneNumber") != null) {
-            optionalSeller.get().setPhoneNumber(fields.get("phoneNumber"));
-            isEdit = true;
-        }
-        if(fields.get("createAccount") != null) {
-            optionalSeller.get().setCreateAccount(LocalDate.parse(fields.get("createAccount")));
+            optionalSeller.get().setPhoneNumber(String.valueOf(fields.get("phoneNumber")));
             isEdit = true;
         }
         if(fields.get("premiumAccount") != null) {
-            optionalSeller.get().setPremiumAccount(LocalDate.parse(fields.get("premiumAccount")));
+            optionalSeller.get().setPremiumAccount(LocalDate.parse((String)fields.get("premiumAccount")));
             isEdit = true;
         }
         if(fields.get("lastAddvertisement") != null) {
-            optionalSeller.get().setLastAddvertisement(LocalDate.parse(fields.get("lastAddvertisement")));
+            optionalSeller.get().setLastAddvertisement(LocalDate.parse((String)fields.get("lastAddvertisement")));
             isEdit = true;
         }
         if(isEdit) {
@@ -128,7 +124,7 @@ public class SellerService extends AddPagable implements CrudServce<Long, Seller
         }
         return sellerPage;
     }
-    public Page<Seller> findAllByName(String firstName, String lastName, boolean sort, int page) {
+    private Page<Seller> findAllByName(String firstName, String lastName, boolean sort, int page) {
         Page<Seller> sellerPage = null;
         if(sort) {
             sellerPage = findALlByNameDesc(firstName, lastName, page);
@@ -138,7 +134,7 @@ public class SellerService extends AddPagable implements CrudServce<Long, Seller
         return sellerPage;
     }
 
-    public Page<Seller> findAllByNameAndType(String firstName, String lastName, TypeAccount typeAccount, boolean sort, int page) {
+    private Page<Seller> findAllByNameAndType(String firstName, String lastName, TypeAccount typeAccount, boolean sort, int page) {
         Page<Seller> sellerPage = null;
         if(typeAccount == null) {
             sellerPage = findAllByName(firstName, lastName, sort, page);
@@ -270,7 +266,19 @@ public class SellerService extends AddPagable implements CrudServce<Long, Seller
     }
 
 
-    public Page<Seller> findAllByNameAndTypeAndPremium(String firstName, String lastName, TypeAccount typeAccount, boolean sort, String premium, int page) {
+    public Page<Seller> findAllByNameAndTypeAndPremium(String firstName, String lastName, String type, String isSort, String premium, int page) {
+        boolean sort = false;
+        TypeAccount typeAccount = null;
+        if(isSort.length() > 0){
+            sort = true;
+        }
+        if(type != null) {
+            try {
+                typeAccount = TypeAccount.valueOf(type);
+            } catch (Exception e) {
+                typeAccount = null;
+            }
+        }
         Page<Seller> sellerPage = null;
         if(premium == null) {
             System.out.println("premium null");

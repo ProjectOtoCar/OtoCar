@@ -9,5 +9,5 @@ public interface CrudServce<ID, T> {
     Optional<Void> deleteById(ID id);
     T save(T obj);
     T change(ID id, T obj);
-    Optional<Void> patch(ID id, Map<String, String> fields);
+    Optional<Void> patch(ID id, Map<String, Object> fields);
 }

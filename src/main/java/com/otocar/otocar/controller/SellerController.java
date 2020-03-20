@@ -31,19 +31,8 @@ public class SellerController {
                                 @RequestParam(required = false) String type,
                                 @RequestParam(required = false) String premium,
                                 @RequestParam(defaultValue = "") String sort){
-        boolean isSort = false;
-        TypeAccount typeAccount = null;
-        if(sort.length() > 0){
-            isSort = true;
-        }
-        if(type != null) {
-            try {
-                typeAccount = TypeAccount.valueOf(type);
-            } catch (Exception e) {
-                typeAccount = null;
-            }
-        }
-        return sellerService.findAllByNameAndTypeAndPremium(firstName, lastName,typeAccount, isSort, premium, page);
+
+        return sellerService.findAllByNameAndTypeAndPremium(firstName, lastName,type, sort, premium, page);
     }
     @GetMapping("/{id}")
     @ResponseStatus(value = HttpStatus.OK)
@@ -76,7 +65,7 @@ public class SellerController {
 
     @PatchMapping("/{id}")
     @ResponseStatus(value =  HttpStatus.OK)
-    public void patch(@PathVariable(value = "id") Long id, @RequestBody Map<String, String> fields ) {
+    public void patch(@PathVariable(value = "id") Long id, @RequestBody Map<String, Object> fields ) {
         sellerService.patch(id, fields);
     }
 
