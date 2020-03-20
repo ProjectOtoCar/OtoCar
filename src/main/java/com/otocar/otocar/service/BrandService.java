@@ -48,7 +48,7 @@ public class BrandService implements CrudServce<Long, Brand> {
     }
 
     @Override
-    public Optional<Void> patch(Long aLong, Map<String, String> fields) {
+    public Optional<Void> patch(Long aLong, Map<String, Object> fields) {
         boolean isEdit = false;
         Optional<Brand> optionalBrand = brandRepository.findById(aLong);
         if(optionalBrand.isEmpty()) {
@@ -58,7 +58,7 @@ public class BrandService implements CrudServce<Long, Brand> {
             return Optional.empty();
         }
         if(fields.get("name") != null) {
-            optionalBrand.get().setName(fields.get("name"));
+            optionalBrand.get().setName((String) fields.get("name"));
             isEdit = true;
         }
         if(isEdit) {

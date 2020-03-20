@@ -57,7 +57,7 @@ public class CarService implements CrudServce<Long, Car> {
     }
 
     @Override
-    public Optional<Void> patch(Long aLong, Map<String, String> fields) {
+    public Optional<Void> patch(Long aLong, Map<String, Object> fields) {
         boolean isEdit = false;
         Optional<Car> optionalCar = carRepository.findById(aLong);
         if(optionalCar.isEmpty()) {
@@ -71,11 +71,11 @@ public class CarService implements CrudServce<Long, Car> {
 //            isEdit = true;
 //        }
         if(fields.get("engine") != null){
-            optionalCar.get().setEngine(Integer.parseInt(fields.get("engine")));
+            optionalCar.get().setEngine(Integer.parseInt((String)fields.get("engine")));
             isEdit = true;
         }
         if(fields.get("enginePower") != null){
-            optionalCar.get().setEnginePower(Integer.parseInt(fields.get("enginePower")));
+            optionalCar.get().setEnginePower(Integer.parseInt((String)fields.get("enginePower")));
             isEdit = true;
         }
 //        if(fields.get("model") != null){
@@ -83,23 +83,23 @@ public class CarService implements CrudServce<Long, Car> {
 //            isEdit = true;
 //        }
         if(fields.get("fuel") != null){
-            optionalCar.get().setFuel(TypeFuel.valueOf(fields.get("fuel")));
+            optionalCar.get().setFuel(TypeFuel.valueOf((String) fields.get("fuel")));
             isEdit = true;
         }
         if(fields.get("firstRegistartion") != null){
-            optionalCar.get().setFirstRegistartion(Integer.parseInt(fields.get("firstRegistartion")));
+            optionalCar.get().setFirstRegistartion(Integer.parseInt((String) fields.get("firstRegistartion")));
             isEdit = true;
         }
         if(fields.get("mileage") != null){
-            optionalCar.get().setMileage(Integer.parseInt(fields.get("mileage")));
+            optionalCar.get().setMileage(Integer.parseInt((String) fields.get("mileage")));
             isEdit = true;
         }
         if(fields.get("typeCar") != null){
-            optionalCar.get().setTypeCar(TypeCar.valueOf(fields.get("typeCar")));
+            optionalCar.get().setTypeCar(TypeCar.valueOf((String) fields.get("typeCar")));
             isEdit = true;
         }
         if(fields.get("color") != null){
-            optionalCar.get().setColor(Color.valueOf(fields.get("color")));
+            optionalCar.get().setColor(Color.valueOf((String) fields.get("color")));
             isEdit = true;
         }
         if(isEdit) {
