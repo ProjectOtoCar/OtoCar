@@ -27,11 +27,9 @@ public class Car {
     @ManyToOne
     @NotNull
     private Brand brand;
-    //@Size(min = 1000)
     @Min(1)
     @Max(50_000)
     private int engine;
-    //@Size(min = 50)
     @Min(1)
     @Max(20_000)
     private int enginePower;
@@ -39,10 +37,12 @@ public class Car {
     @NotNull
     private CarModel model;
     @Enumerated(EnumType.STRING)
+    @NotNull
     private TypeFuel fuel;
+    @Min(1900)
+    @Max(2020)
     private int firstRegistration;
     @NotNull
-    //@Size(min = 1, max=2000000)
     @Min(0)
     @Max(10_000_000)
     private int mileage;

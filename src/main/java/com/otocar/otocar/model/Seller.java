@@ -23,9 +23,9 @@ public class Seller {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Size(min = 4, max = 40)
+    @Size(min = 3, max = 40)
     private String firstName;
-    @Size(min = 4, max = 40)
+    @Size(min = 3, max = 40)
     private String lastName;
     @Enumerated(EnumType.STRING)
     @NotNull
