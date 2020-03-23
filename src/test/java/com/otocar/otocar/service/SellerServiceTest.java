@@ -16,7 +16,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import javax.swing.text.html.StyleSheet;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Stream;
@@ -191,7 +190,7 @@ class SellerServiceTest {
         seller.setId(id);
         changeSeller.setFirstName(firstName);
         changeSeller.setId(2L);
-        given(sellerRepository.findById(anyLong())).willReturn(Optional.of(seller));
+        given(sellerRepository.findById(anyLong())).willReturn(Optional.empty());
         given(sellerRepository.save(changeSeller)).willReturn(changeSeller);
 
         Seller foundSeller = sellerService.change(newId, changeSeller);
