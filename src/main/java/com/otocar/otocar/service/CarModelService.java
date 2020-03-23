@@ -8,19 +8,18 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CarModelSevice {
+public class CarModelService {
 
     private CarModel carModel;
     private CarModelRepository carModelRepository;
 
     @Autowired
-    public CarModelSevice(CarModelRepository carModelRepository) {
+    public CarModelService(CarModelRepository carModelRepository) {
         this.carModelRepository = carModelRepository;
     }
 
     public List<CarModel>find(String brandName){
         List<CarModel> all = carModelRepository.findAll(brandName);
-        System.out.println(all.size());
         return all;
     }
 }
