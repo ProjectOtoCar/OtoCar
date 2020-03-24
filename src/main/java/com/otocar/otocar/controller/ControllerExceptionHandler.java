@@ -19,13 +19,17 @@ import java.util.Set;
 public class ControllerExceptionHandler {
 
     @ExceptionHandler(NumberFormatException.class)
-    public ResponseEntity<ErrorJson> handleNumberFormat(Exception e){
-        return new ResponseEntity<>(new ErrorJson(e.getMessage(),null), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<List<ErrorJson>> handleNumberFormat(Exception e){
+        List<ErrorJson> errorJsonList = new ArrayList<>();
+        errorJsonList.add(new ErrorJson(e.getMessage(),null));
+        return new ResponseEntity<>(errorJsonList, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ErrorJson> handleHttpMessageNotReadable(Exception e){
-        return new ResponseEntity<>(new ErrorJson(e.getMessage(),null), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<List<ErrorJson>> handleHttpMessageNotReadable(Exception e){
+        List<ErrorJson> errorJsonList = new ArrayList<>();
+        errorJsonList.add(new ErrorJson(e.getMessage(),null));
+        return new ResponseEntity<>(errorJsonList, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
