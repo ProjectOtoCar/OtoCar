@@ -40,8 +40,8 @@ public class CityService extends AddPagable implements CrudServce<Long, City> {
     }
 
     @Override
-    public City save(City obj) {
-        Optional<City> cityOptional = Optional.of(cityRepository.save(obj));
+    public City save(City city) {
+        Optional<City> cityOptional = Optional.of(cityRepository.save(city));
         return cityOptional.orElse(null);
     }
 
