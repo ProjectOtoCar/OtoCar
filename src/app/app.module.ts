@@ -9,6 +9,7 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ItemComponent } from './user-page/item/item.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,9 @@ import { RegistrationComponent } from './registration/registration.component';
     UserPageComponent,
     MainPageComponent,
     NavigationComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ItemComponent
+
   ],
   imports: [
     BrowserModule,
