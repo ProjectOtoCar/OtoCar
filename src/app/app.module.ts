@@ -11,6 +11,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ItemComponent } from './user-page/item/item.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { ItemAdminPanelComponent } from './admin-panel/item-admin-panel/item-admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     NavigationComponent,
     RegistrationComponent,
     ItemComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    ItemAdminPanelComponent
 
   ],
   imports: [
