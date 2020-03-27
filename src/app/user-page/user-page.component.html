@@ -1,8 +1,7 @@
-<div class="border-primary mb-3 container row row row-cols-md-3 row-cols-1 mx-auto d-flex justify-content-around" >
+<div class="container">
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus blanditiis dolores iste! Accusantium adipisci assumenda distinctio explicabo odit praesentium sapiente tenetur. Ad distinctio dolor est facilis laboriosam quo quod reiciendis?</p>
+<div class="border-primary mb-3  row row row-cols-md-3 row-cols-1 mx-auto d-flex justify-content-around" >
 
-
-  <app-item></app-item>
-  <app-item></app-item>
-  <app-item></app-item>
-
+ <app-item *ngFor="let data of datas" [data]="data"  style="min-width: 40%;margin-top: 5%;"></app-item>
+</div>
 </div>
