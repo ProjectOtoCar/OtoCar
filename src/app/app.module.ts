@@ -4,13 +4,17 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { UserPageComponent } from './user-page/user-page.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserPageComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [],
