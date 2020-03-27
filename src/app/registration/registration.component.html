@@ -1,20 +1,37 @@
 <div>
-    <form [formGroup]="registrationForm">
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="firstName">Imię</label>
-            <input type="text" class="form-control" id="firstName">
+            <input type="text"
+             class="form-control"
+             id="firstName"
+             formControlName="firstName"
+              >
         </div>
         <div class="form-group">
-            <label for="">Imię</label>
-            <input type="text" class="form-control" id="firstName">
+            <label for="lastName">Nazwisko</label>
+            <input
+            type="text" 
+            class="form-control" 
+            id="lastName"
+            formControlName="lastname">
         </div>
-        <div class="form-group">
-            <label for="">Imię</label>
-            <input type="text" class="form-control" id="firstName">
+        <div formGroupName="userData">
+            <div class="form-group">
+                <label for="email">email</label>
+                <input type="text" 
+                class="form-control" 
+                id="email"
+                formControlName="email">
+            </div>
+            <div class="form-group">
+                <label for="password">hasło</label>
+                <input type="password" 
+                class="form-control" 
+                id="password"
+                formControlName="password">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="">Imię</label>
-            <input type="text" class="form-control" id="firstName">
-        </div>
+        <button class="btn btn-primary" type="submit">załóż konto!</button>
     </form>
 </div>

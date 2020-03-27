@@ -10,6 +10,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ItemComponent } from './user-page/item/item.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ItemComponent } from './user-page/item/item.component';
     MainPageComponent,
     NavigationComponent,
     RegistrationComponent,
-    ItemComponent
+    ItemComponent,
+    AdminPanelComponent
 
   ],
   imports: [
