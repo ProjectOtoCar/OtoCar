@@ -9,8 +9,6 @@
             (click)="toggleNavbar()">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
-  
     <div class="collapse navbar-collapse"
          [ngClass]="{ 'show': navbarOpen }">
       <ul class="navbar-nav mr-auto">
@@ -31,7 +29,12 @@
             <a class="nav-link" 
             [routerLink]="['/signOut']" 
             routerLinkActive="active">Wyloguj się</a>
-        </li>          
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" 
+            [routerLink]="['/registration']" 
+            routerLinkActive="active">Zarejestruj się</a>
+        </li>             
         <li class="nav-item">
             <a class="nav-link" 
             [routerLink]="['/admin']" 

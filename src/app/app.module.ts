@@ -8,13 +8,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserPageComponent } from './user-page/user-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserPageComponent,
     MainPageComponent,
-    NavigationComponent
+    NavigationComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
