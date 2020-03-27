@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <a 
+    class="navbar-brand" 
+    [routerLink]="['']" 
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}">Home
+    </a>
+    <button class="navbar-toggler" type="button"
+            (click)="toggleNavbar()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+  
+    <div class="collapse navbar-collapse"
+         [ngClass]="{ 'show': navbarOpen }">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a 
+            class="nav-link"
+            [routerLink]="['/userPage']" 
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">Moje konto</a>
+        </li>
+        <li class="nav-item">
+            <a 
+            class="nav-link" 
+            [routerLink]="['/signIn']" 
+            routerLinkActive="active">Zaloguj się</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" 
+            [routerLink]="['/signOut']" 
+            routerLinkActive="active">Wyloguj się</a>
+        </li>          
+        <li class="nav-item">
+            <a class="nav-link" 
+            [routerLink]="['/admin']" 
+            routerLinkActive="active">Panel admina</a>
+        </li>
+        <li class="nav-item">
+            <a 
+            class="nav-link" 
+            [routerLink]="['/contact']" 
+            routerLinkActive="active">Kontakt</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
