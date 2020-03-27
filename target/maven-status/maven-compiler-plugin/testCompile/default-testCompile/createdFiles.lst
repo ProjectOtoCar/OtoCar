@@ -1,0 +1,10 @@
+com\otocar\otocar\service\CarModelServiceTest.class
+com\otocar\otocar\OtocarApplicationTests.class
+com\otocar\otocar\service\CityServiceTest.class
+com\otocar\otocar\service\AdvertisementServiceTest$FilterAdv.class
+com\otocar\otocar\service\BrandServiceTest.class
+com\otocar\otocar\service\CityServiceTest$FindAll.class
+com\otocar\otocar\service\ImageServiceTest.class
+com\otocar\otocar\service\SellerServiceTest.class
+com\otocar\otocar\service\AdvertisementServiceTest.class
+com\otocar\otocar\service\SellerServiceTest$FilterSeller.class
