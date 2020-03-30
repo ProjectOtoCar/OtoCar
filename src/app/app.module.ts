@@ -14,6 +14,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ItemAdminPanelComponent } from './admin-panel/item-admin-panel/item-admin-panel.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ErrorComponent } from './error/error.component';
+import { UserDetailsComponent } from './user-page/user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ErrorComponent } from './error/error.component';
     AdminPanelComponent,
     ItemAdminPanelComponent,
     SignInComponent,
-    ErrorComponent
+    ErrorComponent,
+    UserDetailsComponent
 
   ],
   imports: [
