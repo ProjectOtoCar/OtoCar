@@ -4,10 +4,10 @@
 <button>Search</button>
 <button>Clear</button>
 </div>
-<table class="table mx-auto" style="width: 80%;margin-top: 2%">
+<table class="table table-striped mx-auto " style="width: 80%;margin-top: 2%">
   <thead>
   <tr>
-   <th scope="col"></th>
+    <th scope="col">#</th>
     <th scope="col">ID</th>
     <th scope="col">Name</th>
     <th scope="col">username</th>
@@ -18,6 +18,18 @@
   </tr>
   </thead>
   <tbody>
-  <app-item-admin-panel *ngFor="let data of datas" [data]="data"  [data]="data"></app-item-admin-panel>
+  <tr *ngFor="let data of datas" style="width: 100%">
+    <th style="color: red !important;">X</th>
+    <td >{{data.id}}</td>
+    <td >{{data.name}}</td>
+    <td >{{data.username}}</td>
+    <td >{{ data.username}}</td>
+    <td >{{data.premium}}</td>
+    <td >{{data.premiumExpire}}</td>
+    <td >{{data.registerData}}</td>
+  </tr>
+
   </tbody>
 </table>
+
+<!--<app-item-admin-panel  *ngFor="let data of datas" [data]="data"  [data]="data"></app-item-admin-panel>-->
