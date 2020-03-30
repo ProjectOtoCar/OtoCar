@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from '../validators/CustomValidators';
 
@@ -9,6 +9,7 @@ import { CustomValidators } from '../validators/CustomValidators';
 })
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
+  isAccept = false;
   constructor() { }
 
   ngOnInit(): void {
@@ -48,7 +49,10 @@ export class RegistrationComponent implements OnInit {
       })
     });
   }
-
+  onClickAccept(): void {
+    console.log(this.isAccept);
+    this.isAccept = !this.isAccept;
+  }
   onSubmit(): void {
     console.log(this.registrationForm);
     // this.registrationForm.reset();
