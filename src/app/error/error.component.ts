@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 
 @Component({
   selector: 'app-error',
@@ -10,7 +10,9 @@ export class ErrorComponent implements OnInit {
   errorMessage: string;
   errorStatus: number;
   subMessage: string;
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private route: Router) { }
 
   ngOnInit(): void {
     this.errorMessage = this.activatedRoute.snapshot.data.message;
@@ -22,5 +24,7 @@ export class ErrorComponent implements OnInit {
       }
     );
   }
-
+  onBackToHomePage(): void {
+    this.route.navigate(['']);
+  }
 }
