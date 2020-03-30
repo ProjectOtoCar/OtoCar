@@ -12,6 +12,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ItemComponent } from './user-page/item/item.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ItemAdminPanelComponent } from './admin-panel/item-admin-panel/item-admin-panel.component';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ItemAdminPanelComponent } from './admin-panel/item-admin-panel/item-adm
     RegistrationComponent,
     ItemComponent,
     AdminPanelComponent,
-    ItemAdminPanelComponent
+    ItemAdminPanelComponent,
+    SignInComponent
 
   ],
   imports: [

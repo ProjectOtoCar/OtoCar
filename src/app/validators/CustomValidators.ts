@@ -31,7 +31,7 @@ export class CustomValidators {
 
     static withoutSpace(control: FormControl): {[key: string]: boolean} {
         const password: string = control.value;
-        if (password?.indexOf(' ') !== -1){
+        if (password?.indexOf(' ') !== -1) {
             return {withoutspace: true};
         }
         return null;
