@@ -37,15 +37,16 @@ export class RegistrationComponent implements OnInit {
             Validators.minLength(3),
             CustomValidators.withoutSpace
           ]),
-        password: new FormControl(null, [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(40),
-          CustomValidators.requiredCapitalLetter,
-          CustomValidators.requiredDigit,
-          CustomValidators.requiredSpecialSign,
-          CustomValidators.withoutSpace
-        ])
+        password: new FormControl(null,
+          [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.maxLength(40),
+            CustomValidators.requiredCapitalLetter,
+            CustomValidators.requiredDigit,
+            CustomValidators.requiredSpecialSign,
+            CustomValidators.withoutSpace
+          ])
       })
     });
   }
