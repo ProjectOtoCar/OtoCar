@@ -50,6 +50,8 @@ public class AdvertisementService extends AddPagable {
         boolean isEdit = false;
 
         Optional<Advertisement> optionalAdvertisement = advertisementRepository.findById(id);
+
+
         if (optionalAdvertisement.isEmpty()) {
             return Optional.empty();
         }
@@ -67,6 +69,10 @@ public class AdvertisementService extends AddPagable {
         if (fields.get("content") != null) {
             optionalAdvertisement.get().setContent((String) fields.get("content"));
             isEdit = true;
+        }
+
+        if(isEdit==true){
+           advertisementRepository.save(optionalAdvertisement.get());
         }
         return Optional.empty();
     }
