@@ -15,8 +15,18 @@ html {
   max-width: 1920px;
   margin: 0 auto;
 }
+body {
+  height: 100vh;
+}
+.main{
+ flex-grow: 1;
+}
+.page {
+  flex-grow: 1;
+  padding: 5%;
+}
 .top-margin {
-  margin-top: 8%;
+  margin-top: 2%;
 }
 .padding {
   padding: 3%;
