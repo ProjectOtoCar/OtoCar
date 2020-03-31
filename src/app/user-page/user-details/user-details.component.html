@@ -1,25 +1,30 @@
-<div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
-    <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
+<div class="row row row-cols-md-3 row-cols-1 mx-auto d-flex justify-content-around details-page ">
+    <div class="d-flex flex-column bd-highlight mb-3 justify-content-around">
         <div>
-            <h2 class="right">Imie</h2>
+            <h2 class="left">Imie</h2>
+        </div>
+        <div class = "d-flex flex-row bd-highlight mb-3 justify-content-around">
             <ul class="list-no-style right">
                 <li>Imie: </li>
                 <li>Nazwisko: </li>
                 <li>E-mail: </li>
                 <li>data dołączenia: </li>
             </ul>
+            <ul class="list-no-style left">
+                <li>Imie: </li>
+                <li>Nazwisko: </li>
+                <li>E-mail: </li>
+                <li>data dołączenia: </li>
+            </ul>
         </div>
-        <ul class="list-no-style left">
-            <li>Imie: </li>
-            <li>Nazwisko: </li>
-            <li>E-mail: </li>
-            <li>data dołączenia: </li>
-        </ul>
     </div>
     <div class="align-items-baseline">
         <h2 class="center">Panel użytkownika</h2>
         <ul class="list-no-style center">
-            <li><a class="alert-link">Kup premium</a></li>
+            <li><a 
+                class="alert-link"
+                [routerLink]="['..','buy-premium']"
+                >Kup premium</a></li>
             <li><a class="alert-link">Dodaj ogłoszenie</a></li>
             <li><a class="alert-link">Edytuj profil</a></li>
         </ul>

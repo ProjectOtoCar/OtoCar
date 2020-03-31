@@ -7,7 +7,20 @@
 }
 .left {
     text-align: left;
+    margin-left: 10px;
 }
 .center {
  text-align: center;
+}
+.details-page {
+    max-width: 1000px;
+    margin: 10% auto;
+    font-size: 1.5rem;
+}
+
+
+@media(max-width: 767px) {
+    .details-page {
+        max-width: 80%;
+    }    
 }

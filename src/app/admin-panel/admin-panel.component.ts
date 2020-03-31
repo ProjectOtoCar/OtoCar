@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { AdminPanelService } from '../services/admin-panel.service';
+import { Seller } from '../interfaces/Seller';
 
 @Component({
   selector: 'app-admin-panel',
@@ -7,18 +9,21 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class AdminPanelComponent implements OnInit {
 
-  datas = [
-    {id: 1, name: "Janusz",username:"Janek", email: "jan@janusz.pl", premium: 2, premiumExpire: 20, registerData: "25.03.2020"},
-    {id: 2, name: "Janusz",username:"Janek", email: "jan@janusz.pl", premium: 2, premiumExpire: 20, registerData: "25.03.2020"},
-    {id: 3, name: "Janusz",username:"Janek", email: "jan@janusz.pl", premium: 2, premiumExpire: 20, registerData: "25.03.2020"},
-  ];
-
+  datas: Seller[];
+  currentData: number;
+  isLoading = true;
   @Input()
   data;
 
-  constructor() { }
+  constructor(private adminPanelService: AdminPanelService) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
+    this.adminPanelService.getSellers(1).subscribe(response => {
+      this.datas = response;
+      this.currentData = Date.now();
+      this.isLoading = false;
+    });
   }
 
 }

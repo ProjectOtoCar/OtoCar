@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +17,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { ErrorComponent } from './error/error.component';
 import { UserDetailsComponent } from './user-page/user-details/user-details.component';
 import { FooterComponent } from './footer/footer.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -30,11 +32,13 @@ import { FooterComponent } from './footer/footer.component';
     SignInComponent,
     ErrorComponent,
     UserDetailsComponent,
-    FooterComponent
+    FooterComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],

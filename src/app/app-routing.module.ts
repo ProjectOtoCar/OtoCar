@@ -12,10 +12,8 @@ import { UserDetailsComponent } from './user-page/user-details/user-details.comp
 
 const routes: Routes = [
   {path: '', component: MainPageComponent, pathMatch: 'full'},
-  {path: 'user-page', component: UserDetailsComponent, children:
-  [
-    {path: 'buy-premium', component: UserPageComponent}
-  ]},
+  {path: 'user-page', component: UserDetailsComponent},
+  {path: 'buy-premium', component: UserPageComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'admin', component: AdminPanelComponent},
   {path: 'sign-in', component: SignInComponent},
