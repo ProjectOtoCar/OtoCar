@@ -54,8 +54,6 @@ public class Seller {
         this.lastName = lastName;
         this.type = type;
         this.phoneNumber = phoneNumber;
-        this.createAccount = LocalDate.now();
-        this.premiumAccount = LocalDate.now();
         this.advertisement = advertisement;
         this.lastAddvertisement = null;
     }
@@ -130,5 +128,11 @@ public class Seller {
 
     public void setLastAddvertisement(LocalDate lastAddvertisement) {
         this.lastAddvertisement = lastAddvertisement;
+    }
+
+    @PrePersist
+    void addSellerDataCreateAccount(){
+        createAccount = LocalDate.now();
+        premiumAccount = LocalDate.now();
     }
 }
