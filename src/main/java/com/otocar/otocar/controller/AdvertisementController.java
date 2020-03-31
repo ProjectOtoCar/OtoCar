@@ -68,7 +68,6 @@ public class AdvertisementController {
 
     @PostMapping("")
     public Advertisement postSeller(@RequestBody Advertisement advertisement) {
-        advertisement.setDateAdd(LocalDate.now());
         return advertisementService.addAdv(advertisement);
     }
 

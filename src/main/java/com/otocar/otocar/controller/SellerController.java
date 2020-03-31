@@ -44,9 +44,7 @@ public class SellerController {
     @ResponseStatus(value = HttpStatus.CREATED)
     public Seller postSeller(@RequestBody Seller seller) {
         seller.setType(TypeAccount.NORMAL);
-        seller.setPremiumAccount(LocalDate.now());
         seller.setLastAddvertisement(null);
-        seller.setCreateAccount(LocalDate.now());
         seller.setAdvertisement(new HashSet<>());
         return sellerService.save(seller);
     }
