@@ -131,12 +131,11 @@ class AdvertisementServiceTest {
 
     static Stream<Arguments> getArgsToPatchChange() {
         BigDecimal price = BigDecimal.valueOf(10_000);
-        LocalDate data = LocalDate.now();
         boolean isActive = true;
         String title ="Test";
         String content = "TestTestTestContentTest";
         Long id = 5L;
-        Advertisement adv = new Advertisement(price,data,isActive,title,content,null,null,null,null);
+        Advertisement adv = new Advertisement(price,isActive,title,content,null,null,null,null);
        adv.setId(id);
         return Stream.of(Arguments.of(adv,"price",price,id),
             Arguments.of(adv,"content",content,id),
@@ -227,9 +226,9 @@ class AdvertisementServiceTest {
         String title = "Test";
         String content = "TestTestTestContentTest";
         Long id = 1L;
-        Advertisement adv = new Advertisement(price, data, isActive, title, content, null, null, null, null);
-        Advertisement adv1 = new Advertisement(price, data, isActive, title, content, null, null, null, null);
-        Advertisement adv2 = new Advertisement(price, data, isActive, title, content, null, null, null, null);
+        Advertisement adv = new Advertisement(price,  isActive, title, content, null, null, null, null);
+        Advertisement adv1 = new Advertisement(price,  isActive, title, content, null, null, null, null);
+        Advertisement adv2 = new Advertisement(price,  isActive, title, content, null, null, null, null);
 
 
         @BeforeEach

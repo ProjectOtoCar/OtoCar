@@ -48,7 +48,6 @@ public class Advertisement {
     private City city;
 
     public Advertisement(BigDecimal price,
-                         LocalDate dateAdd,
                          Boolean active,
                          String title,
                          String content,
@@ -57,7 +56,6 @@ public class Advertisement {
                          Seller seller,
                          Set<Image> images) {
         this.price = price;
-        this.dateAdd = dateAdd;
         this.active = active;
         this.title = title;
         this.content = content;
@@ -148,5 +146,9 @@ public class Advertisement {
 
     public void setImages(Set<Image> images) {
         this.images = images;
+    }
+    @PrePersist
+    void addDataCreatedAdv(){
+        dateAdd = LocalDate.now();
     }
 }

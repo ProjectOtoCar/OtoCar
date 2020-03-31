@@ -57,10 +57,10 @@ public class DataLoader implements CommandLineRunner {
         Car car = new Car(brandList.get(0), 1000, 1000,modelList.get(0), TypeFuel.PETROL, 2000, 200_000, TypeCar.HATCHBACK, Color.BIALY);
         Car car1 = new Car(brandList.get(1), 500, 1000,modelList.get(2), TypeFuel.GAS, 2010, 250_000, TypeCar.KOMBI, Color.NIEBIESKI);
         Car car2 = new Car(brandList.get(2), 1000, 1000,modelList.get(3), TypeFuel.DIESEL, 2020, 400_000, TypeCar.KABRIOLET, Color.POMARANCZOWY);
-        Advertisement advertisement = new Advertisement(BigDecimal.valueOf(10000), LocalDate.now(), true, "title", "content", cityList.get(0), car, seller , null );
-        Advertisement advertisement1 = new Advertisement(BigDecimal.valueOf(1324300), LocalDate.now(), true, "title23", "content321", cityList.get(3), car1, seller , null );
-        Advertisement advertisement2 = new Advertisement(BigDecimal.valueOf(14230), LocalDate.now(), true, "title1", "co213ntent312321", cityList.get(10), car2, seller , null );
-        Advertisement advertisement6 = new Advertisement(BigDecimal.valueOf(15484121),LocalDate.of(2020,03,19),true,"testy","testCont",cityList.get(5),car1,seller,null);
+        Advertisement advertisement = new Advertisement(BigDecimal.valueOf(10000), true, "title", "content", cityList.get(0), car, seller , null );
+        Advertisement advertisement1 = new Advertisement(BigDecimal.valueOf(1324300), true, "title23", "content321", cityList.get(3), car1, seller , null );
+        Advertisement advertisement2 = new Advertisement(BigDecimal.valueOf(14230),  true, "title1", "co213ntent312321", cityList.get(10), car2, seller , null );
+        Advertisement advertisement6 = new Advertisement(BigDecimal.valueOf(15484121),true,"testy","testCont",cityList.get(5),car1,seller,null);
         seller.getAdvertisement().add(advertisement);
         seller.getAdvertisement().add(advertisement1);
         seller.getAdvertisement().add(advertisement2);
@@ -69,14 +69,14 @@ public class DataLoader implements CommandLineRunner {
 
         Seller seller1 = new Seller("123456", "123456789", TypeAccount.ADMIN, "111111111",  new HashSet<Advertisement>());
         Car car3 = new Car(brandList.get(10), 10, 100, modelList.get(4), TypeFuel.PETROL, 1990, 20_000, TypeCar.SEDAN, Color.ZOLTY);
-        Advertisement advertisement3 = new Advertisement(BigDecimal.valueOf(100), LocalDate.now(), true, "123456", "kjhgfdsa", cityList.get(7), car3, seller, null);
+        Advertisement advertisement3 = new Advertisement(BigDecimal.valueOf(100),  true, "123456", "kjhgfdsa", cityList.get(7), car3, seller, null);
         seller1.getAdvertisement().add(advertisement3);
 
         sellerService.save(seller1);
 
         Seller seller2 = new Seller("jdsnfsdn", "jaskdaslkfd", TypeAccount.MODERATOR, "123456789", new HashSet<Advertisement>());
         Car car4 = new Car((brandList.get(8)), 1000, 500, modelList.get(2), TypeFuel.GAS, 2005, 30_000, TypeCar.KABRIOLET, Color.BIALY);
-        Advertisement advertisement4 = new Advertisement(BigDecimal.valueOf(100), LocalDate.now(), true, "title21321", "lalala", cityList.get(20),car4, seller2,null);
+        Advertisement advertisement4 = new Advertisement(BigDecimal.valueOf(100),  true, "title21321", "lalala", cityList.get(20),car4, seller2,null);
         seller2.getAdvertisement().add(advertisement4);
 
         sellerService.save(seller2);
