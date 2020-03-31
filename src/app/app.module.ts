@@ -18,6 +18,10 @@ import { ErrorComponent } from './error/error.component';
 import { UserDetailsComponent } from './user-page/user-details/user-details.component';
 import { FooterComponent } from './footer/footer.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { MainstatuteComponent } from './main-statute/main-statute.component';
+import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { BusinessStatuteComponent } from './business-statute/business-statute.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,11 @@ import { SpinnerComponent } from './spinner/spinner.component';
     ErrorComponent,
     UserDetailsComponent,
     FooterComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    MainstatuteComponent,
+    CookiePolicyComponent,
+    PrivacyPolicyComponent,
+    BusinessStatuteComponent
   ],
   imports: [
     BrowserModule,

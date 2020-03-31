@@ -7,6 +7,10 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ErrorComponent } from './error/error.component';
 import { UserDetailsComponent } from './user-page/user-details/user-details.component';
+import {MainstatuteComponent} from "./main-statute/main-statute.component";
+import {BusinessStatuteComponent} from "./business-statute/business-statute.component";
+import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
+import {CookiePolicyComponent} from "./cookie-policy/cookie-policy.component";
 
 
 
@@ -17,6 +21,10 @@ const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
   {path: 'admin', component: AdminPanelComponent},
   {path: 'sign-in', component: SignInComponent},
+  {path: 'mainStatute', component: MainstatuteComponent},
+  {path: 'businessStatute', component: BusinessStatuteComponent},
+  {path: 'privacyPolicy', component: PrivacyPolicyComponent},
+  {path: 'cookiePolicy', component: CookiePolicyComponent},
   {path: 'not-found', component: ErrorComponent, data: {message: 'Nic tutaj nie ma', error: 404, subMessage: 'strona nie znaleziona!'}},
   {path: '**', redirectTo: '/not-found'}
 ];
