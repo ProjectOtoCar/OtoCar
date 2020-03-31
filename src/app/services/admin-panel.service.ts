@@ -10,6 +10,9 @@ import { map } from 'rxjs/operators';
 export class AdminPanelService {
 
   constructor(private http: HttpClient) { }
+  deleteSeller(id: number) {
+    return this.http.delete(`http://localhost:8080/api/seller/${id}`);
+  }
   getSellers(
     page: number,
     firstname?: string,
@@ -17,7 +20,7 @@ export class AdminPanelService {
     type?: string,
     premium?: string,
     sort?: string): Observable<Seller[]> {
-      if (page < 0 || page === null || page !== undefined) {
+      if (page < 0 || page === null || page === undefined) {
         page = 1;
       }
       let searchParams = new HttpParams();
@@ -42,6 +45,7 @@ export class AdminPanelService {
         params: searchParams
       }).pipe(map((data: any) => {
         const sellerPage: Seller[] = data.content;
+        console.log(data);
         for (const seller of sellerPage) {
           seller.isPremium = Date.parse(String(seller.premiumAccount)) >= Date.now();
         }
