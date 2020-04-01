@@ -1,17 +1,24 @@
-<footer class=" row row row-cols-md-3 row-cols-1 mx-auto d-flex justify-content-around" style="margin-top: 50px; padding-bottom: 20px">
+<footer class=" row row row-cols-md-3 row-cols-1 mx-auto d-flex justify-content-around" style="margin-top: 60px; padding-bottom: 20px">
 <div class="text-center"><h3>REGULAMINY</h3>
   <div>
-    <a href="mainStatute"> <p>Regulamin serwisu OTOCAR
-    </p></a>
+    <a [routerLink]="['/mainStatute']" routerLinkActive="active">
+      <p>Regulamin serwisu OTOCAR</p>
+    </a>
   </div>
   <div>
-    <a href="businessStatute"><p>Regulamin dla Klientów Biznesowych</p></a>
+    <a [routerLink]="['/businessStatute']" routerLinkActive="active">
+      <p>Regulamin dla Klientów Biznesowych</p>
+    </a>
   </div>
   <div>
-    <a href="privacyPolicy"> <p>Politka prywatnosci</p></a>
+    <a [routerLink]="['/privacyPolicy']" routerLinkActive="active">
+      <p>Politka prywatnosci</p>
+    </a>
   </div>
   <div>
-    <a href="cookiePolicy"><p>Politka plików cookies</p></a>
+    <a [routerLink]="['/cookiePolicy']" routerLinkActive="active">
+      <p>Politka plików cookies</p>
+    </a>
   </div>
 </div>
   <div class="text-center call" style="border-left: solid 1px black;border-right: solid 1px black; padding: 0 10%">
