@@ -22,6 +22,9 @@ import { MainstatuteComponent } from './main-statute/main-statute.component';
 import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { BusinessStatuteComponent } from './business-statute/business-statute.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { PaginationItemComponent } from './pagination/pagination-item/pagination-item.component';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +44,9 @@ import { BusinessStatuteComponent } from './business-statute/business-statute.co
     MainstatuteComponent,
     CookiePolicyComponent,
     PrivacyPolicyComponent,
-    BusinessStatuteComponent
+    BusinessStatuteComponent,
+    PaginationComponent,
+    PaginationItemComponent,
   ],
   imports: [
     BrowserModule,
