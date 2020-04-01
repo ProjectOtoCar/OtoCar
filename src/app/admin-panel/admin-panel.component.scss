@@ -7,4 +7,12 @@
 div.col {
     height: 75px;
 }
- 
+div.head > div.col {
+    height: 30px;
+}
+.head {
+border-bottom: 1px solid var(--btn-main);
+}
+.body {
+    margin-top: 5px;
+}

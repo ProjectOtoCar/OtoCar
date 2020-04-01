@@ -8,7 +8,7 @@
 </div>
 <div class="table-responsive-lg" style="width: 80%;">
   <table class="container" style="min-width: 600px ;margin: 2% auto 0; height: 800px;display: flex; flex-direction: column;" *ngIf="!isLoading; else elseBlock ">
-    <div class="row">
+    <div class="row head">
         <div class="col">
           #
         </div>
@@ -34,7 +34,7 @@
           Register Date
         </div>
     </div>
-      <div *ngFor="let data of datas" class="row">
+      <div *ngFor="let data of datas" class="row body">
         <div class="col">
           <button 
           (click)="deleteUser(data.id)"
