@@ -1,0 +1,12 @@
+<li 
+    class="page-item"
+    [ngClass]='{"active": page?.active}'>
+    <a 
+    class="page-link" 
+    [routerLink]="page.url"
+    [queryParams]="page.queryParams"
+    >{{page.page}}
+    </a>
+</li>
+
+

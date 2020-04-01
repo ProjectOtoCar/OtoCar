@@ -22,7 +22,9 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
 
   constructor(
     private adminPanelService: AdminPanelService,
-    private activedRoute: ActivatedRoute) {}
+    private activedRoute: ActivatedRoute) {
+      this.page = 1;
+    }
 
   ngOnInit(): void {
     this.isLoading = true;

@@ -23,6 +23,9 @@ import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { BusinessStatuteComponent } from './business-statute/business-statute.component';
 import { OneAdvertismentComponent } from './one-advertisment/one-advertisment.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { PaginationItemComponent } from './pagination/pagination-item/pagination-item.component';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +46,10 @@ import { OneAdvertismentComponent } from './one-advertisment/one-advertisment.co
     CookiePolicyComponent,
     PrivacyPolicyComponent,
     BusinessStatuteComponent,
-    OneAdvertismentComponent
+    OneAdvertismentComponent,
+    PaginationItemComponent,
+    PaginationComponent
+
   ],
   imports: [
     BrowserModule,
