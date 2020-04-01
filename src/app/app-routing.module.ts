@@ -11,6 +11,7 @@ import {MainstatuteComponent} from "./main-statute/main-statute.component";
 import {BusinessStatuteComponent} from "./business-statute/business-statute.component";
 import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 import {CookiePolicyComponent} from "./cookie-policy/cookie-policy.component";
+import {OneAdvertismentComponent} from "./one-advertisment/one-advertisment.component";
 
 
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'businessStatute', component: BusinessStatuteComponent},
   {path: 'privacyPolicy', component: PrivacyPolicyComponent},
   {path: 'cookiePolicy', component: CookiePolicyComponent},
+  {path: 'one', component: OneAdvertismentComponent},
   {path: 'not-found', component: ErrorComponent, data: {message: 'Nic tutaj nie ma', error: 404, subMessage: 'strona nie znaleziona!'}},
   {path: '**', redirectTo: '/not-found'}
 ];

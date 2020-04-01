@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +22,7 @@ import { MainstatuteComponent } from './main-statute/main-statute.component';
 import { CookiePolicyComponent } from './cookie-policy/cookie-policy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { BusinessStatuteComponent } from './business-statute/business-statute.component';
+import { OneAdvertismentComponent } from './one-advertisment/one-advertisment.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { PaginationItemComponent } from './pagination/pagination-item/pagination-item.component';
 
@@ -45,14 +46,17 @@ import { PaginationItemComponent } from './pagination/pagination-item/pagination
     CookiePolicyComponent,
     PrivacyPolicyComponent,
     BusinessStatuteComponent,
-    PaginationComponent,
+    OneAdvertismentComponent,
     PaginationItemComponent,
+    PaginationComponent
+
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
