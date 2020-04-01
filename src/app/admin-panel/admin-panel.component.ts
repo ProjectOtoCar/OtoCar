@@ -17,6 +17,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   isLoading = true;
   getSubscription: Subscription;
   page: number;
+  maxPage: number;
   @Input()
   data;
 
@@ -31,8 +32,9 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     this.activedRoute.queryParams
     .subscribe((params: Params) => {
       this.page = params.page || 1;
-      this.getSubscription = this.adminPanelService.getSellers(this.page).subscribe(response => {
+      this.getSubscription = this.adminPanelService.getSellers(this.page).subscribe(([response, maxPage]) => {
         this.datas = response;
+        this.maxPage = maxPage;
         this.currentData = Date.now();
         this.isLoading = false;
       });

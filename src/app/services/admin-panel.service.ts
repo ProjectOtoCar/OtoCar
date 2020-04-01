@@ -19,7 +19,7 @@ export class AdminPanelService {
     lastname?: string,
     type?: string,
     premium?: string,
-    sort?: string): Observable<Seller[]> {
+    sort?: string): Observable<[Seller[], number]> {
       if (page < 0 || page === null || page === undefined) {
         page = 1;
       }
@@ -45,11 +45,10 @@ export class AdminPanelService {
         params: searchParams
       }).pipe(map((data: any) => {
         const sellerPage: Seller[] = data.content;
-        console.log(data);
         for (const seller of sellerPage) {
           seller.isPremium = Date.parse(String(seller.premiumAccount)) >= Date.now();
         }
-        return sellerPage;
+        return [sellerPage, data.totalPages];
       }));
   }
 }

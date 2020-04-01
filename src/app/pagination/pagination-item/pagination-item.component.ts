@@ -11,7 +11,6 @@ export class PaginationItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.page);
   }
 
 }
