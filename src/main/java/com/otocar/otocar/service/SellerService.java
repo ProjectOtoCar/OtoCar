@@ -281,18 +281,15 @@ public class SellerService extends AddPagable implements CrudServce<Long,Seller>
         }
         Page<Seller> sellerPage = null;
         if(premium == null) {
-            System.out.println("premium null");
             sellerPage = findAllByNameAndType(firstName, lastName, typeAccount, sort, page);
         }
         else if(premium.toLowerCase().equals("true")) {
-            System.out.println("premium");
             if(sort) {
                 sellerPage = findAllByNameAndTypeIsPremiumDesc(firstName, lastName, typeAccount, page);
             } else {
                 sellerPage = findAllByNameAndTypeIsPremiumAsc(firstName,lastName,typeAccount,page);
             }
         } else {
-            System.out.println("!premium");
             if(sort) {
                 sellerPage = findAllByNameAndTypeIsNotPremiumDesc(firstName, lastName, typeAccount, page);
             } else {
