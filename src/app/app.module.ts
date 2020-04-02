@@ -25,6 +25,7 @@ import { BusinessStatuteComponent } from './business-statute/business-statute.co
 import { OneAdvertismentComponent } from './one-advertisment/one-advertisment.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { PaginationItemComponent } from './pagination/pagination-item/pagination-item.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { PaginationItemComponent } from './pagination/pagination-item/pagination
     BusinessStatuteComponent,
     OneAdvertismentComponent,
     PaginationItemComponent,
-    PaginationComponent
+    PaginationComponent,
+    ContactFormComponent
 
   ],
   imports: [
