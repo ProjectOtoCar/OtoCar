@@ -7,10 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.mail.MessagingException;
 
 @Controller
+@RequestMapping("api/mail")
 public class MailController {
 
     private MailSenderService mailSenderService;
@@ -19,7 +21,7 @@ public class MailController {
         this.mailSenderService = mailSenderService;
     }
 
-    @PostMapping("/mail")
+    @PostMapping("/send")
     ResponseEntity<?> send (@RequestBody Mail mail) throws MessagingException {
         String subject = "Wiadomość od: "+mail.getMailSender()+" \n"+mail.getContent();
         mailSenderService.sendMail(mail.getMail(),mail.getTitle(),subject,mail.isHtmlContent());
