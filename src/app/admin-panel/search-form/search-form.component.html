@@ -2,17 +2,83 @@
 [formGroup]="searchForm"
 class="container" 
 style="margin-top: 5%"
+(ngSubmit)="onSubmit()"
 >
 <div class="input-group">
   <div class="input-group-prepend">
-    <span class="input-group-text" id="firstName">Imie</span>
+    <span class="input-group-text label-width" id="firstName">Imie</span>
   </div>
-  <input type="text" class="form-control" placeholder="Imie" aria-label="firstName" aria-describedby="firstName">
+  <input 
+  type="text" 
+  class="form-control input-min" 
+  placeholder="Imie" 
+  aria-label="firstName" 
+  aria-describedby="firstName"
+  formControlName="firstName">
   <div class="input-group-prepend">
-    <span class="input-group-text" id="lastName">Nazwisko</span>
+    <span class="input-group-text label-width" id="lastName">Nazwisko</span>
   </div>
-  <input type="text" class="form-control" placeholder="Nazwisko" aria-label="lastName" aria-describedby="lastName">
+  <input
+  type="text" 
+  class="form-control input-min" 
+  placeholder="Nazwisko" 
+  aria-label="lastName" 
+  aria-describedby="lastName"
+  formControlName="lastName">
 </div>
-  <button class="btn btn-primary">Search</button>
-  <button class="btn btn-warning" >Clear</button>
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text label-width" id="accountsTypes">Typ Konta</span>
+  </div>
+  <select 
+  class="custom-select input-min" 
+  aria-label="type" 
+  id="type" 
+  aria-describedat="type"
+  formControlName="type">
+    <option [value]='null'>Wszystkie</option>
+    <option *ngFor="let type of accountsTypes" [value]="type">{{type | upperCaseFirstLetter}}</option>
+  </select>
+  <div class="input-group-prepend">
+    <span class="input-group-text label-width" id="premium">Premium</span>
+  </div>
+  <select 
+  class="custom-select input-min" 
+  aria-label="premium" 
+  id="premium" 
+  aria-describedat="premium"
+  formControlName="premium">
+    <option [value]='null'>Wszystkie</option>
+    <option [value]="true">Premium</option>
+    <option [value]="false">Bez premium</option>
+  </select>
+</div>
+<h5>Sortowanie po dacie Utworzenia</h5>
+<div class="form-check">
+  <input 
+  class="form-check-input" 
+  type="radio" 
+  name="sort" 
+  id="ascending" 
+  value="Desc"
+  formControlName="sort" 
+  checked>
+  <label class="form-check-label" for="ascending">
+    rosnąco
+  </label>
+</div>
+<div class="form-check">
+  <input 
+  class="form-check-input" 
+  type="radio" 
+  name="sort" 
+  id="descending" 
+  value=""
+  formControlName="sort">
+  <label class="form-check-label" for="descending">
+    malejąco
+  </label>
+</div>
+  <button class="btn btn-primary" type="submit">Wyszukaj</button>
+  <button class="btn btn-warning" type="button" (click)="clear()">Wyczyść</button>
 </form>

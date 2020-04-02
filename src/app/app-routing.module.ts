@@ -12,6 +12,7 @@ import {BusinessStatuteComponent} from "./business-statute/business-statute.comp
 import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 import {CookiePolicyComponent} from "./cookie-policy/cookie-policy.component";
 import {OneAdvertismentComponent} from "./one-advertisment/one-advertisment.component";
+import { SearchFormComponent } from './admin-panel/search-form/search-form.component';
 
 
 

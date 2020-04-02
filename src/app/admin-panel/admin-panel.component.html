@@ -1,7 +1,5 @@
-
-
 <div class="d-flex flex-column align-items-center grow">
-<app-search-form></app-search-form>
+<app-search-form (queryParams)="createQueryParams($event)"></app-search-form>
 <div class="table-responsive-lg" style="width: 80%;">
   <table class="container" style="min-width: 600px ;margin: 2% auto 0; height: 800px;display: flex; flex-direction: column;" *ngIf="!isLoading; else elseBlock ">
     <div class="row head">
@@ -71,7 +69,7 @@
   [url]="'/admin'"
   [currentPage]="page"
   [maxPage]="maxPage"
-  [queryParams]="{page:page}"
+  [queryParams]="queryParams"
 ></app-pagination>
 </div>
 
