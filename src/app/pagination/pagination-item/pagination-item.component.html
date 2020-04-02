@@ -1,6 +1,8 @@
 <li 
     class="page-item"
-    [ngClass]='{"active": page?.active}'>
+    [ngClass]='{
+        "active": page?.active,
+        "disabled": page?.disabled}'>
     <a 
     class="page-link" 
     [routerLink]="page.url"

@@ -38,7 +38,7 @@ export class PaginationComponent implements OnInit, OnChanges {
           ...this.queryParams,
           page: this.currentPage <= 1 ? this.currentPage : this.currentPage - 1,
         },
-        disabled: this.currentPage === 1,
+        disabled: this.currentPage <= 1,
       },
       {
         url: this.url,
@@ -71,7 +71,7 @@ export class PaginationComponent implements OnInit, OnChanges {
           page: this.currentPage < this.maxPage ?
           +this.currentPage + 1 : this.currentPage,
         },
-        disabled: this.currentPage <= this.maxPage,
+        disabled: +this.currentPage === +this.maxPage,
       },
     ];
   }
@@ -86,7 +86,7 @@ export class PaginationComponent implements OnInit, OnChanges {
           ...this.queryParams,
           page: this.currentPage <= 1 ? this.currentPage : this.currentPage - 1,
         },
-        disabled: this.currentPage === 1,
+        disabled: +this.currentPage === 1,
       },
       {
         url: this.url,
@@ -140,7 +140,7 @@ export class PaginationComponent implements OnInit, OnChanges {
           page: this.currentPage < this.maxPage ?
           +this.currentPage + 1 : this.currentPage,
         },
-        disabled: this.currentPage <= this.maxPage,
+        disabled: +this.currentPage === +this.maxPage,
       },
     ];
   }
