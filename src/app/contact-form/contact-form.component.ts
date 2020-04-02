@@ -30,6 +30,12 @@ export class ContactFormComponent implements OnInit {
           Validators.minLength(3),
           CustomValidators.withoutSpace
         ]),
+      title: new FormControl(null,
+        [
+          Validators.required,
+          Validators.maxLength(5),
+          Validators.minLength(40),
+        ]),
       content: new FormControl(null,
         [
           Validators.required,
