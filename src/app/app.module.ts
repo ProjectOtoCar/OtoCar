@@ -24,6 +24,7 @@ import { BusinessStatuteComponent } from './business-statute/business-statute.co
 import { OneAdvertismentComponent } from './one-advertisment/one-advertisment.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { PaginationItemComponent } from './pagination/pagination-item/pagination-item.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 import { SearchFormComponent } from './admin-panel/search-form/search-form.component';
 import { UpperCaseFirstLetterPipe } from './pipes/upper-case-first-letter.pipe';
 
@@ -49,9 +50,9 @@ import { UpperCaseFirstLetterPipe } from './pipes/upper-case-first-letter.pipe';
     OneAdvertismentComponent,
     PaginationItemComponent,
     PaginationComponent,
+    ContactFormComponent,
     SearchFormComponent,
     UpperCaseFirstLetterPipe
-
   ],
   imports: [
     BrowserModule,
