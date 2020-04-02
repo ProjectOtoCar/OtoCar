@@ -1,11 +1,7 @@
 
 
 <div class="d-flex flex-column align-items-center grow">
-<div class="container " style="margin-top: 5%">
-  <input type="text">
-  <button>Search</button>
-  <button>Clear</button>
-</div>
+<app-search-form></app-search-form>
 <div class="table-responsive-lg" style="width: 80%;">
   <table class="container" style="min-width: 600px ;margin: 2% auto 0; height: 800px;display: flex; flex-direction: column;" *ngIf="!isLoading; else elseBlock ">
     <div class="row head">
@@ -46,10 +42,10 @@
           {{data.id}}
         </div>
         <div class="col">
-          {{data.firstName}}
+          {{data.firstName | upperCaseFirstLetter}}
         </div>
         <div class="col">
-          {{data.lastName}}
+          {{data.lastName | upperCaseFirstLetter}}
         </div>
         <div class="col">
           {{data.phoneNumber}}
