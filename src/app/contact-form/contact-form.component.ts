@@ -18,8 +18,8 @@ export class ContactFormComponent implements OnInit {
       firstName: new FormControl(null,
         [
           Validators.required,
-          Validators.maxLength(2),
-          Validators.minLength(30),
+          Validators.maxLength(30),
+          Validators.minLength(2),
           CustomValidators.withoutSpace
         ]),
       email: new FormControl(null,
@@ -33,8 +33,8 @@ export class ContactFormComponent implements OnInit {
       title: new FormControl(null,
         [
           Validators.required,
-          Validators.maxLength(5),
-          Validators.minLength(40),
+          Validators.maxLength(40),
+          Validators.minLength(5),
         ]),
       content: new FormControl(null,
         [
