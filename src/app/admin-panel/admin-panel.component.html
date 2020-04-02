@@ -1,42 +1,68 @@
+
+
 <div class="d-flex flex-column align-items-center grow">
-<div class="container " style="margin-top: 5%">
-  <input type="text">
-  <button>Search</button>
-  <button>Clear</button>
+<app-search-form></app-search-form>
+<div class="table-responsive-lg" style="width: 80%;">
+  <table class="container" style="min-width: 600px ;margin: 2% auto 0; height: 800px;display: flex; flex-direction: column;" *ngIf="!isLoading; else elseBlock ">
+    <div class="row head">
+        <div class="col">
+          #
+        </div>
+        <div class="col">
+          ID
+        </div>
+        <div class="col">
+          First Name
+        </div>
+        <div class="col">
+          Last Name
+        </div>
+        <div class="col">
+          Phone Number
+        </div>
+        <div class="col">
+          Premium
+        </div>
+        <div class="col">
+          Premium Expire
+        </div>
+        <div class="col">
+          Register Date
+        </div>
+    </div>
+      <div *ngFor="let data of datas" class="row body">
+        <div class="col">
+          <button 
+          (click)="deleteUser(data.id)"
+          type="button" 
+          class="btn btn-danger"
+          >X</button>
+        </div>
+        <div class="col">
+          {{data.id}}
+        </div>
+        <div class="col">
+          {{data.firstName | upperCaseFirstLetter}}
+        </div>
+        <div class="col">
+          {{data.lastName | upperCaseFirstLetter}}
+        </div>
+        <div class="col">
+          {{data.phoneNumber}}
+        </div>
+        <div class="col">
+          {{data.isPremium}}
+        </div>
+        <div class="col">
+          {{data.premiumAccount}}
+        </div>
+        <div class="col">
+          {{data.createAccount}}
+        </div>
+    </div>
+  </table>
 </div>
 
-<table class="table" style="width: 80%;margin: 2% auto 0; height: 700px;" *ngIf="!isLoading; else elseBlock ">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">ID</th>
-    <th scope="col">FirstName</th>
-    <th scope="col">lastName</th>
-    <th scope="col">phone</th>
-    <th scope="col">Premium</th>
-    <th scope="col">Premium Expire</th>
-    <th scope="col">Register Date</th>
-  </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let data of datas" style="width: 100%; max-height: 70px !important;">
-      <th>
-        <button 
-        (click)="deleteUser(data.id)"
-        type="button" 
-        class="btn btn-danger"
-        >X</button>
-      </th>
-      <td >{{data.id}}</td>
-      <td >{{data.firstName}}</td>
-      <td >{{data.lastName}}</td>
-      <td >{{data.phoneNumber}}</td>
-      <td >{{data.isPremium}}</td>
-      <td >{{data.premiumAccount}}</td>
-      <td >{{data.createAccount}}</td>
-    </tr>
-  </tbody>
-</table>
 <ng-template #elseBlock >
   <div class="margin">
     <app-spinner></app-spinner>

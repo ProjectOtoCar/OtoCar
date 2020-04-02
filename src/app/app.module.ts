@@ -12,7 +12,6 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ItemComponent } from './user-page/item/item.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { ItemAdminPanelComponent } from './admin-panel/item-admin-panel/item-admin-panel.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ErrorComponent } from './error/error.component';
 import { UserDetailsComponent } from './user-page/user-details/user-details.component';
@@ -26,6 +25,8 @@ import { OneAdvertismentComponent } from './one-advertisment/one-advertisment.co
 import { PaginationComponent } from './pagination/pagination.component';
 import { PaginationItemComponent } from './pagination/pagination-item/pagination-item.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { SearchFormComponent } from './admin-panel/search-form/search-form.component';
+import { UpperCaseFirstLetterPipe } from './pipes/upper-case-first-letter.pipe';
 
 
 @NgModule({
@@ -37,7 +38,6 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     RegistrationComponent,
     ItemComponent,
     AdminPanelComponent,
-    ItemAdminPanelComponent,
     SignInComponent,
     ErrorComponent,
     UserDetailsComponent,
@@ -50,8 +50,9 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     OneAdvertismentComponent,
     PaginationItemComponent,
     PaginationComponent,
-    ContactFormComponent
-
+    ContactFormComponent,
+    SearchFormComponent,
+    UpperCaseFirstLetterPipe
   ],
   imports: [
     BrowserModule,

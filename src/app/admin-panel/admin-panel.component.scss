@@ -1,6 +1,18 @@
 .grow {
-    min-height: 900px;
+    min-height: 1200px;
 }
 .margin {
     margin-top: 10%;
+}
+div.col {
+    height: 75px;
+}
+div.head > div.col {
+    height: 40px;
+}
+.head {
+border-bottom: 1px solid var(--btn-main);
+}
+.body {
+    margin-top: 5px;
 }

@@ -4,6 +4,7 @@ import { Seller } from '../interfaces/Seller';
 import { pipe, Subscription, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute, Params } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-panel',
@@ -11,7 +12,7 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./admin-panel.component.scss']
 })
 export class AdminPanelComponent implements OnInit, OnDestroy {
-
+  searchForm: FormGroup;
   datas: Seller[];
   currentData: number;
   isLoading = true;
@@ -25,6 +26,8 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     private adminPanelService: AdminPanelService,
     private activedRoute: ActivatedRoute) {
       this.page = 1;
+      this.searchForm = new FormGroup({
+      });
     }
 
   ngOnInit(): void {

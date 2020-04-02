@@ -1,0 +1,18 @@
+<form 
+[formGroup]="searchForm"
+class="container" 
+style="margin-top: 5%"
+>
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="firstName">Imie</span>
+  </div>
+  <input type="text" class="form-control" placeholder="Imie" aria-label="firstName" aria-describedby="firstName">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="lastName">Nazwisko</span>
+  </div>
+  <input type="text" class="form-control" placeholder="Nazwisko" aria-label="lastName" aria-describedby="lastName">
+</div>
+  <button class="btn btn-primary">Search</button>
+  <button class="btn btn-warning" >Clear</button>
+</form>
