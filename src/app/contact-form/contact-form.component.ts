@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "../validators/CustomValidators";
+import { Contact } from '../interfaces/Contact';
+import { ContactFormService } from '../services/contact-form.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -8,21 +10,20 @@ import {CustomValidators} from "../validators/CustomValidators";
   styleUrls: ['./contact-form.component.scss']
 })
 export class ContactFormComponent implements OnInit {
-
   loginForm: FormGroup;
-  constructor() { }
-
+  isLoading: boolean;
+  isError: boolean;
+  constructor(private contactFormService: ContactFormService) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      firstName: new FormControl(null,
+      title: new FormControl(null,
         [
           Validators.required,
-          Validators.maxLength(30),
-          Validators.minLength(2),
-          CustomValidators.withoutSpace
+          Validators.maxLength(40),
+          Validators.minLength(5),
         ]),
-      email: new FormControl(null,
+        mailSender: new FormControl(null,
         [
           Validators.required,
           Validators.email,
@@ -30,13 +31,7 @@ export class ContactFormComponent implements OnInit {
           Validators.minLength(3),
           CustomValidators.withoutSpace
         ]),
-      title: new FormControl(null,
-        [
-          Validators.required,
-          Validators.maxLength(40),
-          Validators.minLength(5),
-        ]),
-      content: new FormControl(null,
+        content: new FormControl(null,
         [
           Validators.required,
           Validators.minLength(20),
@@ -46,7 +41,16 @@ export class ContactFormComponent implements OnInit {
 
   }
   onSubmit(): void {
-    console.log(this.loginForm.value);
+    this.isLoading = true;
+    this.isError = false;
+    const sendEmail: Contact = {...this.loginForm.value, mail: 'ToJestMailDoProjektuOtoCar@gmail.com'};
+    console.log(sendEmail);
+    this.contactFormService.sendEmail(sendEmail).subscribe(() => {
+      this.isLoading = false;
+    }, error => {
+      this.isError = true;
+      this.isLoading = false;
+    });
   }
 
 }
