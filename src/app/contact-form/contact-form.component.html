@@ -3,6 +3,9 @@
     <div class="alert alert-danger" role="alert" *ngIf="isError">
       Bład spróbuj ponownie
     </div>
+    <div class="alert alert-success" role="alert" *ngIf="isSend">
+      Wiadomość wysłana
+    </div>
     <h3>Skontaktuj się </h3>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="form-group">

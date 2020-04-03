@@ -12,10 +12,14 @@ import { Contact } from '../interfaces/Contact';
 export class ContactFormComponent implements OnInit {
   loginForm: FormGroup;
   isLoading: boolean;
+  isSend: boolean;
   isError: boolean;
   constructor(private contactFormService: ContactFormService) { }
 
   ngOnInit(): void {
+    this.isSend = false;
+    this.isLoading = false;
+    this.isError = false;
     this.loginForm = new FormGroup({
       title: new FormControl(null,
         [
@@ -41,12 +45,14 @@ export class ContactFormComponent implements OnInit {
 
   }
   onSubmit(): void {
+    this.isSend = false;
     this.isLoading = true;
     this.isError = false;
     const sendEmail: Contact = {...this.loginForm.value, mail: 'ToJestMailDoProjektuOtoCar@gmail.com'};
-    console.log(sendEmail);
     this.contactFormService.sendEmail(sendEmail).subscribe(() => {
       this.isLoading = false;
+      this.loginForm.reset();
+      this.isSend = true;
     }, error => {
       this.isError = true;
       this.isLoading = false;
