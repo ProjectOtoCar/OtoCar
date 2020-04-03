@@ -12,16 +12,20 @@ import {BusinessStatuteComponent} from "./business-statute/business-statute.comp
 import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 import {CookiePolicyComponent} from "./cookie-policy/cookie-policy.component";
 import {OneAdvertismentComponent} from "./one-advertisment/one-advertisment.component";
-import { SearchFormComponent } from './admin-panel/search-form/search-form.component';
 import {ContactFormComponent} from "./contact-form/contact-form.component";
+import { UserDataComponent } from './user-page/user-details/user-data/user-data.component';
 
 
 
 
 const routes: Routes = [
   {path: '', component: MainPageComponent, pathMatch: 'full'},
-  {path: 'user-page', component: UserDetailsComponent},
-  {path: 'buy-premium', component: UserPageComponent},
+  {path: 'user-page', redirectTo: 'user-page/user-data'},
+  {path: 'user-page', component: UserDetailsComponent, children:
+  [
+    {path: 'user-data', component: UserDataComponent},
+    {path: 'buy-premium', component: UserPageComponent}
+  ]},
   {path: 'registration', component: RegistrationComponent},
   {path: 'admin', component: AdminPanelComponent},
   {path: 'sign-in', component: SignInComponent},

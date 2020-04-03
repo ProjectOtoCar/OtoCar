@@ -1,12 +1,20 @@
 <div class="card " style="min-width: 40%;margin-bottom: 10%" >
   <div class="card-title"><h1 class="text-center" style="padding-top: 5%">{{ data.title }}</h1></div>
   <div class="card-body">
-    <div class="float-right" >{{ data.limit }}</div>
-    <h6 class="row card-text">Limit ogłoszeń:</h6>
-    <div class="float-right">{{ data.expires}} dni</div>
-    <h6 class="row card-text">Czas ważności pakietu:</h6>
-    <div class="float-right">{{ data.price }} zł</div>
-    <h6 class="row card-text">Cena:</h6>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="float-right" >{{ data.limit }}</div>
+        <h6 class="row card-text">Limit ogłoszeń:</h6>
+      </li>
+      <li class="list-group-item"> 
+        <div class="float-right">{{ data.expires}} dni</div>
+        <h6 class="row card-text">Czas ważności pakietu:</h6>
+      </li>
+      <li class="list-group-item">
+        <div class="float-right">{{ data.price }} zł</div>
+        <h6 class="row card-text">Cena:</h6>
+      </li>
+    </ul>
     <button class="btn btn-primary float-right"style="margin-top: 5%;">Kup Teraz!</button>
   </div>
 </div>
