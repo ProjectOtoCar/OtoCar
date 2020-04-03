@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center top-margin">
   <div class="col-lg-4 col-md-6 border border-primary rounded padding">
-    <div class="alert alert-danger" role="alert">
-      A simple danger alert—check it out!
+    <div class="alert alert-danger" role="alert" *ngIf="isError">
+      Bład spróbuj ponownie
     </div>
     <h3>Skontaktuj się </h3>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -96,7 +96,13 @@
           class="btn btn-success top-margin"
           type="submit"
           [disabled]="loginForm.invalid"
-        >Wyślij</button>
+        >
+        <span *ngIf="!isLoading; else loading">Wyślij</span>
+        <ng-template #loading>
+          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          Loading...
+        </ng-template>
+      </button>
       </div>
     </form>
   </div>
