@@ -1,77 +1,86 @@
 <div class="d-flex flex-column align-items-center grow">
-<app-search-form (queryParams)="createQueryParams($event)"></app-search-form>
-<div class="table-responsive-lg" style="width: 80%;">
-  <table class="container" style="min-width: 600px ;margin: 2% auto 0; height: 800px;display: flex; flex-direction: column;" *ngIf="!isLoading; else elseBlock ">
-    <div class="row head">
-        <div class="col">
-          #
-        </div>
-        <div class="col">
-          ID
-        </div>
-        <div class="col">
-          First Name
-        </div>
-        <div class="col">
-          Last Name
-        </div>
-        <div class="col">
-          Phone Number
-        </div>
-        <div class="col">
-          Premium
-        </div>
-        <div class="col">
-          Premium Expire
-        </div>
-        <div class="col">
-          Register Date
-        </div>
-    </div>
-      <div *ngFor="let data of datas" class="row body">
-        <div class="col">
-          <button 
-          (click)="deleteUser(data.id)"
-          type="button" 
-          class="btn btn-danger"
-          >X</button>
-        </div>
-        <div class="col">
-          {{data.id}}
-        </div>
-        <div class="col">
-          {{data.firstName | upperCaseFirstLetter}}
-        </div>
-        <div class="col">
-          {{data.lastName | upperCaseFirstLetter}}
-        </div>
-        <div class="col">
-          {{data.phoneNumber}}
-        </div>
-        <div class="col">
-          {{data.isPremium}}
-        </div>
-        <div class="col">
-          {{data.premiumAccount}}
-        </div>
-        <div class="col">
-          {{data.createAccount}}
-        </div>
-    </div>
-  </table>
-</div>
-
-<ng-template #elseBlock >
-  <div class="d-flex align-items-center justify-content-center margin">
-    <app-spinner></app-spinner>
+  <app-search-form (queryParams)="createQueryParams($event)"></app-search-form>
+  <div class="table-responsive-lg" style="width: 80%;">
+    <table 
+    class="container" 
+    style="min-width: 600px ;margin: 2% auto 0; height: 800px;display: flex; flex-direction: column;" 
+    *ngIf="!isLoading && !isError">
+      <div class="row head">
+          <div class="col">
+            #
+          </div>
+          <div class="col">
+            ID
+          </div>
+          <div class="col">
+            First Name
+          </div>
+          <div class="col">
+            Last Name
+          </div>
+          <div class="col">
+            Phone Number
+          </div>
+          <div class="col">
+            Premium
+          </div>
+          <div class="col">
+            Premium Expire
+          </div>
+          <div class="col">
+            Register Date
+          </div>
+      </div>
+        <div *ngFor="let data of datas" class="row body">
+          <div class="col">
+            <button 
+            (click)="deleteUser(data.id)"
+            type="button" 
+            class="btn btn-danger"
+            >X</button>
+          </div>
+          <div class="col">
+            {{data.id}}
+          </div>
+          <div class="col">
+            {{data.firstName | upperCaseFirstLetter}}
+          </div>
+          <div class="col">
+            {{data.lastName | upperCaseFirstLetter}}
+          </div>
+          <div class="col">
+            {{data.phoneNumber}}
+          </div>
+          <div class="col">
+            {{data.isPremium}}
+          </div>
+          <div class="col">
+            {{data.premiumAccount}}
+          </div>
+          <div class="col">
+            {{data.createAccount}}
+          </div>
+      </div>
+    </table>
   </div>
-</ng-template>
-<app-pagination
-  [url]="'/admin'"
-  [currentPage]="page"
-  [maxPage]="maxPage"
-  [queryParams]="queryParams"
-></app-pagination>
+  <div 
+  class="alert alert-danger" 
+  role="alert"
+  *ngIf="isError">
+    Coś poszło nie tak <a class="stretched-link text-danger" [routerLink]="['/admin']" >spróbuj jeszcze raz</a>
+  </div>
+  <div 
+  class="d-flex align-items-center justify-content-center margin"
+  *ngIf="isLoading"
+  >
+      <app-spinner></app-spinner>
+  </div>
+  <app-pagination
+    [url]="'/admin'"
+    [currentPage]="page"
+    [maxPage]="maxPage"
+    [queryParams]="queryParams"
+  ></app-pagination>
 </div>
 
 <!--<app-item-admin-panel  *ngFor="let data of datas" [data]="data"  [data]="data"></app-item-admin-panel>-->

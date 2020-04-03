@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SerachAdminFormService } from 'src/app/services/serach-admin-form.service';
 import { QueryParamsAdminPage } from 'src/app/interfaces/QueryParamsAdminPage';
 import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search-form',
@@ -14,7 +15,11 @@ export class SearchFormComponent implements OnInit, OnDestroy {
   accountsTypes: [string];
   @Output() queryParams = new EventEmitter<QueryParamsAdminPage>();
   accountTypesSub: Subscription;
-  constructor(private searchAdminFormService: SerachAdminFormService) {
+  constructor(
+    private searchAdminFormService: SerachAdminFormService,
+    private route: Router,
+    private activatedRoute: ActivatedRoute
+    ) {
     this.searchForm = new FormGroup({
       firstName: new FormControl(null,
       [
@@ -39,11 +44,11 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     });
   }
   onSubmit(): void {
-    console.log(this.searchForm.value);
     this.queryParams.emit(this.searchForm.value);
   }
   clear(): void {
     this.searchForm.reset();
+    this.onSubmit();
   }
 
 }

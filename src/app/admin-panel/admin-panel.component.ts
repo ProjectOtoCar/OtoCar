@@ -17,6 +17,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   datas: Seller[];
   currentData: number;
   isLoading = true;
+  isError = false;
   getSubscription: Subscription;
   page: number;
   maxPage: number;
@@ -52,17 +53,20 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
    this.getSubscription.unsubscribe();
   }
   private loadData(): void {
-    this.isLoading = true;
     this.activedRoute.queryParams
     .subscribe((params: Params) => {
       this.page = params.page || 1;
-      this.getSubscription = this.adminPanelService.getSellers(
+      this.isLoading = true;
+      this.isError = false;
+      this.getSubscription = this.adminPanelService.getSellers
+      (
         this.page,
         this.queryParams?.firstName,
         this.queryParams?.lastName,
         this.queryParams?.type,
         this.queryParams?.premium,
-        this.queryParams?.sort)
+        this.queryParams?.sort
+      )
         .subscribe(([response, maxPage]) => {
         this.datas = response;
         this.maxPage = maxPage;
@@ -74,6 +78,10 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
             });
         }
         this.currentData = Date.now();
+        this.isLoading = false;
+      },
+      error => {
+        this.isError = true;
         this.isLoading = false;
       });
     });
