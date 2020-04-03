@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "../validators/CustomValidators";
+import { Contact } from '../interfaces/Contact';
+import { ContactFormService } from '../services/contact-form.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -8,10 +10,10 @@ import {CustomValidators} from "../validators/CustomValidators";
   styleUrls: ['./contact-form.component.scss']
 })
 export class ContactFormComponent implements OnInit {
-
   loginForm: FormGroup;
-  constructor() { }
-
+  isLoading: boolean;
+  isError: boolean;
+  constructor(private contactFormService: ContactFormService) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -39,7 +41,16 @@ export class ContactFormComponent implements OnInit {
 
   }
   onSubmit(): void {
-    console.log(this.loginForm.value);
+    this.isLoading = true;
+    this.isError = false;
+    const sendEmail: Contact = {...this.loginForm.value, mail: 'ToJestMailDoProjektuOtoCar@gmail.com'};
+    console.log(sendEmail);
+    this.contactFormService.sendEmail(sendEmail).subscribe(() => {
+      this.isLoading = false;
+    }, error => {
+      this.isError = true;
+      this.isLoading = false;
+    });
   }
 
 }
