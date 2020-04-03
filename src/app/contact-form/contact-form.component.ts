@@ -15,14 +15,13 @@ export class ContactFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      firstName: new FormControl(null,
+      title: new FormControl(null,
         [
           Validators.required,
-          Validators.maxLength(30),
-          Validators.minLength(2),
-          CustomValidators.withoutSpace
+          Validators.maxLength(40),
+          Validators.minLength(5),
         ]),
-      email: new FormControl(null,
+        mailSender: new FormControl(null,
         [
           Validators.required,
           Validators.email,
@@ -30,13 +29,7 @@ export class ContactFormComponent implements OnInit {
           Validators.minLength(3),
           CustomValidators.withoutSpace
         ]),
-      title: new FormControl(null,
-        [
-          Validators.required,
-          Validators.maxLength(40),
-          Validators.minLength(5),
-        ]),
-      content: new FormControl(null,
+        content: new FormControl(null,
         [
           Validators.required,
           Validators.minLength(20),
