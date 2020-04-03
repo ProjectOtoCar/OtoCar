@@ -5,13 +5,13 @@
         <ul class="list-no-style right">
             <li>Imie: </li>
             <li>Nazwisko: </li>
-            <li>E-mail: </li>
+            <li>numer telefonu </li>
             <li>data dołączenia: </li>
         </ul>
         <ul class="list-no-style left">
-            <li>Imie: </li>
-            <li>Nazwisko: </li>
-            <li>E-mail: </li>
-            <li>data dołączenia: </li>
+            <li>{{seller.firstName | upperCaseFirstLetter}}</li>
+            <li>{{seller.lastName | upperCaseFirstLetter}}</li>
+            <li>{{seller.phoneNumber}}</li>
+            <li>{{seller.createAccount}}</li>
         </ul>
     </div>

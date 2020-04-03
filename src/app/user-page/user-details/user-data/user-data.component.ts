@@ -1,25 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { UserPageService } from 'src/app/services/user-page.service';
+import { Seller } from 'src/app/interfaces/Seller';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-data',
   templateUrl: './user-data.component.html',
   styleUrls: ['./user-data.component.scss']
 })
-export class UserDataComponent implements OnInit {
+export class UserDataComponent implements OnInit, OnDestroy {
   userId: number;
+  seller: Seller;
+  queryParamsSub: Subscription;
+
   constructor(
     private route: Router,
     private activatedRoute: ActivatedRoute,
+    private userPageService: UserPageService
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params: Params) => {
+    this.queryParamsSub = this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params.userId) {
         this.userId = params.userId;
         console.log(this.userId);
+      } else {
+        this.userId = 1; // zmienic na id usera zalogowanego
       }
+      this.userPageService.downloadUserData(this.userId)
+      .subscribe((seller: Seller) => {
+        this.seller = seller;
+      }
+      );
     });
   }
+  ngOnDestroy(): void {
+    this.queryParamsSub.unsubscribe();
+  }
+
 
 }
