@@ -13,6 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class SearchFormComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;
   accountsTypes: [string];
+  isLoading: boolean;
   @Output() queryParams = new EventEmitter<QueryParamsAdminPage>();
   accountTypesSub: Subscription;
   constructor(
@@ -39,8 +40,10 @@ export class SearchFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.accountTypesSub = this.searchAdminFormService.getAccountTypes().subscribe((data: [string]) => {
       this.accountsTypes = data;
+      this.isLoading = false;
     });
   }
   onSubmit(): void {

@@ -31,7 +31,7 @@ export class UserDataComponent implements OnInit, OnDestroy {
       .subscribe((seller: Seller) => {
         if (seller !== null) {
           this.seller = seller;
-        } //dodać przekierowanie na zalogowanego usera
+        } // dodać przekierowanie na zalogowanego usera
       }
       );
     });

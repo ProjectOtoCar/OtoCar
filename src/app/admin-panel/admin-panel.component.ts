@@ -39,6 +39,13 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     this.adminPanelService.deleteSeller(id)
     .subscribe(response => {
       this.datas = this.datas.filter((data: Seller) => data.id !== id);
+      if (this.datas.length === 0) {
+        this.route.navigate([],
+          {
+            relativeTo: this.activatedRoute,
+            queryParams: this.queryParams
+          });
+      }
     });
   }
   createQueryParams(queryParams: QueryParamsAdminPage) {

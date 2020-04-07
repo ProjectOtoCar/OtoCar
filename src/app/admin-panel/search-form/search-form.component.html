@@ -35,10 +35,20 @@ style="margin-top: 5%"
   aria-label="type" 
   id="type" 
   aria-describedat="type"
-  formControlName="type">
+  formControlName="type"
+  *ngIf="!isLoading; else loading" >
     <option [value]='null'>Wszystkie</option>
-    <option *ngFor="let type of accountsTypes" [value]="type">{{type | upperCaseFirstLetter}}</option>
+    <option
+    *ngFor="let type of accountsTypes"
+     [value]="type">
+     {{type | upperCaseFirstLetter}}
+    </option>
   </select>
+  <ng-template #loading>
+    <div class="spinner-grow text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </ng-template>
   <div class="input-group-prepend">
     <span class="input-group-text label-width" id="premium">Premium</span>
   </div>
