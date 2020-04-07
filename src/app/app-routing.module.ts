@@ -14,6 +14,7 @@ import {CookiePolicyComponent} from "./cookie-policy/cookie-policy.component";
 import {OneAdvertismentComponent} from "./one-advertisment/one-advertisment.component";
 import {ContactFormComponent} from "./contact-form/contact-form.component";
 import { UserDataComponent } from './user-page/user-details/user-data/user-data.component';
+import {FiltrAdvertismentComponent} from "./filtr-advertisment/filtr-advertisment.component";
 
 
 
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path: 'cookiePolicy', component: CookiePolicyComponent},
   {path: 'one', component: OneAdvertismentComponent},
   {path: 'contact', component: ContactFormComponent},
+  {path: 'filtrAdv', component: FiltrAdvertismentComponent},
   {path: 'not-found', component: ErrorComponent, data: {message: 'Nic tutaj nie ma', error: 404, subMessage: 'strona nie znaleziona!'}},
   {path: '**', redirectTo: '/not-found'}
 ];
