@@ -1,1 +1,85 @@
-<p>main-page works!</p>
+<form
+  [formGroup]="searchForm"
+  class="container "
+  style="margin-top: 5%"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="input-group ">
+    <div class="custom-input">
+      <h4>Typ paliwa</h4>
+
+      <div  class="input-group"  >
+        <select
+          class="custom-select input-min"
+          aria-label="mark"
+          id="typeFuel"
+          aria-describedat="mark"
+          formControlName="mark"
+        style="width: 200px">
+          <option [value]='null'>Wszystkie</option>
+          <option *ngFor="let type of accountsTypes" [value]="type">{{type | upperCaseFirstLetter}}</option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <h4>Typ paliwa</h4>
+
+      <div  class="input-group">
+        <select
+          class="custom-select input-min"
+          aria-label="mark"
+          id="mark"
+          aria-describedat="mark"
+          formControlName="mark"
+          style="width: 200px">
+          <option [value]='null'>Wszystkie</option>
+          <option *ngFor="let type of accountsTypes" [value]="type">{{type | upperCaseFirstLetter}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="input-group" style="padding: 5% 0">
+    <div class="custom-span">
+      <h4>Data produkcji</h4>
+      <div class="input-group">
+        <span>Od</span><input class="form-control" type="text"><span>Do</span><input class="form-control" type="text">
+      </div>
+    </div>
+    <div >
+      <h4>Przebieg pojazdu</h4>
+      <div class="input-group">
+        <span>Od</span><input class="form-control" type="text"><span>Do</span><input class="form-control" type="text">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="input-group">
+    <div class="custom-input">
+      <h4>Typ paliwa</h4>
+
+    <div  class="input-group" >
+      <select
+        class="custom-select input-min"
+        aria-label="mark"
+        id="mark"
+        aria-describedat="mark"
+        formControlName="mark"
+        style="width: 200px">
+        <option [value]='null'>Wszystkie</option>
+        <option *ngFor="let type of accountsTypes" [value]="type">{{type | upperCaseFirstLetter}}</option>
+      </select>
+      </div>
+    </div>
+      <div >
+        <h4>cena</h4>
+        <div class="input-group">
+          <span>Od</span><input class="form-control" type="text"><span>Do</span><input class="form-control" type="text">
+        </div>
+      </div>
+    </div>
+
+  <button class="btn btn-primary" style="margin: 5% 0" type="submit">Szukaj</button>
+  <button class="btn btn-warning"  style="margin: 5% 5%" type="submit">Wyczysc</button>
+
+</form>
