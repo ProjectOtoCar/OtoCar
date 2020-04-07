@@ -27,7 +27,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
 
   constructor(
     private adminPanelService: AdminPanelService,
-    private activedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private route: Router) {
       this.page = 1;
     }
@@ -45,7 +45,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     this.queryParams = {...queryParams, page: this.page || 1};
     this.route.navigate([],
        {
-         relativeTo: this.activedRoute,
+         relativeTo: this.activatedRoute,
          queryParams: this.queryParams
        });
   }
@@ -53,7 +53,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
    this.getSubscription.unsubscribe();
   }
   private loadData(): void {
-    this.activedRoute.queryParams
+    this.activatedRoute.queryParams
     .subscribe((params: Params) => {
       this.page = params.page || 1;
       this.isLoading = true;
@@ -73,7 +73,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
         if (+this.maxPage < +this.page) {
           this.route.navigate([],
             {
-              relativeTo: this.activedRoute,
+              relativeTo: this.activatedRoute,
               queryParams: {...this.queryParams, page: 1}
             });
         }

@@ -27,6 +27,7 @@ import { PaginationItemComponent } from './pagination/pagination-item/pagination
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { SearchFormComponent } from './admin-panel/search-form/search-form.component';
 import { UpperCaseFirstLetterPipe } from './pipes/upper-case-first-letter.pipe';
+import { UserDataComponent } from './user-page/user-details/user-data/user-data.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { UpperCaseFirstLetterPipe } from './pipes/upper-case-first-letter.pipe';
     PaginationComponent,
     ContactFormComponent,
     SearchFormComponent,
-    UpperCaseFirstLetterPipe
+    UpperCaseFirstLetterPipe,
+    UserDataComponent
   ],
   imports: [
     BrowserModule,

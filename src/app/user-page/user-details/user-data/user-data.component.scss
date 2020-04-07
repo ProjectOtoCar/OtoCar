@@ -12,15 +12,3 @@
 .center {
  text-align: center;
 }
-.details-page {
-    max-width: 1500px;
-    margin: 10% auto;
-    font-size: 1.5rem;
-}
-
-
-@media(max-width: 767px) {
-    .details-page {
-        max-width: 80%;
-    }    
-}
