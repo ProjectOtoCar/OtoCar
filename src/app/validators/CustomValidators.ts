@@ -36,4 +36,12 @@ export class CustomValidators {
         }
         return null;
     }
+    static phoneNumber(control: FormControl): {[key: string]: boolean} {
+        const phoneNumber: string = control.value;
+        const re = new RegExp('[0-9]{9}');
+        if (!re.test(phoneNumber)) {
+            return {phonenumber: true};
+        }
+        return null;
+    }
 }

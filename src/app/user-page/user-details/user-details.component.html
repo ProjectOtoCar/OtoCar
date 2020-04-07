@@ -4,15 +4,22 @@
         <a 
         class="list-group-item list-group-item-action"
         [routerLink]="['user-data']"
+        [queryParams]="queryParams"
         routerLinkActive="active" 
         >dane użytkownika</a>
             <a 
                 class="list-group-item list-group-item-action"
                 [routerLink]="['buy-premium']"
+                [queryParams]="queryParams"
                 routerLinkActive="active" 
                 >Kup premium</a>
             <a class="list-group-item list-group-item-action">Dodaj ogłoszenie</a>
-            <a class="list-group-item list-group-item-action">Edytuj profil</a>
+            <a 
+            class="list-group-item list-group-item-action"
+            [routerLink]="['edit-profile']"
+            [queryParams]="queryParams"
+            routerLinkActive="active" 
+            >Edytuj profil</a>
     </div>
     <div class="d-flex flex-column bd-highlight mb-3 justify-content-around order-md-1">
         <router-outlet style="width: 0;"></router-outlet>

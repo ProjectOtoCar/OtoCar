@@ -29,6 +29,7 @@ import { SearchFormComponent } from './admin-panel/search-form/search-form.compo
 import { UpperCaseFirstLetterPipe } from './pipes/upper-case-first-letter.pipe';
 import { UserDataComponent } from './user-page/user-details/user-data/user-data.component';
 import { ModalComponent } from './modal/modal.component';
+import { ModifyProfileComponent } from './user-page/user-details/modify-profile/modify-profile.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { ModalComponent } from './modal/modal.component';
     SearchFormComponent,
     UpperCaseFirstLetterPipe,
     UserDataComponent,
-    ModalComponent
+    ModalComponent,
+    ModifyProfileComponent
   ],
   imports: [
     BrowserModule,

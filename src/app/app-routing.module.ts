@@ -14,6 +14,7 @@ import {CookiePolicyComponent} from "./cookie-policy/cookie-policy.component";
 import {OneAdvertismentComponent} from "./one-advertisment/one-advertisment.component";
 import {ContactFormComponent} from "./contact-form/contact-form.component";
 import { UserDataComponent } from './user-page/user-details/user-data/user-data.component';
+import { ModifyProfileComponent } from './user-page/user-details/modify-profile/modify-profile.component';
 
 
 
@@ -24,7 +25,8 @@ const routes: Routes = [
   {path: 'user-page', component: UserDetailsComponent, children:
   [
     {path: 'user-data', component: UserDataComponent},
-    {path: 'buy-premium', component: UserPageComponent}
+    {path: 'buy-premium', component: UserPageComponent},
+    {path: 'edit-profile', component: ModifyProfileComponent}
   ]},
   {path: 'registration', component: RegistrationComponent},
   {path: 'admin', component: AdminPanelComponent},

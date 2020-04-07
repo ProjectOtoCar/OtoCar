@@ -1,0 +1,102 @@
+ <div class="border border-primary rounded padding">
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="firstName">Imię</label>
+                <input type="text"
+                class="form-control is-invalid"
+                [ngClass]="{'is-invalid' : 
+                !editForm.get('firstName').valid &&
+                editForm.get('firstName').touched,
+                'is-valid' : editForm.get('firstName').valid}"
+                id="firstName"
+                formControlName="firstName"
+                >
+                <div class="invalid-feedback"
+                    *ngIf="editForm.get('firstName').errors?.required">
+                    Pole jest wymagane
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="editForm.get('firstName').errors?.minlength">
+                    Imię za krótkie(minimalnie 3 znaki)
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="editForm.get('firstName').errors?.maxlength">
+                    Imię za długie(maksymalnie 40 znaków)
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="editForm.get('firstName').errors?.withoutspace">
+                    Imię nie może zawierać spacji
+                </div>
+                <div class="valid-feedback">
+                    OK!
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Nazwisko</label>
+                <input
+                type="text" 
+                class="form-control" 
+                id="lastName"
+                [ngClass]="{'is-invalid' : 
+                !editForm.get('lastName').valid && 
+                editForm.get('lastName').touched,
+                'is-valid' : editForm.get('lastName').valid}"
+                formControlName="lastName">
+                <div class="invalid-feedback"
+                *ngIf="editForm.get('lastName').errors?.required">
+                Pole jest wymagane
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="editForm.get('lastName').errors?.minlength">
+                    Nazwisko za krótkie(minimalnie 3 znaki)
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="editForm.get('lastName').errors?.maxlength">
+                    Nazwisko za długie(maksymalnie 40 znaków)
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="editForm.get('lastName').errors?.withoutspace">
+                    Nazwisko nie może zawierać spacji
+                </div>
+                <div class="valid-feedback">
+                OK!
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Numer telefonu</label>
+                <input
+                type="text" 
+                class="form-control" 
+                id="phoneNumber"
+                [ngClass]="{'is-invalid' : 
+                !editForm.get('phoneNumber').valid && 
+                editForm.get('phoneNumber').touched,
+                'is-valid' : editForm.get('phoneNumber').valid}"
+                formControlName="phoneNumber">
+                <div class="invalid-feedback"
+                *ngIf="editForm.get('phoneNumber').errors?.required">
+                Pole jest wymagane
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="editForm.get('phoneNumber').errors?.minlength">
+                    Nazwisko za krótkie(minimalnie 3 znaki)
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="editForm.get('phoneNumber').errors?.maxlength">
+                    Nazwisko za długie(maksymalnie 40 znaków)
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="editForm.get('phoneNumber').errors?.withoutspace">
+                    Nazwisko nie może zawierać spacji
+                </div>
+                <div class="valid-feedback">
+                OK!
+                </div>
+            </div>
+            <button 
+            class="btn btn-success top-margin"
+            type="submit"
+            [disabled]="editForm.invalid"
+            >zmień dane</button>
+        </form>
+    </div>

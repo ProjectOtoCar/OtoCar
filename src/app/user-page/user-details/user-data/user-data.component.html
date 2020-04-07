@@ -8,7 +8,7 @@
             <li>numer telefonu </li>
             <li>data dołączenia: </li>
             <li>Typ konta: </li>
-            <li *ngIf="seller?.isPremium"> Konto premium do</li>
+            <li *ngIf="seller?.isPremium" class="primary-color"> Konto premium do</li>
         </ul>
         <ul class="list-no-style left">
             <li>{{seller?.firstName | upperCaseFirstLetter}}</li>
@@ -16,6 +16,6 @@
             <li>{{seller?.phoneNumber}}</li>
             <li>{{seller?.createAccount}}</li>
             <li>{{seller?.type | uppercase}}</li>
-            <li *ngIf="seller?.isPremium">{{seller?.premiumAccount}}</li>
+            <li *ngIf="seller?.isPremium" class="primary-color">{{seller?.premiumAccount}}</li>
         </ul>
     </div>
