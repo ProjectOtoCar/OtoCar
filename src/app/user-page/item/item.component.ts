@@ -6,8 +6,8 @@ import {Component, OnInit, Input} from '@angular/core';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit {
-
-
+  isModal = false;
+  isSuccessModal = false;
   @Input()
   data;
 
@@ -17,4 +17,20 @@ export class ItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  showModal(): void {
+    this.isModal = true;
+  }
+
+  onAction(event: boolean): void {
+    if (event) {
+      this.isModal = false;
+      this.isSuccessModal = true;
+    } else {
+      this.isModal = false;
+    }
+  }
+
+  closeSuccessModal(): void {
+    this.isSuccessModal = false;
+  }
 }

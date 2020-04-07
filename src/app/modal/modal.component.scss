@@ -1,0 +1,39 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 50;
+  }
+  
+  .alert-box {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    top: 30vh;
+    left: 35vw;
+    width: 30vw;
+    padding: 16px;
+    z-index: 100;
+    background: white;
+    text-align: center;
+    box-shadow: 0 2px 8px rbga(0, 0, 0, 0.26);
+  }
+  
+  .alert-box-actions {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 30vw;
+      align-items: space-around;
+      &--right {
+        text-align: right;
+      }
+      &--left {
+        text-align: left;
+      }
+  }

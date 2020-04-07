@@ -15,6 +15,22 @@
         <h6 class="row card-text">Cena:</h6>
       </li>
     </ul>
-    <button class="btn btn-primary float-right"style="margin-top: 5%;">Kup Teraz!</button>
+    <button class="btn btn-primary float-right"style="margin-top: 5%;" (click)="showModal()">Kup Teraz!</button>
   </div>
 </div>
+<app-modal
+*ngIf="isModal"
+title="Czy na pewno chcesz kupić premium?"
+    message="Proszę potwierdzić zakup pakietu premium"
+    firstAction="KUP!"
+    secondAction="anuluj"
+    [showAcceptButton]="true"
+    (action)="onAction($event)"
+></app-modal>
+<app-modal
+*ngIf="isSuccessModal"
+title="Zakup udany!"
+    message="Dziekujemy za zakup w naszej aplikacji"
+    secondAction="zamknij"
+    (action)="closeSuccessModal()"
+></app-modal>

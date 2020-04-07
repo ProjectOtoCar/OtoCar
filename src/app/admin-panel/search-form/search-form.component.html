@@ -35,10 +35,31 @@ style="margin-top: 5%"
   aria-label="type" 
   id="type" 
   aria-describedat="type"
-  formControlName="type">
+  formControlName="type"
+  *ngIf="!isLoading && !isError" >
     <option [value]='null'>Wszystkie</option>
-    <option *ngFor="let type of accountsTypes" [value]="type">{{type | upperCaseFirstLetter}}</option>
+    <option
+    *ngFor="let type of accountsTypes"
+     [value]="type">
+     {{type | upperCaseFirstLetter}}
+    </option>
   </select>
+    <div 
+    *ngIf="isLoading"
+    class="spinner-grow text-primary" 
+    role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  <div 
+  class="alert alert-danger" 
+  role="alert"
+  *ngIf="isError"
+  style="padding: 0 3px; margin: 0" >
+    Coś poszło nie tak <a 
+    class="stretched-link text-danger" 
+    [routerLink]="['/admin']" 
+    [queryParams]="{adf: random(), page: 1}">spróbuj jeszcze raz</a>
+  </div>
   <div class="input-group-prepend">
     <span class="input-group-text label-width" id="premium">Premium</span>
   </div>
