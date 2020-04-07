@@ -24,13 +24,14 @@ export class UserDataComponent implements OnInit, OnDestroy {
     this.queryParamsSub = this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params.userId) {
         this.userId = params.userId;
-        console.log(this.userId);
       } else {
         this.userId = 1; // zmienic na id usera zalogowanego
       }
       this.userPageService.downloadUserData(this.userId)
       .subscribe((seller: Seller) => {
-        this.seller = seller;
+        if (seller !== null) {
+          this.seller = seller;
+        } //dodać przekierowanie na zalogowanego usera
       }
       );
     });

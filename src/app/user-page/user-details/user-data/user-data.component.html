@@ -7,11 +7,15 @@
             <li>Nazwisko: </li>
             <li>numer telefonu </li>
             <li>data dołączenia: </li>
+            <li>Typ konta: </li>
+            <li *ngIf="seller?.isPremium"> Konto premium do</li>
         </ul>
         <ul class="list-no-style left">
             <li>{{seller?.firstName | upperCaseFirstLetter}}</li>
             <li>{{seller?.lastName | upperCaseFirstLetter}}</li>
             <li>{{seller?.phoneNumber}}</li>
             <li>{{seller?.createAccount}}</li>
+            <li>{{seller?.type | uppercase}}</li>
+            <li *ngIf="seller?.isPremium">{{seller?.premiumAccount}}</li>
         </ul>
     </div>
