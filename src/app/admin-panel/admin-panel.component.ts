@@ -59,6 +59,11 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
    this.getSubscription.unsubscribe();
   }
+
+  random(): number {
+    return Math.random();
+  }
+  
   private loadData(): void {
     this.activatedRoute.queryParams
     .subscribe((params: Params) => {

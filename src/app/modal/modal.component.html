@@ -1,0 +1,16 @@
+<div class="background">
+    <div class="backdrop" ></div>
+    <div class="alert-box">
+      <h2>{{title}}</h2>
+      <p>{{message}}</p>
+        <div
+        class ="alert-box-actions">
+            <div class="alert-box-actions--left" *ngIf="showAcceptButton">
+                <button class="btn btn-success" (click)="onAction(true)">{{firstAction}}</button>
+            </div>
+            <div class="alert-box-actions--right">
+                <button class="btn btn-danger" (click)="onAction(false)">{{secondAction}}</button>
+            </div>
+        </div>
+    </div>
+</div>
