@@ -69,8 +69,8 @@ public class SellerController {
     }
 
     @PatchMapping("/premium/{id}")
-    ResponseEntity<?> buyPremium(@PathVariable Long id, @RequestParam(defaultValue = "0") int days){
-        sellerService.addPremium(id,days+1);
+    ResponseEntity<?> buyPremium(@PathVariable Long id, @RequestBody Map<String, Integer> fields){
+        sellerService.addPremium(id,fields);
         return ResponseEntity.ok().build();
     }
 

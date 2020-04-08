@@ -306,14 +306,14 @@ public class SellerService extends AddPagable implements CrudServce<Long, Seller
         return sellerPage;
     }
 
-    public void addPremium(Long idUser, int days) {
+    public void addPremium(Long idUser, Map<String,Integer> fields) {
         LocalDate newDataPremium;
         LocalDate now = LocalDate.now();
         Optional<Seller> user = sellerRepository.findById(idUser);
         if(now.isAfter(user.get().getPremiumAccount())){
-             newDataPremium = now.plusDays(days);
+             newDataPremium = now.plusDays(fields.get("days")+1);
         }else{
-                newDataPremium =  user.get().getPremiumAccount().plusDays(days);
+                newDataPremium =  user.get().getPremiumAccount().plusDays(fields.get("days")+1);
         }
 
 
