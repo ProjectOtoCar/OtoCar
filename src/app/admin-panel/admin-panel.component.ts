@@ -17,6 +17,8 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   datas: Seller[];
   currentData: number;
   isLoading = true;
+  isDeleteSellerLoading = false;
+  isDeleteSellerError = false;
   isError = false;
   getSubscription: Subscription;
   page: number;
@@ -36,8 +38,11 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     this.loadData();
   }
   deleteUser(id: number) {
+    this.isDeleteSellerLoading = true;
+    this.isDeleteSellerError = false;
     this.adminPanelService.deleteSeller(id)
     .subscribe(response => {
+      this.isDeleteSellerLoading = false;
       this.datas = this.datas.filter((data: Seller) => data.id !== id);
       if (this.datas.length === 0) {
         this.route.navigate([],
@@ -46,6 +51,9 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
             queryParams: this.queryParams
           });
       }
+    }, error => {
+      this.isDeleteSellerLoading = false;
+      this.isDeleteSellerError = true;
     });
   }
   createQueryParams(queryParams: QueryParamsAdminPage) {
@@ -63,7 +71,9 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   random(): number {
     return Math.random();
   }
-  
+  closeErrorModal(): void {
+    this.isDeleteSellerError = false;
+  }
   private loadData(): void {
     this.activatedRoute.queryParams
     .subscribe((params: Params) => {

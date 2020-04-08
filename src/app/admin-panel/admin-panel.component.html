@@ -34,10 +34,17 @@
         <div *ngFor="let data of datas" class="row body">
           <div class="col">
             <button 
+            *ngIf="!isDeleteSellerLoading; else deleteSellerLoading"
             (click)="deleteUser(data.id)"
             type="button" 
             class="btn btn-danger"
             >X</button>
+            <ng-template #deleteSellerLoading>
+              <button class="btn btn-danger" type="button" disabled>
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                <span class="sr-only">Loading...</span>
+              </button>
+            </ng-template>
           </div>
           <div class="col">
             {{data.id}}
@@ -82,5 +89,10 @@
     [queryParams]="queryParams"
   ></app-pagination>
 </div>
+<app-modal
+ *ngIf="isDeleteSellerError"
+ [isError]="true"
+ secondAction="Anuluj"
+ (action)="closeErrorModal()"
+></app-modal>
 
-<!--<app-item-admin-panel  *ngFor="let data of datas" [data]="data"  [data]="data"></app-item-admin-panel>-->
