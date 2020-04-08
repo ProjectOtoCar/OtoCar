@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Event } from '@angular/router';
+import { Event, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-user-page',
@@ -14,14 +14,16 @@ export class UserPageComponent implements OnInit {
     {title: "Pakiet min", limit: 10, expires: 30, price: 15},
   ];
 
-  @Input()
-  data;
+  params;
 
 
-  constructor() {
+  constructor(private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      this.params = params;
+    });
   }
 
 

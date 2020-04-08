@@ -1,4 +1,8 @@
 import {Component, OnInit, Input} from '@angular/core';
+import { UserPageService } from 'src/app/services/user-page.service';
+import { PremiumData } from 'src/app/interfaces/premiumData';
+import { HttpParams } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-item',
@@ -7,11 +11,18 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class ItemComponent implements OnInit {
   isModal = false;
+  isLoading = false;
   isSuccessModal = false;
+  isFailModal = false;
   @Input()
-  data;
+  data: PremiumData;
+  @Input() params;
 
-  constructor() {
+  constructor(
+    private userPageService: UserPageService,
+    private route: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
   }
 
   ngOnInit(): void {
@@ -23,8 +34,19 @@ export class ItemComponent implements OnInit {
 
   onAction(event: boolean): void {
     if (event) {
-      this.isModal = false;
-      this.isSuccessModal = true;
+      this.isLoading = true;
+      this.userPageService.buyPremium(this.params.userId, this.data.expires).subscribe(() => {
+        this.isModal = false;
+        this.isSuccessModal = true;
+        this.isLoading = false;
+      }
+      , (error) => {
+        console.log(error);
+        this.isModal = false;
+        this.isFailModal = true;
+        this.isLoading = false;
+      });
+
     } else {
       this.isModal = false;
     }
@@ -32,5 +54,10 @@ export class ItemComponent implements OnInit {
 
   closeSuccessModal(): void {
     this.isSuccessModal = false;
+    this.route.navigate([], {relativeTo: this.activatedRoute, queryParams: {...this.params, afc: Math.random()}});
+  }
+
+  closeFailModal(): void {
+    this.isFailModal = false;
   }
 }

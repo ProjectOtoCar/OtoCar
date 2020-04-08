@@ -2,10 +2,6 @@
   <div class="card-title"><h1 class="text-center" style="padding-top: 5%">{{ data.title }}</h1></div>
   <div class="card-body">
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <div class="float-right" >{{ data.limit }}</div>
-        <h6 class="row card-text">Limit ogłoszeń:</h6>
-      </li>
       <li class="list-group-item"> 
         <div class="float-right">{{ data.expires}} dni</div>
         <h6 class="row card-text">Czas ważności pakietu:</h6>
@@ -33,4 +29,11 @@ title="Zakup udany!"
     message="Dziekujemy za zakup w naszej aplikacji"
     secondAction="zamknij"
     (action)="closeSuccessModal()"
+></app-modal>
+<app-modal
+*ngIf="isFailModal"
+title="Wystąpił bład :/"
+    message="Przepraszamy! Proszę spróbuj jeszcze raz"
+    secondAction="zamknij"
+    (action)="closeFailModal()"
 ></app-modal>

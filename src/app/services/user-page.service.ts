@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Seller } from '../interfaces/Seller';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -25,5 +25,9 @@ export class UserPageService {
 
   modifyDane(id: number, data: EditSeller): Observable<any> {
     return this.http.patch(`http://localhost:8080/api/seller/${id}`, data);
+  }
+
+  buyPremium(id: number, days: number): Observable<any> {
+    return this.http.patch(`http://localhost:8080/api/seller/premium/${id}`, {days});
   }
 }
