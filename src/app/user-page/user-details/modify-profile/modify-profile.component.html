@@ -1,4 +1,11 @@
- <div class="border border-primary rounded padding">
+ <div class="border border-primary rounded padding" *ngIf="!isLoadingError && !isLoading">
+    <div class="alert alert-danger" role="alert" *ngIf="isError">
+        Bład spróbuj ponownie
+      </div>
+      <div class="alert alert-success" role="alert" *ngIf="isChange">
+        Dane zostały zmienione
+      </div>
+      <h3>Zmień dane!</h3>
         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="firstName">Imię</label>
@@ -93,10 +100,22 @@
                 OK!
                 </div>
             </div>
-            <button 
+            <button
             class="btn btn-success top-margin"
             type="submit"
             [disabled]="editForm.invalid"
-            >zmień dane</button>
+            >
+            <span *ngIf="!isSending; else loading">Wyślij</span>
+            <ng-template #loading>
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            Wysyłanie...
+            </ng-template>
+            </button>
         </form>
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="isLoadingError">
+        Bład spróbuj ponownie
+    </div>
+    <div *ngIf="isLoading" style="display: flex; justify-content: center; align-content: center;">
+        <app-spinner></app-spinner>
     </div>
