@@ -56,7 +56,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     );
   }
   onRemoteUser(event: boolean): void {
-    if (!event) {
+    if (event) {
       this.userPageService.deleteSeller(this.userId).subscribe(() => {
         
       });

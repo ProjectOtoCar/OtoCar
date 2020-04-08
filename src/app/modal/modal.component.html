@@ -1,11 +1,16 @@
-<div class="background">
-    <div class="backdrop" ></div>
-    <div class="alert-box">
-      <h2>{{title}}</h2>
-      <p>{{message}}</p>
+<div class="backdrop" ></div>
+<div class="alert-box">
+    <div *ngIf="!isLoading" class="alert-box__background">
+        <div *ngIf="!isError">
+            <h2>{{title}}</h2>
+            <p>{{message}}</p>
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="isError">
+            {{errorMessage}}
+        </div>
         <div
         class ="alert-box-actions">
-            <div class="alert-box-actions--left" *ngIf="showAcceptButton">
+            <div class="alert-box-actions--left" *ngIf="showAcceptButton && !isError">
                 <button class="btn btn-success" (click)="onAction(true)">{{firstAction}}</button>
             </div>
             <div class="alert-box-actions--right">
@@ -13,4 +18,5 @@
             </div>
         </div>
     </div>
+    <app-spinner *ngIf="isLoading"></app-spinner>
 </div>

@@ -16,14 +16,14 @@
     top: 30vh;
     left: 40vw;
     width: 20vw;
-    padding: 16px;
     z-index: 100;
-    background: white;
     text-align: center;
     box-shadow: 0 2px 8px rbga(0, 0, 0, 0.26);
-  }
-  
-  .alert-box-actions {
+    &__background {
+      background: white;
+      padding: 16px;
+    }
+    &-actions {
       margin-top: 20px;
       display: flex;
       flex-direction: row;
@@ -37,6 +37,9 @@
         text-align: left;
       }
   }
+  }
+  
+
   @media(max-width: 1000px) {
     .alert-box {
       left: 30vw;
