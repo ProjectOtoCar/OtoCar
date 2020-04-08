@@ -6,6 +6,7 @@ import com.otocar.otocar.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -67,6 +68,11 @@ public class SellerController {
         sellerService.patch(id, fields);
     }
 
+    @PatchMapping("/premium/{id}")
+    ResponseEntity<?> buyPremium(@PathVariable Long id, @RequestParam(defaultValue = "0") int days){
+        sellerService.addPremium(id,days+1);
+        return ResponseEntity.ok().build();
+    }
 
 
 }

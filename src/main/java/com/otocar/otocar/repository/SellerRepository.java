@@ -8,6 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Repository
 public interface SellerRepository  extends PagingAndSortingRepository<Seller, Long>, com.otocar.otocar.interfaces.Seller<Pageable> {
