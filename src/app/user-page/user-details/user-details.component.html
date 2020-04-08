@@ -24,6 +24,11 @@
         [queryParams]="queryParams"
         routerLinkActive="active" 
         >Edytuj profil</a>
+        <button
+        *ngIf="isFoundUser" 
+        (click)="onRemoteItem()" 
+        class="list-group-item list-group-item-action list-group-item-danger">Usuń profil
+        </button>
     </div>
     <div class="d-flex flex-column bd-highlight mb-3 justify-content-around order-md-1">
         <router-outlet style="width: 0;"></router-outlet>

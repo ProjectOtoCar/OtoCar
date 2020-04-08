@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Seller } from '../interfaces/Seller';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +11,7 @@ export class AdminPanelService {
 
   constructor(private http: HttpClient) { }
   deleteSeller(id: number) {
-    return this.http.delete(`http://localhost:8080/api/seller/${id}`);
+    return this.http.delete(`${environment.basicUrl}/api/seller/${id}`);
   }
   getSellers(
     page: number,
@@ -40,7 +40,7 @@ export class AdminPanelService {
       if (sort !== null && sort !== undefined) {
         searchParams = searchParams.append('sort', sort);
       }
-      return this.http.get<Seller[]>('http://localhost:8080/api/seller',
+      return this.http.get<Seller[]>(`${environment.basicUrl}/api/seller`,
       {
         params: searchParams
       }).pipe(map((data: any) => {

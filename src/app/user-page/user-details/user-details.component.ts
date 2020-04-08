@@ -16,6 +16,7 @@ export class UserDetailsComponent implements OnInit {
   isLoading: boolean;
   userId: number;
   seller: Seller;
+  isDeleteModal: boolean;
   queryParamsSub: Subscription;
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -54,6 +55,9 @@ export class UserDetailsComponent implements OnInit {
         this.isFoundUser = isFound;
       }
     );
+  }
+  onRemoteItem(): void {
+    this.isDeleteModal = true;
   }
 
 }

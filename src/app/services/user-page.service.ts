@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Seller } from '../interfaces/Seller';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EditSeller } from '../interfaces/EditSeller';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class UserPageService {
   constructor(private http: HttpClient) { }
 
   downloadUserData(id: number): Observable<Seller> {
-    return this.http.get<Seller>(`http://localhost:8080/api/seller/${id}`)
+    return this.http.get<Seller>(`${environment.basicUrl}/api/seller/${id}`)
     .pipe(map((seller: Seller) => {
       seller.isPremium = Date.parse(String(seller.premiumAccount)) >= Date.now();
       return seller;
@@ -24,10 +25,10 @@ export class UserPageService {
   }
 
   modifyDane(id: number, data: EditSeller): Observable<any> {
-    return this.http.patch(`http://localhost:8080/api/seller/${id}`, data);
+    return this.http.patch(`${environment.basicUrl}/api/seller/${id}`, data);
   }
 
   buyPremium(id: number, days: number): Observable<any> {
-    return this.http.patch(`http://localhost:8080/api/seller/premium/${id}`, {days});
+    return this.http.patch(`${environment.basicUrl}/api/seller/premium/${id}`, {days});
   }
 }

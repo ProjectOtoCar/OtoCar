@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Contact } from '../interfaces/Contact';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,6 @@ export class ContactFormService {
 
   constructor(private http: HttpClient) { }
   sendEmail(contact: Contact) {
-    return this.http.post<Contact>('http://localhost:8080/api/mail/send', contact);
+    return this.http.post<Contact>(`${environment.basicUrl}/api/mail/send`, contact);
   }
 }
