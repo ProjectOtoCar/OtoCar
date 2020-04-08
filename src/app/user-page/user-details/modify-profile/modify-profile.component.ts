@@ -42,7 +42,9 @@ export class ModifyProfileComponent implements OnInit, OnDestroy {
       phoneNumber: new FormControl(null,
         [
           Validators.required,
-          CustomValidators.phoneNumber
+          Validators.maxLength(9),
+          CustomValidators.phoneNumber,
+          CustomValidators.withoutSpace
         ])
     });
     this.subscription = this.activatedRoute.queryParams

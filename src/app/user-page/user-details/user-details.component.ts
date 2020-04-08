@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Event } from '@angular/router';
+import { UserPageService } from 'src/app/services/user-page.service';
 
 @Component({
   selector: 'app-user-details',
@@ -9,12 +10,20 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class UserDetailsComponent implements OnInit {
 
   queryParams;
-  constructor(private activatedRoute: ActivatedRoute) { }
+  isFoundUser: boolean;
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private userPageService: UserPageService ) { }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.queryParams = params;
-    });
+    })
+    this.userPageService.isUserFound.subscribe(
+      (isFound: boolean) => {
+        this.isFoundUser = isFound;
+      }
+    );
   }
 
 }

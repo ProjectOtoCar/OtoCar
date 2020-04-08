@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Seller } from '../interfaces/Seller';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EditSeller } from '../interfaces/EditSeller';
 
@@ -9,7 +9,7 @@ import { EditSeller } from '../interfaces/EditSeller';
   providedIn: 'root'
 })
 export class UserPageService {
-
+  isUserFound = new Subject<boolean>();
   constructor(private http: HttpClient) { }
 
   downloadUserData(id: number): Observable<Seller> {

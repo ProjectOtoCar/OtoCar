@@ -1,5 +1,5 @@
 export interface EditSeller {
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
+    firstName?: string;
+    lastName?: string;
+    phoneNumber?: string;
 }

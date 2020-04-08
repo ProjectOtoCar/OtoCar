@@ -78,16 +78,16 @@
                 Pole jest wymagane
                 </div>
                 <div class="invalid-feedback"
-                    *ngIf="editForm.get('phoneNumber').errors?.minlength">
-                    Nazwisko za krótkie(minimalnie 3 znaki)
+                    *ngIf="editForm.get('phoneNumber').errors?.phonenumber">
+                    niepoprawny numer telefonu
                 </div>
                 <div class="invalid-feedback"
                     *ngIf="editForm.get('phoneNumber').errors?.maxlength">
-                    Nazwisko za długie(maksymalnie 40 znaków)
+                    dozwolona długość to 9
                 </div>
                 <div class="invalid-feedback"
                     *ngIf="editForm.get('phoneNumber').errors?.withoutspace">
-                    Nazwisko nie może zawierać spacji
+                    numer telefonu nie może zawierać spacji
                 </div>
                 <div class="valid-feedback">
                 OK!

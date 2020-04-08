@@ -1,3 +1,17 @@
+<div 
+    class="alert alert-danger" 
+    role="alert"
+    *ngIf="isError"
+    style="padding: 0 3px; margin: 0" >
+      Coś poszło nie tak <a 
+      class="stretched-link text-danger" 
+      [routerLink]="['/user-page','user-data']" 
+      [queryParams]="{adf: random(),userId: userId}">spróbuj jeszcze raz</a>
+</div>
+<div *ngIf="isLoading" style="display: flex; align-items: center; justify-content: center;">
+    <app-spinner ></app-spinner>
+</div>
+<div *ngIf="!isError && !isLoading">
     <div>
         <h2 class="left">{{seller?.firstName | upperCaseFirstLetter}}</h2>
     </div>
@@ -19,3 +33,4 @@
             <li *ngIf="seller?.isPremium" class="primary-color">{{seller?.premiumAccount}}</li>
         </ul>
     </div>
+</div>
