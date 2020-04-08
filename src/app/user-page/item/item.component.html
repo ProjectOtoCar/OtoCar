@@ -27,13 +27,13 @@ title="Czy na pewno chcesz kupić premium?"
 *ngIf="isSuccessModal"
 title="Zakup udany!"
     message="Dziekujemy za zakup w naszej aplikacji"
-    secondAction="zamknij"
+    secondAction="Zamknij"
     (action)="closeSuccessModal()"
 ></app-modal>
 <app-modal
 *ngIf="isFailModal"
 title="Wystąpił bład :/"
     message="Przepraszamy! Proszę spróbuj jeszcze raz"
-    secondAction="zamknij"
+    secondAction="Zamknij"
     (action)="closeFailModal()"
 ></app-modal>

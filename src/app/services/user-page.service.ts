@@ -31,4 +31,8 @@ export class UserPageService {
   buyPremium(id: number, days: number): Observable<any> {
     return this.http.patch(`${environment.basicUrl}/api/seller/premium/${id}`, {days});
   }
+  
+  deleteSeller(id: number) {
+    return this.http.delete(`${environment.basicUrl}/api/seller/${id}`);
+  }
 }

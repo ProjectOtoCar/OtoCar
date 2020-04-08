@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Event, Router } from '@angular/router';
 import { UserPageService } from 'src/app/services/user-page.service';
 import { Seller } from 'src/app/interfaces/Seller';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.scss']
 })
-export class UserDetailsComponent implements OnInit {
+export class UserDetailsComponent implements OnInit, OnDestroy {
   queryParams;
   isFoundUser: boolean;
   isError: boolean;
@@ -22,7 +22,6 @@ export class UserDetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private route: Router,
     private userPageService: UserPageService ) { }
-
   ngOnInit(): void {
     this.queryParamsSub = this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.userPageService.isError.next(false);
@@ -56,8 +55,20 @@ export class UserDetailsComponent implements OnInit {
       }
     );
   }
-  onRemoteItem(): void {
+  onRemoteUser(event: boolean): void {
+    if (!event) {
+      this.userPageService.deleteSeller(this.userId).subscribe(() => {
+        
+      });
+    } else {
+      this.isDeleteModal = false;
+    }
+  }
+  onShowDeleteModal(): void {
     this.isDeleteModal = true;
+  }
+  ngOnDestroy(): void {
+    this.queryParamsSub.unsubscribe();
   }
 
 }
