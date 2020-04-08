@@ -1,7 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import { UserPageService } from 'src/app/services/user-page.service';
 import { PremiumData } from 'src/app/interfaces/premiumData';
-import { HttpParams } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -14,8 +13,7 @@ export class ItemComponent implements OnInit {
   isLoading = false;
   isSuccessModal = false;
   isFailModal = false;
-  @Input()
-  data: PremiumData;
+  @Input() data: PremiumData;
   @Input() params;
 
   constructor(

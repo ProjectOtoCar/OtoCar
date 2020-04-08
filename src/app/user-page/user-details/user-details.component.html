@@ -35,10 +35,13 @@
     </div>
 </div>
 <app-modal
+    *ngIf="isDeleteModal"
     title="Czy na pewno chcesz usunąć swoje konto?"
     message="Pamiętaj tej operacji nie da się cofnąć"
     firstAction="Potwierdzam"
     secondAction="Anuluj"
+    [isLoading]="isModalLoading"
+    [isError]="isErrorModal"
     [showAcceptButton]="true"
     (action)="onRemoteUser($event)"
 ></app-modal>

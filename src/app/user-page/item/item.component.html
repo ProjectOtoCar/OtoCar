@@ -21,6 +21,7 @@ title="Czy na pewno chcesz kupić premium?"
     firstAction="KUP!"
     secondAction="anuluj"
     [showAcceptButton]="true"
+    [isLoading]="isLoading"
     (action)="onAction($event)"
 ></app-modal>
 <app-modal

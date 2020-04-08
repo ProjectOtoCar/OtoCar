@@ -10,10 +10,10 @@ export class ModalComponent implements OnInit {
   @Input() message: string;
   @Input() firstAction: string;
   @Input() secondAction: string;
-  @Input() showAcceptButton: boolean;
-  @Input() isLoading: boolean;
-  @Input() isError: boolean;
-  @Input() errorMessage: string;
+  @Input() showAcceptButton = false;
+  @Input() isLoading = false;
+  @Input() isError = false;
+  @Input() errorMessage = 'Coś poszło nie tak. Prosimy spróbować ponownie';
   @Output() action = new EventEmitter<boolean>();
   constructor() { }
 

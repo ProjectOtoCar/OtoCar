@@ -17,6 +17,8 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   userId: number;
   seller: Seller;
   isDeleteModal: boolean;
+  isModalLoading: boolean;
+  isErrorModal: boolean;
   queryParamsSub: Subscription;
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -56,10 +58,17 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     );
   }
   onRemoteUser(event: boolean): void {
+    this.isErrorModal = false;
     if (event) {
-      this.userPageService.deleteSeller(this.userId).subscribe(() => {
-        
-      });
+        this.isModalLoading = true;
+        this.userPageService.deleteSeller(this.userId).subscribe(() => {
+        this.isModalLoading = false;
+        this.isDeleteModal = false;
+      }, error => {
+        this.isErrorModal = true;
+        this.isModalLoading = false;
+      }
+      );
     } else {
       this.isDeleteModal = false;
     }
