@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Event } from '@angular/router';
+import { ActivatedRoute, Params, Event, Router } from '@angular/router';
 import { UserPageService } from 'src/app/services/user-page.service';
+import { Seller } from 'src/app/interfaces/Seller';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-details',
@@ -8,17 +10,45 @@ import { UserPageService } from 'src/app/services/user-page.service';
   styleUrls: ['./user-details.component.scss']
 })
 export class UserDetailsComponent implements OnInit {
-
   queryParams;
   isFoundUser: boolean;
+  isError: boolean;
+  isLoading: boolean;
+  userId: number;
+  seller: Seller;
+  queryParamsSub: Subscription;
   constructor(
     private activatedRoute: ActivatedRoute,
+    private route: Router,
     private userPageService: UserPageService ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params: Params) => {
-      this.queryParams = params;
-    })
+    this.queryParamsSub = this.activatedRoute.queryParams.subscribe((params: Params) => {
+      this.userPageService.isError.next(false);
+      this.userPageService.isLoading.next(true);
+      if (params.userId) {
+        this.userId = params.userId;
+      } else {
+        this.userId = 2; // zmienic na id usera zalogowanego
+      }
+      this.queryParams = {...this.queryParams, userId: this.userId};
+      this.route.navigate([], {relativeTo: this.activatedRoute, queryParams: {...this.queryParams}});
+      this.userPageService.downloadUserData(this.userId)
+      .subscribe((seller: Seller) => {
+        this.userPageService.isError.next(false);
+        this.userPageService.isLoading.next(false);
+        this.userPageService.isUserFound.next(true);
+        if (seller !== null) {
+          this.seller = seller;
+          this.userPageService.sellerSubject.next(seller);
+        } // dodać przekierowanie na zalogowanego usera
+      }, error => {
+        this.userPageService.isError.next(true);
+        this.userPageService.isLoading.next(false);
+        this.userPageService.isUserFound.next(false);
+      }
+      );
+    });
     this.userPageService.isUserFound.subscribe(
       (isFound: boolean) => {
         this.isFoundUser = isFound;

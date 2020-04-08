@@ -9,13 +9,11 @@ import { Subscription } from 'rxjs';
   templateUrl: './user-data.component.html',
   styleUrls: ['./user-data.component.scss']
 })
-export class UserDataComponent implements OnInit, OnDestroy {
+export class UserDataComponent implements OnInit {
   isError: boolean;
   isLoading: boolean;
   userId: number;
   seller: Seller;
-  queryParamsSub: Subscription;
-
   constructor(
     private route: Router,
     private activatedRoute: ActivatedRoute,
@@ -26,32 +24,9 @@ export class UserDataComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit(): void {
-    this.queryParamsSub = this.activatedRoute.queryParams.subscribe((params: Params) => {
-      this.isLoading = true;
-      this.isError = false;
-      if (params.userId) {
-        this.userId = params.userId;
-      } else {
-        this.userId = 2; // zmienic na id usera zalogowanego
-      }
-      this.userPageService.downloadUserData(this.userId)
-      .subscribe((seller: Seller) => {
-        this.isError = false;
-        this.isLoading = false;
-        this.userPageService.isUserFound.next(true);
-        if (seller !== null) {
-          this.seller = seller;
-        } // dodać przekierowanie na zalogowanego usera
-      }, error => {
-        this.isError = true;
-        this.isLoading = false;
-        this.userPageService.isUserFound.next(false);
-      }
-      );
-    });
-  }
-  ngOnDestroy(): void {
-    this.queryParamsSub.unsubscribe();
+    this.userPageService.isError.subscribe((isError: boolean) => this.isError = isError);
+    this.userPageService.isLoading.subscribe((isLoading: boolean) => this.isLoading = isLoading);
+    this.userPageService.sellerSubject.subscribe((seller: Seller) => this.seller = seller);
   }
   random(): number {
     return Math.random();

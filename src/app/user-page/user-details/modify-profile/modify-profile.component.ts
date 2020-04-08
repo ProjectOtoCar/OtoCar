@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/validators/CustomValidators';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UserPageService } from 'src/app/services/user-page.service';
 import { Subscription } from 'rxjs';
 import { Seller } from 'src/app/interfaces/Seller';
@@ -14,9 +14,11 @@ import { Seller } from 'src/app/interfaces/Seller';
 export class ModifyProfileComponent implements OnInit, OnDestroy {
   editForm: FormGroup;
   subscription: Subscription;
+  queryParams;
   id: number;
   constructor(
     private activatedRoute: ActivatedRoute,
+    private route: Router,
     private userPageService: UserPageService
     ) { }
   ngOnDestroy(): void {
@@ -50,6 +52,7 @@ export class ModifyProfileComponent implements OnInit, OnDestroy {
     this.subscription = this.activatedRoute.queryParams
     .subscribe((params: Params) => {
       this.id =  params.userId;
+      this.queryParams = params;
       this.userPageService.downloadUserData(this.id)
       .subscribe((seller: Seller) => {
         this.editForm.setValue({
@@ -63,6 +66,8 @@ export class ModifyProfileComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     this.userPageService.modifyDane(this.id, this.editForm.value)
-    .subscribe();
+    .subscribe((params: Params) => {
+      this.route.navigate([], {relativeTo: this.activatedRoute, queryParams: {...this.queryParams, afc: Math.random()}});
+    });
   }
 }
