@@ -315,9 +315,6 @@ public class SellerService extends AddPagable implements CrudServce<Long, Seller
         }else{
                 newDataPremium =  user.get().getPremiumAccount().plusDays(fields.get("days")+1);
         }
-
-
-
         user.get().setPremiumAccount(newDataPremium);
         sellerRepository.save(user.get());
     }
