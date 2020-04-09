@@ -50,7 +50,12 @@
             {{data.id}}
           </div>
           <div class="col">
-            {{data.firstName | upperCaseFirstLetter}}
+            <a class="alert-link" 
+            [routerLink]="['/user-page', 'user-data']" 
+            [queryParams]="{userId: data.id}"
+            routerLinkActive="active" >
+              {{data.firstName | upperCaseFirstLetter}}
+            </a>
           </div>
           <div class="col">
             {{data.lastName | upperCaseFirstLetter}}

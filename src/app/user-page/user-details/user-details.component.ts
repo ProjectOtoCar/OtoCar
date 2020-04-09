@@ -64,6 +64,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
         this.userPageService.deleteSeller(this.userId).subscribe(() => {
         this.isModalLoading = false;
         this.isDeleteModal = false;
+        this.route.navigate(['/']);
       }, error => {
         this.isErrorModal = true;
         this.isModalLoading = false;
