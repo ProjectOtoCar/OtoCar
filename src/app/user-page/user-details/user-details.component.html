@@ -16,7 +16,11 @@
         >Kup premium</a>
         <a 
         *ngIf="isFoundUser"
-        class="list-group-item list-group-item-action">Dodaj ogłoszenie</a>
+        class="list-group-item list-group-item-action"
+        [routerLink]="['add-advertisment']"
+        [queryParams]="queryParams"
+        routerLinkActive="active" 
+        >Dodaj ogłoszenie</a>
         <a 
         *ngIf="isFoundUser"
         class="list-group-item list-group-item-action"

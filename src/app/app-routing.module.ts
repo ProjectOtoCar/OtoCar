@@ -16,6 +16,7 @@ import {ContactFormComponent} from "./contact-form/contact-form.component";
 import { UserDataComponent } from './user-page/user-details/user-data/user-data.component';
 import { ModifyProfileComponent } from './user-page/user-details/modify-profile/modify-profile.component';
 import {FiltrAdvertismentComponent} from "./filtr-advertisment/filtr-advertisment.component";
+import { AddAddvertismentComponent } from './user-page/user-details/add-addvertisment/add-addvertisment.component';
 
 
 
@@ -28,6 +29,7 @@ const routes: Routes = [
   [
     {path: 'user-data', component: UserDataComponent},
     {path: 'buy-premium', component: UserPageComponent},
+    {path: 'add-advertisment', component: AddAddvertismentComponent},
     {path: 'edit-profile', component: ModifyProfileComponent}
   ]},
   {path: 'registration', component: RegistrationComponent},

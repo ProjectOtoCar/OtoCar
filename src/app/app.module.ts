@@ -31,6 +31,7 @@ import { UserDataComponent } from './user-page/user-details/user-data/user-data.
 import { FiltrAdvertismentComponent } from './filtr-advertisment/filtr-advertisment.component';
 import { ModalComponent } from './modal/modal.component';
 import { ModifyProfileComponent } from './user-page/user-details/modify-profile/modify-profile.component';
+import { AddAddvertismentComponent } from './user-page/user-details/add-addvertisment/add-addvertisment.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { ModifyProfileComponent } from './user-page/user-details/modify-profile/
     ModalComponent,
     ModifyProfileComponent,
     FiltrAdvertismentComponent,
+    AddAddvertismentComponent,
   ],
   imports: [
     BrowserModule,
