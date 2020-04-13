@@ -1,4 +1,4 @@
 export interface Image {
-    photo;
+    photo: any;
     isMainImage: boolean;
 }
