@@ -136,15 +136,6 @@ export class AddAddvertismentComponent implements OnInit {
     });
   }
 
-  checkImageIsRequired(index: number): boolean {
-    return ((this.addAddvertismentForm.get('images') as FormArray)
-    .controls[index] as FormGroup)
-    .controls
-    .photo
-    .errors
-    ?.required;
-  }
-
   checkImageIsValid(index: number): boolean {
     return ((this.addAddvertismentForm.get('images') as FormArray)
     .controls[index] as FormGroup)
