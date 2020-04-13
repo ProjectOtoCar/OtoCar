@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
+import { AddvertismentService } from 'src/app/services/addvertisment/addvertisment.service';
 
 @Component({
   selector: 'app-add-addvertisment',
@@ -11,7 +12,9 @@ export class AddAddvertismentComponent implements OnInit {
   isLoading = false;
   isError = false;
   currentYear: number;
-  constructor() {
+  constructor(
+    private addvertismentService: AddvertismentService
+    ) {
     this.currentYear = new Date().getFullYear();
     this.addAddvertismentForm = new FormGroup({
       title: new FormControl(null,
@@ -119,6 +122,9 @@ export class AddAddvertismentComponent implements OnInit {
    }
    onSubmit(): void {
     console.log(this.addAddvertismentForm.value);
+    this.addvertismentService
+    .postAddvertisment(this.addAddvertismentForm.value)
+    .subscribe();
    }
 
   onChangeMainImage(index: number): void {
@@ -130,9 +136,38 @@ export class AddAddvertismentComponent implements OnInit {
     });
   }
 
+  checkImageIsRequired(index: number): boolean {
+    return ((this.addAddvertismentForm.get('images') as FormArray)
+    .controls[index] as FormGroup)
+    .controls
+    .photo
+    .errors
+    ?.required;
+  }
+
+  checkImageIsValid(index: number): boolean {
+    return ((this.addAddvertismentForm.get('images') as FormArray)
+    .controls[index] as FormGroup)
+    .controls
+    .photo
+    .valid;
+  }
+
+  checkImageIsTouched(index: number): boolean {
+    return ((this.addAddvertismentForm.get('images') as FormArray)
+    .controls[index] as FormGroup)
+    .controls
+    .photo
+    .touched;
+  }
+
   addImage(): void {
     const control = new FormGroup({
-      photo: new FormControl(null),
+      photo: new FormControl(null,
+        [
+          Validators.required
+        ]
+      ),
       isMainImage: new FormControl(false)
     });
     if ((this.addAddvertismentForm.get('images') as FormArray).length < 1) {

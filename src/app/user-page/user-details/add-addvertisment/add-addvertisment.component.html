@@ -344,20 +344,28 @@
                 *ngFor="let image of getImages(); let i = index"
                 [formGroupName]="i">
                     <div class="input-group-prepend">
-                    <div class="input-group-text">
-                    <input 
-                    type="radio" 
-                    formControlName="isMainImage"
-                    name="isMainImage"
-                    (click)="onChangeMainImage(i)"
-                    [value]="true" >
+                        <div class="input-group-text">
+                            <div>
+                            <input 
+                            type="radio" 
+                            formControlName="isMainImage"
+                            name="isMainImage"
+                            [value]="true" >
+                            </div>
+                        </div>
                     </div>
+                    <div>
+                        <input 
+                        type="file" 
+                        formControlName="photo"
+                        class="form-control"
+                        accept="image/png, image/jpeg, image/jpg"
+                        [ngClass]="{'is-invalid' :
+                            !checkImageIsValid(i) &&
+                            checkImageIsTouched(i),
+                            'is-valid' : checkImageIsValid(i)}"
+                            (click)="onChangeMainImage(i)" >
                     </div>
-                    <input 
-                    type="file" 
-                    formControlName="photo"
-                    class="form-control"
-                    accept="image/png, image/jpeg, image/jpg" >
                 </div>
             </div>
         </div>
