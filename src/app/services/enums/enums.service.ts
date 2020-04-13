@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {environments} from '../../../environments';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 @Injectable({
@@ -14,7 +13,7 @@ export class EnumsService {
     return this.http
     .get<[string]>(`${environment.basicUrl}/api/enums/color`);
   }
-  
+
   public getTypeAccount(): Observable<[string]> {
     return this.http
     .get<[string]>(`${environment.basicUrl}/api/enums/account`);
@@ -29,5 +28,6 @@ export class EnumsService {
     return this.http
     .get<[string]>(`${environment.basicUrl}/api/enums/typeFuel`);
   }
+
 
 }
