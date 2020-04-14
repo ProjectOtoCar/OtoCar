@@ -200,7 +200,7 @@ class CityServiceTest {
             Page<City> cityPage = new PageImpl<>(cityList, pageable, cityList.size());
             given(cityRepository.findAll(pageable)).willReturn(cityPage);
 
-            Iterable<City> foundCities = cityService.findAll(1);
+            Iterable<City> foundCities = cityService.findAll();
             assertThat(foundCities).isNotNull();
 
             List<City> foundCitiesList = new ArrayList<>();

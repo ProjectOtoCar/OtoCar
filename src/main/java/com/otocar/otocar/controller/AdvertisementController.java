@@ -67,7 +67,7 @@ public class AdvertisementController {
 
 
     @PostMapping("")
-    public Advertisement postSeller(@RequestBody Advertisement advertisement) {
+    public Advertisement addAdvertisemnt(@RequestBody Advertisement advertisement) {
         return advertisementService.addAdv(advertisement);
     }
 
@@ -78,7 +78,7 @@ public class AdvertisementController {
     }
 
     @PutMapping("/{id}")
-    public Advertisement putSeller(@PathVariable(value = "id") Long id, @RequestBody Advertisement advertisement) {
+    public Advertisement putAdvertisement(@PathVariable(value = "id") Long id, @RequestBody Advertisement advertisement) {
         return advertisementService.change(id, advertisement);
     }
 

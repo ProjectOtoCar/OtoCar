@@ -23,11 +23,6 @@ public class CityService extends AddPagable implements CrudServce<Long, City> {
         return cityRepository.findAll();
     }
 
-    public Page<City> findAll(int page) {
-        Pageable pageable = pagable(page);
-        return cityRepository.findAll(pageable);
-    }
-
     @Override
     public City findById(Long aLong) {
         return cityRepository.findById(aLong).orElse(null);
