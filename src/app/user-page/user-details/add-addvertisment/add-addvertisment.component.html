@@ -98,9 +98,25 @@
                     'is-valid' : addAddvertismentForm.get('car.brand.id').valid}"
                     id="brand"
                     formControlName="id"
+                    *ngIf="!isBrandError && !isBrandLoading"
+                    [value]="selectBrandIndex"
+                    (change)="onChangeBrand($event.target.value)"
                     >
-                    <option value="1">test</option>
+                    <option *ngFor="let brand of brands" 
+                    [value]="brand.id">{{brand.name}}</option>
                     </select>
+                    <div *ngIf="isBrandLoading" 
+                    style="text-align: center;">
+                         <app-spinner
+                        [size]="2"></app-spinner>
+                    </div>
+                    <div 
+                    class="alert alert-danger" 
+                    role="alert"
+                    *ngIf="isBrandError"
+                    style="padding: 0 3px; margin: 0" >
+                      Coś poszło nie tak
+                    </div>
                     <div class="invalid-feedback"
                         *ngIf="addAddvertismentForm.get('car.brand.id').errors?.required">
                         Pole jest wymagane
@@ -122,9 +138,24 @@
                     'is-valid' : addAddvertismentForm.get('car.model.id').valid}"
                     id="model"
                     formControlName="id"
+                    *ngIf="!isCarModelLoading && !isCarModelError"
                     >
-                    <option value="1">test</option>
+                    <option
+                    *ngFor="let carModel of carModels"
+                    [value]="carModel.name">{{carModel.name}}</option>
                     </select>
+                    <div *ngIf="isCarModelLoading" 
+                    style="text-align: center;">
+                         <app-spinner
+                        [size]="2"></app-spinner>
+                    </div>
+                    <div 
+                    class="alert alert-danger" 
+                    role="alert"
+                    *ngIf="isCarModelError"
+                    style="padding: 0 3px; margin: 0" >
+                      Coś poszło nie tak
+                    </div>
                     <div class="invalid-feedback"
                         *ngIf="addAddvertismentForm.get('car.model.id').errors?.required">
                         Pole jest wymagane
@@ -199,9 +230,24 @@
                     'is-valid' : addAddvertismentForm.get('car.fuel').valid}"
                     id="fuel"
                     formControlName="fuel"
+                    *ngIf="!isTypeFuelLoading && !isTypeFuelError"
                     >
-                    <option value="1">test</option>
+                    <option 
+                    *ngFor="let typeFuel of TypeFuels"
+                    [value]="typeFuel">{{typeFuel}}</option>
                     </select>
+                    <div *ngIf="isTypeFuelLoading" 
+                    style="text-align: center;">
+                         <app-spinner
+                        [size]="2"></app-spinner>
+                    </div>
+                    <div 
+                    class="alert alert-danger" 
+                    role="alert"
+                    *ngIf="isTypeFuelError"
+                    style="padding: 0 3px; margin: 0" >
+                      Coś poszło nie tak
+                    </div>
                     <div class="invalid-feedback"
                         *ngIf="addAddvertismentForm.get('car.fuel').errors?.required">
                         Pole jest wymagane
@@ -220,9 +266,24 @@
                     'is-valid' : addAddvertismentForm.get('car.typeCar').valid}"
                     id="typeCar"
                     formControlName="typeCar"
+                    *ngIf="!isTypeCarLoading && !isTypeCarError"
                     >
-                    <option value="1">test</option>
+                    <option *ngFor="let typeCar of typeCars"
+                    [value]="typeCar"
+                    >{{typeCar}}</option>
                     </select>
+                    <div *ngIf="isTypeCarLoading" 
+                    style="text-align: center;">
+                         <app-spinner
+                        [size]="2"></app-spinner>
+                    </div>
+                    <div 
+                    class="alert alert-danger" 
+                    role="alert"
+                    *ngIf="isTypeCarError"
+                    style="padding: 0 3px; margin: 0" >
+                      Coś poszło nie tak
+                    </div>
                     <div class="invalid-feedback"
                         *ngIf="addAddvertismentForm.get('car.typeCar').errors?.required">
                         Pole jest wymagane
@@ -296,9 +357,25 @@
                 'is-valid' : addAddvertismentForm.get('car.color').valid}"
                 id="color"
                 formControlName="color"
+                *ngIf="!isColorError && !isColorLoading"
                 >
-                <option value="test">test</option>
+                <option 
+                *ngFor="let color of colors"
+                [value]="color"
+                >{{color}}</option>
                 </select>
+                <div *ngIf="isColorLoading" 
+                style="text-align: center;">
+                     <app-spinner
+                    [size]="2"></app-spinner>
+                </div>
+                <div 
+                class="alert alert-danger" 
+                role="alert"
+                *ngIf="isColorError"
+                style="padding: 0 3px; margin: 0" >
+                  Coś poszło nie tak
+                </div>
                 <div class="invalid-feedback"
                     *ngIf="addAddvertismentForm.get('car.color').errors?.required">
                     Pole jest wymagane
@@ -372,7 +449,7 @@
           <button
           class="btn btn-success top-margin"
           type="submit"
-          
+          [disabled]="addAddvertismentForm.invalid"
           >
           <span *ngIf="!isLoading; else loading">Wyślij</span>
           <ng-template #loading>

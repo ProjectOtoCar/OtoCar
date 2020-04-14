@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { AddvertismentService } from 'src/app/services/addvertisment/addvertisment.service';
+import {CarModelService} from 'src/app/services/car-model/car-model.service';
+import { EnumsService } from 'src/app/services/enums/enums.service';
+import { BrandService } from 'src/app/services/brand/brand.service';
+import { ActivatedRoute } from '@angular/router';
+import { strict } from 'assert';
+import { Brand } from 'src/app/interfaces/Brand.model';
+import { CarModel } from 'src/app/interfaces/CarModel.model';
 
 @Component({
   selector: 'app-add-addvertisment',
@@ -12,8 +19,27 @@ export class AddAddvertismentComponent implements OnInit {
   isLoading = false;
   isError = false;
   currentYear: number;
+  isTypeFuelLoading = false;
+  isTypeFuelError = false;
+  TypeFuels: [string];
+  isColorLoading = false;
+  isColorError = false;
+  colors: [string];
+  isTypeCarLoading = false;
+  isTypeCarError = false;
+  typeCars: [string];
+  isBrandLoading = false;
+  isBrandError = false;
+  brands: [Brand];
+  selectBrandIndex: number;
+  isCarModelLoading = false;
+  isCarModelError = false;
+  carModels: [CarModel];
   constructor(
-    private addvertismentService: AddvertismentService
+    private addvertismentService: AddvertismentService,
+    private carModelService: CarModelService,
+    private enumsService: EnumsService,
+    private brandService: BrandService,
     ) {
     this.currentYear = new Date().getFullYear();
     this.addAddvertismentForm = new FormGroup({
@@ -120,6 +146,68 @@ export class AddAddvertismentComponent implements OnInit {
       images: new FormArray([])
     });
    }
+
+   ngOnInit(): void {
+      this.isTypeFuelLoading = true;
+      this.isTypeFuelError = false;
+      this.isColorLoading = true;
+      this.isColorError = false;
+      this.isTypeCarLoading = true;
+      this.isTypeCarError = false;
+      this.isBrandLoading = true;
+      this.isBrandError = false;
+      this.enumsService.getTypeFuel()
+       .subscribe((typeFuels: [string]) => {
+         this.isTypeFuelLoading = false;
+         this.isTypeFuelError = false;
+         this.TypeFuels = typeFuels;
+       },  error => {
+         this.isTypeFuelLoading = false;
+         this.isTypeFuelError = true;
+       });
+      this.enumsService.getColors()
+      .subscribe((colors: [string]) => {
+        this.isColorLoading = false;
+        this.isColorError = false;
+        this.colors = colors;
+      }, error => {
+        this.isColorLoading = false;
+        this.isColorError = true;
+      });
+      this.enumsService.getTypeCar()
+      .subscribe((typeCars: [string]) => {
+        this.isTypeCarError = false;
+        this.isTypeCarLoading = false;
+        this.typeCars = typeCars;
+      }, error => {
+        this.isTypeCarLoading = false;
+        this.isTypeCarError = true;
+      });
+      this.brandService.getBrand()
+      .subscribe((brands: [Brand]) => {
+        this.isBrandLoading = false;
+        this.isBrandError = false;
+        this.brands = brands;
+      }, error => {
+        this.isBrandLoading = false;
+        this.isBrandError = true;
+      });
+    }
+  onChangeBrand(event) {
+    this.selectBrandIndex = event;
+    this.isCarModelLoading = true;
+    this.isCarModelError = false;
+    this.carModelService.getCarModels(this.brands[event - 1].name)
+    .subscribe((carModels: [CarModel]) => {
+      this.isCarModelLoading = false;
+      this.isCarModelError = false;
+      this.carModels = carModels;
+    }, error => {
+      this.isCarModelLoading = false;
+      this.isCarModelError = false;
+    });
+  }
+
    onSubmit(): void {
     console.log(this.addAddvertismentForm.value);
     this.addvertismentService
@@ -172,7 +260,4 @@ export class AddAddvertismentComponent implements OnInit {
   getImages(): AbstractControl[] {
     return (this.addAddvertismentForm.get('images') as FormArray).controls;
   }
-  ngOnInit(): void {
-  }
-
 }
