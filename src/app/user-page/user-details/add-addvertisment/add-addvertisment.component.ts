@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { AddvertismentService } from 'src/app/services/addvertisment/addvertisment.service';
 import {CarModelService} from 'src/app/services/car-model/car-model.service';
 import { EnumsService } from 'src/app/services/enums/enums.service';
 import { BrandService } from 'src/app/services/brand/brand.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Event } from '@angular/router';
 import { strict } from 'assert';
 import { Brand } from 'src/app/interfaces/Brand.model';
 import { CarModel } from 'src/app/interfaces/CarModel.model';
+import { CityService } from 'src/app/services/city/city.service';
+import { City } from 'src/app/interfaces/City.modal';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-addvertisment',
   templateUrl: './add-addvertisment.component.html',
   styleUrls: ['./add-addvertisment.component.scss']
 })
-export class AddAddvertismentComponent implements OnInit {
+export class AddAddvertismentComponent implements OnInit, OnDestroy {
   addAddvertismentForm: FormGroup;
   isLoading = false;
   isError = false;
@@ -35,11 +38,22 @@ export class AddAddvertismentComponent implements OnInit {
   isCarModelLoading = false;
   isCarModelError = false;
   carModels: [CarModel];
+  isCityLoading = false;
+  isCityError = false;
+  cities: [City];
+  citySub: Subscription;
+  carModelSub: Subscription;
+  brandSub: Subscription;
+  colorSub: Subscription;
+  typyFuelSub: Subscription;
+  typeCarSub: Subscription;
+
   constructor(
     private addvertismentService: AddvertismentService,
     private carModelService: CarModelService,
     private enumsService: EnumsService,
     private brandService: BrandService,
+    private cityService: CityService
     ) {
     this.currentYear = new Date().getFullYear();
     this.addAddvertismentForm = new FormGroup({
@@ -131,7 +145,7 @@ export class AddAddvertismentComponent implements OnInit {
       ),
       seller: new FormGroup(
         {
-          id: new FormControl(null)
+          id: new FormControl(6)
         }
       ),
       city: new FormGroup(
@@ -146,6 +160,14 @@ export class AddAddvertismentComponent implements OnInit {
       images: new FormArray([])
     });
    }
+  ngOnDestroy(): void {
+    this.citySub?.unsubscribe();
+    this.carModelSub?.unsubscribe();
+    this.brandSub?.unsubscribe();
+    this.colorSub?.unsubscribe();
+    this.typyFuelSub?.unsubscribe();
+    this.typeCarSub?.unsubscribe();
+  }
 
    ngOnInit(): void {
       this.isTypeFuelLoading = true;
@@ -156,7 +178,9 @@ export class AddAddvertismentComponent implements OnInit {
       this.isTypeCarError = false;
       this.isBrandLoading = true;
       this.isBrandError = false;
-      this.enumsService.getTypeFuel()
+      this.isCityLoading = true;
+      this.isCityError = false;
+      this.typyFuelSub = this.enumsService.getTypeFuel()
        .subscribe((typeFuels: [string]) => {
          this.isTypeFuelLoading = false;
          this.isTypeFuelError = false;
@@ -165,7 +189,7 @@ export class AddAddvertismentComponent implements OnInit {
          this.isTypeFuelLoading = false;
          this.isTypeFuelError = true;
        });
-      this.enumsService.getColors()
+      this.colorSub = this.enumsService.getColors()
       .subscribe((colors: [string]) => {
         this.isColorLoading = false;
         this.isColorError = false;
@@ -174,7 +198,7 @@ export class AddAddvertismentComponent implements OnInit {
         this.isColorLoading = false;
         this.isColorError = true;
       });
-      this.enumsService.getTypeCar()
+      this.typeCarSub = this.enumsService.getTypeCar()
       .subscribe((typeCars: [string]) => {
         this.isTypeCarError = false;
         this.isTypeCarLoading = false;
@@ -192,12 +216,21 @@ export class AddAddvertismentComponent implements OnInit {
         this.isBrandLoading = false;
         this.isBrandError = true;
       });
+      this.citySub = this.cityService.getCities()
+      .subscribe((cities: [City]) => {
+        this.isCityError = false;
+        this.isCityLoading = false;
+        this.cities = cities;
+      }, error => {
+        this.isCityError = true;
+        this.isCityLoading = false;
+      });
     }
   onChangeBrand(event) {
     this.selectBrandIndex = event;
     this.isCarModelLoading = true;
     this.isCarModelError = false;
-    this.carModelService.getCarModels(this.brands[event - 1].name)
+    this.carModelSub = this.carModelService.getCarModels(this.brands[event - 1].name)
     .subscribe((carModels: [CarModel]) => {
       this.isCarModelLoading = false;
       this.isCarModelError = false;
@@ -209,12 +242,43 @@ export class AddAddvertismentComponent implements OnInit {
   }
 
    onSubmit(): void {
+    this.isLoading = true;
+    this.isError = false;
     console.log(this.addAddvertismentForm.value);
     this.addvertismentService
     .postAddvertisment(this.addAddvertismentForm.value)
-    .subscribe();
+    .subscribe(() => {
+      this.isLoading = false;
+      this.isError = false;
+    }, error => {
+      this.isError = true;
+      this.isLoading = false;
+    });
    }
+   onImageChange(event, index: number): void {
+    if ((event.target as HTMLInputElement).files.length > 0) {
+      const file = (event.target as HTMLInputElement).files[0];
+      console.log(file);
+      (this.addAddvertismentForm.get('images') as FormArray)
+      .controls[index].patchValue({
+        photo: file
+      });
+    }
+   }
+   onDeleteImage(index: number): void {
+     const imageItem = (this.addAddvertismentForm.get('images') as FormArray)
+     .controls
+     .splice(index, 1);
+     if (imageItem[0].value.isMainImage
+        && (this.addAddvertismentForm.get('images') as FormArray).controls.length > 0) {
+        (this.addAddvertismentForm.get('images') as FormArray)
+          .controls[0]
+          .patchValue({
+            isMainImage: true
+          });
+     }
 
+   }
   onChangeMainImage(index: number): void {
     (this.addAddvertismentForm.get('images') as FormArray)
     .controls.forEach((imageItem, i: number) => {

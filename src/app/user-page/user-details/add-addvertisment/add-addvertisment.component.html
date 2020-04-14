@@ -142,7 +142,7 @@
                     >
                     <option
                     *ngFor="let carModel of carModels"
-                    [value]="carModel.name">{{carModel.name}}</option>
+                    [value]="carModel.id">{{carModel.name}}</option>
                     </select>
                     <div *ngIf="isCarModelLoading" 
                     style="text-align: center;">
@@ -396,9 +396,24 @@
                 'is-valid' : addAddvertismentForm.get('city.id').valid}"
                 id="city"
                 formControlName="id"
+                *ngIf="!isCityLoading && !isCityError"
                 >
-                <option value="test">test</option>
+                <option
+                *ngFor="let city of cities" 
+                [value]="+city.id">{{city.name}}</option>
                 </select>
+                <div *ngIf="isCityLoading" 
+                style="text-align: center;">
+                     <app-spinner
+                    [size]="2"></app-spinner>
+                </div>
+                <div 
+                class="alert alert-danger" 
+                role="alert"
+                *ngIf="isCityError"
+                style="padding: 0 3px; margin: 0" >
+                  Coś poszło nie tak
+                </div>
                 <div class="invalid-feedback"
                     *ngIf="addAddvertismentForm.get('city.id').errors?.required">
                     Pole jest wymagane
@@ -417,7 +432,7 @@
             >Dodaj zdjęcie</button>
             <div formArrayName="images">
                 <div 
-                class="input-group" 
+                class="input-group flex-nowrap" 
                 *ngFor="let image of getImages(); let i = index"
                 [formGroupName]="i">
                     <div class="input-group-prepend">
@@ -427,7 +442,8 @@
                             type="radio" 
                             formControlName="isMainImage"
                             name="isMainImage"
-                            [value]="true" >
+                            [value]="true" 
+                            (click)="onChangeMainImage(i)">
                             </div>
                         </div>
                     </div>
@@ -436,12 +452,20 @@
                         type="file" 
                         formControlName="photo"
                         class="form-control"
+                        (change)="onImageChange($event, i)"
                         accept="image/png, image/jpeg, image/jpg"
                         [ngClass]="{'is-invalid' :
                             !checkImageIsValid(i) &&
                             checkImageIsTouched(i),
                             'is-valid' : checkImageIsValid(i)}"
-                            (click)="onChangeMainImage(i)" >
+                             >
+                    </div>
+                    <div class="input-group-append">
+                        <button 
+                        class="btn btn-danger"
+                        type="button"
+                        (click)="onDeleteImage(i)"
+                        >X</button>
                     </div>
                 </div>
             </div>
@@ -453,7 +477,7 @@
           >
           <span *ngIf="!isLoading; else loading">Wyślij</span>
           <ng-template #loading>
-          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          <app-spinner [size]="1"></app-spinner>
           Wysyłanie...
           </ng-template>
           </button>
