@@ -64,7 +64,7 @@ public class ImageService implements CrudServce<Long, Image> {
             isEdit = true;
         }
         if(fields.get("photo") != null) {
-            optionalImage.get().setPhoto(((String)fields.get("photo")).getBytes());
+            optionalImage.get().setPhoto(((String)fields.get("photo")));
             isEdit = true;
         }
         if(isEdit){

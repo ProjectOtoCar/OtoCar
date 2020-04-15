@@ -15,7 +15,7 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Lob
-    private byte[] photo;
+    private String photo;
     private boolean isMainImage;
 
     @ManyToOne
@@ -24,7 +24,7 @@ public class Image {
     public Image() {
     }
 
-    public Image(byte[] photo, boolean isMainImage, Advertisement advertisement) {
+    public Image(String photo, boolean isMainImage, Advertisement advertisement) {
         this.photo = photo;
         this.isMainImage = isMainImage;
         this.advertisement = advertisement;
@@ -38,11 +38,11 @@ public class Image {
         this.id = id;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
