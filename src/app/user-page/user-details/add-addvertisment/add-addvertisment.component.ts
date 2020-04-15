@@ -1,16 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AddvertismentService } from 'src/app/services/addvertisment/addvertisment.service';
 import {CarModelService} from 'src/app/services/car-model/car-model.service';
 import { EnumsService } from 'src/app/services/enums/enums.service';
 import { BrandService } from 'src/app/services/brand/brand.service';
-import { ActivatedRoute, Event } from '@angular/router';
-import { strict } from 'assert';
 import { Brand } from 'src/app/interfaces/Brand.model';
 import { CarModel } from 'src/app/interfaces/CarModel.model';
 import { CityService } from 'src/app/services/city/city.service';
 import { City } from 'src/app/interfaces/City.modal';
 import { Subscription } from 'rxjs';
+import { Image } from 'src/app/interfaces/Image';
 
 @Component({
   selector: 'app-add-addvertisment',
@@ -47,6 +46,7 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
   colorSub: Subscription;
   typyFuelSub: Subscription;
   typeCarSub: Subscription;
+  images: Image[] = [];
 
   constructor(
     private addvertismentService: AddvertismentService,
@@ -80,23 +80,15 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
       ),
       car: new FormGroup(
         {
-          brand: new FormGroup(
-            {
-              id: new FormControl(null,
-                [
-                  Validators.required
-                ]
-              )
-            }
+          brandId: new FormControl(null,
+            [
+              Validators.required
+            ]
           ),
-          model: new FormGroup(
-            {
-              id: new FormControl(null,
-                [
-                  Validators.required
-                ]
-              )
-            }
+          modelId: new FormControl(null,
+            [
+              Validators.required
+            ]
           ),
           engine: new FormControl(null,
             [
@@ -129,7 +121,7 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
               Validators.max(10_000_000)
             ]
           ),
-          firstRegistartion: new FormControl(null,
+          firstRegistration: new FormControl(null,
             [
               Validators.required,
               Validators.min(1900),
@@ -143,21 +135,12 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
           )
         }
       ),
-      seller: new FormGroup(
-        {
-          id: new FormControl(6)
-        }
+        sellerId: new FormControl(6),
+        cityId: new FormControl(null,
+          [
+            Validators.required
+          ]
       ),
-      city: new FormGroup(
-        {
-          id: new FormControl(null,
-            [
-              Validators.required
-            ]
-          )
-        }
-      ),
-      images: new FormArray([])
     });
    }
   ngOnDestroy(): void {
@@ -244,84 +227,64 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
    onSubmit(): void {
     this.isLoading = true;
     this.isError = false;
-    console.log(this.addAddvertismentForm.value);
     this.addvertismentService
-    .postAddvertisment(this.addAddvertismentForm.value)
-    .subscribe(() => {
+    .postAddvertisment({...this.addAddvertismentForm.value, images: this.images})
+    .subscribe((data) => {
       this.isLoading = false;
       this.isError = false;
+      console.log(data);
     }, error => {
       this.isError = true;
       this.isLoading = false;
     });
    }
    onImageChange(event, index: number): void {
-    if ((event.target as HTMLInputElement).files.length > 0) {
-      const file = (event.target as HTMLInputElement).files[0];
-      console.log(file);
-      (this.addAddvertismentForm.get('images') as FormArray)
-      .controls[index].patchValue({
-        photo: file
-      });
+    const reader = new FileReader();
+    if (event.target?.files.length > 0) {
+      const file: File = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+          this.images[index].photo = reader.result;
+      };
     }
    }
    onDeleteImage(index: number): void {
-     const imageItem = (this.addAddvertismentForm.get('images') as FormArray)
-     .controls
+     const imageItem = this.images
      .splice(index, 1);
-     if (imageItem[0].value.isMainImage
-        && (this.addAddvertismentForm.get('images') as FormArray).controls.length > 0) {
-        (this.addAddvertismentForm.get('images') as FormArray)
-          .controls[0]
-          .patchValue({
-            isMainImage: true
-          });
+     if (imageItem[0].isMainImage
+        && this.images.length > 0) {
+        this.images[0].isMainImage = true;
      }
-
    }
   onChangeMainImage(index: number): void {
-    (this.addAddvertismentForm.get('images') as FormArray)
-    .controls.forEach((imageItem, i: number) => {
-        imageItem.patchValue({
-          isMainImage: i === index ? true : false
-        });
+    this.images
+    .forEach((imageItem: Image, i: number) => {
+        imageItem.isMainImage = i === index ? true : false;
     });
   }
 
   checkImageIsValid(index: number): boolean {
-    return ((this.addAddvertismentForm.get('images') as FormArray)
-    .controls[index] as FormGroup)
-    .controls
-    .photo
-    .valid;
+    return this.images[index].photo !== null &&
+    this.images[index].photo !== null &&
+    this.images[index].photo !== '';
+  }
+  checkImagesIsValid(): boolean {
+    let isValid = true;
+    this.images.forEach((itemImage, index) => {
+      if (!this.checkImageIsValid(index)) {
+        isValid = false;
+      }
+    });
+    console.log(isValid);
+    return isValid;
   }
 
-  checkImageIsTouched(index: number): boolean {
-    return ((this.addAddvertismentForm.get('images') as FormArray)
-    .controls[index] as FormGroup)
-    .controls
-    .photo
-    .touched;
-  }
 
   addImage(): void {
-    const control = new FormGroup({
-      photo: new FormControl(null,
-        [
-          Validators.required
-        ]
-      ),
-      isMainImage: new FormControl(false)
-    });
-    if ((this.addAddvertismentForm.get('images') as FormArray).length < 1) {
-      control.setValue({
-        photo: null,
-        isMainImage: true
-      });
+    if (this.images.length < 1) {
+      this.images.push({photo: null, isMainImage: true});
+    } else {
+      this.images.push({photo: null, isMainImage: false});
     }
-    (this.addAddvertismentForm.get('images') as FormArray).push(control);
-  }
-  getImages(): AbstractControl[] {
-    return (this.addAddvertismentForm.get('images') as FormArray).controls;
   }
 }
