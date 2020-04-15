@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.otocar.otocar.dto.AdvertisementDto;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -46,6 +47,36 @@ public class Advertisement {
     @ManyToOne
     @NotNull
     private City city;
+
+    public Advertisement(AdvertisementDto advertisementDto) {
+        Car car = new Car();
+        price = advertisementDto.getPrice();
+        dateAdd = LocalDate.now();
+        active = true;
+        title = advertisementDto.getTitle();
+        content = advertisementDto.getContent();
+        Seller seller = new Seller();
+        seller.setId(advertisementDto.getSellerId());
+        this.seller = seller;
+        images = advertisementDto.getImages();
+        CarModel carModel = new CarModel();
+        carModel.setId(advertisementDto.getCar().getModelId());
+        car.setModel(carModel);
+        Brand brand = new Brand();
+        brand.setId(advertisementDto.getCar().getBrandId());
+        car.setBrand(brand);
+        car.setColor((advertisementDto.getCar().getColor()));
+        car.setEngine(advertisementDto.getCar().getEngine());
+        car.setEnginePower(advertisementDto.getCar().getEnginePower());
+        car.setTypeCar(advertisementDto.getCar().getTypeCar());
+        car.setFirstRegistartion(advertisementDto.getCar().getFirstRegistration());
+        car.setMileage(advertisementDto.getCar().getMileage());
+        car.setFuel(advertisementDto.getCar().getFuel());
+        City city = new City();
+        city.setId(advertisementDto.getCityId());
+        this.city = city;
+        this.car = car;
+    }
 
     public Advertisement(BigDecimal price,
                          String title,
