@@ -439,12 +439,17 @@
             (click)="imageFile.click()"
             type="button"
             >
-                <img
-                class="card-img-top"
+                <div 
+                [ngStyle]="{
+                'background-image': getUrl(i)}"
                 style="
-                height: 9rem;" 
-                [src]="image.photo || 
-                'assets/img/round_add_black_18dp.png'">
+                min-width: 100%;
+                min-height: 100%;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: contain;
+                height: 9rem;">
+                </div>
             </button>
             <div class="invalid-feedback"
             *ngIf="image.valid?.wrongsizebig === true">

@@ -303,7 +303,12 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
     return isValid;
   }
 
-
+  getUrl(index: number) {
+    if (this.images[index]?.photo) {
+      return `url(${this.images[index]?.photo})`;
+    }
+    return 'url(assets/img/round_add_black_18dp.png)';
+  }
   addImage(): void {
     if (this.images.length < 1) {
       this.images.push({photo: null, mainImage: true});
