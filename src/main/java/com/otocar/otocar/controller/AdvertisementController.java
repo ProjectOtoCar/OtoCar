@@ -66,7 +66,9 @@ public class AdvertisementController {
 
     @PostMapping("")
     public Advertisement addAdvertisemnt(@RequestBody AdvertisementDto advertisementDto) {
-        return advertisementService.addAdv(new Advertisement(advertisementDto));
+        Advertisement advertisement = new Advertisement(advertisementDto);
+        advertisement.getImages().forEach(image -> image.setAdvertisement(advertisement));
+        return advertisementService.addAdv(advertisement);
     }
 
     @PatchMapping("/{id}")
