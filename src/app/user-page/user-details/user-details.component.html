@@ -8,6 +8,12 @@
         routerLinkActive="active" 
         >dane użytkownika</a>
         <a 
+        class="list-group-item list-group-item-action"
+        [routerLink]="['user-addvertisment']"
+        [queryParams]="queryParams"
+        routerLinkActive="active" 
+        >Ogłoszenia użytkownika</a>
+        <a 
         *ngIf="isFoundUser"
         class="list-group-item list-group-item-action"
         [routerLink]="['buy-premium']"

@@ -227,6 +227,7 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
    onSubmit(): void {
     this.isLoading = true;
     this.isError = false;
+    console.log({...this.addAddvertismentForm.value, images: this.images});
     this.addvertismentService
     .postAddvertisment({...this.addAddvertismentForm.value, images: this.images})
     .subscribe((data) => {
@@ -242,32 +243,58 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
     const reader = new FileReader();
     if (event.target?.files.length > 0) {
       const file: File = event.target.files[0];
+      this.checkIsImageValid(file, index);
       reader.readAsDataURL(file);
       reader.onload = () => {
           this.images[index].photo = reader.result;
       };
     }
    }
+
    onDeleteImage(index: number): void {
      const imageItem = this.images
      .splice(index, 1);
-     if (imageItem[0].isMainImage
+     if (imageItem[0].mainImage
         && this.images.length > 0) {
-        this.images[0].isMainImage = true;
+        this.images[0].mainImage = true;
      }
    }
+
+   private checkIsImageValid(file, index) {
+    if (file.size > 4194304) {
+      this.images[index].valid = {
+        ... this.images[index].valid,
+        wrongsizebig: true
+      };
+    }
+    if (file.size <= 0) {
+      this.images[index].valid = {
+        ... this.images[index].valid,
+        wrongsizesmall: true
+      };
+    }
+    if (!file.type.startsWith('image')) {
+      this.images[index].valid = {
+        ... this.images[index].valid,
+        wrongtype: true
+      };
+    }
+   }
+
   onChangeMainImage(index: number): void {
     this.images
     .forEach((imageItem: Image, i: number) => {
-        imageItem.isMainImage = i === index ? true : false;
+        imageItem.mainImage = i === index ? true : false;
     });
   }
 
   checkImageIsValid(index: number): boolean {
-    return this.images[index].photo !== null &&
-    this.images[index].photo !== null &&
-    this.images[index].photo !== '';
+    return this.images[index].valid === undefined
+           && this.images[index].photo !== undefined
+           && this.images[index].photo !== null
+           && this.images[index].photo !== '';
   }
+
   checkImagesIsValid(): boolean {
     let isValid = true;
     this.images.forEach((itemImage, index) => {
@@ -282,9 +309,9 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
 
   addImage(): void {
     if (this.images.length < 1) {
-      this.images.push({photo: null, isMainImage: true});
+      this.images.push({photo: null, mainImage: true});
     } else {
-      this.images.push({photo: null, isMainImage: false});
+      this.images.push({photo: null, mainImage: false});
     }
   }
 }

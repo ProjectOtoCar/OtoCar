@@ -429,37 +429,50 @@
             [disabled]="images?.length >=10"
             >Dodaj zdjęcie</button>
             <div 
-            class="input-group flex-nowrap" 
+            class="card" 
+            style="width: 16rem; margin: 10px auto;"
             *ngFor="let image of images; let i = index">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <div>
+                <button 
+                (click)="imageFile.click()"
+                type="button"
+                >
+                    <img
+                    class="card-img-top"
+                    style="
+                    height: 9rem;" 
+                    [src]="image.photo || 
+                    'assets/img/round_add_black_18dp.png'">
+                </button>
+                <div 
+                class="card-body"
+                style="display: flex;">
+                    <label 
+                    class="btn btn-secondary" 
+                    style="display: block; width: 100%;">
                         <input 
                         type="radio" 
                         name="isMainImage"
                         [value]="true" 
-                        [checked]="image.isMainImage"
+                        [checked]="image.mainImage"
                         (click)="onChangeMainImage(i)">
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <input 
+                    </label>
+                    <button 
+                    class="btn btn-danger"
+                    style="width: 100%;"
+                    type="button"
+                    (click)="onDeleteImage(i)"
+                    >X</button>
+                    <input
+                    #imageFile 
                     type="file" 
                     class="form-control"
+                    style="display: none;"
                     (change)="onImageChange($event, i)"
                     accept="image/png, image/jpeg, image/jpg"
                     [ngClass]="{'is-invalid' :
                         !checkImageIsValid(i),
                         'is-valid' : checkImageIsValid(i)}"
-                            >
-                </div>
-                <div class="input-group-append">
-                    <button 
-                    class="btn btn-danger"
-                    type="button"
-                    (click)="onDeleteImage(i)"
-                    >X</button>
+                    >
                 </div>
             </div>
         </div>
