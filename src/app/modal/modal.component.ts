@@ -11,6 +11,7 @@ export class ModalComponent implements OnInit {
   @Input() firstAction: string;
   @Input() secondAction: string;
   @Input() showAcceptButton = false;
+  @Input() showCancelButton = true;
   @Input() isLoading = false;
   @Input() isError = false;
   @Input() errorMessage = 'Coś poszło nie tak. Prosimy spróbować ponownie';

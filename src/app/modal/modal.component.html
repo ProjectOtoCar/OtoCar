@@ -14,7 +14,10 @@
                 <button class="btn btn-success" (click)="onAction(true)">{{firstAction}}</button>
             </div>
             <div class="alert-box-actions--right">
-                <button class="btn btn-danger" (click)="onAction(false)">{{secondAction}}</button>
+                <button
+                *ngIf="showCancelButton" 
+                class="btn btn-danger" 
+                (click)="onAction(false)">{{secondAction}}</button>
             </div>
         </div>
     </div>

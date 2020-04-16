@@ -3,381 +3,161 @@
       Bład spróbuj ponownie
     </div>
     <h3>Dodaj ogłoszenie!</h3>
-      <form [formGroup]="addAddvertismentForm" (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <label for="title">Tytuł</label>
-            <input type="text"
+    <form [formGroup]="addAddvertismentForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+        <label for="title">Tytuł</label>
+        <input type="text"
+        class="form-control is-invalid"
+        [ngClass]="{'is-invalid' : 
+        !addAddvertismentForm.get('title').valid &&
+        addAddvertismentForm.get('title').touched,
+        'is-valid' : addAddvertismentForm.get('title').valid}"
+        id="title"
+        formControlName="title"
+        >
+        <div class="invalid-feedback"
+            *ngIf="addAddvertismentForm.get('title').errors?.required">
+            Pole jest wymagane
+        </div>
+        <div class="invalid-feedback"
+            *ngIf="addAddvertismentForm.get('title').errors?.minlength">
+            Tytuł może mieć minimalnie 10 znaków
+        </div>
+        <div class="invalid-feedback"
+            *ngIf="addAddvertismentForm.get('title').errors?.maxlength">
+            Tytuł może mieć maksymalnie 100 znaków
+        </div>
+        <div class="valid-feedback">
+            OK!
+        </div>
+        </div>
+        <div class="form-group">
+            <label for="price">Cena(PLN)</label>
+            <input type="number"
             class="form-control is-invalid"
             [ngClass]="{'is-invalid' : 
-            !addAddvertismentForm.get('title').valid &&
-            addAddvertismentForm.get('title').touched,
-            'is-valid' : addAddvertismentForm.get('title').valid}"
-            id="title"
-            formControlName="title"
+            !addAddvertismentForm.get('price').valid &&
+            addAddvertismentForm.get('price').touched,
+            'is-valid' : addAddvertismentForm.get('price').valid}"
+            id="price"
+            formControlName="price"
             >
             <div class="invalid-feedback"
-                *ngIf="addAddvertismentForm.get('title').errors?.required">
+                *ngIf="addAddvertismentForm.get('price').errors?.required">
                 Pole jest wymagane
             </div>
             <div class="invalid-feedback"
-                *ngIf="addAddvertismentForm.get('title').errors?.minlength">
-                Tytuł może mieć minimalnie 10 znaków
+                *ngIf="addAddvertismentForm.get('price').errors?.min">
+                Minimalna możliwa wartość to 0
             </div>
             <div class="invalid-feedback"
-                *ngIf="addAddvertismentForm.get('title').errors?.maxlength">
-                Tytuł może mieć maksymalnie 100 znaków
-            </div>
-            <div class="valid-feedback">
-                OK!
-            </div>
-          </div>
-          <div class="form-group">
-              <label for="price">Cena(PLN)</label>
-              <input type="number"
-              class="form-control is-invalid"
-              [ngClass]="{'is-invalid' : 
-              !addAddvertismentForm.get('price').valid &&
-              addAddvertismentForm.get('price').touched,
-              'is-valid' : addAddvertismentForm.get('price').valid}"
-              id="price"
-              formControlName="price"
-              >
-              <div class="invalid-feedback"
-                  *ngIf="addAddvertismentForm.get('price').errors?.required">
-                  Pole jest wymagane
-              </div>
-              <div class="invalid-feedback"
-                  *ngIf="addAddvertismentForm.get('price').errors?.min">
-                  Minimalna możliwa wartość to 0
-              </div>
-              <div class="invalid-feedback"
-                  *ngIf="addAddvertismentForm.get('price').errors?.max">
-                  Maksymalna możliwa wartość to 10000000
-              </div>
-              <div class="valid-feedback">
-                  OK!
-              </div>
-          </div>
-          <div class="form-group">
-            <label for="content">Opis</label>
-            <textarea
-            rows="9"
-            class="form-control is-invalid"
-            [ngClass]="{'is-invalid' : 
-            !addAddvertismentForm.get('content').valid &&
-            addAddvertismentForm.get('content').touched,
-            'is-valid' : addAddvertismentForm.get('content').valid}"
-            id="content"
-            formControlName="content"
-            ></textarea>
-            <div class="invalid-feedback"
-                *ngIf="addAddvertismentForm.get('content').errors?.required">
-                Pole jest wymagane
-            </div>
-            <div class="invalid-feedback"
-                *ngIf="addAddvertismentForm.get('content').errors?.minlength">
-                Opis musi mieć minimalnie 10 znaków
-            </div>
-            <div class="invalid-feedback"
-                *ngIf="addAddvertismentForm.get('content').errors?.maxlength">
-                Opis może mieć maksymalnie 500 znaków
+                *ngIf="addAddvertismentForm.get('price').errors?.max">
+                Maksymalna możliwa wartość to 10000000
             </div>
             <div class="valid-feedback">
                 OK!
             </div>
         </div>
-        <div formGroupName="car">
-            <div class="form-row">
-                <div class="form-group col-md-6"> 
-                    <label for="brandId">Marka samochodu</label>
-                    <select
-                    class="form-control is-invalid"
-                    [ngClass]="{'is-invalid' :
-                    !addAddvertismentForm.get('car.brandId').valid &&
-                    addAddvertismentForm.get('car.brandId').touched,
-                    'is-valid' : addAddvertismentForm.get('car.brandId').valid}"
-                    id="brandId"
-                    formControlName="brandId"
-                    *ngIf="!isBrandError && !isBrandLoading"
-                    [value]="selectBrandIndex"
-                    (change)="onChangeBrand($event.target.value)"
-                    >
-                    <option *ngFor="let brand of brands" 
-                    [value]="brand.id">{{brand.name}}</option>
-                    </select>
-                    <div *ngIf="isBrandLoading" 
-                    style="text-align: center;">
-                         <app-spinner
-                        [size]="2"></app-spinner>
-                    </div>
-                    <div 
-                    class="alert alert-danger" 
-                    role="alert"
-                    *ngIf="isBrandError"
-                    style="padding: 0 3px; margin: 0" >
-                      Coś poszło nie tak
-                    </div>
-                    <div class="invalid-feedback"
-                        *ngIf="addAddvertismentForm.get('car.brandId').errors?.required">
-                        Pole jest wymagane
-                    </div>
-                    <div class="valid-feedback">
-                        OK!
-                    </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="modelId">Model</label>
-                    <select
-                    [attr.disabled]="addAddvertismentForm.get('car.brandId').invalid ? 
-                    '' : 
-                    null"
-                    class="form-control is-invalid"
-                    [ngClass]="{'is-invalid' :
-                    !addAddvertismentForm.get('car.modelId').valid &&
-                    addAddvertismentForm.get('car.modelId').touched,
-                    'is-valid' : addAddvertismentForm.get('car.modelId').valid}"
-                    id="model"
-                    formControlName="modelId"
-                    *ngIf="!isCarModelLoading && !isCarModelError"
-                    >
-                    <option
-                    *ngFor="let carModel of carModels"
-                    [value]="carModel.id">{{carModel.name}}</option>
-                    </select>
-                    <div *ngIf="isCarModelLoading" 
-                    style="text-align: center;">
-                         <app-spinner
-                        [size]="2"></app-spinner>
-                    </div>
-                    <div 
-                    class="alert alert-danger" 
-                    role="alert"
-                    *ngIf="isCarModelError"
-                    style="padding: 0 3px; margin: 0" >
-                      Coś poszło nie tak
-                    </div>
-                    <div class="invalid-feedback"
-                        *ngIf="addAddvertismentForm.get('car.modelId').errors?.required">
-                        Pole jest wymagane
-                    </div>
-                    <div class="valid-feedback">
-                        OK!
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="engine">Silnik</label>
-                <input type="number"
-                class="form-control is-invalid"
-                [ngClass]="{'is-invalid' : 
-                !addAddvertismentForm.get('car.engine').valid &&
-                addAddvertismentForm.get('car.engine').touched,
-                'is-valid' : addAddvertismentForm.get('car.engine').valid}"
-                id="engine"
-                formControlName="engine"
-                >
-                <div class="invalid-feedback"
-                    *ngIf="addAddvertismentForm.get('car.engine').errors?.required">
-                    Pole jest wymagane
-                </div>
-                <div class="invalid-feedback"
-                    *ngIf="addAddvertismentForm.get('car.engine').errors?.min">
-                    Minimalna możliwa wartość to 1
-                </div>
-                <div class="invalid-feedback"
-                    *ngIf="addAddvertismentForm.get('car.engine').errors?.max">
-                    Maksymalna możliwa wartość to 50 000
-                </div>
-                <div class="valid-feedback">
-                    OK!
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="enginePower">Moc silnika</label>
-                <input type="number"
-                class="form-control is-invalid"
-                [ngClass]="{'is-invalid' : 
-                !addAddvertismentForm.get('car.enginePower').valid &&
-                addAddvertismentForm.get('car.enginePower').touched,
-                'is-valid' : addAddvertismentForm.get('car.enginePower').valid}"
-                id="enginePower"
-                formControlName="enginePower"
-                >
-                <div class="invalid-feedback"
-                    *ngIf="addAddvertismentForm.get('car.enginePower').errors?.required">
-                    Pole jest wymagane
-                </div>
-                <div class="invalid-feedback"
-                    *ngIf="addAddvertismentForm.get('car.enginePower').errors?.min">
-                    Minimalna możliwa wartość to 1
-                </div>
-                <div class="invalid-feedback"
-                    *ngIf="addAddvertismentForm.get('car.enginePower').errors?.max">
-                    Maksymalna możliwa wartość to 20 000
-                </div>
-                <div class="valid-feedback">
-                    OK!
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6"> 
-                    <label for="fuel">Rodzaj paliwa</label>
-                    <select
-                    class="form-control is-invalid"
-                    [ngClass]="{'is-invalid' :
-                    !addAddvertismentForm.get('car.fuel').valid &&
-                    addAddvertismentForm.get('car.fuel').touched,
-                    'is-valid' : addAddvertismentForm.get('car.fuel').valid}"
-                    id="fuel"
-                    formControlName="fuel"
-                    *ngIf="!isTypeFuelLoading && !isTypeFuelError"
-                    >
-                    <option 
-                    *ngFor="let typeFuel of TypeFuels"
-                    [value]="typeFuel">{{typeFuel}}</option>
-                    </select>
-                    <div *ngIf="isTypeFuelLoading" 
-                    style="text-align: center;">
-                         <app-spinner
-                        [size]="2"></app-spinner>
-                    </div>
-                    <div 
-                    class="alert alert-danger" 
-                    role="alert"
-                    *ngIf="isTypeFuelError"
-                    style="padding: 0 3px; margin: 0" >
-                      Coś poszło nie tak
-                    </div>
-                    <div class="invalid-feedback"
-                        *ngIf="addAddvertismentForm.get('car.fuel').errors?.required">
-                        Pole jest wymagane
-                    </div>
-                    <div class="valid-feedback">
-                        OK!
-                    </div>
-                </div>
-                <div class="form-group col-md-6"> 
-                    <label for="typeCar">Typ samochodu</label>
-                    <select
-                    class="form-control is-invalid"
-                    [ngClass]="{'is-invalid' :
-                    !addAddvertismentForm.get('car.typeCar').valid &&
-                    addAddvertismentForm.get('car.typeCar').touched,
-                    'is-valid' : addAddvertismentForm.get('car.typeCar').valid}"
-                    id="typeCar"
-                    formControlName="typeCar"
-                    *ngIf="!isTypeCarLoading && !isTypeCarError"
-                    >
-                    <option *ngFor="let typeCar of typeCars"
-                    [value]="typeCar"
-                    >{{typeCar}}</option>
-                    </select>
-                    <div *ngIf="isTypeCarLoading" 
-                    style="text-align: center;">
-                         <app-spinner
-                        [size]="2"></app-spinner>
-                    </div>
-                    <div 
-                    class="alert alert-danger" 
-                    role="alert"
-                    *ngIf="isTypeCarError"
-                    style="padding: 0 3px; margin: 0" >
-                      Coś poszło nie tak
-                    </div>
-                    <div class="invalid-feedback"
-                        *ngIf="addAddvertismentForm.get('car.typeCar').errors?.required">
-                        Pole jest wymagane
-                    </div>
-                    <div class="valid-feedback">
-                        OK!
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="mileage">Przebieg</label>
-                <input type="number"
-                class="form-control is-invalid"
-                [ngClass]="{'is-invalid' : 
-                !addAddvertismentForm.get('car.mileage').valid &&
-                addAddvertismentForm.get('car.mileage').touched,
-                'is-valid' : addAddvertismentForm.get('car.mileage').valid}"
-                id="mileage"
-                formControlName="mileage"
-                >
-                <div class="invalid-feedback"
-                    *ngIf="addAddvertismentForm.get('car.mileage').errors?.required">
-                    Pole jest wymagane
-                </div>
-                <div class="invalid-feedback"
-                    *ngIf="addAddvertismentForm.get('car.mileage').errors?.min">
-                    Minimalna możliwa wartość to 0
-                </div>
-                <div class="invalid-feedback"
-                    *ngIf="addAddvertismentForm.get('car.mileage').errors?.max">
-                    Maksymalna możliwa wartość to 10 000 000
-                </div>
-                <div class="valid-feedback">
-                    OK!
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="firstRegistration">Pierwsza rejestracja</label>
-                <input type="number"
-                class="form-control is-invalid"
-                [ngClass]="{'is-invalid' : 
-                !addAddvertismentForm.get('car.firstRegistration').valid &&
-                addAddvertismentForm.get('car.firstRegistration').touched,
-                'is-valid' : addAddvertismentForm.get('car.firstRegistration').valid}"
-                id="firstRegistration"
-                formControlName="firstRegistration"
-                >
-                <div class="invalid-feedback"
-                    *ngIf="addAddvertismentForm.get('car.firstRegistration').errors?.required">
-                    Pole jest wymagane
-                </div>
-                <div class="invalid-feedback"
-                    *ngIf="addAddvertismentForm.get('car.firstRegistration').errors?.min">
-                    Minimalna możliwa wartość to 1900
-                </div>
-                <div class="invalid-feedback"
-                    *ngIf="addAddvertismentForm.get('car.firstRegistration').errors?.max">
-                    Maksymalna możliwa wartość to {{currentYear}}
-                </div>
-                <div class="valid-feedback">
-                    OK!
-                </div>
-            </div>
-            <div class="form-group"> 
-                <label for="color">Color</label>
+        <div class="form-group">
+        <label for="content">Opis</label>
+        <textarea
+        rows="9"
+        class="form-control is-invalid"
+        [ngClass]="{'is-invalid' : 
+        !addAddvertismentForm.get('content').valid &&
+        addAddvertismentForm.get('content').touched,
+        'is-valid' : addAddvertismentForm.get('content').valid}"
+        id="content"
+        formControlName="content"
+        ></textarea>
+        <div class="invalid-feedback"
+            *ngIf="addAddvertismentForm.get('content').errors?.required">
+            Pole jest wymagane
+        </div>
+        <div class="invalid-feedback"
+            *ngIf="addAddvertismentForm.get('content').errors?.minlength">
+            Opis musi mieć minimalnie 10 znaków
+        </div>
+        <div class="invalid-feedback"
+            *ngIf="addAddvertismentForm.get('content').errors?.maxlength">
+            Opis może mieć maksymalnie 500 znaków
+        </div>
+        <div class="valid-feedback">
+            OK!
+        </div>
+    </div>
+    <div formGroupName="car">
+        <div class="form-row">
+            <div class="form-group col-md-6"> 
+                <label for="brandId">Marka samochodu</label>
                 <select
                 class="form-control is-invalid"
                 [ngClass]="{'is-invalid' :
-                !addAddvertismentForm.get('car.color').valid &&
-                addAddvertismentForm.get('car.color').touched,
-                'is-valid' : addAddvertismentForm.get('car.color').valid}"
-                id="color"
-                formControlName="color"
-                *ngIf="!isColorError && !isColorLoading"
+                !addAddvertismentForm.get('car.brandId').valid &&
+                addAddvertismentForm.get('car.brandId').touched,
+                'is-valid' : addAddvertismentForm.get('car.brandId').valid}"
+                id="brandId"
+                formControlName="brandId"
+                *ngIf="!isBrandError && !isBrandLoading"
+                [value]="selectBrandIndex"
+                (change)="onChangeBrand($event.target.value)"
                 >
-                <option 
-                *ngFor="let color of colors"
-                [value]="color"
-                >{{color}}</option>
+                <option *ngFor="let brand of brands" 
+                [value]="brand.id">{{brand.name}}</option>
                 </select>
-                <div *ngIf="isColorLoading" 
+                <div *ngIf="isBrandLoading" 
                 style="text-align: center;">
-                     <app-spinner
+                        <app-spinner
                     [size]="2"></app-spinner>
                 </div>
                 <div 
                 class="alert alert-danger" 
                 role="alert"
-                *ngIf="isColorError"
+                *ngIf="isBrandError"
                 style="padding: 0 3px; margin: 0" >
-                  Coś poszło nie tak
+                    Coś poszło nie tak
                 </div>
                 <div class="invalid-feedback"
-                    *ngIf="addAddvertismentForm.get('car.color').errors?.required">
+                    *ngIf="addAddvertismentForm.get('car.brandId').errors?.required">
+                    Pole jest wymagane
+                </div>
+                <div class="valid-feedback">
+                    OK!
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="modelId">Model</label>
+                <select
+                [attr.disabled]="addAddvertismentForm.get('car.brandId').invalid ? 
+                '' : 
+                null"
+                class="form-control is-invalid"
+                [ngClass]="{'is-invalid' :
+                !addAddvertismentForm.get('car.modelId').valid &&
+                addAddvertismentForm.get('car.modelId').touched,
+                'is-valid' : addAddvertismentForm.get('car.modelId').valid}"
+                id="model"
+                formControlName="modelId"
+                *ngIf="!isCarModelLoading && !isCarModelError"
+                >
+                <option
+                *ngFor="let carModel of carModels"
+                [value]="carModel.id">{{carModel.name}}</option>
+                </select>
+                <div *ngIf="isCarModelLoading" 
+                style="text-align: center;">
+                        <app-spinner
+                    [size]="2"></app-spinner>
+                </div>
+                <div 
+                class="alert alert-danger" 
+                role="alert"
+                *ngIf="isCarModelError"
+                style="padding: 0 3px; margin: 0" >
+                    Coś poszło nie tak
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="addAddvertismentForm.get('car.modelId').errors?.required">
                     Pole jest wymagane
                 </div>
                 <div class="valid-feedback">
@@ -385,23 +165,206 @@
                 </div>
             </div>
         </div>
-            <div class="form-group"> 
-            <label for="cityId">Miasto</label>
+        <div class="form-group">
+            <label for="engine">Pojemność silnika</label>
+            <input type="number"
+            class="form-control is-invalid"
+            [ngClass]="{'is-invalid' : 
+            !addAddvertismentForm.get('car.engine').valid &&
+            addAddvertismentForm.get('car.engine').touched,
+            'is-valid' : addAddvertismentForm.get('car.engine').valid}"
+            id="engine"
+            formControlName="engine"
+            >
+            <div class="invalid-feedback"
+                *ngIf="addAddvertismentForm.get('car.engine').errors?.required">
+                Pole jest wymagane
+            </div>
+            <div class="invalid-feedback"
+                *ngIf="addAddvertismentForm.get('car.engine').errors?.min">
+                Minimalna możliwa wartość to 1
+            </div>
+            <div class="invalid-feedback"
+                *ngIf="addAddvertismentForm.get('car.engine').errors?.max">
+                Maksymalna możliwa wartość to 50 000
+            </div>
+            <div class="valid-feedback">
+                OK!
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="enginePower">Moc silnika</label>
+            <input type="number"
+            class="form-control is-invalid"
+            [ngClass]="{'is-invalid' : 
+            !addAddvertismentForm.get('car.enginePower').valid &&
+            addAddvertismentForm.get('car.enginePower').touched,
+            'is-valid' : addAddvertismentForm.get('car.enginePower').valid}"
+            id="enginePower"
+            formControlName="enginePower"
+            >
+            <div class="invalid-feedback"
+                *ngIf="addAddvertismentForm.get('car.enginePower').errors?.required">
+                Pole jest wymagane
+            </div>
+            <div class="invalid-feedback"
+                *ngIf="addAddvertismentForm.get('car.enginePower').errors?.min">
+                Minimalna możliwa wartość to 1
+            </div>
+            <div class="invalid-feedback"
+                *ngIf="addAddvertismentForm.get('car.enginePower').errors?.max">
+                Maksymalna możliwa wartość to 20 000
+            </div>
+            <div class="valid-feedback">
+                OK!
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6"> 
+                <label for="fuel">Rodzaj paliwa</label>
+                <select
+                class="form-control is-invalid"
+                [ngClass]="{'is-invalid' :
+                !addAddvertismentForm.get('car.fuel').valid &&
+                addAddvertismentForm.get('car.fuel').touched,
+                'is-valid' : addAddvertismentForm.get('car.fuel').valid}"
+                id="fuel"
+                formControlName="fuel"
+                *ngIf="!isTypeFuelLoading && !isTypeFuelError"
+                >
+                <option 
+                *ngFor="let typeFuel of TypeFuels"
+                [value]="typeFuel">{{typeFuel}}</option>
+                </select>
+                <div *ngIf="isTypeFuelLoading" 
+                style="text-align: center;">
+                        <app-spinner
+                    [size]="2"></app-spinner>
+                </div>
+                <div 
+                class="alert alert-danger" 
+                role="alert"
+                *ngIf="isTypeFuelError"
+                style="padding: 0 3px; margin: 0" >
+                    Coś poszło nie tak
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="addAddvertismentForm.get('car.fuel').errors?.required">
+                    Pole jest wymagane
+                </div>
+                <div class="valid-feedback">
+                    OK!
+                </div>
+            </div>
+            <div class="form-group col-md-6"> 
+                <label for="typeCar">Typ samochodu</label>
+                <select
+                class="form-control is-invalid"
+                [ngClass]="{'is-invalid' :
+                !addAddvertismentForm.get('car.typeCar').valid &&
+                addAddvertismentForm.get('car.typeCar').touched,
+                'is-valid' : addAddvertismentForm.get('car.typeCar').valid}"
+                id="typeCar"
+                formControlName="typeCar"
+                *ngIf="!isTypeCarLoading && !isTypeCarError"
+                >
+                <option *ngFor="let typeCar of typeCars"
+                [value]="typeCar"
+                >{{typeCar}}</option>
+                </select>
+                <div *ngIf="isTypeCarLoading" 
+                style="text-align: center;">
+                        <app-spinner
+                    [size]="2"></app-spinner>
+                </div>
+                <div 
+                class="alert alert-danger" 
+                role="alert"
+                *ngIf="isTypeCarError"
+                style="padding: 0 3px; margin: 0" >
+                    Coś poszło nie tak
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="addAddvertismentForm.get('car.typeCar').errors?.required">
+                    Pole jest wymagane
+                </div>
+                <div class="valid-feedback">
+                    OK!
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="mileage">Przebieg</label>
+            <input type="number"
+            class="form-control is-invalid"
+            [ngClass]="{'is-invalid' : 
+            !addAddvertismentForm.get('car.mileage').valid &&
+            addAddvertismentForm.get('car.mileage').touched,
+            'is-valid' : addAddvertismentForm.get('car.mileage').valid}"
+            id="mileage"
+            formControlName="mileage"
+            >
+            <div class="invalid-feedback"
+                *ngIf="addAddvertismentForm.get('car.mileage').errors?.required">
+                Pole jest wymagane
+            </div>
+            <div class="invalid-feedback"
+                *ngIf="addAddvertismentForm.get('car.mileage').errors?.min">
+                Minimalna możliwa wartość to 0
+            </div>
+            <div class="invalid-feedback"
+                *ngIf="addAddvertismentForm.get('car.mileage').errors?.max">
+                Maksymalna możliwa wartość to 10 000 000
+            </div>
+            <div class="valid-feedback">
+                OK!
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="firstRegistration">Pierwsza rejestracja</label>
+            <input type="number"
+            class="form-control is-invalid"
+            [ngClass]="{'is-invalid' : 
+            !addAddvertismentForm.get('car.firstRegistration').valid &&
+            addAddvertismentForm.get('car.firstRegistration').touched,
+            'is-valid' : addAddvertismentForm.get('car.firstRegistration').valid}"
+            id="firstRegistration"
+            formControlName="firstRegistration"
+            >
+            <div class="invalid-feedback"
+                *ngIf="addAddvertismentForm.get('car.firstRegistration').errors?.required">
+                Pole jest wymagane
+            </div>
+            <div class="invalid-feedback"
+                *ngIf="addAddvertismentForm.get('car.firstRegistration').errors?.min">
+                Minimalna możliwa wartość to 1900
+            </div>
+            <div class="invalid-feedback"
+                *ngIf="addAddvertismentForm.get('car.firstRegistration').errors?.max">
+                Maksymalna możliwa wartość to {{currentYear}}
+            </div>
+            <div class="valid-feedback">
+                OK!
+            </div>
+        </div>
+        <div class="form-group"> 
+            <label for="color">Color</label>
             <select
             class="form-control is-invalid"
             [ngClass]="{'is-invalid' :
-            !addAddvertismentForm.get('cityId').valid &&
-            addAddvertismentForm.get('cityId').touched,
-            'is-valid' : addAddvertismentForm.get('cityId').valid}"
-            id="cityId"
-            formControlName="cityId"
-            *ngIf="!isCityLoading && !isCityError"
+            !addAddvertismentForm.get('car.color').valid &&
+            addAddvertismentForm.get('car.color').touched,
+            'is-valid' : addAddvertismentForm.get('car.color').valid}"
+            id="color"
+            formControlName="color"
+            *ngIf="!isColorError && !isColorLoading"
             >
-            <option
-            *ngFor="let city of cities" 
-            [value]="+city.id">{{city.name}}</option>
+            <option 
+            *ngFor="let color of colors"
+            [value]="color"
+            >{{color}}</option>
             </select>
-            <div *ngIf="isCityLoading" 
+            <div *ngIf="isColorLoading" 
             style="text-align: center;">
                     <app-spinner
                 [size]="2"></app-spinner>
@@ -409,84 +372,148 @@
             <div 
             class="alert alert-danger" 
             role="alert"
-            *ngIf="isCityError"
+            *ngIf="isColorError"
             style="padding: 0 3px; margin: 0" >
                 Coś poszło nie tak
             </div>
             <div class="invalid-feedback"
-                *ngIf="addAddvertismentForm.get('cityId').errors?.required">
+                *ngIf="addAddvertismentForm.get('car.color').errors?.required">
                 Pole jest wymagane
             </div>
             <div class="valid-feedback">
                 OK!
             </div>
         </div>
-        <div>
+    </div>
+        <div class="form-group"> 
+        <label for="cityId">Miasto</label>
+        <select
+        class="form-control is-invalid"
+        [ngClass]="{'is-invalid' :
+        !addAddvertismentForm.get('cityId').valid &&
+        addAddvertismentForm.get('cityId').touched,
+        'is-valid' : addAddvertismentForm.get('cityId').valid}"
+        id="cityId"
+        formControlName="cityId"
+        *ngIf="!isCityLoading && !isCityError"
+        >
+        <option
+        *ngFor="let city of cities" 
+        [value]="+city.id">{{city.name}}</option>
+        </select>
+        <div *ngIf="isCityLoading" 
+        style="text-align: center;">
+                <app-spinner
+            [size]="2"></app-spinner>
+        </div>
+        <div 
+        class="alert alert-danger" 
+        role="alert"
+        *ngIf="isCityError"
+        style="padding: 0 3px; margin: 0" >
+            Coś poszło nie tak
+        </div>
+        <div class="invalid-feedback"
+            *ngIf="addAddvertismentForm.get('cityId').errors?.required">
+            Pole jest wymagane
+        </div>
+        <div class="valid-feedback">
+            OK!
+        </div>
+    </div>
+    <div>
+        <button 
+        class="btn btn-primary"
+        type="button"
+        (click)="addImage()"
+        [disabled]="images?.length >=10"
+        >Dodaj zdjęcie</button>
+        <div 
+        class="card " 
+        style="width: 16rem; margin: 10px auto;"
+        *ngFor="let image of images; let i = index">
             <button 
-            class="btn btn-primary"
+            class="form-group"
+            [ngClass]="{'is-invalid' : !checkImageIsValid(i),
+            'is-valid' : checkImageIsValid(i)}"
+            (click)="imageFile.click()"
             type="button"
-            (click)="addImage()"
-            [disabled]="images?.length >=10"
-            >Dodaj zdjęcie</button>
+            >
+                <img
+                class="card-img-top"
+                style="
+                height: 9rem;" 
+                [src]="image.photo || 
+                'assets/img/round_add_black_18dp.png'">
+            </button>
+            <div class="invalid-feedback"
+            *ngIf="image.valid?.wrongsizebig === true">
+            Zdjęcia jest za duży
+            </div>
+            <div class="invalid-feedback"
+            *ngIf="image.valid?.wrongsizesmall === true">
+            Zdjęcia jest za za mały
+            </div>
+            <div class="invalid-feedback"
+            *ngIf="image.valid?.wrongtype === true">
+            Zły format zdjęcia.
+            </div>
+            <div class="valid-feedback">
+            OK!
+            </div>
             <div 
-            class="card" 
-            style="width: 16rem; margin: 10px auto;"
-            *ngFor="let image of images; let i = index">
-                <button 
-                (click)="imageFile.click()"
-                type="button"
-                >
-                    <img
-                    class="card-img-top"
-                    style="
-                    height: 9rem;" 
-                    [src]="image.photo || 
-                    'assets/img/round_add_black_18dp.png'">
-                </button>
-                <div 
-                class="card-body"
-                style="display: flex;">
-                    <label 
-                    class="btn btn-secondary" 
-                    style="display: block; width: 100%;">
-                        <input 
-                        type="radio" 
-                        name="isMainImage"
-                        [value]="true" 
-                        [checked]="image.mainImage"
-                        (click)="onChangeMainImage(i)">
+            class="card-body"
+            style="display: flex;">
+                    <input 
+                    type="radio" 
+                    name="isMainImage"
+                    [id]="'image'+i"
+                    [value]="true" 
+                    [checked]="image.mainImage"
+                    (click)="onChangeMainImage(i)">
+                    <label [for]="'image'+i">
+                główne
                     </label>
-                    <button 
-                    class="btn btn-danger"
-                    style="width: 100%;"
-                    type="button"
-                    (click)="onDeleteImage(i)"
-                    >X</button>
-                    <input
-                    #imageFile 
-                    type="file" 
-                    class="form-control"
-                    style="display: none;"
-                    (change)="onImageChange($event, i)"
-                    accept="image/png, image/jpeg, image/jpg"
-                    [ngClass]="{'is-invalid' :
-                        !checkImageIsValid(i),
-                        'is-valid' : checkImageIsValid(i)}"
-                    >
-                </div>
+                <button 
+                class="btn btn-danger"
+                style="width: 100%;"
+                type="button"
+                (click)="onDeleteImage(i)"
+                >X</button>
+                <input
+                #imageFile 
+                type="file" 
+                class="form-control"
+                style="display: none;"
+                (change)="onImageChange($event, i)"
+                accept="image/png, image/jpeg, image/jpg"
+                [ngClass]="{'is-invalid' :
+                    !checkImageIsValid(i),
+                    'is-valid' : checkImageIsValid(i)}"
+                >
             </div>
         </div>
-          <button
-          class="btn btn-success top-margin"
-          type="submit"
-          [disabled]="addAddvertismentForm.invalid ||
-          !checkImagesIsValid()"
-          >
-          <span *ngIf="!isLoading; else loading">Wyślij</span>
-          <ng-template #loading>
-          <app-spinner [size]="1"></app-spinner>
-          Wysyłanie...
-          </ng-template>
-          </button>
-      </form>
-  </div>
+    </div>
+        <button
+        class="btn btn-success top-margin"
+        type="submit"
+        [disabled]="addAddvertismentForm.invalid ||
+        !checkImagesIsValid()"
+        >
+        <span *ngIf="!isLoading; else loading">Wyślij</span>
+        <ng-template #loading>
+        <app-spinner [size]="1"></app-spinner>
+        Wysyłanie...
+        </ng-template>
+        </button>
+    </form>
+</div>
+<app-modal
+    *ngIf="isModal"
+    [showAcceptButton]="true"
+    [showCancelButton]="false"
+    title="Ogłoszenie zostało dodane!!"
+    firstAction="Wróć do strony"
+    (action)="onModalClick($event)"
+>
+</app-modal>

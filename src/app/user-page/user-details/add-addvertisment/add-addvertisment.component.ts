@@ -10,6 +10,7 @@ import { CityService } from 'src/app/services/city/city.service';
 import { City } from 'src/app/interfaces/City.modal';
 import { Subscription } from 'rxjs';
 import { Image } from 'src/app/interfaces/Image';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-addvertisment',
@@ -47,13 +48,16 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
   typyFuelSub: Subscription;
   typeCarSub: Subscription;
   images: Image[] = [];
+  isModal = false;
 
   constructor(
     private addvertismentService: AddvertismentService,
     private carModelService: CarModelService,
     private enumsService: EnumsService,
     private brandService: BrandService,
-    private cityService: CityService
+    private cityService: CityService,
+    private route: Router,
+    private activatedRoute: ActivatedRoute
     ) {
     this.currentYear = new Date().getFullYear();
     this.addAddvertismentForm = new FormGroup({
@@ -230,10 +234,10 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
     console.log({...this.addAddvertismentForm.value, images: this.images});
     this.addvertismentService
     .postAddvertisment({...this.addAddvertismentForm.value, images: this.images})
-    .subscribe((data) => {
+    .subscribe(() => {
       this.isLoading = false;
       this.isError = false;
-      console.log(data);
+      this.isModal = true;
     }, error => {
       this.isError = true;
       this.isLoading = false;
@@ -261,24 +265,17 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
    }
 
    private checkIsImageValid(file, index) {
-    if (file.size > 4194304) {
       this.images[index].valid = {
         ... this.images[index].valid,
-        wrongsizebig: true
+        wrongsizebig: file.size > 4194304 ? true : undefined,
+        wrongsizesmall: file.size <= 0 ? true : undefined,
+        wrongtype: !file.type.startsWith('image') ? true : undefined
       };
-    }
-    if (file.size <= 0) {
-      this.images[index].valid = {
-        ... this.images[index].valid,
-        wrongsizesmall: true
-      };
-    }
-    if (!file.type.startsWith('image')) {
-      this.images[index].valid = {
-        ... this.images[index].valid,
-        wrongtype: true
-      };
-    }
+      if (this.images[index].valid?.wrongsizebig === undefined
+        && this.images[index].valid?.wrongsizesmall === undefined
+        && this.images[index].valid?.wrongtype === undefined) {
+          this.images[index].valid = undefined;
+        }
    }
 
   onChangeMainImage(index: number): void {
@@ -312,6 +309,12 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
       this.images.push({photo: null, mainImage: true});
     } else {
       this.images.push({photo: null, mainImage: false});
+    }
+  }
+
+  onModalClick(event: boolean): void {
+    if (event) {
+      this.route.navigate(['/user-page', 'user-data'], {queryParamsHandling: 'merge'});
     }
   }
 }
