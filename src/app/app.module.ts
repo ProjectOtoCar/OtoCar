@@ -32,6 +32,7 @@ import { FiltrAdvertismentComponent } from './filtr-advertisment/filtr-advertism
 import { ModalComponent } from './modal/modal.component';
 import { ModifyProfileComponent } from './user-page/user-details/modify-profile/modify-profile.component';
 import { AddAddvertismentComponent } from './user-page/user-details/add-addvertisment/add-addvertisment.component';
+import { UserAddvertismentsComponent } from './user-page/user-details/user-addvertisments/user-addvertisments.component';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { AddAddvertismentComponent } from './user-page/user-details/add-addverti
     ModifyProfileComponent,
     FiltrAdvertismentComponent,
     AddAddvertismentComponent,
+    UserAddvertismentsComponent,
   ],
   imports: [
     BrowserModule,
