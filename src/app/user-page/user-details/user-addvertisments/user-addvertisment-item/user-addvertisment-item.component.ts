@@ -13,6 +13,7 @@ export class UserAddvertismentItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.shortAdvertisment.images[0]?.photo);
   }
 
   showDetails(): void {
@@ -28,7 +29,10 @@ export class UserAddvertismentItemComponent implements OnInit {
   }
 
   toggleActive(): void {
-    
+
+  }
+  getUrl(): string {
+    return 'url(' + this.shortAdvertisment.images[0]?.photo + ')';
   }
 
 }

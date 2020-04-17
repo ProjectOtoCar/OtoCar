@@ -3,7 +3,7 @@ import { Image } from './Image';
 export interface ShortAddvertisment {
     id: number;
     price: number;
-    dataAdd: Date;
+    dateAdd: Date;
     active: boolean;
     title: string;
     content: string;

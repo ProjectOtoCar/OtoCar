@@ -234,7 +234,7 @@
                 >
                 <option 
                 *ngFor="let typeFuel of TypeFuels"
-                [value]="typeFuel">{{typeFuel}}</option>
+                [value]="typeFuel">{{typeFuel | translateFuel}}</option>
                 </select>
                 <div *ngIf="isTypeFuelLoading" 
                 style="text-align: center;">

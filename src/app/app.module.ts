@@ -34,6 +34,7 @@ import { ModifyProfileComponent } from './user-page/user-details/modify-profile/
 import { AddAddvertismentComponent } from './user-page/user-details/add-addvertisment/add-addvertisment.component';
 import { UserAddvertismentsComponent } from './user-page/user-details/user-addvertisments/user-addvertisments.component';
 import { UserAddvertismentItemComponent } from './user-page/user-details/user-addvertisments/user-addvertisment-item/user-addvertisment-item.component';
+import { TranslateFuelPipe } from './pipes/translate/translate-fuel.pipe';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { UserAddvertismentItemComponent } from './user-page/user-details/user-ad
     AddAddvertismentComponent,
     UserAddvertismentsComponent,
     UserAddvertismentItemComponent,
+    TranslateFuelPipe,
   ],
   imports: [
     BrowserModule,

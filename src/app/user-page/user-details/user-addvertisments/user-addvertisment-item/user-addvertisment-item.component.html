@@ -1,8 +1,17 @@
 <div class="card" style="width: 80%; margin: 10px;">
-    <div 
+     <div 
+     *ngIf="this.shortAdvertisment.images[0]?.photo !== undefined"
     class="card-img-top" 
-    [ngStyle]="{'background-image': shortAdvertisment.images[0].photo}" 
-    ></div>
+    [ngStyle]="{
+      'background-image': getUrl()}"
+      style="
+      min-width: 100%;
+      min-height: 100%;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+      height: 9rem;"
+    ></div> 
     <div class="card-body">
       <h5 class="card-title">{{shortAdvertisment.title}}</h5>
       <p class="card-text">{{shortAdvertisment.content}}</p>
@@ -12,8 +21,8 @@
             <h5 class="row card-text">Cena:</h5>
         </li>
         <li class="list-group-item">
-            <div class="float-right">{{ shortAdvertisment.car.fuel }} </div>
-            <h5 class="row card-text">Rodzaj paliWwa:</h5>
+            <div class="float-right">{{ shortAdvertisment.car.fuel | translateFuel}} </div>
+            <h5 class="row card-text">Rodzaj paliwa:</h5>
         </li>
         <li class="list-group-item">
             <div class="float-right">{{ shortAdvertisment.car.firstRegistartion }} </div>
@@ -22,6 +31,10 @@
         <li class="list-group-item">
             <div class="float-right">{{ shortAdvertisment.car.mileage }} </div>
             <h5 class="row card-text">Przebieg:</h5>
+        </li>
+        <li class="list-group-item">
+          <div class="float-right">{{ shortAdvertisment.dateAdd }} </div>
+          <h5 class="row card-text">Data wystawienia:</h5>
         </li>
       </ul>
       <div style="width: 100%; display: flex; flex-direction: column;">
@@ -42,7 +55,7 @@
         (click)="deleteAddvertisment()">
         Usuń</button>
         <button 
-        *ngIf="shortAdvertisment.active === undefined"
+        *ngIf="shortAdvertisment.active !== undefined"
         type="button" 
         class="btn btn-info" 
         (click)="toggleActive()">
