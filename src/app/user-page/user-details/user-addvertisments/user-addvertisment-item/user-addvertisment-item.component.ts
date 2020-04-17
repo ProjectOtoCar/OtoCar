@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ShortAddvertisment } from 'src/app/interfaces/ShortAddvertisment.model';
+import { AddvertismentService } from 'src/app/services/addvertisment/addvertisment.service';
 
 @Component({
   selector: 'app-user-addvertisment-item',
@@ -8,9 +9,13 @@ import { ShortAddvertisment } from 'src/app/interfaces/ShortAddvertisment.model'
 })
 export class UserAddvertismentItemComponent implements OnInit {
 
+  isDeleteLoading = false;
+  isError = false;
   @Input() shortAdvertisment: ShortAddvertisment;
+  @Output() deleteEmitter = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(private addvertismentService: AddvertismentService) {
+   }
 
   ngOnInit(): void {
   }
@@ -23,8 +28,18 @@ export class UserAddvertismentItemComponent implements OnInit {
 
   }
 
-  deleteAddvertisment(): void {
-
+  deleteAddvertisment(id: number): void {
+    this.isDeleteLoading = true;
+    this.isError = false;
+    this.addvertismentService.deleteAddvertisment(id)
+    .subscribe(() => {
+       this.isDeleteLoading = false;
+       this.isError = false;
+       this.deleteEmitter.emit(id);
+    }, error => {
+      this.isDeleteLoading = false;
+      this.isError = true;
+    });
   }
 
   toggleActive(): void {

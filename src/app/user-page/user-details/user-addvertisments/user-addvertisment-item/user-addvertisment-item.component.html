@@ -13,6 +13,12 @@
       height: 9rem;"
     ></div> 
     <div class="card-body">
+      <div
+      *ngIf="isError" 
+      class="alert alert-danger" 
+      role="alert">
+        Coś poszło nie tak
+      </div>
       <h5 class="card-title">{{shortAdvertisment.title}}</h5>
       <p class="card-text">{{shortAdvertisment.content | shorterText}}</p>
       <ul class="list-group list-group-flush">
@@ -49,11 +55,19 @@
         style="color: white;" 
         (click)="modifyAddvertisment()">
         Modyfikuj</button>
-        <button 
+        <button
+        *ngIf="!isDeleteLoading; else deleteLoading" 
         type="button" 
         class="btn btn-danger" 
-        (click)="deleteAddvertisment()">
+        (click)="deleteAddvertisment(shortAdvertisment.id)">
         Usuń</button>
+        <ng-template #deleteLoading>
+          <button         
+          type="button" 
+          class="btn btn-danger" >
+            <app-spinner [size]="1"></app-spinner>
+          </button>
+        </ng-template>
         <button 
         *ngIf="shortAdvertisment.active !== undefined"
         type="button" 

@@ -2,7 +2,8 @@
     <h2>Ogłoszenia </h2>
     <app-user-addvertisment-item
     *ngFor="let shortAddvertisment of shortAddvertisments"
-    [shortAdvertisment]="shortAddvertisment"></app-user-addvertisment-item>
+    [shortAdvertisment]="shortAddvertisment"
+    (deleteEmitter)="deleteItem($event)"></app-user-addvertisment-item>
     <app-pagination
     [url]="['/user-page','user-addvertisments']"
     [currentPage]="page"

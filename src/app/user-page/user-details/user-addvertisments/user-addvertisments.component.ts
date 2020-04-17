@@ -45,6 +45,12 @@ export class UserAddvertismentsComponent implements OnInit {
       });
     });
   }
+
+  deleteItem(id: number): void {
+    this.shortAddvertisments = this.shortAddvertisments
+    .filter((shortAddvertisment: ShortAddvertisment) => shortAddvertisment.id !== id);
+  }
+
   random(): number {
     return Math.random();
   }

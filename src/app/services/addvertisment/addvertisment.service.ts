@@ -18,6 +18,11 @@ export class AddvertismentService {
     .post<Addvertisment>(`${environment.basicUrl}/api/advertisement`, add);
   }
 
+  deleteAddvertisment(id: number): Observable<any> {
+    return this.http
+    .delete(`${environment.basicUrl}/api/advertisement/${id}`);
+  }
+
   getAddvertismentBySeller(idSeller: number, page: number = 1): Observable<[ShortAddvertisment[], number]> {
     let searchParams = new HttpParams();
     searchParams = searchParams.append('page', '' + page);
