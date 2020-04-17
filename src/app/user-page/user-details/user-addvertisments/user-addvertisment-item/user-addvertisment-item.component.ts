@@ -13,7 +13,6 @@ export class UserAddvertismentItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.shortAdvertisment.images[0]?.photo);
   }
 
   showDetails(): void {

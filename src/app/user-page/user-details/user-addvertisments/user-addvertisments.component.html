@@ -1,5 +1,4 @@
-
-<div>
+<div *ngIf="!isLoading && !isError">
     <h2>Ogłoszenia </h2>
     <app-user-addvertisment-item
     *ngFor="let shortAddvertisment of shortAddvertisments"
@@ -10,4 +9,10 @@
     [maxPage]="maxPage"
     [queryParams]="queryParams"
     ></app-pagination>
+</div>
+<div 
+*ngIf="isLoading"
+style="display: flex; align-items: center; justify-content: center;"
+>
+    <app-spinner></app-spinner>
 </div>

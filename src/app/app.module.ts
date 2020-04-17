@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-import {NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +35,7 @@ import { AddAddvertismentComponent } from './user-page/user-details/add-addverti
 import { UserAddvertismentsComponent } from './user-page/user-details/user-addvertisments/user-addvertisments.component';
 import { UserAddvertismentItemComponent } from './user-page/user-details/user-addvertisments/user-addvertisment-item/user-addvertisment-item.component';
 import { TranslateFuelPipe } from './pipes/translate/translate-fuel.pipe';
+import { ShorterTextPipe } from './pipes/shorter-text/shorter-text.pipe';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { TranslateFuelPipe } from './pipes/translate/translate-fuel.pipe';
     UserAddvertismentsComponent,
     UserAddvertismentItemComponent,
     TranslateFuelPipe,
+    ShorterTextPipe,
   ],
   imports: [
     BrowserModule,
