@@ -12,12 +12,29 @@
   font-weight: 300;
   line-height: 1.7;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--premium-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 html {
   max-width: 1920px;
   margin: 0 auto;
 }
 body {
-  height: 100vh;
+  min-height: 100vh;
 }
 .main{
  flex-grow: 1;
