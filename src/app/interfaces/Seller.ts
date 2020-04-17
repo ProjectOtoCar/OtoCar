@@ -8,4 +8,6 @@ export interface Seller {
     isPremium?: boolean;
     premiumAccount: Date;
     lastAddvertisement: Date;
+    nextAddvertisment?: Date;
+    canCreateAddvertisement?: boolean;
 }

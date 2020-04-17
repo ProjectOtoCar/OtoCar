@@ -11,26 +11,43 @@
 <div *ngIf="isLoading" style="display: flex; align-items: center; justify-content: center;">
     <app-spinner ></app-spinner>
 </div>
-<div *ngIf="!isError && !isLoading">
-    <div>
-        <h2 class="left">{{seller?.firstName | upperCaseFirstLetter}}</h2>
-    </div>
-    <div class = "d-flex flex-row bd-highlight mb-3 justify-content-around" style="max-width: 330px;">
-        <ul class="list-no-style right">
-            <li>Imie: </li>
-            <li>Nazwisko: </li>
-            <li>numer telefonu </li>
-            <li>data dołączenia: </li>
-            <li>Typ konta: </li>
-            <li *ngIf="seller?.isPremium" class="primary-color"> Konto premium do</li>
-        </ul>
-        <ul class="list-no-style left">
-            <li>{{seller?.firstName | upperCaseFirstLetter}}</li>
-            <li>{{seller?.lastName | upperCaseFirstLetter}}</li>
-            <li>{{seller?.phoneNumber}}</li>
-            <li>{{seller?.createAccount}}</li>
-            <li>{{seller?.type | uppercase}}</li>
-            <li *ngIf="seller?.isPremium" class="primary-color">{{seller?.premiumAccount}}</li>
+<div 
+*ngIf="!isError && !isLoading"
+class="card"> 
+    <div class="card-body">
+        <h2 class="card-title">{{seller?.firstName | upperCaseFirstLetter}}</h2>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <div class="float-right">{{seller?.firstName | upperCaseFirstLetter}}</div>
+                <h6 class="row card-text">Imie:</h6>
+            </li>
+            <li class="list-group-item">
+                <div class="float-right">{{seller?.lastName | upperCaseFirstLetter}}</div>
+                <h6 class="row card-text">Nazwisko</h6>
+            </li>
+            <li class="list-group-item">
+                <div class="float-right">{{seller?.phoneNumber}}</div>
+                <h6 class="row card-text">Numer telefonu</h6>
+            </li>
+            <li class="list-group-item">
+                <div class="float-right">{{seller?.createAccount}}</div>
+                <h6 class="row card-text">Data dołączenia: </h6>
+            </li>
+            <li class="list-group-item">
+                <div class="float-right">{{seller?.type | uppercase}}</div>
+                <h6 class="row card-text">Typ konta: </h6>
+            </li>
+            <li class="list-group-item"
+            *ngIf="seller?.isPremium; else notPremium" >
+                <div class="float-right primary-color">{{seller?.premiumAccount}}</div>
+                <h6 class="row card-text primary-color"> Konto premium do </h6>
+            </li>
+            <ng-template #notPremium>
+                <li class="list-group-item">
+                    <div class="float-right">{{seller?.nextAddvertisment}}</div>
+                    <h6 class="row card-text">Następne ogłoszenie: </h6>
+                </li>
+            </ng-template>
         </ul>
     </div>
 </div>
