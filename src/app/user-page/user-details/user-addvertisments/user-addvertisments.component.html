@@ -16,3 +16,16 @@ style="display: flex; align-items: center; justify-content: center;"
 >
     <app-spinner></app-spinner>
 </div>
+<div 
+class="alert alert-danger"
+ role="alert"
+ *ngIf="isError"
+ >
+    Coś poszło nie tak 
+    <a 
+    class="alert-link"
+    [routerLink]="['/user-page','user-addvertisments']"
+    [queryParamsHandling]="'merge'"
+    [queryParams]="{afd: random()}"
+    routerLinkActive="active">spróbuj ponownie</a>
+  </div>

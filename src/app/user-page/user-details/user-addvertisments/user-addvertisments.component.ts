@@ -31,7 +31,7 @@ export class UserAddvertismentsComponent implements OnInit {
         this.page = params.page;
       }
       this.sellerId = params.userId;
-      this.queryParams = {userId: this.sellerId, page: this.page}
+      this.queryParams = {userId: this.sellerId, page: this.page};
       this.addvertismentService
       .getAddvertismentBySeller(this.sellerId, this.page)
       .subscribe(([shortAddvertisments, totalPages]) => {
@@ -44,5 +44,8 @@ export class UserAddvertismentsComponent implements OnInit {
         this.isError = true;
       });
     });
+  }
+  random(): number {
+    return Math.random();
   }
 }
