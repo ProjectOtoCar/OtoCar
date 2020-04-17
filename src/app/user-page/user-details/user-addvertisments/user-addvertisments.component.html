@@ -1,4 +1,4 @@
-<div *ngIf="!isLoading && !isError">
+<div *ngIf="!isLoading && !isError && shortAddvertisments?.length > 0">
     <h2>Ogłoszenia </h2>
     <app-user-addvertisment-item
     *ngFor="let shortAddvertisment of shortAddvertisments"
@@ -9,6 +9,9 @@
     [maxPage]="maxPage"
     [queryParams]="queryParams"
     ></app-pagination>
+</div>
+<div *ngIf="shortAddvertisments?.length === 0">
+    <h2>Nie ma tu żadnych ogłoszeń :/</h2>
 </div>
 <div 
 *ngIf="isLoading"
