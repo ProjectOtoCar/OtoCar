@@ -1,1 +1,52 @@
-<p>user-addvertisment-item works!</p>
+<div class="card" style="width: 80%; margin: 10px;">
+    <div 
+    class="card-img-top" 
+    [ngStyle]="{'background-image': shortAdvertisment.images[0].photo}" 
+    ></div>
+    <div class="card-body">
+      <h5 class="card-title">{{shortAdvertisment.title}}</h5>
+      <p class="card-text">{{shortAdvertisment.content}}</p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div class="float-right">{{ shortAdvertisment.price }} zł</div>
+            <h5 class="row card-text">Cena:</h5>
+        </li>
+        <li class="list-group-item">
+            <div class="float-right">{{ shortAdvertisment.car.fuel }} </div>
+            <h5 class="row card-text">Rodzaj paliWwa:</h5>
+        </li>
+        <li class="list-group-item">
+            <div class="float-right">{{ shortAdvertisment.car.firstRegistartion }} </div>
+            <h5 class="row card-text">Pierwsza rejestracja:</h5>
+        </li>
+        <li class="list-group-item">
+            <div class="float-right">{{ shortAdvertisment.car.mileage }} </div>
+            <h5 class="row card-text">Przebieg:</h5>
+        </li>
+      </ul>
+      <div style="width: 100%; display: flex; flex-direction: column;">
+        <button
+        type="button"
+        class="btn btn-success" 
+        (click)="showDetails()"
+        >Zobacz</button>
+        <button 
+        type="button" 
+        class="btn btn-warning" 
+        style="color: white;" 
+        (click)="modifyAddvertisment()">
+        Modyfikuj</button>
+        <button 
+        type="button" 
+        class="btn btn-danger" 
+        (click)="deleteAddvertisment()">
+        Usuń</button>
+        <button 
+        *ngIf="shortAdvertisment.active === undefined"
+        type="button" 
+        class="btn btn-info" 
+        (click)="toggleActive()">
+        {{shortAdvertisment.active ? 'zdeaktywuj' : 'aktywuj'}}</button>
+      </div>
+    </div>
+  </div>
