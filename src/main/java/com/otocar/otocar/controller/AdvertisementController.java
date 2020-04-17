@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/advertisement")
@@ -52,7 +52,27 @@ public class AdvertisementController {
     @GetMapping("seller/{id}")
     public Page<Advertisement> findAllAdvertisementBySeller(@PathVariable(value = "id") Long id, @RequestParam(defaultValue = "1")int page) {
         Page<Advertisement> advertisementPage = advertisementService.findAllAdvertisementBySeller(id,page);
-        advertisementPage.forEach(advertisement -> advertisement.getCity().setAdvertisements(null));
+        Set<Image> imageTreeSet = new HashSet<>();
+        advertisementPage.forEach(advertisement -> {
+            advertisement.getCity().setAdvertisements(null);
+            advertisement.getCar().setBrand(null);
+            advertisement.getCar().setModel(null);
+            advertisement.getCar().setColor(null);
+            advertisement.getCar().setTypeCar(null);
+            advertisement.getSeller().setFirstName(null);
+            advertisement.getSeller().setLastName(null);
+            advertisement.getSeller().setType(null);
+            advertisement.getSeller().setPhoneNumber(null);
+            advertisement.getSeller().setCreateAccount(null);
+            if(advertisement.getImages().size() > 1) {
+                advertisement.getImages().forEach(image -> {
+                    if(!image.isMainImage() && imageTreeSet.size() < 1) {
+                        imageTreeSet.add(image);
+                    }
+                });
+                advertisement.setImages(imageTreeSet);
+            }
+        });
         return advertisementPage;
     }
 
