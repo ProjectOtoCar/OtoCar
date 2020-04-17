@@ -43,10 +43,17 @@ class="card">
                 <h6 class="row card-text primary-color"> Konto premium do </h6>
             </li>
             <ng-template #notPremium>
-                <li class="list-group-item">
-                    <div class="float-right">{{seller?.nextAddvertisment}}</div>
-                    <h6 class="row card-text">Następne ogłoszenie: </h6>
+                <li class="list-group-item"
+                *ngIf="seller?.canCreateAddvertisement; else notAllow">
+                    <div class="float-right success-color">Dostępne</div>
+                    <h6 class="row card-text success-color">Następne ogłoszenie: </h6>
                 </li>
+                <ng-template #notAllow>
+                    <li class="list-group-item">
+                        <div class="float-right danger-color">{{seller?.nextAddvertisment | dateFormat}}</div>
+                        <h6 class="row card-text danger-color">Następne ogłoszenie: </h6>
+                    </li>
+                </ng-template>
             </ng-template>
         </ul>
     </div>

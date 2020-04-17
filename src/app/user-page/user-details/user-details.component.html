@@ -23,6 +23,7 @@
         <a 
         *ngIf="isFoundUser"
         class="list-group-item list-group-item-action"
+        [ngClass]="{'disabled': !seller?.canCreateAddvertisement}"
         [routerLink]="['add-advertisment']"
         [queryParams]="queryParams"
         routerLinkActive="active" 

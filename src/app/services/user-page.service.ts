@@ -21,16 +21,20 @@ export class UserPageService {
     .pipe(map((seller: Seller) => {
       seller.isPremium = Date.parse(String(seller.premiumAccount)) >= Date.now();
       if (!seller.isPremium) {
-        const date = new Date(seller.lastAddvertisement);
-        date.setDate(date.getDate() + 30);
-        seller.nextAddvertisment = date;
+        if (seller.lastAddvertisement !== null) {
+          const date = new Date(seller.lastAddvertisement);
+          date.setDate(date.getDate() + 30);
+          seller.nextAddvertisment = date;
+        } else {
+          seller.nextAddvertisment = new Date(Date.now());
+        }
       }
       if (seller.lastAddvertisement === null
          || seller.lastAddvertisement === undefined
          || seller.isPremium === true
          || seller.nextAddvertisment.getMilliseconds() >= Date.now()) {
           seller.canCreateAddvertisement = true;
-         };
+         }
       return seller;
     }));
   }

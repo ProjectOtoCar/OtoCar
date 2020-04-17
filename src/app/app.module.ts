@@ -36,6 +36,7 @@ import { UserAddvertismentsComponent } from './user-page/user-details/user-addve
 import { UserAddvertismentItemComponent } from './user-page/user-details/user-addvertisments/user-addvertisment-item/user-addvertisment-item.component';
 import { TranslateFuelPipe } from './pipes/translate/translate-fuel.pipe';
 import { ShorterTextPipe } from './pipes/shorter-text/shorter-text.pipe';
+import { DateFormatPipe } from './pipes/dateFormat/date-format.pipe';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { ShorterTextPipe } from './pipes/shorter-text/shorter-text.pipe';
     UserAddvertismentItemComponent,
     TranslateFuelPipe,
     ShorterTextPipe,
+    DateFormatPipe,
   ],
   imports: [
     BrowserModule,
