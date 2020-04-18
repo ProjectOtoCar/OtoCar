@@ -70,8 +70,12 @@ public class AdvertisementService extends AddPagable {
             optionalAdvertisement.get().setContent((String) fields.get("content"));
             isEdit = true;
         }
+        if (fields.get("active") != null) {
+            optionalAdvertisement.get().setActive((Boolean) fields.get("active"));
+            isEdit = true;
+        }
 
-        if(isEdit==true){
+        if(isEdit){
            advertisementRepository.save(optionalAdvertisement.get());
         }
         return Optional.empty();
