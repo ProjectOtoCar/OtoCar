@@ -7,7 +7,10 @@ export interface Addvertisment {
     title: string;
     content: string;
     seller: {
-        id: number
+        id: number,
+        firstName?: string;
+        lastName?: string;
+        phoneNumber?: string;
     };
     city: {
         id: number
@@ -20,11 +23,13 @@ interface Car {
     id?: number;
     brand: {
         id: number;
+        name?: string
     };
     engine: number;
     enginePower: number;
     model: {
-        id: number
+        id: number,
+        name?: string
     };
     fuel: string;
     mileage: number;
