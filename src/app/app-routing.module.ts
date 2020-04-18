@@ -29,9 +29,9 @@ const routes: Routes = [
   {path: 'user-page', component: UserDetailsComponent, children:
   [
     {path: 'user-data', component: UserDataComponent},
-    {path: 'user-addvertisments', component: UserAddvertismentsComponent},
+    {path: 'user-advertisements', component: UserAddvertismentsComponent},
     {path: 'buy-premium', component: UserPageComponent},
-    {path: 'add-advertisment', component: AddAddvertismentComponent},
+    {path: 'add-advertisement', component: AddAddvertismentComponent},
     {path: 'edit-profile', component: ModifyProfileComponent}
   ]},
   {path: 'registration', component: RegistrationComponent},
@@ -41,7 +41,7 @@ const routes: Routes = [
   {path: 'business-statute', component: BusinessStatuteComponent},
   {path: 'privacy-policy', component: PrivacyPolicyComponent},
   {path: 'cookie-policy', component: CookiePolicyComponent},
-  {path: 'one', component: OneAdvertismentComponent},
+  {path: 'advertisement', component: OneAdvertismentComponent},
   {path: 'contact', component: ContactFormComponent},
   {path: 'filtrAdv', component: FiltrAdvertismentComponent},
   {path: 'not-found', component: ErrorComponent, data: {message: 'Nic tutaj nie ma', error: 404, subMessage: 'strona nie znaleziona!'}},

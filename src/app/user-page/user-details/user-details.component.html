@@ -9,7 +9,7 @@
         >Dane użytkownika</a>
         <a 
         class="list-group-item list-group-item-action"
-        [routerLink]="['user-addvertisments']"
+        [routerLink]="['user-advertisements']"
         [queryParams]="queryParams"
         routerLinkActive="active" 
         >Ogłoszenia użytkownika</a>
@@ -24,7 +24,7 @@
         *ngIf="isFoundUser"
         class="list-group-item list-group-item-action"
         [ngClass]="{'disabled': !seller?.canCreateAddvertisement}"
-        [routerLink]="['add-advertisment']"
+        [routerLink]="['add-advertisement']"
         [queryParams]="queryParams"
         routerLinkActive="active" 
         >Dodaj ogłoszenie</a>

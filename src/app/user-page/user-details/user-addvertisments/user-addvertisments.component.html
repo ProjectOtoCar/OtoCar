@@ -5,7 +5,7 @@
     [shortAdvertisment]="shortAddvertisment"
     (deleteEmitter)="deleteItem($event)"></app-user-addvertisment-item>
     <app-pagination
-    [url]="['/user-page','user-addvertisments']"
+    [url]="['/user-page','user-advertisements']"
     [currentPage]="page"
     [maxPage]="maxPage"
     [queryParams]="queryParams"
@@ -28,7 +28,7 @@ class="alert alert-danger"
     Coś poszło nie tak 
     <a 
     class="alert-link"
-    [routerLink]="['/user-page','user-addvertisments']"
+    [routerLink]="['/user-page','user-advertisements']"
     [queryParamsHandling]="'merge'"
     [queryParams]="{userId: sellerId, page: 1}"
     routerLinkActive="active">spróbuj ponownie</a>
