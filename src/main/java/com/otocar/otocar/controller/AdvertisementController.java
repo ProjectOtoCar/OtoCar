@@ -66,7 +66,7 @@ public class AdvertisementController {
             advertisement.getSeller().setCreateAccount(null);
             if(advertisement.getImages().size() > 1) {
                 advertisement.getImages().forEach(image -> {
-                    if(!image.isMainImage() && imageTreeSet.size() < 1) {
+                    if(image.isMainImage() && imageTreeSet.size() < 1) {
                         imageTreeSet.add(image);
                     }
                 });
