@@ -1,0 +1,9 @@
+<div class="alert alert-danger" role="alert">
+   {{errorMessage | upperCaseFirstLetter}}
+   <a 
+   *ngIf="isLink"
+   class="alert-link"
+   [routerLink]="url"
+   [queryParams]="queryParams"
+   >{{linkMessage}}</a>
+</div>
