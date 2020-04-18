@@ -9,10 +9,12 @@ import { AddvertismentService } from 'src/app/services/addvertisment/addvertisme
 })
 export class UserAddvertismentItemComponent implements OnInit {
 
-  isDeleteLoading = false;
-  isError = false;
   @Input() shortAdvertisment: ShortAddvertisment;
   @Output() deleteEmitter = new EventEmitter<number>();
+
+  isDeleteLoading = false;
+  isError = false;
+  isToogleActiveLoading = false;
 
   constructor(private addvertismentService: AddvertismentService) {
    }
@@ -43,7 +45,21 @@ export class UserAddvertismentItemComponent implements OnInit {
   }
 
   toggleActive(): void {
-
+    this.isToogleActiveLoading = true;
+    this.isError = false;
+    this.addvertismentService
+    .patchAddvertisment(
+      this.shortAdvertisment.id,
+      {
+        active: !this.shortAdvertisment.active
+      }).subscribe(() => {
+        this.isToogleActiveLoading = false;
+        this.isError = false;
+        this.shortAdvertisment.active = !this.shortAdvertisment.active;
+      }, error => {
+        this.isToogleActiveLoading = false;
+        this.isError = true;
+      });
   }
   getUrl(): string {
     return 'url(' + this.shortAdvertisment.images[0]?.photo + ')';

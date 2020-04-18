@@ -1,4 +1,7 @@
-<div class="card" style="width: 80%; margin: 10px;">
+<div 
+[ngClass]="{'not-active': !shortAdvertisment?.active}"
+class="card" 
+style="width: 80%; margin: 10px;">
      <div 
      *ngIf="this.shortAdvertisment.images[0]?.photo !== undefined"
     class="card-img-top" 
@@ -69,11 +72,18 @@
           </button>
         </ng-template>
         <button 
-        *ngIf="shortAdvertisment.active !== undefined"
+        *ngIf="shortAdvertisment.active !== undefined && !isToogleActiveLoading"
         type="button" 
         class="btn btn-info" 
         (click)="toggleActive()">
         {{shortAdvertisment.active ? 'zdeaktywuj' : 'aktywuj'}}</button>
+        <button
+        *ngIf="isToogleActiveLoading"
+        type="button"
+        class="btn btn-info" 
+        >
+          <app-spinner [size]="1"></app-spinner>
+        </button>
       </div>
     </div>
   </div>

@@ -25,7 +25,7 @@ export class UserAddvertismentsComponent implements OnInit, OnDestroy{
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams
+    this.paramsSub = this.activatedRoute.queryParams
     .subscribe((params: Params) => {
       this.isLoading = true;
       this.isError = false;
