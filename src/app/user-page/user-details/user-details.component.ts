@@ -34,7 +34,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
         this.userId = 2; // zmienic na id usera zalogowanego
       }
       this.queryParams = {...this.queryParams, userId: this.userId};
-      this.route.navigate([], {relativeTo: this.activatedRoute, queryParams: {...this.queryParams} , queryParamsHandling: 'preserve'});
+      // this.route.navigate([], {relativeTo: this.activatedRoute, queryParams: {...this.queryParams} , queryParamsHandling: 'merge'});
       this.userPageService.downloadUserData(this.userId)
       .subscribe((seller: Seller) => {
         this.userPageService.isError.next(false);

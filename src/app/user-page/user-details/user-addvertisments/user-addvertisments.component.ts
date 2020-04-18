@@ -25,11 +25,12 @@ export class UserAddvertismentsComponent implements OnInit, OnDestroy{
   ) { }
 
   ngOnInit(): void {
-    this.paramsSub = this.activatedRoute.queryParams
+    this.activatedRoute.queryParams
     .subscribe((params: Params) => {
       this.isLoading = true;
       this.isError = false;
       this.sellerId = params.userId;
+      this.page = params.page || 1;
       this.queryParams = {userId: this.sellerId, page: this.page};
       this.addvertismentService
       .getAddvertismentBySeller(this.sellerId, this.page)
@@ -38,10 +39,8 @@ export class UserAddvertismentsComponent implements OnInit, OnDestroy{
         this.isError = false;
         this.maxPage = totalPages;
         this.shortAddvertisments = shortAddvertisments;
-        if (typeof params.page === 'number'
-        || +this.maxPage < +this.page
-        || this.page < 1
-        || this.page === Infinity) {
+        if (+this.maxPage < Number(this.page)
+        || this.page < 1) {
           this.route.navigate([],
             {
               relativeTo: this.activatedRoute,
@@ -62,7 +61,7 @@ export class UserAddvertismentsComponent implements OnInit, OnDestroy{
       this.route.navigate([],
         {
           relativeTo: this.activatedRoute,
-          queryParams: this.queryParams
+          queryParams: {...this.queryParams, afc: Math.random()}
         });
     }
   }
@@ -72,6 +71,6 @@ export class UserAddvertismentsComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-   this.paramsSub.unsubscribe();
+   this.paramsSub?.unsubscribe();
   }
 }
