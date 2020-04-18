@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./error-message.component.scss']
 })
 export class ErrorMessageComponent implements OnInit {
-  @Input() errorMessage = 'Coś poszło nie tak';
+  @Input() errorMessage = 'Coś poszło nie tak.';
   @Input() isLink = false;
   @Input() url: string[];
   @Input() queryParams;
@@ -14,6 +14,7 @@ export class ErrorMessageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.queryParams = {...this.queryParams, afc: Math.random()};
   }
 
 }
