@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AddvertismentService } from 'src/app/services/addvertisment/addvertisment.service';
 import { ShortAddvertisment } from 'src/app/interfaces/ShortAddvertisment.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-addvertisments',
   templateUrl: './user-addvertisments.component.html',
   styleUrls: ['./user-addvertisments.component.scss']
 })
-export class UserAddvertismentsComponent implements OnInit {
+export class UserAddvertismentsComponent implements OnInit, OnDestroy{
   isLoading = false;
   isError = false;
   page = 1;
@@ -16,20 +17,18 @@ export class UserAddvertismentsComponent implements OnInit {
   sellerId: number;
   queryParams = {};
   shortAddvertisments: ShortAddvertisment[];
+  paramsSub: Subscription;
   constructor(
     private addvertismentService: AddvertismentService,
-    private router: Router,
+    private route: Router,
     private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams
+    this.paramsSub = this.activatedRoute.queryParams
     .subscribe((params: Params) => {
       this.isLoading = true;
       this.isError = false;
-      if (params.page !== undefined) {
-        this.page = params.page;
-      }
       this.sellerId = params.userId;
       this.queryParams = {userId: this.sellerId, page: this.page};
       this.addvertismentService
@@ -39,6 +38,16 @@ export class UserAddvertismentsComponent implements OnInit {
         this.isError = false;
         this.maxPage = totalPages;
         this.shortAddvertisments = shortAddvertisments;
+        if (typeof params.page === 'number'
+        || +this.maxPage < +this.page
+        || this.page < 1
+        || this.page === Infinity) {
+          this.route.navigate([],
+            {
+              relativeTo: this.activatedRoute,
+              queryParams: {...this.queryParams, page: 1}
+            });
+        }
       }, error => {
         this.isLoading = false;
         this.isError = true;
@@ -49,9 +58,20 @@ export class UserAddvertismentsComponent implements OnInit {
   deleteItem(id: number): void {
     this.shortAddvertisments = this.shortAddvertisments
     .filter((shortAddvertisment: ShortAddvertisment) => shortAddvertisment.id !== id);
+    if (this.shortAddvertisments.length === 0) {
+      this.route.navigate([],
+        {
+          relativeTo: this.activatedRoute,
+          queryParams: this.queryParams
+        });
+    }
   }
 
   random(): number {
     return Math.random();
+  }
+
+  ngOnDestroy(): void {
+   this.paramsSub.unsubscribe();
   }
 }

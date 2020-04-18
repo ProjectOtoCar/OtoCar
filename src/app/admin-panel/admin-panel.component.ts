@@ -92,7 +92,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
         .subscribe(([response, maxPage]) => {
         this.datas = response;
         this.maxPage = maxPage;
-        if (+this.maxPage < +this.page) {
+        if (+this.maxPage < +this.page || this.page < 1 ) {
           this.route.navigate([],
             {
               relativeTo: this.activatedRoute,
