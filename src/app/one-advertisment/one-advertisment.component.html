@@ -1,43 +1,53 @@
-<div class="container" style="margin-top: 50px">
+<section
+*ngIf="!isLoading && !isError" 
+class="container" 
+style="margin-top: 50px">
   <div class=" row row row-cols-md-2 row-cols-1 mx-auto">
   <div >
-    <ngb-carousel style="">
-      <ng-template ngbSlide>
-        <img src="https://picsum.photos/600/300" alt="Delhi Metro">
-
-      </ng-template>
-      <ng-template ngbSlide>
-        <img src="https://picsum.photos/600/300" alt="Bangalore Metro">
-
-      </ng-template>
-      <ng-template ngbSlide>
-        <img src="https://picsum.photos/600/300" alt="Channai Metro">
-        <div class="carousel-caption">
+    <ngb-carousel style="height: 350px; width: 100%;">
+      <ng-template 
+      ngbSlide 
+      *ngFor="let image of addvertisment.images">
+      <button 
+      (click)="showImage(image.photo)" 
+      style="background-color: transparent;
+       border-color: transparent;
+       width: 100%;">
+        <div 
+        [ngStyle]="{'background-image': 'url('+image.photo+')'}"
+        style="height: 350px;
+        background-repeat: no-repeat;
+        background-size: cover;">
         </div>
-      </ng-template>
-      <ng-template ngbSlide>
-        <img src="https://picsum.photos/600/300" alt="Jaipur Metro">
-
-      </ng-template>
-      <ng-template ngbSlide>
-        <img src="https://picsum.photos/600/300" alt="Mumbai Metro">
+      </button>
       </ng-template>
     </ngb-carousel>
   </div>
   <div class="text-center">
-    <div><p class="text-center">Sprzedający: xyz</p></div>
     <div>
-     <H5> Cena: </H5>
-         <h3> 10 000</h3>
+      <p class="text-center">Sprzedający 
+        <a
+        [ngClass]="{'premium-color': addvertisment?.seller.isPremium}"
+        class="alert-link"
+        [routerLink]="['/user-page', 'user-data']"
+        [queryParams]="{userId: addvertisment?.seller.id}"
+        >{{addvertisment?.seller.firstName + " " + addvertisment?.seller.lastName}}
+        </a>
+      </p>
+    </div>
+    <div>
+     <H5> Cena </H5>
+         <h3>{{addvertisment.price}} zł</h3>
    </div>
     <button class="btn btn-primary" style="margin-top: 20px">Napisz wiadomość do sprzedającego</button>
     <div style="margin-top: 20px">
-      <p>
-      Numer telefonu</p>
-      <h4>+45 457 85 64</h4>
+      <p>Numer telefonu</p>
+      <h4>
+        <app-tel-link [phoneNumber]="addvertisment.seller.phoneNumber"></app-tel-link>
+      </h4>
     </div>
     <div>
-      <p> Dodane 3 dni temu!</p>
+      <p> Dodane {{addvertisment?.dateAdd}}</p>
     </div>
   </div>
   </div>
@@ -45,39 +55,59 @@
     <tbody>
     <tr>
       <th scope="row">Marka:</th>
-      <td>dupa</td>
+      <td>{{addvertisment?.car.brand.name}}</td>
 
     </tr>
     <tr>
       <th scope="row">Model:</th>
-      <td>Jacob</td>
+      <td>{{addvertisment?.car.model.name}}</td>
 
     </tr>
     <tr>
       <th scope="row">Rok produkcji:</th>
-      <td>Larry</td>
+      <td>{{addvertisment?.car.firstRegistartion}}</td>
 
     </tr>
     <tr>
       <th scope="row">Przebieg:</th>
-      <td>Larry</td>
+      <td>{{addvertisment?.car.mileage}}</td>
     </tr>
     <tr>
       <th scope="row">Rodzaj paliwa:</th>
-      <td>Larry</td>
+      <td>{{addvertisment?.car.fuel | translateFuel}}</td>
     </tr>
     <tr>
       <th scope="row">Typ:</th>
-      <td>Larry</td>
+      <td>{{addvertisment?.car.typeCar}}</td>
     </tr>
     <tr>
       <th scope="row">Color:</th>
-      <td>Larry</td>
+      <td>{{addvertisment?.car.color}}</td>
     </tr>
     </tbody>
   </table>
   <div>
-    <h4 class="text-center">Tytuł</h4>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aspernatur at consequuntur cupiditate doloribus dolorum, ea expedita explicabo ipsam laborum molestiae optio perspiciatis quod quos ratione tempore ut? Aliquam facere fugiat harum ipsam ipsum iure sapiente soluta unde? Accusamus alias culpa fuga fugit harum iste itaque, laboriosam neque nisi non officia quibusdam sint voluptatem. At consectetur cumque debitis dolorem dolores, magnam molestias optio placeat porro quae quam quas quisquam quod unde vel. Aliquam assumenda, blanditiis commodi harum maiores nemo quis quod ullam ut vel. Aperiam aspernatur beatae, consequatur ducimus eius illo itaque laborum officiis qui, sapiente, soluta voluptatibus. Atque, quae?</p>
+    <h3 class="text-center">{{addvertisment.title}}</h3>
+    <p style="min-height: 200px;">{{addvertisment.content}}</p>
   </div>
+</section>
+<div *ngIf="isLoading || isError"
+style="width: 100%;
+ margin-top: 30px;
+ display: flex;
+ justify-content: center;
+ align-items: center;">
+  <app-spinner *ngIf="isLoading"></app-spinner>
+  <app-error-message 
+  *ngIf="isError"
+  [isLink]="true"
+  [url]="['/advertisement']"
+  [queryParams]="{id: addvertisment.id}"
+  [linkMessage]="' Spróbuj ponownie!'"></app-error-message>
 </div>
+<app-image-modal
+*ngIf="isShowImageModal"
+[image]="currentPhoto"
+(closeModal)="closeImageModal()"
+>
+</app-image-modal>

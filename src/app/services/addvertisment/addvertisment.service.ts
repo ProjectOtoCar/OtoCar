@@ -37,8 +37,17 @@ export class AddvertismentService {
     {
       params: searchParams
     }).pipe(map((data: any) => {
-        const shortAddvertismentPage: [ShortAddvertisment] = data.content;
+        const shortAddvertismentPage: ShortAddvertisment[] = data.content;
         return [shortAddvertismentPage, data.totalPages];
+    }));
+  }
+
+  getAdvertisement(id: number): Observable<Addvertisment> {
+    return this.http
+    .get<Addvertisment>(`${environment.basicUrl}/api/advertisement/${id}`)
+    .pipe(map((add: Addvertisment) => {
+      add.seller.isPremium = Date.parse(String(add.seller.premiumAccount)) >= Date.now();
+      return add;
     }));
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ShortAddvertisment } from 'src/app/interfaces/ShortAddvertisment.model';
 import { AddvertismentService } from 'src/app/services/addvertisment/addvertisment.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-addvertisment-item',
@@ -16,28 +17,38 @@ export class UserAddvertismentItemComponent implements OnInit {
   isError = false;
   isToogleActiveLoading = false;
 
-  constructor(private addvertismentService: AddvertismentService) {
+  constructor(
+    private addvertismentService: AddvertismentService,
+    private route: Router
+    ) {
    }
 
   ngOnInit(): void {
   }
 
   showDetails(): void {
-
+    this.route
+    .navigate(['advertisement'],
+    {
+      queryParams:
+      {
+        id: this.shortAdvertisment.id
+      }
+    });
   }
 
   modifyAddvertisment(): void {
 
   }
 
-  deleteAddvertisment(id: number): void {
+  deleteAddvertisment(): void {
     this.isDeleteLoading = true;
     this.isError = false;
-    this.addvertismentService.deleteAddvertisment(id)
+    this.addvertismentService.deleteAddvertisment(this.shortAdvertisment.id)
     .subscribe(() => {
        this.isDeleteLoading = false;
        this.isError = false;
-       this.deleteEmitter.emit(id);
+       this.deleteEmitter.emit(this.shortAdvertisment.id);
     }, error => {
       this.isDeleteLoading = false;
       this.isError = true;

@@ -62,7 +62,7 @@ style="width: 80%; margin: 10px;">
         *ngIf="!isDeleteLoading; else deleteLoading" 
         type="button" 
         class="btn btn-danger" 
-        (click)="deleteAddvertisment(shortAdvertisment.id)">
+        (click)="deleteAddvertisment()">
         Usuń</button>
         <ng-template #deleteLoading>
           <button         
