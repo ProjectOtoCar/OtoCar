@@ -26,7 +26,9 @@ class="card">
                 <h6 class="row card-text">Nazwisko</h6>
             </li>
             <li class="list-group-item">
-                <div class="float-right">{{seller?.phoneNumber}}</div>
+                <div class="float-right">
+                    <app-tel-link [phoneNumber]="seller?.phoneNumber"></app-tel-link>
+                </div>
                 <h6 class="row card-text">Numer telefonu</h6>
             </li>
             <li class="list-group-item">
