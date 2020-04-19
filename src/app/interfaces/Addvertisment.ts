@@ -1,4 +1,5 @@
 import {Image} from './Image';
+import { Seller } from './Seller';
 export interface Addvertisment {
     id?: number;
     price: number;
@@ -6,12 +7,7 @@ export interface Addvertisment {
     active: boolean;
     title: string;
     content: string;
-    seller: {
-        id: number,
-        firstName?: string;
-        lastName?: string;
-        phoneNumber?: string;
-    };
+    seller: Seller;
     city: {
         id: number
     };

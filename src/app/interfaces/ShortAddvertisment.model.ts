@@ -16,6 +16,7 @@ export interface ShortAddvertisment {
     seller: {
         id: number;
         premiumAccount: Date;
+        isPremium: boolean;
     };
     images: [Image];
 }
