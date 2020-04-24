@@ -35,6 +35,11 @@ export class OneAdvertismentComponent implements OnInit, OnDestroy {
     .subscribe((params: Params) => {
       this.isLoading = true;
       this.isError = false;
+      if (params.id === undefined) {
+        this.isLoading = false;
+        this.isError = true;
+        return;
+      }
       this.addvertismentService.getAdvertisement(params.id)
       .subscribe((addvertisment: Addvertisment) => {
         this.isLoading = false;

@@ -109,7 +109,7 @@ style="width: 100%;
   *ngIf="isError"
   [isLink]="true"
   [url]="['/advertisement']"
-  [queryParams]="{id: addvertisment.id}"
+  [queryParams]="{id: addvertisment?.id}"
   [linkMessage]="' Spróbuj ponownie!'"></app-error-message>
 </div>
 <app-image-modal
