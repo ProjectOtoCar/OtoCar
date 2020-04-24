@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {CustomValidators} from "../validators/CustomValidators";
-import { ContactFormService } from '../services/contact-form.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {CustomValidators} from '../validators/CustomValidators';
 import { Contact } from '../interfaces/Contact';
+import { EmailSenderService } from '../services/emailSender/email-sender.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -14,7 +14,7 @@ export class ContactFormComponent implements OnInit {
   isLoading: boolean;
   isSend: boolean;
   isError: boolean;
-  constructor(private contactFormService: ContactFormService) { }
+  constructor(private emailSenderService: EmailSenderService) { }
 
   ngOnInit(): void {
     this.isSend = false;
@@ -49,7 +49,7 @@ export class ContactFormComponent implements OnInit {
     this.isLoading = true;
     this.isError = false;
     const sendEmail: Contact = {...this.loginForm.value, mail: 'ToJestMailDoProjektuOtoCar@gmail.com'};
-    this.contactFormService.sendEmail(sendEmail).subscribe(() => {
+    this.emailSenderService.sendEmail(sendEmail).subscribe(() => {
       this.isLoading = false;
       this.loginForm.reset();
       this.isSend = true;

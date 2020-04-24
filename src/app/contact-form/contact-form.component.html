@@ -102,8 +102,7 @@
         >
         <span *ngIf="!isLoading; else loading">Wyślij</span>
         <ng-template #loading>
-          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-          Wysyłanie...
+          <app-spinner [size]="1"></app-spinner>
         </ng-template>
       </button>
       </div>

@@ -14,6 +14,7 @@ export class OneAdvertismentComponent implements OnInit, OnDestroy {
   isLoading = false;
   isError = false;
   isShowImageModal = false;
+  isShowContactModal = false;
   currentPhoto;
   addvertisment: Addvertisment;
 
@@ -54,9 +55,15 @@ export class OneAdvertismentComponent implements OnInit, OnDestroy {
     this.isShowImageModal = true;
     this.currentPhoto = photo;
   }
+  showContactModal(): void {
+    this.isShowContactModal = true;
+  }
 
   closeImageModal(): void {
     this.isShowImageModal = false;
+  }
+  closeContactModal(): void {
+    this.isShowContactModal = false;
   }
 
   ngOnDestroy(): void {

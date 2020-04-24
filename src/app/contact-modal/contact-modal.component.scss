@@ -1,0 +1,35 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 50;
+  }
+
+.alert-box {
+    position: fixed;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    top: 30vh;
+    left: 30vw;
+    right: 30vw;
+    z-index: 100;
+    text-align: left;
+    box-shadow: 0 2px 8px rbga(0, 0, 0, 0.26);
+    background: white;
+    padding: 30px 30px 20px;
+}
+
+.right {
+    display: block;
+    margin-left: auto;
+}
+
+.form {
+    width: 100%;
+}
+

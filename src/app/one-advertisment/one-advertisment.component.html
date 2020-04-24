@@ -42,6 +42,7 @@ style="margin-top: 50px">
    </div>
     <button
     *ngIf="addvertisment.active"
+    (click)="showContactModal()"
     class="btn btn-primary" 
     style="margin-top: 20px">Napisz wiadomość do sprzedającego</button>
     <div
@@ -117,3 +118,8 @@ style="width: 100%;
 (closeModal)="closeImageModal()"
 >
 </app-image-modal>
+<app-contact-modal
+*ngIf="isShowContactModal"
+[seller]="addvertisment.seller"
+(closeModal)="closeContactModal()"
+></app-contact-modal>

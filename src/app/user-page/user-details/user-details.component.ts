@@ -31,7 +31,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
       if (params.userId) {
         this.userId = params.userId;
       } else {
-        this.userId = 2; // zmienic na id usera zalogowanego
+        this.userId = 6; // zmienic na id usera zalogowanego
       }
       this.queryParams = {...this.queryParams, userId: this.userId};
       // this.route.navigate([], {relativeTo: this.activatedRoute, queryParams: {...this.queryParams} , queryParamsHandling: 'merge'});

@@ -1,0 +1,124 @@
+<div class="backdrop">
+    <div class="alert-box">
+        <app-success-message 
+        *ngIf="isSend" 
+        successMessage="Wiadomość została wysłana"></app-success-message>
+        <app-error-message *ngIf="isError"></app-error-message>
+        <h3>Wyslij wiadomość do {{seller?.firstName + ' ' + seller?.lastName}}</h3>
+        <form 
+        class="form"
+        [formGroup]="contactForm"
+        (ngSubmit)="onSubmit()"> 
+        <div class="form-group">
+            <label for="title">Tytuł</label>
+            <input type="text"
+                 class="form-control"
+                 [ngClass]="{'is-invalid' :
+                !contactForm.get('title').valid &&
+                contactForm.get('title').touched,
+                'is-valid' : contactForm.get('title').valid}"
+                 id="title"
+                 formControlName="title">
+            <div class="invalid-feedback"
+                *ngIf="contactForm.get('title').errors?.required">
+              Tytuł jest wymagane
+            </div>
+            <div class="invalid-feedback"
+                *ngIf="contactForm.get('title').errors?.minlength">
+              Tytuł za krótki(minimalnie 5 znaki)
+            </div>
+            <div class="invalid-feedback"
+                *ngIf="contactForm.get('title').errors?.maxlength">
+              Tytuł za długi(maksymalnie 40 znaków)
+            </div>
+            <div class="valid-feedback">
+              OK!
+            </div>
+          </div>
+          <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text"
+                 class="form-control"
+                 [ngClass]="{'is-invalid' :
+                !contactForm.get('mailSender').valid &&
+                contactForm.get('mailSender').touched,
+                'is-valid' : contactForm.get('mailSender').valid}"
+                 id="email"
+                 formControlName="mailSender">
+          <div class="invalid-feedback"
+               *ngIf="contactForm.get('mailSender').errors?.required">
+            Pole jest wymagane
+          </div>
+          <div class="invalid-feedback"
+               *ngIf="contactForm.get('mailSender').errors?.minlength">
+            E-mail za krótki(minimalnie 3 znaki)
+          </div>
+          <div class="invalid-feedback"
+               *ngIf="contactForm.get('mailSender').errors?.maxlength">
+            E-mail za długi(maksymalnie 100 znaków)
+          </div>
+          <div class="invalid-feedback"
+               *ngIf="contactForm.get('mailSender').errors?.email ">
+            Niepoprawny email
+          </div>
+          <div class="invalid-feedback"
+               *ngIf="contactForm.get('mailSender').errors?.withoutspace">
+            E-mail nie może zawierać spacji
+          </div>
+          <div class="valid-feedback">
+            OK!
+          </div>
+          </div>
+          <div class="form-group">
+            <label for="content">Wiadomość</label>
+            <textarea type="content"
+                   class="form-control"
+                   [ngClass]="{'is-invalid' :
+                    !contactForm.get('content').valid &&
+                    contactForm.get('content').touched,
+                    'is-valid' : contactForm.get('content').valid}"
+                   id="content"
+                      formControlName="content">
+              </textarea>
+            <div class="invalid-feedback"
+                 *ngIf="contactForm.get('content').errors?.required">
+              Pole jest wymagane
+            </div>
+    
+            <div class="invalid-feedback"
+                 *ngIf="contactForm.get('content').errors?.minlength">
+              Treść jest za krótka(minimalnie 20 znaków)
+            </div>
+            <div class="invalid-feedback"
+                 *ngIf="contactForm.get('content').errors?.maxlength">
+              treść za długa(maksymalnie 200 znaków)
+            </div>
+            <div class="valid-feedback">
+              OK!
+            </div>
+            <button
+              *ngIf="!isLoading; else loading"
+              class="btn btn-success top-margin"
+              type="submit"
+              [disabled]="contactForm.invalid"
+            >
+            Wyślij
+            </button>
+            <ng-template #loading>
+                <button
+                class="btn btn-success top-margin" 
+                type="button">
+                <app-spinner [size]="1"></app-spinner>
+                </button>
+            </ng-template>
+            <button 
+            class="btn btn-danger right"
+            type="button"
+            [disabled]="isLoading"
+            (click)="onCloseModal()">
+                Zamknij
+            </button>
+          </div>
+        </form>
+    </div>
+</div>

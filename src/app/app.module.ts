@@ -40,6 +40,8 @@ import { DateFormatPipe } from './pipes/dateFormat/date-format.pipe';
 import { ErrorMessageComponent } from './error-message/error-message.component';
 import { ImageModalComponent } from './image-modal/image-modal.component';
 import { TelLinkComponent } from './tel-link/tel-link.component';
+import { ContactModalComponent } from './contact-modal/contact-modal.component';
+import { SuccessMessageComponent } from './success-message/success-message.component';
 
 
 @NgModule({
@@ -79,6 +81,8 @@ import { TelLinkComponent } from './tel-link/tel-link.component';
     ErrorMessageComponent,
     ImageModalComponent,
     TelLinkComponent,
+    ContactModalComponent,
+    SuccessMessageComponent,
   ],
   imports: [
     BrowserModule,
