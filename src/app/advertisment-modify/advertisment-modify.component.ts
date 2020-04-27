@@ -279,6 +279,7 @@ export class AdvertismentModifyComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     this.isLoading = true;
     this.isError = false;
+    console.log({...this.modifyAdvertismentForm.value, images: this.images});
     this.addvertismentService
     .putAdvertisment(this.addId, {...this.modifyAdvertismentForm.value, images: this.images})
     .subscribe(() => {
