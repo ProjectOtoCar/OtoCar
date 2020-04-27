@@ -38,7 +38,14 @@ export class UserAddvertismentItemComponent implements OnInit {
   }
 
   modifyAddvertisment(): void {
-
+    this.route.navigate(['/advertisement-modify'],
+      {
+        queryParams:
+        {
+          id: this.shortAdvertisment.id
+        }
+      }
+    );
   }
 
   deleteAddvertisment(): void {

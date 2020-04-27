@@ -28,6 +28,11 @@ export class AddvertismentService {
     .patch(`${environment.basicUrl}/api/advertisement/${id}`, body);
   }
 
+  putAdvertisment(id: number, body: Addvertisment): Observable<any> {
+    return this.http
+    .put(`${environment.basicUrl}/api/advertisement/${id}`, body);
+  }
+
   getAddvertismentBySeller(idSeller: number, page: number = 1): Observable<[ShortAddvertisment[], number]> {
     let searchParams = new HttpParams();
     searchParams = searchParams.append('page', '' + page);

@@ -18,6 +18,7 @@ import { ModifyProfileComponent } from './user-page/user-details/modify-profile/
 import {FiltrAdvertismentComponent} from './filtr-advertisment/filtr-advertisment.component';
 import { AddAddvertismentComponent } from './user-page/user-details/add-addvertisment/add-addvertisment.component';
 import { UserAddvertismentsComponent } from './user-page/user-details/user-addvertisments/user-addvertisments.component';
+import { AdvertismentModifyComponent } from './advertisment-modify/advertisment-modify.component';
 
 
 
@@ -42,6 +43,7 @@ const routes: Routes = [
   {path: 'privacy-policy', component: PrivacyPolicyComponent},
   {path: 'cookie-policy', component: CookiePolicyComponent},
   {path: 'advertisement', component: OneAdvertismentComponent},
+  {path: 'advertisement-modify', component: AdvertismentModifyComponent},
   {path: 'contact', component: ContactFormComponent},
   {path: 'filtrAdv', component: FiltrAdvertismentComponent},
   {path: 'not-found', component: ErrorComponent, data: {message: 'Nic tutaj nie ma', error: 404, subMessage: 'strona nie znaleziona!'}},

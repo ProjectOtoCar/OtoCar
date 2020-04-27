@@ -42,6 +42,7 @@ import { ImageModalComponent } from './image-modal/image-modal.component';
 import { TelLinkComponent } from './tel-link/tel-link.component';
 import { ContactModalComponent } from './contact-modal/contact-modal.component';
 import { SuccessMessageComponent } from './success-message/success-message.component';
+import { AdvertismentModifyComponent } from './advertisment-modify/advertisment-modify.component';
 
 
 @NgModule({
@@ -83,6 +84,7 @@ import { SuccessMessageComponent } from './success-message/success-message.compo
     TelLinkComponent,
     ContactModalComponent,
     SuccessMessageComponent,
+    AdvertismentModifyComponent,
   ],
   imports: [
     BrowserModule,
