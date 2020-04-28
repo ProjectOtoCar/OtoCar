@@ -98,7 +98,9 @@ public class AdvertisementController {
     }
 
     @PutMapping("/{id}")
-    public Advertisement putAdvertisement(@PathVariable(value = "id") Long id, @RequestBody Advertisement advertisement) {
+    public Advertisement putAdvertisement(@PathVariable(value = "id") Long id, @RequestBody AdvertisementDto advertisementDto) {
+        Advertisement advertisement = new Advertisement(advertisementDto);
+        advertisement.getImages().forEach(image -> image.setAdvertisement(advertisement));
         return advertisementService.change(id, advertisement);
     }
 
