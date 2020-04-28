@@ -1,6 +1,6 @@
-<div class="d-flex justify-content-center top-margin">
+<div class="d-flex justify-content-center top-margin page-size">
     <form 
-    style="width: 40%;"
+    class="border border-primary rounded form"
     [formGroup]="searchAddForm" 
     (ngSubmit)="onSubmit()">
         <h2>Opcje wyszukiwania</h2>
@@ -173,10 +173,17 @@
                 </label>
             </div>
             <button
-            class="btn btn-success top-margin"
+            class="btn btn-primary top-margin"
             type="submit"
             >
             Szukaj
+            </button>
+            <button
+            class="btn btn-warning top-margin"
+            type="button"
+            (click)="cleanForm()"
+            >
+            Wyczyść
             </button>
     </form>
 </div>

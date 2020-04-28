@@ -92,6 +92,17 @@ export class SearchAddFormComponent implements OnInit, OnDestroy {
     this.queryParams.emit(value);
   }
 
+  cleanForm(): void {
+    this.searchAddForm.reset();
+    this.searchAddForm.patchValue({
+      lowPrice: this.lowPriceStart,
+      highPrice: this.highPriceStart,
+      lowRegistration: this.lowRegistrationStart,
+      highRegistration: this.highRegistrationStart,
+      orderBy: 'desc'
+    });
+  }
+
   onChangeBrand(event) {
     this.selectBrandIndex = event;
     this.isCarModelLoading = true;
