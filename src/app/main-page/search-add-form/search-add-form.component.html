@@ -1,1 +1,17 @@
-<p>search-add-form works!</p>
+<div>
+    <form 
+    [formGroup]="searchAddForm" 
+    (ngSubmit)="onSubmit()">
+        <h2>Opcje wyszukiwania</h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="brandName">Marka: </label>
+                <input 
+                type="text"
+                class="form-control"
+                id="brandName"
+                formControlName="brandName">
+            </div>
+        </div>
+    </form>
+</div>

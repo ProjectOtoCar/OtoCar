@@ -23,4 +23,8 @@ export class SearchAddFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onSubmit(): void {
+
+  }
+
 }

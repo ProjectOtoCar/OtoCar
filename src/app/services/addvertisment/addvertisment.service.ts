@@ -28,7 +28,7 @@ export class AddvertismentService {
     .patch(`${environment.basicUrl}/api/advertisement/${id}`, body);
   }
 
-  putAdvertisment(id: number, body: Addvertisment): Observable<any> {
+  putAdvertisment(id: number, body): Observable<any> {
     return this.http
     .put(`${environment.basicUrl}/api/advertisement/${id}`, body);
   }

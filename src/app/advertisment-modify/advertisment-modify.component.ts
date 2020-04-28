@@ -279,6 +279,9 @@ export class AdvertismentModifyComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     this.isLoading = true;
     this.isError = false;
+    this.images = this.images.map((image: Image) => {
+      return {mainImage: image.mainImage, photo: image.photo} as Image;
+    })
     console.log({...this.modifyAdvertismentForm.value, images: this.images});
     this.addvertismentService
     .putAdvertisment(this.addId, {...this.modifyAdvertismentForm.value, images: this.images})
