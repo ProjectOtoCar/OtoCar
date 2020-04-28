@@ -517,7 +517,9 @@ class="border border-primary rounded padding margin-vertical container">
         </button>
     </form>
 </div>
-<div *ngIf="isLoadingPage">
+<div 
+*ngIf="isLoadingPage"
+style="display: flex; align-items: center; justify-content: center;">
     <app-spinner></app-spinner>
 </div>
 <app-modal

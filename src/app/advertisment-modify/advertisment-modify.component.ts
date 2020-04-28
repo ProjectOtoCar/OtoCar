@@ -304,6 +304,13 @@ export class AdvertismentModifyComponent implements OnInit, OnDestroy {
       this.isCarModelLoading = false;
       this.isCarModelError = false;
       this.carModels = carModels;
+      this.modifyAdvertismentForm.patchValue(
+        {
+          car: {
+            modelId: undefined
+          }
+        }
+      );
     }, error => {
       this.isCarModelLoading = false;
       this.isCarModelError = false;

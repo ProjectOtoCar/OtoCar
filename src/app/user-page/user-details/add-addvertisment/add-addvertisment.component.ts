@@ -56,8 +56,7 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
     private enumsService: EnumsService,
     private brandService: BrandService,
     private cityService: CityService,
-    private route: Router,
-    private activatedRoute: ActivatedRoute
+    private route: Router
     ) {
     this.currentYear = new Date().getFullYear();
     this.addAddvertismentForm = new FormGroup({
@@ -221,6 +220,13 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
     .subscribe((carModels: [CarModel]) => {
       this.isCarModelLoading = false;
       this.isCarModelError = false;
+      this.addAddvertismentForm.patchValue(
+        {
+          car: {
+            modelId: undefined
+          }
+        }
+      );
       this.carModels = carModels;
     }, error => {
       this.isCarModelLoading = false;
