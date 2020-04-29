@@ -5,6 +5,7 @@ import { Addvertisment } from 'src/app/interfaces/Addvertisment';
 import { environment } from '../../../environments/environment';
 import { ShortAddvertisment } from 'src/app/interfaces/ShortAddvertisment.model';
 import { map } from 'rxjs/operators';
+import { QueryParamsAdvertismentSearch } from 'src/app/interfaces/QueryParamsAdvertismentSearch.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,40 @@ export class AddvertismentService {
     }));
   }
 
+  getAdvertisements(queryParams: QueryParamsAdvertismentSearch): Observable<[ShortAddvertisment[], number]> {
+    let searchParams = new HttpParams();
+    if (queryParams.brandName !== null && queryParams.brandName !== undefined && queryParams.brandName !== '') {
+      searchParams = searchParams.append('brandName', queryParams.brandName);
+    }
+    if (queryParams.modelName !== null && queryParams.modelName !== undefined && queryParams.modelName !== '') {
+      searchParams = searchParams.append('modelName', queryParams.modelName);
+    }
+    if (queryParams.highPrice !== null && queryParams.highPrice !== undefined && '' + queryParams.highPrice !== '') {
+      searchParams = searchParams.append('highPrice', '' + queryParams.highPrice);
+    }
+    if (queryParams.lowPrice !== null && queryParams.lowPrice !== undefined && '' + queryParams.lowPrice !== '') {
+      searchParams = searchParams.append('lowPrice', '' + queryParams.lowPrice);
+    }
+    if (queryParams.lowRegistration !== null && queryParams.lowRegistration !== undefined && '' + queryParams.lowRegistration !== '') {
+      searchParams = searchParams.append('lowRegistration', '' + queryParams.lowRegistration);
+    }
+    if (queryParams.highRegistration !== null && queryParams.highRegistration !== undefined && '' + queryParams.highRegistration !== '') {
+      searchParams = searchParams.append('highRegistration', '' + queryParams.highRegistration);
+    }
+    if (queryParams.orderBy !== null && queryParams.orderBy !== undefined && queryParams.orderBy !== '') {
+      searchParams = searchParams.append('orderBy', queryParams.orderBy);
+    }
+    if (queryParams.page !== null && queryParams.page !== undefined && '' + queryParams.page !== '') {
+      searchParams = searchParams.append('page', '' + queryParams.page);
+    }
+    return this.http
+      .get<[ShortAddvertisment[], number]>(`${environment.basicUrl}/api/advertisement/sort`, {
+        params: searchParams
+      }).pipe(map((data: any) => {
+        const shortAddvertismentPage: ShortAddvertisment[] = data.content;
+        return [shortAddvertismentPage, data.totalPages];
+    }));
+  }
   getAdvertisement(id: number): Observable<Addvertisment> {
     return this.http
     .get<Addvertisment>(`${environment.basicUrl}/api/advertisement/${id}`)

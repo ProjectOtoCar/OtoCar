@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import { QueryParamsAdvertismentSearch } from '../interfaces/QueryParamsAdvertismentSearch.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,7 +9,10 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
-
-  constructor() { }
+  constructor(private route: Router) { }
   ngOnInit(): void {}
+
+  onGetQueryParams(event: QueryParamsAdvertismentSearch): void {
+    this.route.navigate(['advertisements'], {queryParams: event});
+  }
 }

@@ -1,4 +1,5 @@
 export interface QueryParamsAdvertismentSearch {
+    page?: number;
     brandName?: string;
     modelName?: string;
     lowPrice?: number;

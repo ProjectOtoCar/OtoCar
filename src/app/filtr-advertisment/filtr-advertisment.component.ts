@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ShortAddvertisment } from '../interfaces/ShortAddvertisment.model';
 
 @Component({
   selector: 'app-filtr-advertisment',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./filtr-advertisment.component.scss']
 })
 export class FiltrAdvertismentComponent implements OnInit {
+  @Input() shortAdvertisement: ShortAddvertisment;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  getUrl(): string {
+    return 'url(' + this.shortAdvertisement.images[0]?.photo + ')';
+  }
 }

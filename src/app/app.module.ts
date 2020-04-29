@@ -44,6 +44,7 @@ import { ContactModalComponent } from './contact-modal/contact-modal.component';
 import { SuccessMessageComponent } from './success-message/success-message.component';
 import { AdvertismentModifyComponent } from './advertisment-modify/advertisment-modify.component';
 import { SearchAddFormComponent } from './main-page/search-add-form/search-add-form.component';
+import { ShowAdvertismentComponent } from './show-advertisment/show-advertisment.component';
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import { SearchAddFormComponent } from './main-page/search-add-form/search-add-f
     SuccessMessageComponent,
     AdvertismentModifyComponent,
     SearchAddFormComponent,
+    ShowAdvertismentComponent,
   ],
   imports: [
     BrowserModule,

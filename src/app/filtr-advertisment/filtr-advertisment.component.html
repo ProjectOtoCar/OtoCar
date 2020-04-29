@@ -1,21 +1,24 @@
-<app-main-page></app-main-page>
-<div class="container " style="width: 100%">
-  <div class="card-group">
+<div class="container" style="width: 100%">
+  <div class="card-group add">
     <div class="card">
       <div class="d-flex flex-md-row flex-column card-body">
-        <div style="margin-right: 20px">
-          <img class="card-img-top" src="https://picsum.photos/220/170" alt="Card image cap" >
+        <div style="margin-right: 10px; box-sizing: border-box;">
+          <div 
+          *ngIf="shortAdvertisement.images[0]?.photo !== undefined"
+         class="card-img-top add__image" 
+         [ngStyle]="{
+           'background-image': getUrl()}"
+         ></div> 
         </div>
         <div class="">
-          <h5 class="card-title">Tytuł ogłoszenia</h5>
-          <p >Pierwsza rejestracja: </p>
-          <p class="card-text">Rodzaj paliwa</p>
-          <p class="card-text">Przebieg: </p>
+          <h5 class="card-title">{{shortAdvertisement.title}}</h5>
+          <p>Pierwsza rejestracja: {{shortAdvertisement.car.firstRegistartion}}</p>
+          <p class="card-text">Przebieg: {{shortAdvertisement.car.mileage}}</p>
         </div>
         <div class="p-2 flex-grow-1"style="text-align: right">
-          <h4>1000zł</h4>
-          <p>Dodane wczoraj</p>
-          <p>Wygasa za 3 dni</p>
+          <h4>{{shortAdvertisement.price}} zł</h4>
+          <p>Dodane {{shortAdvertisement.dateAdd}}</p>
+          <p class="card-text">Rodzaj paliwa: {{shortAdvertisement.car.fuel}}</p>
         </div>
       </div>
 
