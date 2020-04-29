@@ -1,13 +1,19 @@
-<div class="d-flex justify-content-center top-margin page-size">
+<div 
+class="d-flex justify-content-center top-margin"
+[ngClass]="{'page-size': isMainPage}"
+>
     <form 
-    class="border border-primary rounded form"
     [formGroup]="searchAddForm" 
-    (ngSubmit)="onSubmit()">
+    (ngSubmit)="onSubmit()"
+    class="border border-primary rounded padding"
+    [ngClass]="{'form': isMainPage,
+                'form-full': !isMainPage}">
         <h2>Opcje wyszukiwania</h2>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="brandName">Marka </label>
                 <select 
+                *ngIf="!isBrandLoading && !isBrandError"
                 class="form-control"
                 id="brandName"
                 formControlName="brandName"
@@ -34,7 +40,7 @@
                 <div class="form-group col-md-6">
                     <label for="modelName">Model</label>
                     <select
-                    [attr.disabled]="searchAddForm.get('modelName').invalid ? 
+                    [attr.disabled]="searchAddForm.get('modelName').value !== undefined ? 
                     '' : 
                     null"
                     class="form-control"

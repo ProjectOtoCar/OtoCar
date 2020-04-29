@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CarModelService } from 'src/app/services/car-model/car-model.service';
 import { BrandService } from 'src/app/services/brand/brand.service';
@@ -14,6 +14,8 @@ import { QueryParamsAdvertismentSearch } from 'src/app/interfaces/QueryParamsAdv
 })
 export class SearchAddFormComponent implements OnInit, OnDestroy {
   @Output() queryParams = new EventEmitter<QueryParamsAdvertismentSearch>();
+  @Input() isMainPage = true;
+  @Input() params: QueryParamsAdvertismentSearch;
 
   searchAddForm: FormGroup;
   isError = false;
@@ -67,6 +69,43 @@ export class SearchAddFormComponent implements OnInit, OnDestroy {
      this.isBrandLoading = false;
      this.isBrandError = false;
      this.brands = brands;
+     if (!this.isMainPage) {
+      let brandId: number;
+      this.brands?.forEach((brand: Brand) => {
+        if (this.params.brandName === brand.name) {
+          brandId = brand.id;
+        }
+      });
+      this.searchAddForm.patchValue({
+        brandName: brandId || undefined,
+        lowPrice: this.params.lowPrice || this.lowPriceStart,
+        highPrice: this.params.highPrice || this.highPriceStart,
+        lowRegistration: this.params.lowRegistration || this.lowRegistrationStart,
+        highRegistration: this.params.highRegistration || this.highRegistrationStart,
+        orderBy: this.params.orderBy || 'desc'
+      });
+      this.carModelService.getCarModels(this.params.brandName)
+      .subscribe((carModels: [CarModel]) => {
+        let carModelId: number;
+        this.carModels = carModels;
+        this.carModels?.forEach((brand: Brand) => {
+          if (this.params.modelName === brand.name) {
+            carModelId = brand.id;
+          }
+        });
+        this.searchAddForm.patchValue(
+          {
+            modelName: carModelId
+          }
+        );
+        this.isCarModelLoading = false;
+        this.isCarModelError = false;
+        this.carModels = carModels;
+      }, error => {
+        this.isCarModelLoading = false;
+        this.isCarModelError = false;
+      });
+    }
    }, error => {
      this.isBrandLoading = false;
      this.isBrandError = true;

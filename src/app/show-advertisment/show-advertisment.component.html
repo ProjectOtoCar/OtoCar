@@ -1,9 +1,20 @@
 <div *ngIf="!isLoading && !isError">
-    <app-search-add-form></app-search-add-form>
+    <app-search-add-form
+    [isMainPage]="false"
+    [params]="queryParams"></app-search-add-form>
     <app-filtr-advertisment 
     *ngFor="let shortAdvertisment of shortAdvertisments"
     [shortAdvertisement]="shortAdvertisment"
     ></app-filtr-advertisment>
+    <div 
+    style="width: 100%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;"
+    *ngIf="shortAdvertisments.length === 0">
+        <p style="font-size: 2rem;">Nic tutaj nie ma :/</p>
+    </div>
     <app-pagination 
     style="width: 100%;
     margin-top: 30px;
