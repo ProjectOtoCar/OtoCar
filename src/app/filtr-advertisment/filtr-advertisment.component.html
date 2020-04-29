@@ -1,6 +1,7 @@
 <div class="container" style="width: 100%">
   <div class="card-group add">
-    <div class="card">
+    <div
+    class="card">
       <div class="d-flex flex-md-row flex-column card-body">
         <div style="margin-right: 10px; box-sizing: border-box;">
           <div 
@@ -14,6 +15,10 @@
           <h5 class="card-title">{{shortAdvertisement.title}}</h5>
           <p>Pierwsza rejestracja: {{shortAdvertisement.car.firstRegistartion}}</p>
           <p class="card-text">Przebieg: {{shortAdvertisement.car.mileage}}</p>
+          <button 
+          class="btn btn-primary"
+          (click)='showDetails()' 
+          >Pokaz</button>
         </div>
         <div class="p-2 flex-grow-1"style="text-align: right">
           <h4>{{shortAdvertisement.price}} zł</h4>
@@ -21,7 +26,6 @@
           <p class="card-text">Rodzaj paliwa: {{shortAdvertisement.car.fuel}}</p>
         </div>
       </div>
-
     </div>
   </div>
 </div>

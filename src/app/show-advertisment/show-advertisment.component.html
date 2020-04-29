@@ -1,6 +1,32 @@
-<div>
+<div *ngIf="!isLoading && !isError">
+    <app-search-add-form></app-search-add-form>
     <app-filtr-advertisment 
     *ngFor="let shortAdvertisment of shortAdvertisments"
     [shortAdvertisement]="shortAdvertisment"
     ></app-filtr-advertisment>
+    <app-pagination 
+    style="width: 100%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;"
+    [url]="['/advertisements']"
+    [currentPage]="currentPage"
+    [maxPage]="totalPage"
+    [queryParams]="queryParams"></app-pagination>
+</div>
+<div
+*ngIf="isLoading || isError" 
+style="width: 100%;
+margin-top: 30px;
+display: flex;
+justify-content: center;
+align-items: center;"> 
+    <app-spinner *ngIf="isLoading"></app-spinner>
+    <app-error-message 
+    *ngIf="isError"
+    isLink="true"
+    url="/advertisements"
+    [queryParams]="queryParams"
+    ></app-error-message>
 </div>

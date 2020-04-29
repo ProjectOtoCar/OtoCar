@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ShortAddvertisment } from '../interfaces/ShortAddvertisment.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-filtr-advertisment',
@@ -9,12 +10,16 @@ import { ShortAddvertisment } from '../interfaces/ShortAddvertisment.model';
 export class FiltrAdvertismentComponent implements OnInit {
   @Input() shortAdvertisement: ShortAddvertisment;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
   getUrl(): string {
     return 'url(' + this.shortAdvertisement.images[0]?.photo + ')';
+  }
+
+  showDetails(): void {
+    this.router.navigate(['advertisement'], {queryParams: {id: this.shortAdvertisement.id}});
   }
 }

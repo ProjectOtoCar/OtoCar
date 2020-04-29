@@ -10,7 +10,7 @@ export class ErrorMessageComponent implements OnInit {
   @Input() isLink = false;
   @Input() url: string[];
   @Input() queryParams;
-  @Input() linkMessage;
+  @Input() linkMessage = 'Spróbuj ponownie';
   constructor() { }
 
   ngOnInit(): void {
