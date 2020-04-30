@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,6 +46,8 @@ import { SuccessMessageComponent } from './success-message/success-message.compo
 import { AdvertismentModifyComponent } from './advertisment-modify/advertisment-modify.component';
 import { SearchAddFormComponent } from './main-page/search-add-form/search-add-form.component';
 import { ShowAdvertismentComponent } from './show-advertisment/show-advertisment.component';
+
+
 
 
 @NgModule({
@@ -95,7 +98,8 @@ import { ShowAdvertismentComponent } from './show-advertisment/show-advertisment
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
