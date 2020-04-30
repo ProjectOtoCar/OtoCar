@@ -1,0 +1,19 @@
+.toster {
+    position: fixed;
+    bottom: 50px;
+    left: 30px;
+    width: 190px;
+    height: 150px;
+    padding: 10px;
+    background-color: var(--btn-main);
+    z-index: 99;
+    &__button {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        color: var(--danger-color);
+        background-color: var(--btn-main);
+        border-color: var(--btn-main);
+        border-style: solid;
+    }
+}

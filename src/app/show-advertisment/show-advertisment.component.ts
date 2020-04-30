@@ -49,8 +49,4 @@ export class ShowAdvertismentComponent implements OnInit {
     });
   }
 
-  searchAdvertisment(event: QueryParamsAdvertismentSearch): void {
-    this.router.navigate([], {relativeTo: this.activatedRoute, queryParams: event});
-  }
-
 }

@@ -1,8 +1,7 @@
 <div *ngIf="!isLoading && !isError">
     <app-search-add-form
     [isMainPage]="false"
-    [params]="queryParams"
-    (queryParams)="searchAdvertisment($event)"></app-search-add-form>
+    [params]="queryParams"></app-search-add-form>
     <app-filtr-advertisment 
     *ngFor="let shortAdvertisment of shortAdvertisments"
     [shortAdvertisement]="shortAdvertisment"

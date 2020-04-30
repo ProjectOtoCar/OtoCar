@@ -46,6 +46,7 @@ import { SuccessMessageComponent } from './success-message/success-message.compo
 import { AdvertismentModifyComponent } from './advertisment-modify/advertisment-modify.component';
 import { SearchAddFormComponent } from './main-page/search-add-form/search-add-form.component';
 import { ShowAdvertismentComponent } from './show-advertisment/show-advertisment.component';
+import { TosterComponent } from './toster/toster.component';
 
 
 
@@ -92,6 +93,7 @@ import { ShowAdvertismentComponent } from './show-advertisment/show-advertisment
     AdvertismentModifyComponent,
     SearchAddFormComponent,
     ShowAdvertismentComponent,
+    TosterComponent,
   ],
   imports: [
     BrowserModule,

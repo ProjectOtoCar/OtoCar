@@ -1,0 +1,5 @@
+<div class="toster alert alert-primary" *ngIf="isShow">
+    <h4>Cookie</h4>
+    <p>Wchodzać na strone zgadzasz się z naszą <a class="alert-link" [routerLink]="['/cookie-policy']">polityką cookie</a></p>
+    <button (click)="onClose()" class="toster__button">X</button>
+</div>
