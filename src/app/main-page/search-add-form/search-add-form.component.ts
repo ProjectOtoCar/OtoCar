@@ -128,6 +128,7 @@ export class SearchAddFormComponent implements OnInit, OnDestroy {
     value.highPrice = this.highPrice;
     value.lowRegistration = this.lowRegistration;
     value.highRegistration = this.highRegistration;
+    value.page = 1;
     this.queryParams.emit(value);
   }
 
