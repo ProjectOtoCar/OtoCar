@@ -466,9 +466,8 @@
             <div class="valid-feedback">
             OK!
             </div>
-            <div 
-            class="card-body"
-            style="display: flex;">
+            <div class="card-body advert-image-menu">
+                <div class="toggle">
                     <input 
                     type="radio" 
                     name="isMainImage"
@@ -477,8 +476,9 @@
                     [checked]="image.mainImage"
                     (click)="onChangeMainImage(i)">
                     <label [for]="'image'+i">
-                główne
+                    główne
                     </label>
+                </div>
                 <button 
                 class="btn btn-danger"
                 style="width: 100%;"

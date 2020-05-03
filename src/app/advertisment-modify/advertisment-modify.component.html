@@ -473,6 +473,7 @@ class="border border-primary rounded padding margin-vertical container">
             <div 
             class="card-body"
             style="display: flex;">
+                <div class="toggle">
                     <input 
                     type="radio" 
                     name="isMainImage"
@@ -481,8 +482,9 @@ class="border border-primary rounded padding margin-vertical container">
                     [checked]="image.mainImage"
                     (click)="onChangeMainImage(i)">
                     <label [for]="'image'+i">
-                główne
+                    główne
                     </label>
+                </div>
                 <button 
                 class="btn btn-danger"
                 style="width: 100%;"
