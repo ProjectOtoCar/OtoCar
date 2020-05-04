@@ -37,8 +37,8 @@
       <div class="form-group">
       <label for="email">Email</label>
       <input type="text"
-             class="form-control"
-             [ngClass]="{'is-invalid' :
+            class="form-control"
+            [ngClass]="{'is-invalid' :
             !loginForm.get('mailSender').valid &&
             loginForm.get('mailSender').touched,
             'is-valid' : loginForm.get('mailSender').valid}"

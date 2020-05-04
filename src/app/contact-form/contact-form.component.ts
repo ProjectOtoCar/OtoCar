@@ -5,6 +5,7 @@ import { Contact } from '../interfaces/Contact';
 import { EmailSenderService } from '../services/emailSender/email-sender.service';
 import { LoginUserService } from '../services/loginUser/login-user.service';
 import { environment } from 'src/environments/environment';
+import { LoginUser } from '../interfaces/loginUser.model';
 
 @Component({
   selector: 'app-contact-form',
@@ -13,6 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ContactFormComponent implements OnInit {
   loginForm: FormGroup;
+
   isLoading: boolean;
   isSend: boolean;
   isError: boolean;
@@ -31,7 +33,7 @@ export class ContactFormComponent implements OnInit {
           Validators.maxLength(40),
           Validators.minLength(5),
         ]),
-        mailSender: new FormControl(null,
+        mailSender: new FormControl({value: null,  disabled: false},
         [
           Validators.required,
           Validators.email,
@@ -46,6 +48,16 @@ export class ContactFormComponent implements OnInit {
           Validators.maxLength(200),
         ])
     });
+
+    this.loginUserService.loginUser
+      .subscribe((loginUser: LoginUser) => {
+        if (loginUser !== undefined && loginUser !== null) {
+          this.loginForm.patchValue({
+            mailSender: loginUser.email
+          });
+          this.loginForm.get('mailSender').disable();
+        }
+      });
 
   }
   onSubmit(): void {
