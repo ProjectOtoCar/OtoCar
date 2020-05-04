@@ -10,8 +10,8 @@ export class LoginUserService {
   loginSelerId = new BehaviorSubject(null);
   constructor() { }
 
-  signIn(): void {
-    this.loginSelerId.next({id: 6, role: 'USER'} as LoginUser);
+  signIn(login): void {
+    this.loginSelerId.next({id: 6, role: 'USER', email: 'lala@o2.pl'} as LoginUser);
   }
 
   signOut(): void {

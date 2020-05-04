@@ -84,3 +84,12 @@
         </form>
     </div>
 </div>
+<div *ngIf="isLoginSuccess">
+    <app-modal
+    title="Logowanie powiodło się"
+    [showAcceptButton]="true"
+    [showCancelButton]="false"
+    firstAction="Wróć do strony głównej"
+    (action)="onLoginSuccess()"
+    ></app-modal>
+</div>

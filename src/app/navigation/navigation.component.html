@@ -15,6 +15,7 @@
         <li class="nav-item">
             <a 
             class="nav-link"
+            *ngIf="user"
             [routerLink]="['/user-page']" 
             routerLinkActive="active"
             [routerLinkActiveOptions]="{exact: true}">Moje konto</a>
@@ -22,22 +23,27 @@
         <li class="nav-item">
             <a 
             class="nav-link" 
+            *ngIf="!user"
             [routerLink]="['/sign-in']" 
             routerLinkActive="active">Zaloguj się</a>
         </li>
         <li class="nav-item">
-            <button class="nav-link button"
+            <button 
+            class="nav-link button"
+            *ngIf="user"
             (click)="signOut()"
             routerLinkActive="active">Wyloguj się</button>
         </li>
         <li class="nav-item">
             <a class="nav-link" 
+            *ngIf="!user"
             [routerLink]="['/registration']" 
             routerLinkActive="active">Zarejestruj się</a>
         </li>             
         <li class="nav-item">
             <a class="nav-link" 
             [routerLink]="['/admin']" 
+            *ngIf="user && user?.role === 'ADMIN'"
             routerLinkActive="active">Panel admina</a>
         </li>
         <li class="nav-item">

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from '../validators/CustomValidators';
+import { LoginUserService } from '../services/loginUser/login-user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -9,7 +11,11 @@ import { CustomValidators } from '../validators/CustomValidators';
 })
 export class SignInComponent implements OnInit {
   loginForm: FormGroup;
-  constructor() { }
+  isLoginSuccess = false;
+  constructor(
+    private loginUserService: LoginUserService,
+    private route: Router
+    ) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -36,7 +42,12 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.loginForm.value);
+    this.loginUserService.signIn(this.loginForm.value);
+    this.isLoginSuccess = true;
+  }
+
+  onLoginSuccess(): void {
+    this.route.navigate(['/']);
   }
 
 }
