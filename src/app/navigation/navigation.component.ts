@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginUserService } from '../services/loginUser/login-user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -7,12 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
   navbarOpen = false;
-  constructor() { }
+  constructor(
+    private loginUserService: LoginUserService,
+    private route: Router
+    ) { }
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
   ngOnInit(): void {
+  }
+
+  signOut(): void {
+    this.loginUserService.signOut();
+    this.route.navigate(['/']);
   }
 
 }
