@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  basicUrl: 'http://localhost:8080'
+  basicUrl: 'http://localhost:8080',
+  contactEmail: 'ToJestMailDoProjektuOtoCar@gmail.com'
 };
 
 /*
