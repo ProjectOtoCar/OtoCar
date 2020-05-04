@@ -14,14 +14,14 @@
         routerLinkActive="active" 
         >Ogłoszenia użytkownika</a>
         <a 
-        *ngIf="isFoundUser"
+        *ngIf="isFoundUser && +userId === +loginUser?.id"
         class="list-group-item list-group-item-action"
         [routerLink]="['buy-premium']"
         [queryParams]="queryParams"
         routerLinkActive="active" 
         >Kup premium</a>
         <a 
-        *ngIf="isFoundUser"
+        *ngIf="isFoundUser && +userId === +loginUser?.id"
         class="list-group-item list-group-item-action"
         [ngClass]="{'disabled': !seller?.canCreateAddvertisement}"
         [routerLink]="['add-advertisement']"
@@ -29,14 +29,14 @@
         routerLinkActive="active" 
         >Dodaj ogłoszenie</a>
         <a 
-        *ngIf="isFoundUser"
+        *ngIf="(isFoundUser && +userId === +loginUser?.id ) || loginUser?.role === 'ADMIN'"
         class="list-group-item list-group-item-action"
         [routerLink]="['edit-profile']"
         [queryParams]="queryParams"
         routerLinkActive="active" 
         >Edytuj profil</a>
         <button
-        *ngIf="isFoundUser" 
+        *ngIf="isFoundUser && +userId === +loginUser?.id" 
         (click)="onShowDeleteModal()" 
         class="list-group-item list-group-item-action list-group-item-danger">Usuń profil
         </button>

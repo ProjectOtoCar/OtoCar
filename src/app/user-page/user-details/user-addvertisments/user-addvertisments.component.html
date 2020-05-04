@@ -3,6 +3,7 @@
     <app-user-addvertisment-item
     *ngFor="let shortAddvertisment of shortAddvertisments"
     [shortAdvertisment]="shortAddvertisment"
+    [sellerId]="sellerId"
     (deleteEmitter)="deleteItem($event)"></app-user-addvertisment-item>
     <app-pagination
     [url]="['/user-page','user-advertisements']"

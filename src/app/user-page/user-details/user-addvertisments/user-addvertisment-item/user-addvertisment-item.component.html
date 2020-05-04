@@ -55,24 +55,24 @@ style="width: 80%; margin: 10px;">
         <button 
         type="button" 
         class="btn btn-warning" 
-        style="color: white;" 
+        style="color: white;"
+        *ngIf="loginUser && (+loginUser.id === +sellerId || loginUser.role === 'ADMIN' || loginUser.role === 'MODERATOR') " 
         (click)="modifyAddvertisment()">
         Modyfikuj</button>
         <button
-        *ngIf="!isDeleteLoading; else deleteLoading" 
+        *ngIf="!isDeleteLoading && loginUser && (+loginUser.id === +sellerId || loginUser.role === 'ADMIN' || loginUser.role === 'MODERATOR')" 
         type="button" 
         class="btn btn-danger" 
         (click)="deleteAddvertisment()">
         Usuń</button>
-        <ng-template #deleteLoading>
-          <button         
-          type="button" 
-          class="btn btn-danger" >
-            <app-spinner [size]="1"></app-spinner>
-          </button>
-        </ng-template>
+        <button         
+        type="button"
+        *ngIf="isDeleteLoading" 
+        class="btn btn-danger" >
+          <app-spinner [size]="1"></app-spinner>
+        </button>
         <button 
-        *ngIf="shortAdvertisment.active !== undefined && !isToogleActiveLoading"
+        *ngIf="(shortAdvertisment.active !== undefined && !isToogleActiveLoading) && loginUser && (+loginUser.id === +sellerId || loginUser.role === 'ADMIN' || loginUser.role === 'MODERATOR')"
         type="button" 
         class="btn btn-info" 
         (click)="toggleActive()">

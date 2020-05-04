@@ -17,6 +17,7 @@
             class="nav-link"
             *ngIf="user"
             [routerLink]="['/user-page']" 
+            [queryParams]="{userId: user.id}"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{exact: true}">Moje konto</a>
         </li>

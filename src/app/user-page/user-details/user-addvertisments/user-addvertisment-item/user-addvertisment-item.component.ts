@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ShortAddvertisment } from 'src/app/interfaces/ShortAddvertisment.model';
 import { AddvertismentService } from 'src/app/services/addvertisment/addvertisment.service';
 import { Router } from '@angular/router';
+import { LoginUserService } from 'src/app/services/loginUser/login-user.service';
+import { LoginUser } from 'src/app/interfaces/loginUser.model';
 
 @Component({
   selector: 'app-user-addvertisment-item',
@@ -11,19 +13,26 @@ import { Router } from '@angular/router';
 export class UserAddvertismentItemComponent implements OnInit {
 
   @Input() shortAdvertisment: ShortAddvertisment;
+  @Input() sellerId: number;
   @Output() deleteEmitter = new EventEmitter<number>();
 
+  loginUser: LoginUser;
   isDeleteLoading = false;
   isError = false;
   isToogleActiveLoading = false;
 
   constructor(
     private addvertismentService: AddvertismentService,
-    private route: Router
+    private route: Router,
+    private loginUserService: LoginUserService
     ) {
    }
 
   ngOnInit(): void {
+    this.loginUserService.loginUser
+      .subscribe((loginUser: LoginUser) => {
+        this.loginUser = loginUser;
+      });
   }
 
   showDetails(): void {
