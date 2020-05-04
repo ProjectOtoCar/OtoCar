@@ -22,7 +22,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.navbarOpen = !this.navbarOpen;
   }
   ngOnInit(): void {
-    this.loginUserSub = this.loginUserService.loginSelerId
+    this.loginUserSub = this.loginUserService.loginUser
       .subscribe((loginUser: LoginUser) => {
         this.user = loginUser;
       });

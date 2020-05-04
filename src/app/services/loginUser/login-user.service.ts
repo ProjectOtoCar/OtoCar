@@ -7,15 +7,19 @@ import { LoginUser } from 'src/app/interfaces/loginUser.model';
 })
 export class LoginUserService {
 
-  loginSelerId = new BehaviorSubject(null);
+  loginUser = new BehaviorSubject(null);
   constructor() { }
 
   signIn(login): void {
-    this.loginSelerId.next({id: 6, role: 'USER', email: 'lala@o2.pl'} as LoginUser);
+    this.loginUser.next({id: 6, role: 'USER', email: 'lala@o2.pl'} as LoginUser);
   }
 
   signOut(): void {
-    this.loginSelerId.next(null);
+    this.loginUser.next(null);
+  }
+
+  autoSignIn(): void {
+    this.loginUser.next({id: 6, role: 'USER', email: 'lala@o2.pl'} as LoginUser);
   }
 
 }

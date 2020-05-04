@@ -3,6 +3,8 @@ import { ActivatedRoute, Params, Event, Router } from '@angular/router';
 import { UserPageService } from 'src/app/services/user-page.service';
 import { Seller } from 'src/app/interfaces/Seller';
 import { Subscription } from 'rxjs';
+import { LoginUserService } from 'src/app/services/loginUser/login-user.service';
+import { LoginUser } from 'src/app/interfaces/loginUser.model';
 
 @Component({
   selector: 'app-user-details',
@@ -20,11 +22,17 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   isModalLoading: boolean;
   isErrorModal: boolean;
   queryParamsSub: Subscription;
+  loginUserSub: Subscription;
   constructor(
     private activatedRoute: ActivatedRoute,
     private route: Router,
-    private userPageService: UserPageService ) { }
+    private userPageService: UserPageService,
+    private loginUserService: LoginUserService ) { }
   ngOnInit(): void {
+    this.loginUserSub = this.loginUserService.loginUser
+      .subscribe((loginUser: LoginUser) => {
+
+      });
     this.queryParamsSub = this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.userPageService.isError.next(false);
       this.userPageService.isLoading.next(true);
@@ -78,7 +86,8 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     this.isDeleteModal = true;
   }
   ngOnDestroy(): void {
-    this.queryParamsSub.unsubscribe();
+    this.queryParamsSub?.unsubscribe();
+    this.loginUserSub?.unsubscribe();
   }
 
 }
