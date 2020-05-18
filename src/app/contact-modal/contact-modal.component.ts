@@ -4,6 +4,8 @@ import { Seller } from '../interfaces/Seller';
 import { CustomValidators } from '../validators/CustomValidators';
 import { EmailSenderService } from '../services/emailSender/email-sender.service';
 import { Contact } from '../interfaces/Contact';
+import { LoginUserService } from '../services/loginUser/login-user.service';
+import { LoginUser } from '../interfaces/loginUser.model';
 
 @Component({
   selector: 'app-contact-modal',
@@ -18,7 +20,9 @@ export class ContactModalComponent implements OnInit {
   isError = false;
   isSend = false;
   contactForm: FormGroup;
-  constructor(private emailSenderService: EmailSenderService) {
+  constructor(
+    private emailSenderService: EmailSenderService,
+    private loginUserService: LoginUserService) {
     this.contactForm = new FormGroup({
       title: new FormControl(null,
         [
@@ -63,6 +67,15 @@ export class ContactModalComponent implements OnInit {
     });
    }
   ngOnInit(): void {
+    this.loginUserService.loginUser
+      .subscribe((loginUser: LoginUser) => {
+        if (loginUser !== undefined && loginUser !== null) {
+          this.contactForm.patchValue({
+            mailSender: loginUser.email
+          });
+          this.contactForm.get('mailSender').disable();
+        }
+      });
   }
 
 

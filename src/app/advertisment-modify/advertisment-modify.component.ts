@@ -12,6 +12,8 @@ import { BrandService } from '../services/brand/brand.service';
 import { CityService } from '../services/city/city.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Addvertisment } from '../interfaces/Addvertisment';
+import { LoginUserService } from '../services/loginUser/login-user.service';
+import { LoginUser } from '../interfaces/loginUser.model';
 
 @Component({
   selector: 'app-advertisment-modify',
@@ -62,6 +64,7 @@ export class AdvertismentModifyComponent implements OnInit, OnDestroy {
     private enumsService: EnumsService,
     private brandService: BrandService,
     private cityService: CityService,
+    private loginUserService: LoginUserService,
     private route: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -145,7 +148,7 @@ export class AdvertismentModifyComponent implements OnInit, OnDestroy {
           )
         }
       ),
-        sellerId: new FormControl(6),
+        sellerId: new FormControl(null),
         cityId: new FormControl(null,
           [
             Validators.required
@@ -273,6 +276,14 @@ export class AdvertismentModifyComponent implements OnInit, OnDestroy {
       });
     }, error => {
       this.isError = true;
+    });
+    this.loginUserService.loginUser
+    .subscribe((loginUser: LoginUser) => {
+      if (loginUser.email !== null && loginUser.email !== undefined && loginUser.email !== '') {
+        this.modifyAdvertismentForm.patchValue({
+          sellerId: loginUser.id
+        });
+      }
     });
   }
 

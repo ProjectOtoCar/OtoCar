@@ -11,6 +11,8 @@ import { City } from 'src/app/interfaces/City.modal';
 import { Subscription } from 'rxjs';
 import { Image } from 'src/app/interfaces/Image';
 import { Router, ActivatedRoute } from '@angular/router';
+import { LoginUserService } from 'src/app/services/loginUser/login-user.service';
+import { LoginUser } from 'src/app/interfaces/loginUser.model';
 
 @Component({
   selector: 'app-add-addvertisment',
@@ -56,6 +58,7 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
     private enumsService: EnumsService,
     private brandService: BrandService,
     private cityService: CityService,
+    private loginUserService: LoginUserService,
     private route: Router
     ) {
     this.currentYear = new Date().getFullYear();
@@ -138,7 +141,7 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
           )
         }
       ),
-        sellerId: new FormControl(6),
+        sellerId: new FormControl(null),
         cityId: new FormControl(null,
           [
             Validators.required
@@ -211,6 +214,14 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
         this.isCityError = true;
         this.isCityLoading = false;
       });
+      this.loginUserService.loginUser
+        .subscribe((loginUser: LoginUser) => {
+          if (loginUser.email !== null && loginUser.email !== undefined && loginUser.email !== '') {
+            this.addAddvertismentForm.patchValue({
+              sellerId: loginUser.id
+            });
+          }
+        });
     }
   onChangeBrand(event) {
     this.selectBrandIndex = event;
