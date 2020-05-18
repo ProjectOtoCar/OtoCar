@@ -30,13 +30,10 @@ import { UserAddvertismentItemComponent } from './user-addvertisment-item/user-a
   ],
   imports: [
     CommonModule,
-    PipeModule,
     ModalModule,
     PaginationModule,
     SharedModule,
-    ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
   ],
   exports: [
     UserPageComponent,

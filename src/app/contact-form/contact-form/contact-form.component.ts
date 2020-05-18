@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CustomValidators} from '../validators/CustomValidators';
-import { Contact } from '../interfaces/Contact';
-import { EmailSenderService } from '../services/emailSender/email-sender.service';
-import { LoginUserService } from '../services/loginUser/login-user.service';
+import {CustomValidators} from '../../validators/CustomValidators';
+import { Contact } from '../../interfaces/Contact';
+import { EmailSenderService } from '../../services/emailSender/email-sender.service';
+import { LoginUserService } from '../../services/loginUser/login-user.service';
 import { environment } from 'src/environments/environment';
-import { LoginUser } from '../interfaces/loginUser.model';
+import { LoginUser } from '../../interfaces/loginUser.model';
 
 @Component({
   selector: 'app-contact-form',

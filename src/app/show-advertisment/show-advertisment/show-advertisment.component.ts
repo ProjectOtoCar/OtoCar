@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ShortAddvertisment } from '../interfaces/ShortAddvertisment.model';
-import { AddvertismentService } from '../services/addvertisment/addvertisment.service';
+import { ShortAddvertisment } from '../../interfaces/ShortAddvertisment.model';
+import { AddvertismentService } from '../../services/addvertisment/addvertisment.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { QueryParamsAdvertismentSearch } from '../interfaces/QueryParamsAdvertismentSearch.model';
+import { QueryParamsAdvertismentSearch } from '../../interfaces/QueryParamsAdvertismentSearch.model';
 
 @Component({
   selector: 'app-show-advertisment',

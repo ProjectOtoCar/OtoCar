@@ -32,7 +32,10 @@ import { SearchAddFormComponent } from './search-add-form/search-add-form.compon
     TosterComponent,
     SpinnerComponent,
     TelLinkComponent,
-    SearchAddFormComponent
+    SearchAddFormComponent,
+    PipeModule,
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
 })
 export class SharedModule { }

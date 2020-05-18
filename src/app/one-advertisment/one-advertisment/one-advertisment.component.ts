@@ -1,9 +1,9 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Params } from '@angular/router';
-import { AddvertismentService } from '../services/addvertisment/addvertisment.service';
+import { AddvertismentService } from '../../services/addvertisment/addvertisment.service';
 import { Subscription } from 'rxjs';
-import { Addvertisment } from '../interfaces/Addvertisment';
+import { Addvertisment } from '../../interfaces/Addvertisment';
 
 @Component({
   selector: 'app-one-advertisment',

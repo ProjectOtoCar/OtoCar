@@ -1,19 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Brand } from '../interfaces/Brand.model';
-import { CarModel } from '../interfaces/CarModel.model';
-import { City } from '../interfaces/City.modal';
+import { Brand } from '../../interfaces/Brand.model';
+import { CarModel } from '../../interfaces/CarModel.model';
+import { City } from '../../interfaces/City.modal';
 import { Subscription } from 'rxjs';
-import { Image } from '../interfaces/Image';
-import { AddvertismentService } from '../services/addvertisment/addvertisment.service';
-import { CarModelService } from '../services/car-model/car-model.service';
-import { EnumsService } from '../services/enums/enums.service';
-import { BrandService } from '../services/brand/brand.service';
-import { CityService } from '../services/city/city.service';
+import { Image } from '../../interfaces/Image';
+import { AddvertismentService } from '../../services/addvertisment/addvertisment.service';
+import { CarModelService } from '../../services/car-model/car-model.service';
+import { EnumsService } from '../../services/enums/enums.service';
+import { BrandService } from '../../services/brand/brand.service';
+import { CityService } from '../../services/city/city.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Addvertisment } from '../interfaces/Addvertisment';
-import { LoginUserService } from '../services/loginUser/login-user.service';
-import { LoginUser } from '../interfaces/loginUser.model';
+import { Addvertisment } from '../../interfaces/Addvertisment';
+import { LoginUserService } from '../../services/loginUser/login-user.service';
+import { LoginUser } from '../../interfaces/loginUser.model';
 
 @Component({
   selector: 'app-advertisment-modify',
@@ -292,7 +292,7 @@ export class AdvertismentModifyComponent implements OnInit, OnDestroy {
     this.isError = false;
     this.images = this.images.map((image: Image) => {
       return {mainImage: image.mainImage, photo: image.photo} as Image;
-    })
+    });
     console.log({...this.modifyAdvertismentForm.value, images: this.images});
     this.addvertismentService
     .putAdvertisment(this.addId, {...this.modifyAdvertismentForm.value, images: this.images})
