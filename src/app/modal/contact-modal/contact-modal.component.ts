@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { Seller } from '../interfaces/Seller';
-import { CustomValidators } from '../validators/CustomValidators';
-import { EmailSenderService } from '../services/emailSender/email-sender.service';
-import { Contact } from '../interfaces/Contact';
-import { LoginUserService } from '../services/loginUser/login-user.service';
-import { LoginUser } from '../interfaces/loginUser.model';
+import { Seller } from '../../interfaces/Seller';
+import { CustomValidators } from '../../validators/CustomValidators';
+import { EmailSenderService } from '../../services/emailSender/email-sender.service';
+import { Contact } from '../../interfaces/Contact';
+import { LoginUserService } from '../../services/loginUser/login-user.service';
+import { LoginUser } from '../../interfaces/loginUser.model';
 
 @Component({
   selector: 'app-contact-modal',

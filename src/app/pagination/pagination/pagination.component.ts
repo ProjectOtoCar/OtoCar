@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
-import { Page } from '../interfaces/Page';
+import { Page } from '../../interfaces/Page';
 
 @Component({
   selector: 'app-pagination',

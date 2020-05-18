@@ -1,11 +1,11 @@
 import {Component, Input, OnInit, OnDestroy} from '@angular/core';
-import { AdminPanelService } from '../services/admin-panel.service';
-import { Seller } from '../interfaces/Seller';
+import { AdminPanelService } from '../../services/admin-panel.service';
+import { Seller } from '../../interfaces/Seller';
 import { pipe, Subscription, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
-import { QueryParamsAdminPage } from '../interfaces/QueryParamsAdminPage';
+import { QueryParamsAdminPage } from '../../interfaces/QueryParamsAdminPage';
 
 @Component({
   selector: 'app-admin-panel',
