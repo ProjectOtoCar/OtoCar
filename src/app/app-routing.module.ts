@@ -20,6 +20,11 @@ import { AddAddvertismentComponent } from './user-page/user-details/add-addverti
 import { UserAddvertismentsComponent } from './user-page/user-details/user-addvertisments/user-addvertisments.component';
 import { AdvertismentModifyComponent } from './advertisment-modify/advertisment-modify.component';
 import { ShowAdvertismentComponent } from './show-advertisment/show-advertisment.component';
+import { AuthOwnerGuard } from './guard/authOwner.guard';
+import { AuthAdminGuard } from './guard/authAdmin.guard';
+import { AuthNotLoginGuard } from './guard/authNotLogin.guard';
+import { AuthGuard } from './guard/auth.guard';
+import { AuthUserGuard } from './guard/authUser.guard';
 
 
 
@@ -32,20 +37,20 @@ const routes: Routes = [
   [
     {path: 'user-data', component: UserDataComponent},
     {path: 'user-advertisements', component: UserAddvertismentsComponent},
-    {path: 'buy-premium', component: UserPageComponent},
-    {path: 'add-advertisement', component: AddAddvertismentComponent},
-    {path: 'edit-profile', component: ModifyProfileComponent}
+    {path: 'buy-premium', component: UserPageComponent, canActivate: [AuthOwnerGuard]},
+    {path: 'add-advertisement', component: AddAddvertismentComponent, canActivate: [AuthUserGuard]},
+    {path: 'edit-profile', component: ModifyProfileComponent, canActivate: [AuthUserGuard]}
   ]},
-  {path: 'registration', component: RegistrationComponent},
-  {path: 'admin', component: AdminPanelComponent},
-  {path: 'sign-in', component: SignInComponent},
+  {path: 'registration', component: RegistrationComponent, canActivate: [AuthNotLoginGuard]},
+  {path: 'admin', component: AdminPanelComponent, canActivate: [AuthAdminGuard]},
+  {path: 'sign-in', component: SignInComponent, canActivate: [AuthNotLoginGuard]},
   {path: 'main-statute', component: MainstatuteComponent},
   {path: 'business-statute', component: BusinessStatuteComponent},
   {path: 'privacy-policy', component: PrivacyPolicyComponent},
   {path: 'cookie-policy', component: CookiePolicyComponent},
   {path: 'advertisement', component: OneAdvertismentComponent},
   {path: 'advertisements', component: ShowAdvertismentComponent},
-  {path: 'advertisement-modify', component: AdvertismentModifyComponent},
+  {path: 'advertisement-modify', component: AdvertismentModifyComponent, canActivate: [AuthGuard]},
   {path: 'contact', component: ContactFormComponent},
   {path: 'filtrAdv', component: FiltrAdvertismentComponent},
   {path: 'not-found', component: ErrorComponent, data: {message: 'Nic tutaj nie ma', error: 404, subMessage: 'strona nie znaleziona!'}},

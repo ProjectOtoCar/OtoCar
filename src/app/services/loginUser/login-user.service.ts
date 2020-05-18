@@ -20,7 +20,7 @@ export class LoginUserService {
   }
 
   autoSignIn(): void {
-    this.loginUser.next({id: 6, role: 'ADMIN', email: 'lala@o2.pl'} as LoginUser);
+    this.loginUser.next({id: 6, role: 'USER', email: 'lala@o2.pl'} as LoginUser);
     localStorage.setItem('test', 'test');
   }
 
