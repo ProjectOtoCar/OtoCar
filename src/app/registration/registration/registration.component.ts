@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from '../../validators/CustomValidators';
+import { LoginUserService } from 'src/app/services/loginUser/login-user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -10,7 +12,10 @@ import { CustomValidators } from '../../validators/CustomValidators';
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   isAccept = false;
-  constructor() { }
+  isLoading = false;
+  isError = false;
+  isSuccess = false;
+  constructor(private loginUserService: LoginUserService, private router: Router) { }
 
   ngOnInit(): void {
     this.registrationForm = new FormGroup({
@@ -29,7 +34,7 @@ export class RegistrationComponent implements OnInit {
           CustomValidators.withoutSpace
         ]),
       userData: new FormGroup({
-        email: new FormControl(null,
+        username: new FormControl(null,
           [
             Validators.required,
             Validators.email,
@@ -51,12 +56,26 @@ export class RegistrationComponent implements OnInit {
     });
   }
   onClickAccept(): void {
-    console.log(this.isAccept);
     this.isAccept = !this.isAccept;
   }
   onSubmit(): void {
-    console.log(this.registrationForm);
-    // this.registrationForm.reset();
+    this.isLoading = true;
+    this.isError = false;
+    this.isSuccess = false;
+    this.loginUserService.createUser(this.registrationForm.value.userData)
+    .subscribe((user) => {
+      this.isLoading = false;
+      this.isSuccess = true;
+      this.registrationForm.reset();
+      console.log(user);
+    }, error => {
+      this.isLoading = false;
+      this.isError = true;
+    });
   }
-
+  onPressSuccessModal(event: boolean): void {
+    if (event) {
+      this.router.navigate(['/']);
+    }
+  }
 }

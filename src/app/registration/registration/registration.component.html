@@ -1,5 +1,6 @@
 <div class="d-flex justify-content-center top-margin page">
     <div class="col-lg-4 col-md-5 border border-primary rounded padding">
+        <app-error-message *ngIf="isError"></app-error-message>
         <h3>Załóż darmowe konto!</h3>
         <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
@@ -66,33 +67,33 @@
             </div>
             <div formGroupName="userData">
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="username">Email</label>
                     <input type="text" 
                     class="form-control" 
                     [ngClass]="{'is-invalid' : 
-                    !registrationForm.get('userData.email').valid && 
-                    registrationForm.get('userData.email').touched,
-                    'is-valid' : registrationForm.get('userData.email').valid}"
-                    id="email"
-                    formControlName="email">
+                    !registrationForm.get('userData.username').valid && 
+                    registrationForm.get('userData.username').touched,
+                    'is-valid' : registrationForm.get('userData.username').valid}"
+                    id="username"
+                    formControlName="username">
                     <div class="invalid-feedback"
-                        *ngIf="registrationForm.get('userData.email').errors?.required">
+                        *ngIf="registrationForm.get('userData.username').errors?.required">
                     Pole jest wymagane
                     </div>
                     <div class="invalid-feedback"
-                        *ngIf="registrationForm.get('userData.email').errors?.minlength">
+                        *ngIf="registrationForm.get('userData.username').errors?.minlength">
                         E-mail za krótki(minimalnie 3 znaki)
                     </div>
                     <div class="invalid-feedback"
-                        *ngIf="registrationForm.get('userData.email').errors?.maxlength">
+                        *ngIf="registrationForm.get('userData.username').errors?.maxlength">
                         E-mail za długi(maksymalnie 100 znaków)
                     </div>
                     <div class="invalid-feedback"
-                        *ngIf="registrationForm.get('userData.email').errors?.email ">
+                        *ngIf="registrationForm.get('userData.username').errors?.email ">
                         Niepoprawny email
                     </div>
                     <div class="invalid-feedback"
-                        *ngIf="registrationForm.get('userData.email').errors?.withoutspace">
+                        *ngIf="registrationForm.get('userData.username').errors?.withoutspace">
                         E-mail nie może zawierać spacji
                     </div>
                     <div class="valid-feedback">
@@ -158,8 +159,23 @@
             <button 
             class="btn btn-success top-margin"
             type="submit"
+            *ngIf="!isLoading; else loading"
             [disabled]="registrationForm.invalid || !isAccept"
             >załóż konto!</button>
+            <ng-template #loading>
+                <button 
+                class="btn btn-success top-margin"
+                ><app-spinner [size]="1"></app-spinner> Wysyłanie...</button>
+            </ng-template>
         </form>
     </div>
 </div>
+<app-modal
+*ngIf="isSuccess"
+title="Udało się założyć konto!"
+message="Prosimy sprawdzić email w celu dokończenie rejestracji"
+[showCancelButton]="false"
+[showAcceptButton]="true"
+firstAction="Wróć do strony głównej"
+(action)="onPressSuccessModal($event)"
+></app-modal>
