@@ -64,7 +64,7 @@ public class UserSevice {
                 ":" +
                 request.getServerPort() + "/" +
                 request.getContextPath() +
-                "test/" + type + "?token="+ verifyToken + "\"> Aktywuj Konto </a></body></html>";
+                "api/user/" + type + "?token="+ verifyToken + "\"> Aktywuj Konto </a></body></html>";
         return url;
     }
 
