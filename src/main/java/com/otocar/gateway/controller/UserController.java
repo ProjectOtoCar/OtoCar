@@ -72,12 +72,12 @@ public class UserController {
 
     // Do zrobienia weryfikacja hasla i zmiena hasła
     @GetMapping("/reset")
-    String verifyTokenAndSetNewPassword(@RequestParam String token) {
+    ResponseEntity<String> verifyTokenAndSetNewPassword(@RequestParam String token) {
         int i = token.indexOf("_");
         String id = token.substring(0, i);
         System.out.println();
         userSevice.verificationToken(token);
-        return id;
+        return ResponseEntity.ok(id);
     }
 
     @PostMapping("/changePassword")
