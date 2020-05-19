@@ -16,15 +16,15 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/test")
-public class TestSingIn {
+@RequestMapping("/api/user")
+public class UserController {
     private static final String KEY_ = "McQfTjWnZr4u7x!A%D*G-KaNdRgUkXp2s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F";
     private UserDetailsServiceImpl appUserRepository;
     private PasswordEncoder passwordEncoder;
     private AppUserRepository userRepository;
     private UserSevice userSevice;
 
-    public TestSingIn(UserDetailsServiceImpl appUserRepository, PasswordEncoder passwordEncoder, AppUserRepository userRepository, UserSevice userSevice) {
+    public UserController(UserDetailsServiceImpl appUserRepository, PasswordEncoder passwordEncoder, AppUserRepository userRepository, UserSevice userSevice) {
         this.appUserRepository = appUserRepository;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
@@ -32,19 +32,19 @@ public class TestSingIn {
     }
 
     @PostMapping("/regi")
-    ResponseEntity<AppUser> addAcc(@RequestBody AppUser user,  HttpServletRequest request) {
-
-        AppUser appUser = userSevice.addNeUser(user, request);
-
-
-        return ResponseEntity.created(URI.create("localhost:8080/user/"+appUser.getId())).body(appUser);
+    ResponseEntity<AppUser> addAcc(@RequestBody AppUser user, HttpServletRequest request) {
+        if (userSevice.isExistAccount(user.getUsername())) {
+            AppUser appUser = userSevice.addNeUser(user, request);
+            return ResponseEntity.created(URI.create("localhost:8080/user/" + appUser.getId())).body(appUser);
+        }
+        return ResponseEntity.badRequest().body(user);
     }
 
     @PostMapping()
     ResponseEntity<String> login(@RequestBody AppUser user) {
         String sign = null;
         UserDetails userDetails = appUserRepository.loadUserByUsername(user.getUsername());
-        if (userDetails != null && BCrypt.checkpw(user.getPassword(),userDetails.getPassword())) {
+        if (userDetails != null && BCrypt.checkpw(user.getPassword(), userDetails.getPassword())) {
             sign = JWT.create().withClaim("role", "ROLE_ADMIN").sign(Algorithm.HMAC512(KEY_));
         }
         AppUser allByUsername = userRepository.findAllByUsername(user.getUsername());
@@ -52,26 +52,27 @@ public class TestSingIn {
 
         return ResponseEntity.ok(sign);
     }
+
     @GetMapping("/verifyToken")
-    public String verifyToken(@RequestParam String token){
+    public String verifyToken(@RequestParam String token) {
         userSevice.verificationToken(token);
         return "Zrobione";
     }
 
     @PostMapping("/reset")
-    ResponseEntity<Boolean> resetPassword(@RequestParam String username,HttpServletRequest request){
-      //  boolean b = token.endsWith("=");
-      //  System.out.println(b);
+    ResponseEntity<Boolean> resetPassword(@RequestParam String username, HttpServletRequest request) {
+        //  boolean b = token.endsWith("=");
+        //  System.out.println(b);
         UserDetails user = appUserRepository.loadUserByUsername(username);
-        if(user != null){
-            userSevice.resetPassword(username,request);
+        if (user != null) {
+            userSevice.resetPassword(username, request);
         }
         return ResponseEntity.ok(true);
     }
 
     // Do zrobienia weryfikacja hasla i zmiena hasła
     @GetMapping("/reset")
-    String verifyTokenAndSetNewPassword(@RequestParam  String token){
+    String verifyTokenAndSetNewPassword(@RequestParam String token) {
         int i = token.indexOf("_");
         String id = token.substring(0, i);
         System.out.println();
@@ -80,7 +81,7 @@ public class TestSingIn {
     }
 
     @PostMapping("/changePassword")
-    void changePassword(@RequestBody AppUser user){
+    void changePassword(@RequestBody AppUser user) {
         AppUser userDetails = userRepository.findAllByUsername(user.getUsername());
         userDetails.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(userDetails);

@@ -27,6 +27,13 @@ public class UserSevice {
         this.verificationTokenRepository = verificationTokenRepository;
     }
 
+    public boolean isExistAccount(String mail){
+        if(appUserRepository.findAllByUsername(mail)!= null){
+            throw new IllegalArgumentException("Podane konto już istenije");
+        }
+        return true;
+    }
+
     public AppUser addNeUser(AppUser user, HttpServletRequest request) {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
