@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/user")
@@ -41,7 +42,7 @@ public class UserController {
     }
 
     @PostMapping()
-    ResponseEntity<String> login(@RequestBody AppUser user) {
+    ResponseEntity<Map<String,String>> login(@RequestBody AppUser user) {
         String sign = null;
         UserDetails userDetails = appUserRepository.loadUserByUsername(user.getUsername());
         if (userDetails != null && BCrypt.checkpw(user.getPassword(), userDetails.getPassword())) {
@@ -50,7 +51,7 @@ public class UserController {
         AppUser allByUsername = userRepository.findAllByUsername(user.getUsername());
         System.out.println(allByUsername.getId());
 
-        return ResponseEntity.ok(sign);
+        return ResponseEntity.ok(Map.of("Key",sign));
     }
 
     @GetMapping("/verifyToken")
