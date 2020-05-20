@@ -28,13 +28,13 @@ public class AdvertisementController {
                                                    @RequestParam(required = false) String brandName,
                                                    @RequestParam(required = false) String modelName,
                                                    @RequestParam(defaultValue = "0") BigDecimal lowPrice,
-                                                   @RequestParam(defaultValue = "100000000") BigDecimal highPirce,
+                                                   @RequestParam(defaultValue = "100000000") BigDecimal highPrice,
                                                    @RequestParam(defaultValue = "1940") int lowRegistration,
                                                    @RequestParam(defaultValue = "2020") int highRegistration,
                                                    @RequestParam(defaultValue = "desc") String orderBy
                                                    ) {
 
-        Page<Advertisement> advertisements = advertisementService.find(page, brandName, modelName, lowRegistration, highRegistration, lowPrice, highPirce, orderBy);
+        Page<Advertisement> advertisements = advertisementService.find(page, brandName, modelName, lowRegistration, highRegistration, lowPrice, highPrice, orderBy);
 
         advertisements.forEach(advertisement -> {
             advertisement.setContent(null);
@@ -42,7 +42,6 @@ public class AdvertisementController {
             advertisement.getCar().setTypeCar(null);
             advertisement.getCar().setBrand(null);
             advertisement.getCar().setModel(null);
-            advertisement.setSeller(null);
             advertisement.getCity().setAdvertisements(null);
 
         });
@@ -98,7 +97,9 @@ public class AdvertisementController {
     }
 
     @PutMapping("/{id}")
-    public Advertisement putAdvertisement(@PathVariable(value = "id") Long id, @RequestBody Advertisement advertisement) {
+    public Advertisement putAdvertisement(@PathVariable(value = "id") Long id, @RequestBody AdvertisementDto advertisementDto) {
+        Advertisement advertisement = new Advertisement(advertisementDto);
+        advertisement.getImages().forEach(image -> image.setAdvertisement(advertisement));
         return advertisementService.change(id, advertisement);
     }
 

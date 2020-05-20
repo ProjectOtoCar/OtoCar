@@ -17,11 +17,13 @@ import java.util.Optional;
 public class AdvertisementService extends AddPagable {
 
     private AdvertisementRepository advertisementRepository;
+    private ImageService imageService;
 
 
     @Autowired
-    public AdvertisementService(AdvertisementRepository advertisementRepository) {
+    public AdvertisementService(AdvertisementRepository advertisementRepository, ImageService imageService) {
         this.advertisementRepository = advertisementRepository;
+        this.imageService = imageService;
     }
 
     public Page<Advertisement> find(int page, String brandName, String modelName, int lowRegistration, int highRegistration, BigDecimal lowPrcie, BigDecimal highPrice, String orderBy) {
@@ -86,9 +88,11 @@ public class AdvertisementService extends AddPagable {
     }
 
     public Advertisement change(Long aLong, Advertisement advertisement) {
+        Optional<Advertisement> advertisementFound = advertisementRepository.findById(aLong);
         if (advertisementRepository.findById(aLong).isEmpty()) {
             return advertisementRepository.save(advertisement);
         }
+        advertisementFound.get().getImages().forEach(image -> imageService.deleteById(image.getId()));
         advertisement.setId(aLong);
         return advertisementRepository.save(advertisement);
     }
