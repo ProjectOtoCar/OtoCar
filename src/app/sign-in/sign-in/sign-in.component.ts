@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 export class SignInComponent implements OnInit {
   loginForm: FormGroup;
   isLoginSuccess = false;
+  isLoading = false;
+  isError = false;
   constructor(
     private loginUserService: LoginUserService,
     private route: Router
@@ -19,7 +21,7 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      email: new FormControl(null,
+      username: new FormControl(null,
         [
           Validators.required,
           Validators.email,
@@ -38,12 +40,22 @@ export class SignInComponent implements OnInit {
           CustomValidators.withoutSpace
         ])
     });
-
   }
 
   onSubmit(): void {
-    this.loginUserService.signIn(this.loginForm.value);
-    this.isLoginSuccess = true;
+    this.isError = false;
+    this.isLoading = false;
+    this.isLoginSuccess = false;
+    this.loginUserService.signIn(this.loginForm.value)
+      .subscribe((user) => {
+        console.log(user);
+        this.isLoginSuccess = true;
+        this.isLoading = false;
+      }, error => {
+        console.log(error);
+        this.isLoading = false;
+        this.isError = true;
+      });
   }
 
   onLoginSuccess(): void {

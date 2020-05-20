@@ -1,34 +1,35 @@
 <div class="d-flex justify-content-center top-margin">
     <div class="col-lg-4 col-md-6 border border-primary rounded padding">
+        <app-error-message *ngIf="isError"></app-error-message>
         <h3>Zaloguj się</h3>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <label for="email">Email</label>
+            <label for="username">Email</label>
             <input type="text" 
             class="form-control" 
             [ngClass]="{'is-invalid' : 
-            !loginForm.get('email').valid && 
-            loginForm.get('email').touched,
-            'is-valid' : loginForm.get('email').valid}"
-            id="email"
-            formControlName="email">
+            !loginForm.get('username').valid && 
+            loginForm.get('username').touched,
+            'is-valid' : loginForm.get('username').valid}"
+            id="username"
+            formControlName="username">
             <div class="invalid-feedback"
-                *ngIf="loginForm.get('email').errors?.required">
+                *ngIf="loginForm.get('username').errors?.required">
             Pole jest wymagane
             </div>
             <div class="invalid-feedback"
-                *ngIf="loginForm.get('email').errors?.minlength">
+                *ngIf="loginForm.get('username').errors?.minlength">
                 E-mail za krótki(minimalnie 3 znaki)
             </div>
             <div class="invalid-feedback"
-                *ngIf="loginForm.get('email').errors?.maxlength">
+                *ngIf="loginForm.get('username').errors?.maxlength">
                 E-mail za długi(maksymalnie 100 znaków)
             </div>
             <div class="invalid-feedback"
-                *ngIf="loginForm.get('email').errors?.email ">
+                *ngIf="loginForm.get('username').errors?.email ">
                 Niepoprawny email
             </div>
             <div class="invalid-feedback"
-                *ngIf="loginForm.get('email').errors?.withoutspace">
+                *ngIf="loginForm.get('username').errors?.withoutspace">
                 E-mail nie może zawierać spacji
             </div>
             <div class="valid-feedback">
@@ -78,8 +79,14 @@
                 <button 
                 class="btn btn-success top-margin"
                 type="submit"
+                *ngIf="!isLoading; else loading"
                 [disabled]="loginForm.invalid"
                 >Zaloguj się</button>
+                <ng-template #loading>
+                    <button 
+                    class="btn btn-success top-margin"
+                    ><app-spinner [size]="1"></app-spinner> Wysyłanie...</button>
+                </ng-template>
             </div>
         </form>
     </div>

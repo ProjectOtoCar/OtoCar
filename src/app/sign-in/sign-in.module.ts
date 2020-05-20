@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ModalModule } from '../modal/modal.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -13,7 +14,8 @@ import { ModalModule } from '../modal/modal.module';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    ModalModule
+    ModalModule,
+    SharedModule
   ],
   exports: [
     SignInComponent

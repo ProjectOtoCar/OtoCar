@@ -4,6 +4,7 @@ import { LoginUser } from 'src/app/interfaces/loginUser.model';
 import { HttpClient } from '@angular/common/http';
 import { RegisterUser } from '../../interfaces/RegisterUser.model';
 import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,16 @@ import { environment } from 'src/environments/environment';
 export class LoginUserService {
 
   loginUser = new BehaviorSubject(null);
+  token = new BehaviorSubject(null);
   constructor(private http: HttpClient) { }
 
-  signIn(login): void {
-     this.loginUser.next({id: 6, role: 'USER', email: 'lala@o2.pl'} as LoginUser);
+  signIn(login): Observable<any> {
+    return this.http.post(`${environment.loginUrl}/api/user`, login)
+    .pipe(map((key) => {
+      this.token.next(key);
+      return key;
+    }));
+    //  this.loginUser.next({id: 6, role: 'USER', email: 'lala@o2.pl'} as LoginUser);
   }
 
   signOut(): void {
@@ -23,7 +30,7 @@ export class LoginUserService {
   }
 
   autoSignIn(): void {
-    this.loginUser.next({id: 6, role: 'USER', email: 'lala@o2.pl'} as LoginUser);
+    this.loginUser.next({id: 6, role: 'ADMIN', email: 'lala@o2.pl'} as LoginUser);
     localStorage.setItem('test', 'test');
   }
 

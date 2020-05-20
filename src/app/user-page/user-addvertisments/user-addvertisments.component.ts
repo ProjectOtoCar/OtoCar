@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './user-addvertisments.component.html',
   styleUrls: ['./user-addvertisments.component.scss']
 })
-export class UserAddvertismentsComponent implements OnInit, OnDestroy{
+export class UserAddvertismentsComponent implements OnInit, OnDestroy {
   isLoading = false;
   isError = false;
   page = 1;

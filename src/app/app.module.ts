@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -21,6 +21,7 @@ import { OneAdvertismentModule } from './one-advertisment/one-advertisment.modul
 import { ShowAdvertismentModule } from './show-advertisment/show-advertisment.module';
 import { AdvertismentModifyModule } from './advertisment-modify/advertisment-modify.module';
 import { ContactFormModule } from './contact-form/contact-form.module';
+import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
 
 
 
@@ -50,7 +51,13 @@ import { ContactFormModule } from './contact-form/contact-form.module';
     HttpClientModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: AuthInterceptorService,
+    //   multi: true
+    // }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
