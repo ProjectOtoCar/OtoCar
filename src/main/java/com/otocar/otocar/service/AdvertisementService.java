@@ -72,13 +72,9 @@ public class AdvertisementService extends AddPagable {
             optionalAdvertisement.get().setContent((String) fields.get("content"));
             isEdit = true;
         }
-        if (fields.get("active") != null) {
-            optionalAdvertisement.get().setActive((Boolean) fields.get("active"));
-            isEdit = true;
-        }
 
-        if(isEdit){
-           advertisementRepository.save(optionalAdvertisement.get());
+        if (isEdit == true) {
+            advertisementRepository.save(optionalAdvertisement.get());
         }
         return Optional.empty();
     }
@@ -87,12 +83,14 @@ public class AdvertisementService extends AddPagable {
         advertisementRepository.deleteById(id);
     }
 
+
     public Advertisement change(Long aLong, Advertisement advertisement) {
         Optional<Advertisement> advertisementFound = advertisementRepository.findById(aLong);
         if (advertisementRepository.findById(aLong).isEmpty()) {
             return advertisementRepository.save(advertisement);
         }
         advertisementFound.get().getImages().forEach(image -> imageService.deleteById(image.getId()));
+        advertisementRepository.deleteById(aLong);
         advertisement.setId(aLong);
         return advertisementRepository.save(advertisement);
     }
