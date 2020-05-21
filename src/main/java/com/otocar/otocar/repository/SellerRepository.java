@@ -60,4 +60,5 @@ public interface SellerRepository  extends PagingAndSortingRepository<Seller, Lo
     Page<Seller> findAllByPremiumAccountLessThanAndFirstNameAndLastNameOrderByCreateAccountDesc(LocalDate today, String firstName,String lastName, Pageable pageable);
     Page<Seller> findAllByPremiumAccountLessThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountAsc(LocalDate today, String firstName,String lastName,TypeAccount typeAccount, Pageable pageable);
     Page<Seller> findAllByPremiumAccountLessThanAndFirstNameAndLastNameAndTypeOrderByCreateAccountDesc(LocalDate today, String firstName,String lastName,TypeAccount typeAccount, Pageable pageable);
+    Seller findByAuthId(Long authId);
 }

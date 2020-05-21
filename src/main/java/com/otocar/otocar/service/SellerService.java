@@ -318,5 +318,7 @@ public class SellerService extends AddPagable implements CrudServce<Long, Seller
         user.get().setPremiumAccount(newDataPremium);
         sellerRepository.save(user.get());
     }
-
+    public Seller findByAuthId(Long authId) {
+        return sellerRepository.findByAuthId(authId);
+    }
 }

@@ -40,6 +40,8 @@ public class Seller {
     @OneToMany(cascade = CascadeType.ALL ,mappedBy = "seller")
     @JsonIgnore
     private Set<Advertisement> advertisement;
+    @NotNull
+    private Long authId;
 
 
     public Seller() {
@@ -56,6 +58,14 @@ public class Seller {
         this.phoneNumber = phoneNumber;
         this.advertisement = advertisement;
         this.lastAddvertisement = null;
+    }
+
+    public Long getAuthId() {
+        return authId;
+    }
+
+    public void setAuthId(Long authId) {
+        this.authId = authId;
     }
 
     public Long getId() {

@@ -74,5 +74,10 @@ public class SellerController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/authId/{authId}")
+    public ResponseEntity<Seller> findByAuthId(@PathVariable Long authId) {
+        Seller seller = sellerService.findByAuthId(authId);
+        return new ResponseEntity<>(seller, HttpStatus.OK);
+    }
 
 }
