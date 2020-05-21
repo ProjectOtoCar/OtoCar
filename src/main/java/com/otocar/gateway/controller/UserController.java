@@ -46,13 +46,13 @@ public class UserController {
         String sign = null;
         UserDetails userDetails = appUserRepository.loadUserByUsername(user.getUsername());
         if (userDetails != null && BCrypt.checkpw(user.getPassword(), userDetails.getPassword())) {
-            sign = JWT.create().withClaim("name",user.getUsername()).withClaim("role", "ROLE_ADMIN").sign(Algorithm.HMAC512(KEY_));
+            sign = JWT.create().withClaim("name",userDetails.getUsername()).withClaim("role", "ROLE_ADMIN").sign(Algorithm.HMAC512(KEY_));
 
         }
         AppUser allByUsername = userRepository.findAllByUsername(user.getUsername());
         System.out.println(allByUsername.getId());
 
-        return ResponseEntity.ok(Map.of(user.getId(),sign));
+        return ResponseEntity.ok(Map.of(allByUsername.getId(),sign));
     }
 
     @GetMapping("/verifyToken")
