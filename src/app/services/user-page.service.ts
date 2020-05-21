@@ -5,6 +5,7 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EditSeller } from '../interfaces/EditSeller';
 import { environment } from '../../environments/environment';
+import { SellerPost } from '../interfaces/SellerPost.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,10 @@ export class UserPageService {
          }
       return seller;
     }));
+  }
+
+  postSeller(seller: SellerPost): Observable<SellerPost> {
+    return this.http.post<SellerPost>(`${environment.basicUrl}/api/seller`, seller);
   }
 
   modifyDane(id: number, data: EditSeller): Observable<any> {

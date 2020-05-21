@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from '../../validators/CustomValidators';
 import { LoginUserService } from 'src/app/services/loginUser/login-user.service';
 import { Router } from '@angular/router';
+import { UserPageService } from 'src/app/services/user-page.service';
+import { SellerPost } from 'src/app/interfaces/SellerPost.model';
 
 @Component({
   selector: 'app-registration',
@@ -15,7 +17,10 @@ export class RegistrationComponent implements OnInit {
   isLoading = false;
   isError = false;
   isSuccess = false;
-  constructor(private loginUserService: LoginUserService, private router: Router) { }
+  constructor(
+    private loginUserService: LoginUserService,
+    private router: Router,
+    private userPageService: UserPageService) { }
 
   ngOnInit(): void {
     this.registrationForm = new FormGroup({
@@ -33,7 +38,14 @@ export class RegistrationComponent implements OnInit {
           Validators.minLength(3),
           CustomValidators.withoutSpace
         ]),
-      userData: new FormGroup({
+        phoneNumber: new FormControl(null,
+          [
+            Validators.required,
+            Validators.maxLength(9),
+            CustomValidators.phoneNumber,
+            CustomValidators.withoutSpace
+          ]),
+        registerUser: new FormGroup({
         username: new FormControl(null,
           [
             Validators.required,
@@ -62,10 +74,24 @@ export class RegistrationComponent implements OnInit {
     this.isLoading = true;
     this.isError = false;
     this.isSuccess = false;
-    this.loginUserService.createUser(this.registrationForm.value.userData)
+    console.log(this.registrationForm.value);
+    this.loginUserService.createUser(this.registrationForm.value)
     .subscribe((user) => {
-      this.isLoading = false;
-      this.isSuccess = true;
+      console.log(user, "posrt");
+      this.userPageService.postSeller(
+          {
+            authId: user.id,
+            firstName: this.registrationForm.value.firstName,
+            lastName: this.registrationForm.value.lastName,
+            phoneNumber: this.registrationForm.value.phoneNumber
+          } as SellerPost)
+          .subscribe(() => {
+            this.isLoading = false;
+            this.isSuccess = true;
+          }, error => {
+            this.isLoading = false;
+            this.isError = true;
+          });
       this.registrationForm.reset();
       console.log(user);
     }, error => {

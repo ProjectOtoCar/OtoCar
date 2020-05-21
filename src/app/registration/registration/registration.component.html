@@ -65,35 +65,66 @@
                 OK!
                 </div>
             </div>
-            <div formGroupName="userData">
+            <div class="form-group">
+                <label for="phoneNumber">Numer telefonu</label>
+                <input
+                type="text" 
+                class="form-control" 
+                id="phoneNumber"
+                [ngClass]="{'is-invalid' : 
+                !registrationForm.get('phoneNumber').valid && 
+                registrationForm.get('phoneNumber').touched,
+                'is-valid' : registrationForm.get('phoneNumber').valid}"
+                formControlName="phoneNumber">
+                <div class="invalid-feedback"
+                *ngIf="registrationForm.get('phoneNumber').errors?.required">
+                Pole jest wymagane
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="registrationForm.get('phoneNumber').errors?.phonenumber">
+                    niepoprawny numer telefonu
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="registrationForm.get('phoneNumber').errors?.maxlength">
+                    dozwolona długość to 9
+                </div>
+                <div class="invalid-feedback"
+                    *ngIf="registrationForm.get('phoneNumber').errors?.withoutspace">
+                    numer telefonu nie może zawierać spacji
+                </div>
+                <div class="valid-feedback">
+                OK!
+                </div>
+            </div>
+            <div formGroupName="registerUser">
                 <div class="form-group">
                     <label for="username">Email</label>
                     <input type="text" 
                     class="form-control" 
                     [ngClass]="{'is-invalid' : 
-                    !registrationForm.get('userData.username').valid && 
-                    registrationForm.get('userData.username').touched,
-                    'is-valid' : registrationForm.get('userData.username').valid}"
+                    !registrationForm.get('registerUser.username').valid && 
+                    registrationForm.get('registerUser.username').touched,
+                    'is-valid' : registrationForm.get('registerUser.username').valid}"
                     id="username"
                     formControlName="username">
                     <div class="invalid-feedback"
-                        *ngIf="registrationForm.get('userData.username').errors?.required">
+                        *ngIf="registrationForm.get('registerUser.username').errors?.required">
                     Pole jest wymagane
                     </div>
                     <div class="invalid-feedback"
-                        *ngIf="registrationForm.get('userData.username').errors?.minlength">
+                        *ngIf="registrationForm.get('registerUser.username').errors?.minlength">
                         E-mail za krótki(minimalnie 3 znaki)
                     </div>
                     <div class="invalid-feedback"
-                        *ngIf="registrationForm.get('userData.username').errors?.maxlength">
+                        *ngIf="registrationForm.get('registerUser.username').errors?.maxlength">
                         E-mail za długi(maksymalnie 100 znaków)
                     </div>
                     <div class="invalid-feedback"
-                        *ngIf="registrationForm.get('userData.username').errors?.email ">
+                        *ngIf="registrationForm.get('registerUser.username').errors?.email ">
                         Niepoprawny email
                     </div>
                     <div class="invalid-feedback"
-                        *ngIf="registrationForm.get('userData.username').errors?.withoutspace">
+                        *ngIf="registrationForm.get('registerUser.username').errors?.withoutspace">
                         E-mail nie może zawierać spacji
                     </div>
                     <div class="valid-feedback">
@@ -105,37 +136,37 @@
                     <input type="password" 
                     class="form-control"
                     [ngClass]="{'is-invalid' : 
-                    !registrationForm.get('userData.password').valid && 
-                    registrationForm.get('userData.password').touched,
-                    'is-valid' : registrationForm.get('userData.password').valid}" 
+                    !registrationForm.get('registerUser.password').valid && 
+                    registrationForm.get('registerUser.password').touched,
+                    'is-valid' : registrationForm.get('registerUser.password').valid}" 
                     id="password"
                     formControlName="password">
                     <div class="invalid-feedback"
-                    *ngIf="registrationForm.get('userData.password').errors?.required">
+                    *ngIf="registrationForm.get('registerUser.password').errors?.required">
                     Pole jest wymagane
                     </div>
                     <div class="invalid-feedback"
-                        *ngIf="registrationForm.get('userData.password').errors?.minlength">
+                        *ngIf="registrationForm.get('registerUser.password').errors?.minlength">
                         Hasło za krótkie(minimalnie 8 znaki)
                     </div>
                     <div class="invalid-feedback"
-                        *ngIf="registrationForm.get('userData.password').errors?.maxlength">
+                        *ngIf="registrationForm.get('registerUser.password').errors?.maxlength">
                         Hasło za długie(maksymalnie 40 znaków)
                     </div>
                     <div class="invalid-feedback"
-                        *ngIf="registrationForm.get('userData.password').errors?.requiredcapitalletter">
+                        *ngIf="registrationForm.get('registerUser.password').errors?.requiredcapitalletter">
                         Hasło musi zawierać co najmniej jedną dużą literę
                     </div>
                     <div class="invalid-feedback"
-                        *ngIf="registrationForm.get('userData.password').errors?.requiredspecialsign">
+                        *ngIf="registrationForm.get('registerUser.password').errors?.requiredspecialsign">
                         Hasło musi zawierać co najmniej jeden znak specjalny
                     </div>
                     <div class="invalid-feedback"
-                        *ngIf="registrationForm.get('userData.password').errors?.requireddigit">
+                        *ngIf="registrationForm.get('registerUser.password').errors?.requireddigit">
                         Hasło musi zawierać co najmniej jedną cyfrę
                     </div>
                     <div class="invalid-feedback"
-                        *ngIf="registrationForm.get('userData.password').errors?.withoutspace">
+                        *ngIf="registrationForm.get('registerUser.password').errors?.withoutspace">
                         Hasło nie może zawierać spacji
                     </div>
                     <div class="valid-feedback">
