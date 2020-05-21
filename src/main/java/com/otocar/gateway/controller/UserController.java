@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @PostMapping()
-    ResponseEntity<Map<Long,String>> login(@RequestBody AppUser user) {
+    ResponseEntity<Map<String,String>> login(@RequestBody AppUser user) {
         String sign = null;
         UserDetails userDetails = appUserRepository.loadUserByUsername(user.getUsername());
         if (userDetails != null && BCrypt.checkpw(user.getPassword(), userDetails.getPassword())) {
@@ -52,7 +52,7 @@ public class UserController {
         AppUser allByUsername = userRepository.findAllByUsername(user.getUsername());
         System.out.println(allByUsername.getId());
 
-        return ResponseEntity.ok(Map.of(allByUsername.getId(),sign));
+        return ResponseEntity.ok(Map.of("key",allByUsername.getId()+" "+sign));
     }
 
     @GetMapping("/verifyToken")
