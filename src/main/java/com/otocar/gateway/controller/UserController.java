@@ -42,16 +42,17 @@ public class UserController {
     }
 
     @PostMapping()
-    ResponseEntity<Map<String,String>> login(@RequestBody AppUser user) {
+    ResponseEntity<Map<Long,String>> login(@RequestBody AppUser user) {
         String sign = null;
         UserDetails userDetails = appUserRepository.loadUserByUsername(user.getUsername());
         if (userDetails != null && BCrypt.checkpw(user.getPassword(), userDetails.getPassword())) {
-            sign = JWT.create().withClaim("role", "ROLE_ADMIN").sign(Algorithm.HMAC512(KEY_));
+            sign = JWT.create().withClaim("name",user.getUsername()).withClaim("role", "ROLE_ADMIN").sign(Algorithm.HMAC512(KEY_));
+
         }
         AppUser allByUsername = userRepository.findAllByUsername(user.getUsername());
         System.out.println(allByUsername.getId());
 
-        return ResponseEntity.ok(Map.of("Key",sign));
+        return ResponseEntity.ok(Map.of(user.getId(),sign));
     }
 
     @GetMapping("/verifyToken")
