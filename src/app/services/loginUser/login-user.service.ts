@@ -88,9 +88,7 @@ export class LoginUserService {
       i++;
     }
     const key = token.key.substr(i);
-    console.log(key);
     const id = token.key.slice(0, i);
-    console.log(token.key, "key," , id);
     return [key, +id];
   }
 
