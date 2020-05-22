@@ -31,7 +31,7 @@ export class RegistrationComponent implements OnInit {
           Validators.minLength(3),
           CustomValidators.withoutSpace
         ]),
-      lastname: new FormControl(null,
+        lastName: new FormControl(null,
         [
           Validators.required,
           Validators.maxLength(40),
@@ -77,7 +77,6 @@ export class RegistrationComponent implements OnInit {
     console.log(this.registrationForm.value);
     this.loginUserService.createUser(this.registrationForm.value)
     .subscribe((user) => {
-      console.log(user, "posrt");
       this.userPageService.postSeller(
           {
             authId: user.id,

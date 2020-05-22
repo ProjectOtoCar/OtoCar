@@ -41,24 +41,24 @@
                 class="form-control" 
                 id="lastName"
                 [ngClass]="{'is-invalid' : 
-                !registrationForm.get('lastname').valid && 
-                registrationForm.get('lastname').touched,
-                'is-valid' : registrationForm.get('lastname').valid}"
-                formControlName="lastname">
+                !registrationForm.get('lastName').valid && 
+                registrationForm.get('lastName').touched,
+                'is-valid' : registrationForm.get('lastName').valid}"
+                formControlName="lastName">
                 <div class="invalid-feedback"
-                *ngIf="registrationForm.get('lastname').errors?.required">
+                *ngIf="registrationForm.get('lastName').errors?.required">
                 Pole jest wymagane
                 </div>
                 <div class="invalid-feedback"
-                    *ngIf="registrationForm.get('lastname').errors?.minlength">
+                    *ngIf="registrationForm.get('lastName').errors?.minlength">
                     Nazwisko za krótkie(minimalnie 3 znaki)
                 </div>
                 <div class="invalid-feedback"
-                    *ngIf="registrationForm.get('lastname').errors?.maxlength">
+                    *ngIf="registrationForm.get('lastName').errors?.maxlength">
                     Nazwisko za długie(maksymalnie 40 znaków)
                 </div>
                 <div class="invalid-feedback"
-                    *ngIf="registrationForm.get('lastname').errors?.withoutspace">
+                    *ngIf="registrationForm.get('lastName').errors?.withoutspace">
                     Nazwisko nie może zawierać spacji
                 </div>
                 <div class="valid-feedback">
