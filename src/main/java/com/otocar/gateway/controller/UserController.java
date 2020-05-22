@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
@@ -41,6 +42,17 @@ public class UserController {
         return ResponseEntity.badRequest().body(user);
     }
 
+    @GetMapping("/email/{id}")
+    ResponseEntity<Map<String,String>> getEmailById(@PathVariable Long id){
+        Optional<AppUser> user = userRepository.findById(id);
+        return ResponseEntity.ok(Map.of("E-mail", user.get().getUsername()));
+    }
+
+    @GetMapping("/role/{id}")
+    ResponseEntity<Map<String,String>> getRoleById(@PathVariable Long id){
+        Optional<AppUser> user = userRepository.findById(id);
+        return ResponseEntity.ok(Map.of("Role", user.get().getRole()));
+    }
     @PostMapping()
     ResponseEntity<Map<String,String>> login(@RequestBody AppUser user) {
         String sign = null;
