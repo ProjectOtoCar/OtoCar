@@ -36,7 +36,7 @@ public class DataLoader implements CommandLineRunner {
         if(((Collection<Brand>)brandService.findAll()).size() != 0 &&
                 ((Collection<Seller>)sellerService.findAll()).size() == 0 &&
                 ((Collection<City>)cityService.findAll()).size() != 0) {
-            addData();
+            //addData();
         }
     }
 

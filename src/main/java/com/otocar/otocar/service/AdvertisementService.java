@@ -17,13 +17,15 @@ import java.util.Optional;
 public class AdvertisementService extends AddPagable {
 
     private AdvertisementRepository advertisementRepository;
+    private SellerService sellerService;
     private ImageService imageService;
 
 
     @Autowired
-    public AdvertisementService(AdvertisementRepository advertisementRepository, ImageService imageService) {
+    public AdvertisementService(AdvertisementRepository advertisementRepository, ImageService imageService, SellerService sellerService) {
         this.advertisementRepository = advertisementRepository;
         this.imageService = imageService;
+        this.sellerService = sellerService;
     }
 
     public Page<Advertisement> find(int page, String brandName, String modelName, int lowRegistration, int highRegistration, BigDecimal lowPrcie, BigDecimal highPrice, String orderBy) {
@@ -45,6 +47,9 @@ public class AdvertisementService extends AddPagable {
     }
 
     public Advertisement addAdv(Advertisement adv) {
+        Seller seller = sellerService.findById(adv.getSeller().getId());
+        seller.setLastAddvertisement(LocalDate.now());
+        sellerService.save(seller);
         return advertisementRepository.save(adv);
     }
 
@@ -72,7 +77,10 @@ public class AdvertisementService extends AddPagable {
             optionalAdvertisement.get().setContent((String) fields.get("content"));
             isEdit = true;
         }
-
+        if (fields.get("active") != null) {
+            optionalAdvertisement.get().setActive((boolean)fields.get("active"));
+            isEdit = true;
+        }
         if (isEdit == true) {
             advertisementRepository.save(optionalAdvertisement.get());
         }
