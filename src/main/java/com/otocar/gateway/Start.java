@@ -19,9 +19,9 @@ public class Start {
         this.appUserRepo = appUserRepo;
 
         AppUser appUser = new AppUser();
-        appUser.setUsername("Marian");
+        appUser.setUsername("Marian@o2");
         appUser.setRole("ROLE_ADMIN");
-        appUser.setPassword(passwordEncoder.encode("Marian123"));
+        appUser.setPassword(passwordEncoder.encode("Marian123!"));
         appUser.setEnabled(true);
 
         appUserRepo.save(appUser);

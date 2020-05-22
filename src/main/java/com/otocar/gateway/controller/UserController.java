@@ -45,13 +45,13 @@ public class UserController {
     @GetMapping("/email/{id}")
     ResponseEntity<Map<String,String>> getEmailById(@PathVariable Long id){
         Optional<AppUser> user = userRepository.findById(id);
-        return ResponseEntity.ok(Map.of("E-mail", user.get().getUsername()));
+        return ResponseEntity.ok(Map.of("email", user.get().getUsername()));
     }
 
     @GetMapping("/role/{id}")
     ResponseEntity<Map<String,String>> getRoleById(@PathVariable Long id){
         Optional<AppUser> user = userRepository.findById(id);
-        return ResponseEntity.ok(Map.of("Role", user.get().getRole()));
+        return ResponseEntity.ok(Map.of("role", user.get().getRole()));
     }
     @PostMapping()
     ResponseEntity<Map<String,String>> login(@RequestBody AppUser user) {
