@@ -21,6 +21,7 @@ export class LoginUserService {
     return this.http.post(`${environment.loginUrl}/api/user`, login)
     .pipe(map((token: Token) => {
       const [key, id] = this.getIdAndKey(token);
+      console.log(key);
       this.getSellerByUserId(id)
         .subscribe((seller: Seller) => {
           console.log(seller);
@@ -86,8 +87,11 @@ export class LoginUserService {
     while (token.key[i] !== ' ') {
       i++;
     }
+    const key = token.key.substr(i);
+    console.log(key);
     const id = token.key.slice(0, i);
-    return [token.key, +id];
+    console.log(token.key, "key," , id);
+    return [key, +id];
   }
 
   private translateRole(role: string): string {
