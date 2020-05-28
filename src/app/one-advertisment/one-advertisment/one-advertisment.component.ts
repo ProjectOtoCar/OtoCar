@@ -4,6 +4,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { AddvertismentService } from '../../services/addvertisment/addvertisment.service';
 import { Subscription } from 'rxjs';
 import { Addvertisment } from '../../interfaces/Addvertisment';
+import { LoginUserService } from 'src/app/services/loginUser/login-user.service';
+import { LoginUser } from 'src/app/interfaces/loginUser.model';
 
 @Component({
   selector: 'app-one-advertisment',
@@ -17,16 +19,17 @@ export class OneAdvertismentComponent implements OnInit, OnDestroy {
   isShowContactModal = false;
   currentPhoto;
   addvertisment: Addvertisment;
+  loginUser: LoginUser;
 
   paramsSub: Subscription;
   constructor(
     private config: NgbCarouselConfig,
+    private loginUserService: LoginUserService,
     private addvertismentService: AddvertismentService,
     private activatedRoute: ActivatedRoute
     ) {
     config.wrap = true;
     config.keyboard = false;
-    // config.pauseOnHover = false;
   }
 
   ngOnInit() {
@@ -40,12 +43,15 @@ export class OneAdvertismentComponent implements OnInit, OnDestroy {
         this.isError = true;
         return;
       }
+      this.loginUserService.loginUser
+        .subscribe((loginUser: LoginUser) => {
+          this.loginUser = loginUser;
+        });
       this.addvertismentService.getAdvertisement(params.id)
       .subscribe((addvertisment: Addvertisment) => {
         this.isLoading = false;
         this.isError = false;
         this.addvertisment = addvertisment;
-        console.log(this.addvertisment);
       }, error => {
         this.isLoading = false;
         this.isError = true;

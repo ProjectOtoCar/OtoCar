@@ -21,21 +21,17 @@ export class LoginUserService {
     return this.http.post(`${environment.loginUrl}/api/user`, login)
     .pipe(map((token: Token) => {
       const [key, id] = this.getIdAndKey(token);
-      console.log(key);
       this.getSellerByUserId(id)
         .subscribe((seller: Seller) => {
-          console.log(seller);
-          return this.getEmailByUserId(id)
-            .subscribe((email: {email: string}) => {
-              return this.getRoleByUserId(id)
+          return this.getEmailByAuthId(id)
+            .subscribe((email: string) => {
+              return this.getRoleByAuthId(id)
                 .subscribe((role: string) => {
-                  const loginUser = {id: seller.id, role, email: email.email} as LoginUser;
+                  const loginUser = {id: seller.id, role, email} as LoginUser;
                   localStorage.setItem('user', JSON.stringify(loginUser));
-                  console.log(key, id, seller);
                   this.loginUser.next(loginUser);
                   this.token.next(key);
                   localStorage.setItem('token', key);
-                  console.log(loginUser);
                   return token;
                 });
             });
@@ -68,14 +64,15 @@ export class LoginUserService {
       .get<Seller>(`${environment.basicUrl}/api/seller/authId/${userId}`);
   }
 
-  getEmailByUserId(userId: number): Observable<{email: string}> {
+  getEmailByAuthId(authId: number): Observable<string> {
     return this.http
-      .get<{email: string}>(`${environment.loginUrl}/api/user/email/${userId}`);
+      .get<{email: string}>(`${environment.loginUrl}/api/user/email/${authId}`)
+      .pipe(map((email: {email: string}) => email.email));
   }
 
-  getRoleByUserId(userId: number): Observable<string> {
+  getRoleByAuthId(authId: number): Observable<string> {
     return this.http
-      .get<{role: string}>(`${environment.loginUrl}/api/user/role/${userId}`)
+      .get<{role: string}>(`${environment.loginUrl}/api/user/role/${authId}`)
       .pipe(map((role: {role: string}) => {
         return this.translateRole(role.role);
       }))

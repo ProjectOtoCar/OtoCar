@@ -19,6 +19,7 @@ export class ContactModalComponent implements OnInit {
   isLoading = false;
   isError = false;
   isSend = false;
+  email: string;
   contactForm: FormGroup;
   constructor(
     private emailSenderService: EmailSenderService,
@@ -50,16 +51,24 @@ export class ContactModalComponent implements OnInit {
     this.isSend = false;
     this.isLoading = true;
     this.isError = false;
-    if(!this.seller?.user?.email) {
+    if (!this.email) {
       this.isError = true;
       this.isLoading = false;
       this.isSend = false;
       return;
     }
-    const sendEmail: Contact = {...this.contactForm.value, mail: this.seller?.user.email};
+    console.log(this.contactForm);
+    this.contactForm.get('mailSender').enable();
+    const sendEmail: Contact = {...this.contactForm.value, mail: this.email};
+    this.contactForm.get('mailSender').disable();
+    console.log(sendEmail);
     this.emailSenderService.sendEmail(sendEmail).subscribe(() => {
       this.isLoading = false;
       this.contactForm.reset();
+      this.contactForm.patchValue({
+        mail: sendEmail.mail,
+        mailSender: sendEmail.mailSender
+      });
       this.isSend = true;
     }, error => {
       this.isError = true;
@@ -76,6 +85,10 @@ export class ContactModalComponent implements OnInit {
           this.contactForm.get('mailSender').disable();
         }
       });
+    this.loginUserService.getEmailByAuthId(this.seller.authId)
+        .subscribe((email: string) => {
+          this.email = email;
+        });
   }
 
 

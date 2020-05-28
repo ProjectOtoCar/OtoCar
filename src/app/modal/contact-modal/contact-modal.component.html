@@ -44,7 +44,8 @@
                 contactForm.get('mailSender').touched,
                 'is-valid' : contactForm.get('mailSender').valid}"
                  id="email"
-                 formControlName="mailSender">
+                 formControlName="mailSender"
+          >
           <div class="invalid-feedback"
                *ngIf="contactForm.get('mailSender').errors?.required">
             Pole jest wymagane

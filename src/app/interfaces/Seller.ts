@@ -13,4 +13,5 @@ export interface Seller {
     lastAddvertisement: Date;
     nextAddvertisment?: Date;
     canCreateAddvertisement?: boolean;
+    authId: number;
 }

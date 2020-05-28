@@ -1,5 +1,6 @@
 import {Image} from './Image';
 import { Seller } from './Seller';
+import { City } from './City.modal';
 export interface Addvertisment {
     id?: number;
     price: number;
@@ -8,9 +9,7 @@ export interface Addvertisment {
     title: string;
     content: string;
     seller: Seller;
-    city: {
-        id: number
-    };
+    city: City;
     car: Car;
     images: [Image];
 }

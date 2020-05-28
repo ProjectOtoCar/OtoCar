@@ -41,7 +41,7 @@ style="margin-top: 50px">
          <h3>{{addvertisment.price}} zł</h3>
    </div>
     <button
-    *ngIf="addvertisment.active"
+    *ngIf="addvertisment.active && addvertisment.seller.id !== loginUser.id"
     (click)="showContactModal()"
     class="btn btn-primary" 
     style="margin-top: 20px">Napisz wiadomość do sprzedającego</button>
@@ -88,8 +88,12 @@ style="margin-top: 50px">
       <td>{{addvertisment?.car.typeCar}}</td>
     </tr>
     <tr>
-      <th scope="row">Color:</th>
+      <th scope="row">Kolor:</th>
       <td>{{addvertisment?.car.color}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Miasto:</th>
+      <td>{{addvertisment?.city.name}}</td>
     </tr>
     </tbody>
   </table>
