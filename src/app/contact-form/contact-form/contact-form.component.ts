@@ -64,10 +64,16 @@ export class ContactFormComponent implements OnInit {
     this.isSend = false;
     this.isLoading = true;
     this.isError = false;
+    this.loginForm.get('mailSender').enable();
     const sendEmail: Contact = {...this.loginForm.value, mail: environment.contactEmail};
+    this.loginForm.get('mailSender').disable();
     this.emailSenderService.sendEmail(sendEmail).subscribe(() => {
       this.isLoading = false;
       this.loginForm.reset();
+      this.loginForm.patchValue({
+        mail: sendEmail.mail,
+        mailSender: sendEmail.mailSender
+      });
       this.isSend = true;
     }, error => {
       this.isError = true;

@@ -57,11 +57,9 @@ export class ContactModalComponent implements OnInit {
       this.isSend = false;
       return;
     }
-    console.log(this.contactForm);
     this.contactForm.get('mailSender').enable();
     const sendEmail: Contact = {...this.contactForm.value, mail: this.email};
     this.contactForm.get('mailSender').disable();
-    console.log(sendEmail);
     this.emailSenderService.sendEmail(sendEmail).subscribe(() => {
       this.isLoading = false;
       this.contactForm.reset();
