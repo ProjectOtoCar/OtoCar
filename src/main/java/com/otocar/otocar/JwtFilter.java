@@ -22,9 +22,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String authorization = httpServletRequest.getHeader("Authorization");
 
-        UsernamePasswordAuthenticationToken authenticationToken = getAuthenticationToken(authorization);
-
-        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        if (authorization != null) {
+            SecurityContextHolder.getContext().setAuthentication(getAuthenticationToken(authorization));
+        }
 
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
@@ -35,7 +35,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String name = verify.getClaim("name").asString();
         String role = verify.getClaim("role").asString();
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(role);
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(name,null, Collections.singleton(simpleGrantedAuthority));
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(name, null, Collections.singleton(simpleGrantedAuthority));
         return token;
     }
 }
