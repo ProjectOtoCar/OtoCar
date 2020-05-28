@@ -18,7 +18,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-@Component
+//@Component
 public class DataLoader implements CommandLineRunner {
 
     private final SellerService sellerService;
@@ -36,7 +36,7 @@ public class DataLoader implements CommandLineRunner {
         if(((Collection<Brand>)brandService.findAll()).size() != 0 &&
                 ((Collection<Seller>)sellerService.findAll()).size() == 0 &&
                 ((Collection<City>)cityService.findAll()).size() != 0) {
-            //addData();
+            addData();
         }
     }
 
