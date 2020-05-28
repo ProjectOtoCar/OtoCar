@@ -41,7 +41,14 @@ public class UserController {
         }
         return ResponseEntity.badRequest().body(user);
     }
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        if (userSevice.findUserById(id).isPresent()) {
+            userSevice.deleteUserById(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.accepted().build();
+    }
     @GetMapping("/email/{id}")
     ResponseEntity<Map<String,String>> getEmailById(@PathVariable Long id){
         Optional<AppUser> user = userRepository.findById(id);

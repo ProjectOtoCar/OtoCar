@@ -6,11 +6,10 @@ import com.otocar.gateway.repository.AppUserRepository;
 import com.otocar.gateway.repository.VerificationTokenRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PatchMapping;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
-import java.net.http.HttpResponse;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -34,6 +33,13 @@ public class UserSevice {
         return true;
     }
 
+    public Optional<AppUser> findUserById(Long id) {
+        return appUserRepository.findById(id);
+    }
+
+    public void deleteUserById(Long id) {
+        appUserRepository.deleteById(id);
+    }
     public AppUser addNeUser(AppUser user, HttpServletRequest request) {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
