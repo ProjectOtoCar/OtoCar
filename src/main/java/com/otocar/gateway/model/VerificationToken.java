@@ -10,7 +10,7 @@ public class VerificationToken {
 
 
     private String value;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private AppUser appUser;
 
     public VerificationToken() {

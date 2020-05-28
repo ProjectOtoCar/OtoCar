@@ -38,7 +38,8 @@ public class UserSevice {
     }
 
     public void deleteUserById(Long id) {
-        appUserRepository.deleteById(id);
+        VerificationToken verificationToken = verificationTokenRepository.findByAppUser_Id(id);
+        verificationTokenRepository.deleteById(verificationToken.getId());
     }
     public AppUser addNeUser(AppUser user, HttpServletRequest request) {
 

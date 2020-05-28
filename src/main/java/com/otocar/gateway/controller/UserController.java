@@ -43,6 +43,7 @@ public class UserController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+
         if (userSevice.findUserById(id).isPresent()) {
             userSevice.deleteUserById(id);
             return ResponseEntity.noContent().build();
