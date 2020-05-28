@@ -50,6 +50,11 @@ public class UserController {
         }
         return ResponseEntity.accepted().build();
     }
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> patchRole(@PathVariable(value = "id") Long id, @RequestBody Map<String, String> fields ){
+        userSevice.updateRole(id,fields);
+        return ResponseEntity.noContent().build();
+    }
     @GetMapping("/email/{id}")
     ResponseEntity<Map<String,String>> getEmailById(@PathVariable Long id){
         Optional<AppUser> user = userRepository.findById(id);

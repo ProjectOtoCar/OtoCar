@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,6 +26,24 @@ public class UserSevice {
         this.mailSenderService = mailSenderService;
         this.verificationTokenRepository = verificationTokenRepository;
     }
+
+    public Optional<Void> updateRole(Long aLong, Map<String,String> fields){
+        boolean isEdit = false;
+        Optional<AppUser> optionalUser = appUserRepository.findById(aLong);
+        if (optionalUser.isEmpty()) {
+            return Optional.empty();
+        }
+        if(fields.get("role") != null){
+            optionalUser.get().setRole(fields.get("role"));
+            isEdit=true;
+        }
+        if(isEdit){
+            appUserRepository.save(optionalUser.get());
+        }
+        return Optional.empty();
+    }
+
+
 
     public boolean isExistAccount(String mail){
         if(appUserRepository.findAllByUsername(mail)!= null){
