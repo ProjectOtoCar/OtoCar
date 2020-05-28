@@ -48,5 +48,10 @@ export class ShowAdvertismentComponent implements OnInit {
         });
     });
   }
+  onGetQueryParams(event: QueryParamsAdvertismentSearch): void {
+    this.router.navigate(['advertisements'], {queryParams: {
+      ...event, asd: Math.random()
+    }});
+  }
 
 }
