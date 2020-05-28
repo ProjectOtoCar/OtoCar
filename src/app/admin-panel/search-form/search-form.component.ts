@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SerachAdminFormService } from 'src/app/services/serach-admin-form.service';
 import { QueryParamsAdminPage } from 'src/app/interfaces/QueryParamsAdminPage';
 import { Subscription } from 'rxjs';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-search-form',

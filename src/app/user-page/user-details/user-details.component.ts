@@ -68,14 +68,21 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
       }
     );
   }
-  onRemoteUser(event: boolean): void {
+  onRemoveUser(event: boolean): void {
     this.isErrorModal = false;
     if (event) {
         this.isModalLoading = true;
         this.userPageService.deleteSeller(this.userId).subscribe(() => {
-        this.isModalLoading = false;
-        this.isDeleteModal = false;
-        this.route.navigate(['/']);
+          this.loginUserService.deleteUserById(this.seller.authId)
+            .subscribe(() => {
+              this.isModalLoading = false;
+              this.isDeleteModal = false;
+              this.loginUserService.signOut();
+              this.route.navigate(['/']);
+            }, error => {
+              this.isErrorModal = true;
+              this.isModalLoading = false;
+            });
       }, error => {
         this.isErrorModal = true;
         this.isModalLoading = false;

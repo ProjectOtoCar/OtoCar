@@ -53,6 +53,10 @@ export class LoginUserService {
     this.token.next(token);
   }
 
+  public patchAppUSer(authId: number, changes: any): Observable<any> {
+    return this.http
+      .patch(`${environment.loginUrl}/api/user/${authId}`, changes);
+  }
   createUser(sellerPost: SellerPost): Observable<any> {
     sellerPost.registerUser.role = 'ROLE_USER';
     console.log(sellerPost);
@@ -62,6 +66,10 @@ export class LoginUserService {
   getSellerByUserId(userId: number): Observable<Seller> {
     return this.http
       .get<Seller>(`${environment.basicUrl}/api/seller/authId/${userId}`);
+  }
+  deleteUserById(authId: number): Observable<any> {
+    return this.http
+    .delete(`${environment.loginUrl}/api/user/${authId}`);
   }
 
   getEmailByAuthId(authId: number): Observable<string> {
@@ -90,7 +98,7 @@ export class LoginUserService {
   }
 
   private translateRole(role: string): string {
-    return role.substr(4);
+    return role.substr(5);
   }
 }
 

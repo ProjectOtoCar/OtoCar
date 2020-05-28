@@ -13,22 +13,25 @@
             ID
           </div>
           <div class="col">
-            First Name
+            Imię
           </div>
           <div class="col">
-            Last Name
+            Nazwisko
           </div>
           <div class="col">
-            Phone Number
+            Numer tef.
           </div>
           <div class="col">
             Premium
           </div>
           <div class="col">
-            Premium Expire
+            Premium Wygasa
           </div>
           <div class="col">
-            Register Date
+            Data Rejestracji
+          </div>
+          <div class="col">
+            Role
           </div>
       </div>
         <div *ngFor="let data of datas" class="row body">
@@ -71,6 +74,25 @@
           </div>
           <div class="col">
             {{data.createAccount}}
+          </div>
+          <div class="col">
+            <select 
+            class="custom-select input-min" 
+            aria-label="type" 
+            id="type" 
+            aria-describedat="type"
+            [value]="data.type"
+            #mySelect
+            (change)="onTypeChange($event.target.value, data.authId, data.id)"
+            *ngIf="!isLoading && !isError" >
+              <option
+              *ngFor="let type of accountsTypes"
+               [value]="type"
+               [selected]="type === data.type"
+               >
+               {{type | upperCaseFirstLetter}}
+              </option>
+            </select>
           </div>
       </div>
     </table>

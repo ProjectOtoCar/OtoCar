@@ -1,11 +1,13 @@
 import {Component, Input, OnInit, OnDestroy} from '@angular/core';
 import { AdminPanelService } from '../../services/admin-panel.service';
 import { Seller } from '../../interfaces/Seller';
-import { pipe, Subscription, forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { QueryParamsAdminPage } from '../../interfaces/QueryParamsAdminPage';
+import { LoginUserService } from 'src/app/services/loginUser/login-user.service';
+import { SerachAdminFormService } from 'src/app/services/serach-admin-form.service';
+import { SellerService } from 'src/app/services/seller/seller.service';
 
 @Component({
   selector: 'app-admin-panel',
@@ -15,11 +17,14 @@ import { QueryParamsAdminPage } from '../../interfaces/QueryParamsAdminPage';
 export class AdminPanelComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;
   datas: Seller[];
+  accountsTypes: string[];
   currentData: number;
   isLoading = true;
   isDeleteSellerLoading = false;
   isDeleteSellerError = false;
   isError = false;
+  isTypeChangeLoading = false;
+  isTypeChangeError = false;
   getSubscription: Subscription;
   page: number;
   maxPage: number;
@@ -29,6 +34,9 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
 
   constructor(
     private adminPanelService: AdminPanelService,
+    private searchAdminFormService: SerachAdminFormService,
+    private loginUserService: LoginUserService,
+    private sellerService: SellerService,
     private activatedRoute: ActivatedRoute,
     private route: Router) {
       this.page = 1;
@@ -36,21 +44,35 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadData();
+    this.searchAdminFormService.getAccountTypes().subscribe((data: [string]) => {
+      this.accountsTypes = data;
+      this.isLoading = false;
+    }, error => {
+    this.isLoading = false;
+    this.isError = true;
+    });
   }
   deleteUser(id: number) {
     this.isDeleteSellerLoading = true;
     this.isDeleteSellerError = false;
     this.adminPanelService.deleteSeller(id)
     .subscribe(response => {
-      this.isDeleteSellerLoading = false;
-      this.datas = this.datas.filter((data: Seller) => data.id !== id);
-      if (this.datas.length === 0) {
-        this.route.navigate([],
-          {
-            relativeTo: this.activatedRoute,
-            queryParams: this.queryParams
-          });
-      }
+      this.loginUserService
+      .deleteUserById(this.datas.filter((data: Seller) => data.id === id)[0].authId)
+      .subscribe(() => {
+        this.isDeleteSellerLoading = false;
+        this.datas = this.datas.filter((data: Seller) => data.id !== id);
+        if (this.datas.length === 0) {
+          this.route.navigate([],
+            {
+              relativeTo: this.activatedRoute,
+              queryParams: this.queryParams
+            });
+        }
+      }, error => {
+        this.isDeleteSellerLoading = false;
+        this.isDeleteSellerError = true;
+      });
     }, error => {
       this.isDeleteSellerLoading = false;
       this.isDeleteSellerError = true;
@@ -63,9 +85,6 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
          relativeTo: this.activatedRoute,
          queryParams: this.queryParams
        });
-  }
-  ngOnDestroy(): void {
-   this.getSubscription.unsubscribe();
   }
 
   random(): number {
@@ -92,6 +111,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
         .subscribe(([response, maxPage]) => {
         this.datas = response;
         this.maxPage = maxPage;
+        console.log(this.datas);
         if (+this.maxPage < +this.page
             || this.page < 1 ) {
           this.route.navigate([],
@@ -109,4 +129,28 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
       });
     });
   }
+  onTypeChange(type: string, authId: number, id: number): void {
+    this.isTypeChangeLoading = true;
+    this.isTypeChangeError = false;
+    console.log('l');
+    this.sellerService
+      .patchSeller(id, { type })
+      .subscribe(() => {
+        this.loginUserService
+        .patchAppUSer(authId, {role: 'ROLE_' + type})
+        .subscribe(() => {
+          this.isTypeChangeLoading = false;
+        }, error => {
+          this.isTypeChangeLoading = false;
+          this.isTypeChangeError = true;
+        });
+      }, error => {
+        this.isTypeChangeLoading = false;
+        this.isTypeChangeError = true;
+      });
+
+  }
+  ngOnDestroy(): void {
+    this.getSubscription.unsubscribe();
+   }
 }
