@@ -22,6 +22,7 @@ export class VerifyAccountComponent implements OnInit {
     this.activatedRoute.queryParams
       .subscribe((params: Params) => {
         this.isLoading = true;
+        console.log('a');
         this.isActive = false;
         this.isError = false;
         if (params.token) {
@@ -30,8 +31,10 @@ export class VerifyAccountComponent implements OnInit {
             .subscribe(() => {
               this.isActive = true;
               this.isLoading = false;
+              this.isError = false;
             }, error => {
               this.isError = true;
+              console.log('v');
               this.isLoading = false;
             });
         } else {
@@ -41,10 +44,11 @@ export class VerifyAccountComponent implements OnInit {
         }
       }, error => {
         this.isError = true;
+        console.log('ccv');
         this.isLoading = false;
       });
   }
   onActiveAccount(): void {
-    this.router.navigate(['/si']);
+    this.router.navigate(['/sign-in']);
   }
 }

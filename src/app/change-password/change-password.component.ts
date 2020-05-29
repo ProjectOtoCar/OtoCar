@@ -15,11 +15,9 @@ export class ChangePasswordComponent implements OnInit {
   isLoading = false;
   isError = false;
   token: string;
-  
   constructor(
     private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private resetPasswordService: ResetPasswordComponent) {
+    private router: Router,) {
     this.resetPasswordForm = new FormGroup({
       password: new FormControl(null,
         [
