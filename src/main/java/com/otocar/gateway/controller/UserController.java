@@ -81,9 +81,9 @@ public class UserController {
     }
 
     @GetMapping("/verifyToken")
-    public String verifyToken(@RequestParam String token) {
+    public ResponseEntity<String> verifyToken(@RequestParam String token) {
         userSevice.verificationToken(token);
-        return "Zrobione";
+        return ResponseEntity.ok("Zrobione");
     }
 
     @PostMapping("/reset")
