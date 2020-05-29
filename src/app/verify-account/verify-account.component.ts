@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ActiveAccountService } from '../services/activeAccount/active-account.service';
 
 @Component({
@@ -14,22 +14,37 @@ export class VerifyAccountComponent implements OnInit {
   isError = false;
   constructor(
     private activatedRoute: ActivatedRoute,
-    private activeAccountService: ActiveAccountService
+    private activeAccountService: ActiveAccountService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams
       .subscribe((params: Params) => {
+        this.isLoading = true;
+        this.isActive = false;
+        this.isError = false;
         if (params.token) {
           this.activeAccountService
-            .activeAccout(params.token)
+            .activeAccount(params.token)
             .subscribe(() => {
               this.isActive = true;
+              this.isLoading = false;
             }, error => {
-
+              this.isError = true;
+              this.isLoading = false;
             });
+        } else {
+          this.router.navigate(['/']);
+          this.isError = true;
+          this.isLoading = false;
         }
+      }, error => {
+        this.isError = true;
+        this.isLoading = false;
       });
   }
-
+  onActiveAccount(): void {
+    this.router.navigate(['/si']);
+  }
 }

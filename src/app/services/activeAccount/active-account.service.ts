@@ -12,8 +12,18 @@ export class ActiveAccountService {
     private http: HttpClient
   ) { }
 
-   activeAccout(token: string): Observable<any> {
+   activeAccount(token: string): Observable<any> {
+     const key = this.getKey(token);
      return this.http
-        .get(`${environment}/api/user/verifyToken?token=${token}`);
+        .get(`${environment.loginUrl}/api/user/verifyToken?token=${key}`);
    }
+
+   private getKey(token: string): string {
+    let i = 0;
+    while (token[i] !== '_') {
+      i++;
+    }
+    const key = token.substr(i + 1);
+    return key;
+  }
 }

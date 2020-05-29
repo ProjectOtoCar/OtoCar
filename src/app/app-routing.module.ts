@@ -49,7 +49,7 @@ const routes: Routes = [
   {path: 'main-statute', component: MainstatuteComponent},
   {path: 'reset-password', component: ResetPasswordComponent, canActivate: [AuthNotLoginGuard]},
   {path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthNotLoginGuard]},
-  {path: 'active/verifyToken', component: VerifyAccountComponent, canActivate: [AuthNotLoginGuard]}
+  {path: 'active/verifyToken', component: VerifyAccountComponent, canActivate: [AuthNotLoginGuard]},
   {path: 'business-statute', component: BusinessStatuteComponent},
   {path: 'privacy-policy', component: PrivacyPolicyComponent},
   {path: 'cookie-policy', component: CookiePolicyComponent},

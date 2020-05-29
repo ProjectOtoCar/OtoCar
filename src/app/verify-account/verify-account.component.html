@@ -1,3 +1,19 @@
 <div class="d-flex flex-column bd-highlight mb-3 justify-content-center align-items-sm-center top-margin">
-
+    <app-error-message
+    *ngIf="isError"></app-error-message>
+    <div
+    *ngIf="isLoading" 
+    style="width: 100%;
+     height: 100%; 
+     display: flex;
+     justify-content: center;
+     align-items: center;">
+        <app-spinner [size]="6"></app-spinner>
+    </div>
+    <div *ngIf="!isError && !isLoading ">
+        <h2 class="text-center title--big">Konto aktywowane!</h2>
+        <button 
+        class='btn btn-primary title--small' 
+        (click)='onActiveAccount()'>Zaloguj się</button>
+    </div>
 </div>
