@@ -87,14 +87,14 @@ public class UserController {
     }
 
     @PostMapping("/reset")
-    ResponseEntity<Boolean> resetPassword(@RequestParam String username, HttpServletRequest request) {
+    ResponseEntity<Map<String,Boolean>> resetPassword(@RequestParam String username, HttpServletRequest request) {
         //  boolean b = token.endsWith("=");
         //  System.out.println(b);
         UserDetails user = appUserRepository.loadUserByUsername(username);
         if (user != null) {
             userSevice.resetPassword(username, request);
         }
-        return ResponseEntity.ok(true);
+        return ResponseEntity.ok(Map.of("Zrobionr", true));
     }
 
     // Do zrobienia weryfikacja hasla i zmiena hasła
