@@ -98,21 +98,24 @@ public class UserController {
     }
 
     // Do zrobienia weryfikacja hasla i zmiena hasła
-    @GetMapping("/reset")
-    ResponseEntity<String> verifyTokenAndSetNewPassword(@RequestParam String token) {
-        int i = token.indexOf("_");
-        String id = token.substring(0, i);
-        System.out.println();
-        userSevice.verificationToken(token);
-        return ResponseEntity.ok(id);
-    }
-
     @PostMapping("/changePassword")
-    void changePassword(@RequestBody AppUser user) {
+    ResponseEntity<Void> verifyTokenAndSetNewPassword(@RequestParam String token,@RequestBody AppUser user) {
+//        int i = token.indexOf("_");
+//        String id = token.substring(0, i);
+//        System.out.println();
+        userSevice.verificationToken(token);
         AppUser userDetails = userRepository.findAllByUsername(user.getUsername());
         userDetails.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(userDetails);
+        return ResponseEntity.ok().build();
     }
+
+//    @PostMapping("/changePassword")
+//    void changePassword(@RequestBody AppUser user) {
+//        AppUser userDetails = userRepository.findAllByUsername(user.getUsername());
+//        userDetails.setPassword(passwordEncoder.encode(user.getPassword()));
+//        userRepository.save(userDetails);
+//    }
 
 
 }

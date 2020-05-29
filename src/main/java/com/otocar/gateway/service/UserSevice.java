@@ -87,10 +87,9 @@ public class UserSevice {
         VerificationToken verificationToken = new VerificationToken(verifyToken, user);
         verificationTokenRepository.save(verificationToken);
         String url = "<html><head></head><body><a href =\"http://" + request.getServerName() +
-                ":" +
-                request.getServerPort() + "/" +
+                ":4200/" +
                 request.getContextPath() +
-                "api/user/" + type + "?token="+ verifyToken + "\"> Aktywuj Konto </a></body></html>";
+                "active/" + type + "?token="+ verifyToken + "\"> Aktywuj Konto </a></body></html>";
         return url;
     }
 
