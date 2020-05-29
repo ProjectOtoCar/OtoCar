@@ -42,7 +42,21 @@ public class UserSevice {
         }
         return Optional.empty();
     }
-
+    public Optional<Void> updatePassword(Long aLong, Map<String,String> fields){
+        boolean isEdit = false;
+        Optional<AppUser> optionalUser = appUserRepository.findById(aLong);
+        if (optionalUser.isEmpty()) {
+            return Optional.empty();
+        }
+        if(fields.get("role") != null){
+            optionalUser.get().setPassword(passwordEncoder.encode(fields.get("password")));
+            isEdit=true;
+        }
+        if(isEdit){
+            appUserRepository.save(optionalUser.get());
+        }
+        return Optional.empty();
+    }
 
 
     public boolean isExistAccount(String mail){

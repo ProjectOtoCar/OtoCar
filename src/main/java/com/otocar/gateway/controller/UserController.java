@@ -86,7 +86,7 @@ public class UserController {
         return ResponseEntity.ok(Map.of("Kod","zrobione"));
     }
 
-    @PostMapping("/reset")
+    @GetMapping("/reset")
     ResponseEntity<Map<String,Boolean>> resetPassword(@RequestParam String username, HttpServletRequest request) {
         //  boolean b = token.endsWith("=");
         //  System.out.println(b);
@@ -99,14 +99,13 @@ public class UserController {
 
     // Do zrobienia weryfikacja hasla i zmiena hasła
     @PostMapping("/changePassword")
-    ResponseEntity<Void> verifyTokenAndSetNewPassword(@RequestParam String token,@RequestBody AppUser user) {
-//        int i = token.indexOf("_");
-//        String id = token.substring(0, i);
-//        System.out.println();
+    ResponseEntity<Void> verifyTokenAndSetNewPassword(@RequestParam String token,@RequestBody Map<String,String> fields) {
+       int i = token.indexOf("_");
+        String id = token.substring(0, i);
+        Long nId = Long.valueOf(id);
+       System.out.println();
         userSevice.verificationToken(token);
-        AppUser userDetails = userRepository.findAllByUsername(user.getUsername());
-        userDetails.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(userDetails);
+        userSevice.updatePassword(nId,fields);
         return ResponseEntity.ok().build();
     }
 
