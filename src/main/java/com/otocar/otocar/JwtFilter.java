@@ -31,7 +31,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private UsernamePasswordAuthenticationToken getAuthenticationToken(String authorization) {
         JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC512("McQfTjWnZr4u7x!A%D*G-KaNdRgUkXp2s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F")).build();
-        DecodedJWT verify = jwtVerifier.verify(authorization.substring(7));
+        DecodedJWT verify = jwtVerifier.verify(authorization.substring(8));
         String name = verify.getClaim("name").asString();
         String role = verify.getClaim("role").asString();
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(role);
