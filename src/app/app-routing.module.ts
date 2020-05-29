@@ -24,6 +24,9 @@ import { AddAddvertismentComponent } from './user-page/add-addvertisment/add-add
 import { ModifyProfileComponent } from './user-page/modify-profile/modify-profile.component';
 import { AuthUserGuard } from './guard/authUser.guard';
 import { AuthOwnerGuard } from './guard/authOwner.guard';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { VerifyAccountComponent } from './verify-account/verify-account.component';
 
 
 
@@ -44,6 +47,9 @@ const routes: Routes = [
   {path: 'admin', component: AdminPanelComponent, canActivate: [AuthAdminGuard]},
   {path: 'sign-in', component: SignInComponent, canActivate: [AuthNotLoginGuard]},
   {path: 'main-statute', component: MainstatuteComponent},
+  {path: 'reset-password', component: ResetPasswordComponent, canActivate: [AuthNotLoginGuard]},
+  {path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthNotLoginGuard]},
+  {path: 'active/verifyToken', component: VerifyAccountComponent, canActivate: [AuthNotLoginGuard]}
   {path: 'business-statute', component: BusinessStatuteComponent},
   {path: 'privacy-policy', component: PrivacyPolicyComponent},
   {path: 'cookie-policy', component: CookiePolicyComponent},

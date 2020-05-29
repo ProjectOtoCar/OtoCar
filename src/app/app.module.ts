@@ -22,6 +22,9 @@ import { ShowAdvertismentModule } from './show-advertisment/show-advertisment.mo
 import { AdvertismentModifyModule } from './advertisment-modify/advertisment-modify.module';
 import { ContactFormModule } from './contact-form/contact-form.module';
 import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { VerifyAccountComponent } from './verify-account/verify-account.component';
 
 
 
@@ -33,6 +36,9 @@ import { AuthInterceptorService } from './interceptors/auth-interceptor.service'
     NavigationComponent,
     ErrorComponent,
     FooterComponent,
+    ResetPasswordComponent,
+    ChangePasswordComponent,
+    VerifyAccountComponent,
   ],
   imports: [
     BrowserModule,
