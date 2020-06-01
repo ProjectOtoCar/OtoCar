@@ -3,7 +3,13 @@
     class="navbar-brand" 
     [routerLink]="['']" 
     routerLinkActive="active"
-    [routerLinkActiveOptions]="{exact: true}">Home
+    [routerLinkActiveOptions]="{exact: true}">
+        <div style="background-image: url(assets/img/logo.png);
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    width: 150px;
+                    height: 40px;
+        "></div>
     </a>
     <button class="navbar-toggler" type="button"
             (click)="toggleNavbar()">
