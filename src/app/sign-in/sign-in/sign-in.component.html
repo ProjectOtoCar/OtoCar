@@ -108,3 +108,11 @@
     (action)="onLoginSuccess()"
     ></app-modal>
 </div>
+<app-modal
+*ngIf="isShowEnabledModal"
+title="Aktywuj konto!"
+[showAcceptButton]="false"
+[showCancelButton]="true"
+secondAction="zamknij"
+(action)="onIsNotEnabled()"
+></app-modal>

@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { Token } from 'src/app/interfaces/Token.modal';
 import { SellerPost } from 'src/app/interfaces/SellerPost.model';
 import { Seller } from 'src/app/interfaces/Seller';
+import { AppUser } from 'src/app/interfaces/AppUser.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,25 +18,30 @@ export class LoginUserService {
   token = new BehaviorSubject(null);
   constructor(private http: HttpClient) { }
 
-  signIn(login): Observable<any> {
+  signIn(login): Observable<Observable<any>> {
     return this.http.post(`${environment.loginUrl}/api/user`, login)
-    .pipe(map((token: Token) => {
-      const [key, id] = this.getIdAndKey(token);
-      this.getSellerByUserId(id)
-        .subscribe((seller: Seller) => {
-          return this.getEmailByAuthId(id)
-            .subscribe((email: string) => {
-              return this.getRoleByAuthId(id)
-                .subscribe((role: string) => {
-                  const loginUser = {id: seller.id, role, email} as LoginUser;
-                  localStorage.setItem('user', JSON.stringify(loginUser));
-                  this.loginUser.next(loginUser);
-                  this.token.next(key);
-                  localStorage.setItem('token', key);
-                  return token;
-                });
-            });
-        });
+    .pipe(map((token: Token): Observable<any> => {
+      console.log(token);
+      if (!token) {
+        return null;
+      }
+      const [key, authId] = this.getIdAndKey(token);
+      return this.getSellerByUserId(authId)
+        .pipe(map((seller: Seller): any => {
+            return this.getAppUser(authId)
+              .pipe(map((appUser: AppUser): any => {
+                if (appUser.enabled) {
+                    const loginUser = {id: seller.id, role: appUser.role, email: appUser.username} as LoginUser;
+                    localStorage.setItem('user', JSON.stringify(loginUser));
+                    this.loginUser.next(loginUser);
+                    this.token.next(key);
+                    localStorage.setItem('token', key);
+                    return true;
+                  } else {
+                    return false;
+                  }
+              }));
+        }));
     }));
   }
 
@@ -85,6 +91,11 @@ export class LoginUserService {
         return this.translateRole(role.role);
       }))
       ;
+  }
+
+  getAppUser(authId: number): Observable<AppUser> {
+    return this.http
+      .get<AppUser>(`${environment.loginUrl}/api/user/${authId}`);
   }
 
   private getIdAndKey(token: Token): [string, number] {

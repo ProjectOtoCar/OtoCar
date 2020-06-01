@@ -14,6 +14,7 @@ export class SignInComponent implements OnInit {
   isLoginSuccess = false;
   isLoading = false;
   isError = false;
+  isShowEnabledModal = false;
   constructor(
     private loginUserService: LoginUserService,
     private route: Router
@@ -46,11 +47,21 @@ export class SignInComponent implements OnInit {
     this.isError = false;
     this.isLoading = false;
     this.isLoginSuccess = false;
+    this.isShowEnabledModal = false;
     this.loginUserService.signIn(this.loginForm.value)
-      .subscribe((user) => {
-        console.log(user);
-        this.isLoginSuccess = true;
-        this.isLoading = false;
+      .subscribe((observable) => {
+        observable.subscribe((data) => {
+          data.subscribe((isEnabled: boolean) => {
+            this.isLoading = false;
+            if (isEnabled) {
+                this.isLoginSuccess = true;
+                console.log('1');
+              } else {
+                console.log('2');
+                this.isShowEnabledModal = true;
+              }
+          });
+        });
       }, error => {
         console.log(error);
         this.isLoading = false;
@@ -60,6 +71,10 @@ export class SignInComponent implements OnInit {
 
   onLoginSuccess(): void {
     this.route.navigate(['/']);
+  }
+
+  onIsNotEnabled(): void {
+    this.isShowEnabledModal = false;
   }
 
 }
