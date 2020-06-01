@@ -6,6 +6,7 @@ import com.otocar.gateway.model.AppUser;
 import com.otocar.gateway.repository.AppUserRepository;
 import com.otocar.gateway.service.UserDetailsServiceImpl;
 import com.otocar.gateway.service.UserSevice;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -59,6 +60,14 @@ public class UserController {
     ResponseEntity<Map<String,String>> getEmailById(@PathVariable Long id){
         Optional<AppUser> user = userRepository.findById(id);
         return ResponseEntity.ok(Map.of("email", user.get().getUsername()));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AppUser> getAppUserById(@PathVariable Long id) {
+        Optional<AppUser> appUserOptional = userRepository.findById(id);
+        return appUserOptional
+                .map(appUser -> new ResponseEntity<AppUser>(appUser, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/role/{id}")
