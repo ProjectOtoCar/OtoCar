@@ -74,7 +74,6 @@ export class RegistrationComponent implements OnInit {
     this.isLoading = true;
     this.isError = false;
     this.isSuccess = false;
-    console.log(this.registrationForm.value);
     this.loginUserService.createUser(this.registrationForm.value)
     .subscribe((user) => {
       this.userPageService.postSeller(
@@ -92,7 +91,6 @@ export class RegistrationComponent implements OnInit {
             this.isError = true;
           });
       this.registrationForm.reset();
-      console.log(user);
     }, error => {
       this.isLoading = false;
       this.isError = true;

@@ -55,9 +55,7 @@ export class SignInComponent implements OnInit {
             this.isLoading = false;
             if (isEnabled) {
                 this.isLoginSuccess = true;
-                console.log('1');
               } else {
-                console.log('2');
                 this.isShowEnabledModal = true;
               }
           });
