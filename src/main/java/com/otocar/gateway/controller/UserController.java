@@ -42,17 +42,14 @@ public class UserController {
         }
         return ResponseEntity.badRequest().body(user);
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-
         if (userSevice.findUserById(id).isPresent()) {
             userSevice.deleteUserById(id);
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.accepted().build();
     }
-
     @GetMapping("username/{username}")
     public ResponseEntity<Map<String, Boolean>> isUserExisted(@PathVariable String username) {
         if (userSevice.isExistAccountSoft(username)) {
@@ -60,19 +57,16 @@ public class UserController {
         }
         return ResponseEntity.ok().body(Map.of("isExisted", false));
     }
-
     @PatchMapping("/{id}")
     public ResponseEntity<Void> patchRole(@PathVariable(value = "id") Long id, @RequestBody Map<String, String> fields) {
         userSevice.updateRole(id, fields);
         return ResponseEntity.noContent().build();
     }
-
     @GetMapping("/email/{id}")
     ResponseEntity<Map<String, String>> getEmailById(@PathVariable Long id) {
         Optional<AppUser> user = userRepository.findById(id);
         return ResponseEntity.ok(Map.of("email", user.get().getUsername()));
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<AppUser> getAppUserById(@PathVariable Long id) {
         Optional<AppUser> appUserOptional = userRepository.findById(id);
@@ -80,13 +74,11 @@ public class UserController {
             .map(appUser -> new ResponseEntity<AppUser>(appUser, HttpStatus.OK))
             .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
     }
-
     @GetMapping("/role/{id}")
     ResponseEntity<Map<String, String>> getRoleById(@PathVariable Long id) {
         Optional<AppUser> user = userRepository.findById(id);
         return ResponseEntity.ok(Map.of("role", user.get().getRole()));
     }
-
     @PostMapping()
     ResponseEntity<Map<String, String>> login(@RequestBody AppUser user) {
         String sign = null;
@@ -99,7 +91,6 @@ public class UserController {
         }
         AppUser allByUsername = userRepository.findAllByUsername(user.getUsername());
         System.out.println(allByUsername.getId());
-
         return ResponseEntity.ok(Map.of("key", allByUsername.getId() + " " + sign));
     }
 
@@ -111,8 +102,6 @@ public class UserController {
 
     @GetMapping("/reset")
     ResponseEntity<Map<String, Boolean>> resetPassword(@RequestParam String username, HttpServletRequest request) {
-        //  boolean b = token.endsWith("=");
-        //  System.out.println(b);
         UserDetails user = appUserRepository.loadUserByUsername(username);
         if (user != null) {
             userSevice.resetPassword(username, request);
@@ -120,7 +109,6 @@ public class UserController {
         return ResponseEntity.ok(Map.of("Zrobionr", true));
     }
 
-    // Do zrobienia weryfikacja hasla i zmiena hasła
     @PostMapping("/changePassword")
     ResponseEntity<Map<String, Boolean>> verifyTokenAndSetNewPassword(@RequestParam String token, @RequestBody Map<String, String> fields) {
         int i = token.indexOf("_");
@@ -132,12 +120,6 @@ public class UserController {
         return ResponseEntity.ok(Map.of("Zrobionr",true));
     }
 
-//    @PostMapping("/changePassword")
-//    void changePassword(@RequestBody AppUser user) {
-//        AppUser userDetails = userRepository.findAllByUsername(user.getUsername());
-//        userDetails.setPassword(passwordEncoder.encode(user.getPassword()));
-//        userRepository.save(userDetails);
-//    }
 
 
 }
