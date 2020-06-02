@@ -1,9 +1,6 @@
 package com.otocar.otocar.model;
 
 
-import org.springframework.stereotype.Service;
-
-
 public class Mail {
 
     private String mail;

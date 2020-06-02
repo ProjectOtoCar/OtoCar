@@ -9,16 +9,13 @@ import com.otocar.otocar.service.BrandService;
 import com.otocar.otocar.service.CityService;
 import com.otocar.otocar.service.SellerService;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-//@Component
 public class DataLoader implements CommandLineRunner {
 
     private final SellerService sellerService;

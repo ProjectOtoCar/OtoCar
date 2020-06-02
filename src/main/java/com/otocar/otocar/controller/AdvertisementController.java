@@ -1,7 +1,8 @@
 package com.otocar.otocar.controller;
 
 import com.otocar.otocar.dto.AdvertisementDto;
-import com.otocar.otocar.model.*;
+import com.otocar.otocar.model.Advertisement;
+import com.otocar.otocar.model.Image;
 import com.otocar.otocar.service.AdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,8 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/advertisement")

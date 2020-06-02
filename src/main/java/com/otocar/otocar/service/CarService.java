@@ -66,10 +66,6 @@ public class CarService implements CrudServce<Long, Car> {
         if(fields.size() == 0){
             return Optional.empty();
         }
-//       if(fields.get("brand") != null){
-//            optionalCar.get().setBrand(fields.get("brand"));
-//            isEdit = true;
-//        }
         if(fields.get("engine") != null){
             optionalCar.get().setEngine(Integer.parseInt((String)fields.get("engine")));
             isEdit = true;
@@ -78,10 +74,7 @@ public class CarService implements CrudServce<Long, Car> {
             optionalCar.get().setEnginePower(Integer.parseInt((String)fields.get("enginePower")));
             isEdit = true;
         }
-//        if(fields.get("model") != null){
-//            optionalCar.get().setModel(fields.get("model"));
-//            isEdit = true;
-//        }
+
         if(fields.get("fuel") != null){
             optionalCar.get().setFuel(TypeFuel.valueOf((String) fields.get("fuel")));
             isEdit = true;

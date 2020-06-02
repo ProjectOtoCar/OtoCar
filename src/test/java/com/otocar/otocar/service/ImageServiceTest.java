@@ -1,8 +1,6 @@
 package com.otocar.otocar.service;
 
-import com.otocar.otocar.enums.TypeAccount;
 import com.otocar.otocar.model.Image;
-import com.otocar.otocar.model.Seller;
 import com.otocar.otocar.repository.ImageRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Stream;
 

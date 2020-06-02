@@ -2,7 +2,6 @@ package com.otocar.otocar.controller;
 
 import com.otocar.otocar.model.City;
 import com.otocar.otocar.service.CityService;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
