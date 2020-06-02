@@ -42,6 +42,7 @@ public class UserController {
         }
         return ResponseEntity.badRequest().body(user);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
 
@@ -51,20 +52,23 @@ public class UserController {
         }
         return ResponseEntity.accepted().build();
     }
+
     @GetMapping("username/{username}")
     public ResponseEntity<Map<String, Boolean>> isUserExisted(@PathVariable String username) {
         if (userSevice.isExistAccountSoft(username)) {
             return ResponseEntity.ok().body(Map.of("isExisted", true));
         }
-        return  ResponseEntity.ok().body(Map.of("isExisted", false));
+        return ResponseEntity.ok().body(Map.of("isExisted", false));
     }
+
     @PatchMapping("/{id}")
-    public ResponseEntity<Void> patchRole(@PathVariable(value = "id") Long id, @RequestBody Map<String, String> fields ){
-        userSevice.updateRole(id,fields);
+    public ResponseEntity<Void> patchRole(@PathVariable(value = "id") Long id, @RequestBody Map<String, String> fields) {
+        userSevice.updateRole(id, fields);
         return ResponseEntity.noContent().build();
     }
+
     @GetMapping("/email/{id}")
-    ResponseEntity<Map<String,String>> getEmailById(@PathVariable Long id){
+    ResponseEntity<Map<String, String>> getEmailById(@PathVariable Long id) {
         Optional<AppUser> user = userRepository.findById(id);
         return ResponseEntity.ok(Map.of("email", user.get().getUsername()));
     }
@@ -73,37 +77,38 @@ public class UserController {
     public ResponseEntity<AppUser> getAppUserById(@PathVariable Long id) {
         Optional<AppUser> appUserOptional = userRepository.findById(id);
         return appUserOptional
-                .map(appUser -> new ResponseEntity<AppUser>(appUser, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
+            .map(appUser -> new ResponseEntity<AppUser>(appUser, HttpStatus.OK))
+            .orElseGet(() -> new ResponseEntity(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/role/{id}")
-    ResponseEntity<Map<String,String>> getRoleById(@PathVariable Long id){
+    ResponseEntity<Map<String, String>> getRoleById(@PathVariable Long id) {
         Optional<AppUser> user = userRepository.findById(id);
         return ResponseEntity.ok(Map.of("role", user.get().getRole()));
     }
+
     @PostMapping()
-    ResponseEntity<Map<String,String>> login(@RequestBody AppUser user) {
+    ResponseEntity<Map<String, String>> login(@RequestBody AppUser user) {
         String sign = null;
         UserDetails userDetails = appUserRepository.loadUserByUsername(user.getUsername());
         if (userDetails != null && BCrypt.checkpw(user.getPassword(), userDetails.getPassword())) {
-            sign = JWT.create().withClaim("name",userDetails.getUsername()).withClaim("role", "ROLE_ADMIN").sign(Algorithm.HMAC512(KEY_));
+            sign = JWT.create().withClaim("name", userDetails.getUsername()).withClaim("role", "ROLE_ADMIN").sign(Algorithm.HMAC512(KEY_));
 
         }
         AppUser allByUsername = userRepository.findAllByUsername(user.getUsername());
         System.out.println(allByUsername.getId());
 
-        return ResponseEntity.ok(Map.of("key",allByUsername.getId()+" "+sign));
+        return ResponseEntity.ok(Map.of("key", allByUsername.getId() + " " + sign));
     }
 
     @GetMapping("/verifyToken")
-    public ResponseEntity<Map<String,String>> verifyToken(@RequestParam String token) {
+    public ResponseEntity<Map<String, String>> verifyToken(@RequestParam String token) {
         userSevice.verificationToken(token);
-        return ResponseEntity.ok(Map.of("Kod","zrobione"));
+        return ResponseEntity.ok(Map.of("Kod", "zrobione"));
     }
 
     @GetMapping("/reset")
-    ResponseEntity<Map<String,Boolean>> resetPassword(@RequestParam String username, HttpServletRequest request) {
+    ResponseEntity<Map<String, Boolean>> resetPassword(@RequestParam String username, HttpServletRequest request) {
         //  boolean b = token.endsWith("=");
         //  System.out.println(b);
         UserDetails user = appUserRepository.loadUserByUsername(username);
@@ -115,14 +120,14 @@ public class UserController {
 
     // Do zrobienia weryfikacja hasla i zmiena hasła
     @PostMapping("/changePassword")
-    ResponseEntity<Void> verifyTokenAndSetNewPassword(@RequestParam String token,@RequestBody Map<String,String> fields) {
-       int i = token.indexOf("_");
+    ResponseEntity<Map<String, Boolean>> verifyTokenAndSetNewPassword(@RequestParam String token, @RequestBody Map<String, String> fields) {
+        int i = token.indexOf("_");
         String id = token.substring(0, i);
         Long nId = Long.valueOf(id);
-       System.out.println();
+        System.out.println();
         userSevice.verificationToken(token);
-        userSevice.updatePassword(nId,fields);
-        return ResponseEntity.ok().build();
+        userSevice.updatePassword(nId, fields);
+        return ResponseEntity.ok(Map.of("Zrobionr",true));
     }
 
 //    @PostMapping("/changePassword")

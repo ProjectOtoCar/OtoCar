@@ -48,7 +48,7 @@ public class UserSevice {
         if (optionalUser.isEmpty()) {
             return Optional.empty();
         }
-        if(fields.get("role") != null){
+        if(fields.get("password") != null){
             optionalUser.get().setPassword(passwordEncoder.encode(fields.get("password")));
             isEdit=true;
         }
