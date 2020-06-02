@@ -94,6 +94,8 @@ public class UserController {
         if (userDetails != null && BCrypt.checkpw(user.getPassword(), userDetails.getPassword())) {
             sign = JWT.create().withClaim("name", userDetails.getUsername()).withClaim("role", "ROLE_ADMIN").sign(Algorithm.HMAC512(KEY_));
 
+        }else{
+            return ResponseEntity.ok(Map.of("key", null));
         }
         AppUser allByUsername = userRepository.findAllByUsername(user.getUsername());
         System.out.println(allByUsername.getId());
@@ -124,7 +126,7 @@ public class UserController {
         int i = token.indexOf("_");
         String id = token.substring(0, i);
         Long nId = Long.valueOf(id);
-        System.out.println();
+        System.out.println(nId);
         userSevice.verificationToken(token);
         userSevice.updatePassword(nId, fields);
         return ResponseEntity.ok(Map.of("Zrobionr",true));
