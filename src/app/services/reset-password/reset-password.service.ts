@@ -12,10 +12,10 @@ export class ResetPasswordService {
 
   sendEmailWithUsername(username: string): Observable<any> {
     return this.http
-      .post(`${environment.loginUrl}/api/user/reset?username=${ username }`, { username });
+      .get(`${environment.loginUrl}/api/user/reset?username=${ username }`);
   }
-  changePassword(token, password): Observable<any> {
+  changePassword(token: string, password: {password: string}): Observable<any> {
     return this.http
-      .post(`${environment.loginUrl}/upi/user/token=${ token }`, { password });
+      .post(`${environment.loginUrl}/api/user/changePassword?token=${ token }`, { password });
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { CustomValidators } from '../validators/CustomValidators';
-import { ResetPasswordComponent } from '../reset-password/reset-password.component';
+import { ResetPasswordService } from '../services/reset-password/reset-password.service';
 
 @Component({
   selector: 'app-change-password',
@@ -16,8 +16,10 @@ export class ChangePasswordComponent implements OnInit {
   isError = false;
   token: string;
   constructor(
+    private resetPasswordService: ResetPasswordService,
     private activatedRoute: ActivatedRoute,
-    private router: Router,) {
+    private router: Router
+    ) {
     this.resetPasswordForm = new FormGroup({
       password: new FormControl(null,
         [
@@ -40,7 +42,17 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   onSubmit(): void {
-
+    this.isChangePassword = false;
+    this.isLoading = false;
+    this.isError = false;
+    this.resetPasswordService.changePassword(this.token, this.resetPasswordForm.value)
+      .subscribe(() => {
+        this.isLoading = false;
+        this.isChangePassword = true;
+      }, error => {
+        this.isError = true;
+        this.isLoading = false;
+      });
   }
   onChangePassword(): void {
     this.router.navigate(['/sign-in']);

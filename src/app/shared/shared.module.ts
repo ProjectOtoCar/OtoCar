@@ -9,6 +9,7 @@ import { SuccessMessageComponent } from './success-message/success-message.compo
 import { TelLinkComponent } from './tel-link/tel-link.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SearchAddFormComponent } from './search-add-form/search-add-form.component';
+import { EmailLinkComponent } from './email-link/email-link.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SearchAddFormComponent } from './search-add-form/search-add-form.compon
     TosterComponent,
     SpinnerComponent,
     TelLinkComponent,
-    SearchAddFormComponent
+    SearchAddFormComponent,
+    EmailLinkComponent
   ],
   imports: [
     CommonModule,
@@ -33,6 +35,7 @@ import { SearchAddFormComponent } from './search-add-form/search-add-form.compon
     SpinnerComponent,
     TelLinkComponent,
     SearchAddFormComponent,
+    EmailLinkComponent,
     PipeModule,
     AppRoutingModule,
     ReactiveFormsModule
