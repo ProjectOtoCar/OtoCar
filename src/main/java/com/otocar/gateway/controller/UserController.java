@@ -51,6 +51,13 @@ public class UserController {
         }
         return ResponseEntity.accepted().build();
     }
+    @GetMapping("username/{username}")
+    public ResponseEntity<Map<String, Boolean>> isUserExisted(@PathVariable String username) {
+        if (userSevice.isExistAccountSoft(username)) {
+            return ResponseEntity.ok().body(Map.of("isExisted", true));
+        }
+        return  ResponseEntity.ok().body(Map.of("isExisted", false));
+    }
     @PatchMapping("/{id}")
     public ResponseEntity<Void> patchRole(@PathVariable(value = "id") Long id, @RequestBody Map<String, String> fields ){
         userSevice.updateRole(id,fields);

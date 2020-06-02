@@ -61,11 +61,17 @@ public class UserSevice {
 
     public boolean isExistAccount(String mail){
         if(appUserRepository.findAllByUsername(mail)!= null){
-            throw new IllegalArgumentException("Podane konto już istenije");
+            throw new IllegalArgumentException("Podane konto już istnieje");
         }
         return true;
     }
 
+    public boolean isExistAccountSoft(String mail){
+        if(appUserRepository.findAllByUsername(mail)!= null){
+            return true;
+        }
+        return false;
+    }
     public Optional<AppUser> findUserById(Long id) {
         return appUserRepository.findById(id);
     }
