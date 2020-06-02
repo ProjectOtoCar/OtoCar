@@ -55,7 +55,6 @@ export class SignInComponent implements OnInit {
     this.isLoginError = false;
     this.loginUserService.signIn(this.loginForm.value)
       .subscribe((observable) => {
-        console.log(observable);
         if (!observable) {
           this.isLoginError = true;
           return;

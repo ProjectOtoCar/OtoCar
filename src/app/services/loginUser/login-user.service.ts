@@ -21,7 +21,6 @@ export class LoginUserService {
   signIn(login): Observable<Observable<any>> {
     return this.http.post(`${environment.loginUrl}/api/user`, login)
     .pipe(map((token: Token): Observable<any> => {
-      console.log(token);
       if (!token || token.key.length < 10) {
         return null;
       }
@@ -65,7 +64,6 @@ export class LoginUserService {
   }
   createUser(sellerPost: SellerPost): Observable<any> {
     sellerPost.registerUser.role = 'ROLE_USER';
-    console.log(sellerPost);
     return this.http.post(`${environment.loginUrl}/api/user/regi`, sellerPost.registerUser);
   }
 

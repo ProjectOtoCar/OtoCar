@@ -248,7 +248,6 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
    onSubmit(): void {
     this.isLoading = true;
     this.isError = false;
-    console.log({...this.addAddvertismentForm.value, images: this.images});
     this.addvertismentService
     .postAddvertisment({...this.addAddvertismentForm.value, images: this.images})
     .subscribe(() => {
@@ -316,7 +315,6 @@ export class AddAddvertismentComponent implements OnInit, OnDestroy {
         isValid = false;
       }
     });
-    console.log(isValid);
     return isValid;
   }
 

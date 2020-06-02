@@ -72,7 +72,6 @@ export class RegistrationComponent implements OnInit {
   }
   onClickAccept(): void {
     this.isAccept = !this.isAccept;
-    console.log(this.registrationForm);
   }
   onSubmit(): void {
     this.isLoading = true;

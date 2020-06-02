@@ -111,7 +111,6 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
         .subscribe(([response, maxPage]) => {
         this.datas = response;
         this.maxPage = maxPage;
-        console.log(this.datas);
         if (+this.maxPage < +this.page
             || this.page < 1 ) {
           this.route.navigate([],
@@ -132,7 +131,6 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   onTypeChange(type: string, authId: number, id: number): void {
     this.isTypeChangeLoading = true;
     this.isTypeChangeError = false;
-    console.log('l');
     this.sellerService
       .patchSeller(id, { type })
       .subscribe(() => {

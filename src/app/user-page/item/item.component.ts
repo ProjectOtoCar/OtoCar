@@ -39,7 +39,6 @@ export class ItemComponent implements OnInit {
         this.isLoading = false;
       }
       , (error) => {
-        console.log(error);
         this.isModal = false;
         this.isFailModal = true;
         this.isLoading = false;

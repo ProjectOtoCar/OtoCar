@@ -13,7 +13,6 @@ export class AuthUserGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, router: RouterStateSnapshot):
     boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
         const id = route.queryParams.userId;
-        console.log(id);
         return this.loginUserService.loginUser.pipe(map((loginUser: LoginUser) => {
             if (loginUser !== null && loginUser !== undefined) {
                 if (+loginUser.id === +id) {
