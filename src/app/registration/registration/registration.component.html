@@ -125,7 +125,7 @@
                     </div>
                     <div class="invalid-feedback"
                     *ngIf="registrationForm.get('registerUser.username').errors?.isusernameexisted ">
-                        Użytkownik o takim addresie email istnieje <a [routerLink]="['/sign-in']" class="" >zaloguj się</a>
+                        Użytkownik o takim addresie email istnieje <a [routerLink]="['/sign-in']" class="alert-link" >zaloguj się</a>
                     </div>
                     <div class="invalid-feedback"
                         *ngIf="registrationForm.get('registerUser.username').errors?.withoutspace">

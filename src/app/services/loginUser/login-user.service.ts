@@ -82,10 +82,7 @@ export class LoginUserService {
   isUsernameExisted(username: string): Observable<any> {
     return this.http
     .get(`${environment.loginUrl}/api/user/username/${username}`)
-    .pipe(map((response: {isExisted: boolean}) => {
-      console.log(response);
-      return response.isExisted;
-    }));
+    .pipe(map((response: {isExisted: boolean}) => response.isExisted));
   }
 
   getEmailByAuthId(authId: number): Observable<string> {

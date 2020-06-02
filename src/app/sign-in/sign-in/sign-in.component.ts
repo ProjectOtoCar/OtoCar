@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from '../../validators/CustomValidators';
 import { LoginUserService } from '../../services/loginUser/login-user.service';
 import { Router } from '@angular/router';
+import { CustomAsyncValidators } from 'src/app/validators/CustomAsyncValidators';
 
 @Component({
   selector: 'app-sign-in',
@@ -29,6 +30,8 @@ export class SignInComponent implements OnInit {
           Validators.maxLength(100),
           Validators.minLength(3),
           CustomValidators.withoutSpace
+        ], [
+          CustomAsyncValidators.isUsernameNotExisted(this.loginUserService)
         ]),
       password: new FormControl(null,
         [
