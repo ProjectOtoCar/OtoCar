@@ -15,6 +15,7 @@ export class SignInComponent implements OnInit {
   isLoginSuccess = false;
   isLoading = false;
   isError = false;
+  isLoginError = false;
   isShowEnabledModal = false;
   constructor(
     private loginUserService: LoginUserService,
@@ -51,8 +52,14 @@ export class SignInComponent implements OnInit {
     this.isLoading = false;
     this.isLoginSuccess = false;
     this.isShowEnabledModal = false;
+    this.isLoginError = false;
     this.loginUserService.signIn(this.loginForm.value)
       .subscribe((observable) => {
+        console.log(observable);
+        if (!observable) {
+          this.isLoginError = true;
+          return;
+        }
         observable.subscribe((data) => {
           data.subscribe((isEnabled: boolean) => {
             this.isLoading = false;
@@ -64,7 +71,6 @@ export class SignInComponent implements OnInit {
           });
         });
       }, error => {
-        console.log(error);
         this.isLoading = false;
         this.isError = true;
       });

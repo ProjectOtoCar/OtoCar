@@ -22,7 +22,7 @@ export class LoginUserService {
     return this.http.post(`${environment.loginUrl}/api/user`, login)
     .pipe(map((token: Token): Observable<any> => {
       console.log(token);
-      if (!token) {
+      if (!token || token.key.length < 10) {
         return null;
       }
       const [key, authId] = this.getIdAndKey(token);
