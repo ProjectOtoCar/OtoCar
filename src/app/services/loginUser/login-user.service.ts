@@ -73,9 +73,19 @@ export class LoginUserService {
     return this.http
       .get<Seller>(`${environment.basicUrl}/api/seller/authId/${userId}`);
   }
+
   deleteUserById(authId: number): Observable<any> {
     return this.http
     .delete(`${environment.loginUrl}/api/user/${authId}`);
+  }
+
+  isUsernameExisted(username: string): Observable<any> {
+    return this.http
+    .get(`${environment.loginUrl}/api/user/username/${username}`)
+    .pipe(map((response: {isExisted: boolean}) => {
+      console.log(response);
+      return response.isExisted;
+    }));
   }
 
   getEmailByAuthId(authId: number): Observable<string> {

@@ -124,6 +124,10 @@
                         Niepoprawny email
                     </div>
                     <div class="invalid-feedback"
+                    *ngIf="registrationForm.get('registerUser.username').errors?.isusernameexisted ">
+                        Użytkownik o takim addresie email istnieje <a [routerLink]="['/sign-in']" class="" >zaloguj się</a>
+                    </div>
+                    <div class="invalid-feedback"
                         *ngIf="registrationForm.get('registerUser.username').errors?.withoutspace">
                         E-mail nie może zawierać spacji
                     </div>

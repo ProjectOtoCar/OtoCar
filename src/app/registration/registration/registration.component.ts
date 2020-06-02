@@ -5,6 +5,7 @@ import { LoginUserService } from 'src/app/services/loginUser/login-user.service'
 import { Router } from '@angular/router';
 import { UserPageService } from 'src/app/services/user-page.service';
 import { SellerPost } from 'src/app/interfaces/SellerPost.model';
+import { CustomAsyncValidators } from 'src/app/validators/CustomAsyncValidators';
 
 @Component({
   selector: 'app-registration',
@@ -53,6 +54,8 @@ export class RegistrationComponent implements OnInit {
             Validators.maxLength(100),
             Validators.minLength(3),
             CustomValidators.withoutSpace
+          ], [
+            CustomAsyncValidators.isUsernameExisted(this.loginUserService)
           ]),
         password: new FormControl(null,
           [
@@ -69,6 +72,7 @@ export class RegistrationComponent implements OnInit {
   }
   onClickAccept(): void {
     this.isAccept = !this.isAccept;
+    console.log(this.registrationForm);
   }
   onSubmit(): void {
     this.isLoading = true;
